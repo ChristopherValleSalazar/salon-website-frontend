@@ -4,71 +4,109 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yasmin Beauty Salon</title>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <header>
-        <a href="index.html"><img src="assets/logo-test.png"
-                        alt="Yasmin Beauty Salong Logo"
-                        width="320">
+    <header class="site-header">
+        <a class="brand" href="index.html" aria-label="Yasmin Beauty Salon home">
+            <img src="https://placehold.co/300x100?text=Yasmin+Beauty+Salon+Logo" alt="Yasmin Beauty Salon logo">
+            <span>Yasmin Beauty Salon</span>
         </a>
-        <h1>Welcome to Yasmin Beauty Salon</h1>
 
-        <nav class="globalNav">
-            <select name="languages" id="language-toggle">
-                <option value="EN">EN</option>
-                <option value="ES">ES</option>
-            </select>
+        <span class="header-divider" aria-hidden="true"></span>
 
-            <button id="themeToggle">Should be theme toggle</button>
-            
-            <ul>
+        <nav class="globalNav" aria-label="Primary">
+            <ul class="nav-links">
                 <li><a href="about.html">About</a></li>
                 <li><a href="#services">Services</a></li>
             </ul>
         </nav>
+
+        <div class="nav-controls">
+            <button id="languageToggle" type="button" class="control-button" aria-label="Switch language">EN</button>
+            <button id="themeToggle" type="button" class="control-button" aria-label="Toggle theme">Light mode</button>
+        </div>
     </header>
 
     <main>
-        <section id="map">
-            <h2>Location</h2>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52896.46063052753!2d-118.24379712089842!3d34.0431326!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c60701da1d91%3A0x9e292fb128fbf175!2sYasmin%20Beauty%20Salon%20Unisex!5e0!3m2!1sen!2sus!4v1778407176796!5m2!1sen!2sus"
-                        width="600" height="450" style="border:0;" 
-                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-        </section>
+        <section class="content-grid" aria-label="Location and booking">
+            <section id="map" class="panel">
+                <h2>Location</h2>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52896.46063052753!2d-118.24379712089842!3d34.0431326!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c60701da1d91%3A0x9e292fb128fbf175!2sYasmin%20Beauty%20Salon%20Unisex!5e0!3m2!1sen!2sus!4v1778407176796!5m2!1sen!2sus"
+                        width="500" height="400"
+                        loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                        allowfullscreen title="Yasmin Beauty Salon location">
+                </iframe>
+            </section>
 
         <section id="appointments">
             <h2>Make an appointment</h2>
             <form action="">
-                <label for="customerName">name</label>
-                <input type="text" id="customerName"
+                <label for="customerName">Name</label>
+                <input type="text" id="customerName" required
                         name="name" placeholder="Your name">
 
-                <label for="customerEmail">email</label>
-                <input type="email" id="customerEmail"
+                <label for="customerEmail">Email</label>
+                <input type="email" id="customerEmail" required
                         name="email" placeholder="email@example.com"
                         pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$">
 
-                <label for="date">date</label>
+                <label for="date">Date</label>
                 <input type="datetime-local" id="date"
                         name="date">
 
-                <label for=""></label>
-
-                <button type="submit">Book appointment</button>
-            </form>
+                    <button class="bookAppointment" type="submit">Book appointment</button>
+                </form>
+            </section>
         </section>
 
         <section id="services">
-            <p>seomthing hehhe</p>
+            <article class="serviceCard">
+                <img src="https://placehold.co/320x210?text=Root+touch-ups" alt="Image of barber cut service">
+                <h2>Root touch-ups</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                    <br>Ea optio perspiciatis quia assumenda porro similique consequatur ullam 
+                    <br>laudantium pariatur, tempore officia esse ducimus officiis deserunt? Unde et doloremque alias maxime?</p>
+                <h3>PRICE</h3>
+            </article>
+
+            <article class="serviceCard">
+                <h2>Cuts</h2>
+                <img src="https://placehold.co/320x210?text=Cuts" alt="Image of barber cut service">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                    <br>Ea optio perspiciatis quia assumenda porro similique consequatur ullam 
+                    <br>laudantium pariatur, tempore officia esse ducimus officiis deserunt? Unde et doloremque alias maxime?</p>
+                <h3>PRICE</h3>
+            </article>
+
+            <article class="serviceCard">
+                <img src="https://placehold.co/320x210?text=Barber+Cut" alt="Image of barber cut service">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                    <br>Ea optio perspiciatis quia assumenda porro similique consequatur ullam 
+                    <br>laudantium pariatur, tempore officia esse ducimus officiis deserunt? Unde et doloremque alias maxime?</p>
+                <h3>PRICE</h3>
+            </article>
+
+            <article class="serviceCard">
+                <img src="https://placehold.co/320x210?text=Barber+Cut" alt="Image of barber cut service">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                    <br>Ea optio perspiciatis quia assumenda porro similique consequatur ullam 
+                    <br>laudantium pariatur, tempore officia esse ducimus officiis deserunt? Unde et doloremque alias maxime?</p>
+                <h3>PRICE</h3>
+            </article>
+
         </section>
     </main>
 
     <footer>
+
         <p>Contact Us</p>
+        <ul>
+            <li><a href="https://www.instagram.com/" target="_blank">instagram</a></li>
+            <li><a href="https://www.facebook.com/" target="_blank">facebook</a></li>
+        </ul>
+
+        <p>© 2026 by Christopher Valle</p>
     </footer>
-
-
-    
 </body>
 </html>
