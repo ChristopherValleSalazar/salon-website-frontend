@@ -9,13 +9,13 @@
 <body>
     <header class="site-header">
         <a class="brand" href="index.html" aria-label="Yasmin Beauty Salon home">
-            <img src="https://placehold.co/300x100?text=Yasmin+Beauty+Salon+Logo" alt="Yasmin Beauty Salon logo">
+            <img src="https://placehold.co/200x50?text=Yasmin+Beauty+Salon+Logo" alt="Yasmin Beauty Salon logo">
             <span>Yasmin Beauty Salon</span>
         </a>
 
         <span class="header-divider" aria-hidden="true"></span>
 
-        <nav class="globalNav" aria-label="Primary">
+        <nav class="top-nav" aria-label="Primary">
             <ul class="nav-links">
                 <li><a href="about.html">About</a></li>
                 <li><a href="#services">Services</a></li>
@@ -33,7 +33,7 @@
             <section id="map" class="panel">
                 <h2>Location</h2>
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52896.46063052753!2d-118.24379712089842!3d34.0431326!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c60701da1d91%3A0x9e292fb128fbf175!2sYasmin%20Beauty%20Salon%20Unisex!5e0!3m2!1sen!2sus!4v1778407176796!5m2!1sen!2sus"
-                        width="500" height="400"
+                        width="300"
                         loading="lazy" referrerpolicy="no-referrer-when-downgrade"
                         allowfullscreen title="Yasmin Beauty Salon location">
                 </iframe>
@@ -60,50 +60,137 @@
             </section>
         </section>
 
-        <section id="services">
-            <article class="serviceCard">
-                <img src="https://placehold.co/320x210?text=Root+touch-ups" alt="Image of barber cut service">
-                <h2>Root touch-ups</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                    <br>Ea optio perspiciatis quia assumenda porro similique consequatur ullam 
-                    <br>laudantium pariatur, tempore officia esse ducimus officiis deserunt? Unde et doloremque alias maxime?</p>
-                <h3>PRICE</h3>
+        <div class="service-toggle">
+            <button type="button" 
+                    class="toggle-btn active"
+                    data-target="services-beauty">
+                Beauty Salon
+            </button>
+
+            <button type="button" 
+                    class="toggle-btn"
+                    data-target="services-barber">
+                Barber Shop
+            </button>
+        </div>
+
+        <section id="services-beauty" class="services-section is-open">
+            <article class="service-card">
+                
+                <button type="button" class="service-header"
+                        aria-expanded="false" aria-controls="service-1-BEAU-content">
+                    
+                    <div class="service-title-group">
+                        <h2>Service 1 beau</h2>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <p>FROM PRICE</p>
+                    </div>
+
+                    <span class="accordion-icon" aria-hidden="true">&#8964;</span>
+                </button>
+
+                <div id="service-1-BEAU-content" class="service-content is-closed">
+                    <ul class="service-details">
+                        <li>clock icon</li>
+                        <li>duration</li>
+                        <li>extras</li>
+                    </ul>
+                    <button type="button" class="appointment-booking">
+                        Book this Service
+                    </button>
+                </div>
             </article>
 
-            <article class="serviceCard">
-                <h2>Cuts</h2>
-                <img src="https://placehold.co/320x210?text=Cuts" alt="Image of barber cut service">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                    <br>Ea optio perspiciatis quia assumenda porro similique consequatur ullam 
-                    <br>laudantium pariatur, tempore officia esse ducimus officiis deserunt? Unde et doloremque alias maxime?</p>
-                <h3>PRICE</h3>
+            <article class="service-card">
+                
+                <button type="button" class="service-header"
+                        aria-expanded="false" aria-controls="service-2-BEAU-content">
+                    
+                    <div class="service-title-group">
+                        <h2>Service 2 beau</h2>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <p>FROM PRICE</p>
+                    </div>
+
+                    <span class="accordion-icon" aria-hidden="true">&#8964;</span>
+                </button>
+
+                <div id="service-2-BEAU-content" class="service-content is-closed">
+                    <ul class="service-details">
+                        <li>clock icon</li>
+                        <li>duration</li>
+                        <li>extras</li>
+                    </ul>
+                    <button type="button" class="appointment-booking">
+                        Book this Service
+                    </button>
+                </div>
+            </article>
+        </section>
+
+        <section id="services-barber" class="services-section is-closed" >
+            
+            <article class="service-card">
+                
+                <button type="button" class="service-header"
+                        aria-expanded="false" aria-controls="service-1-Bar-content">
+                    
+                    <div class="service-title-group">
+                        <h2>Service 1 bar</h2>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <p>FROM PRICE</p>
+                    </div>
+
+                    <span class="accordion-icon" aria-hidden="true">&#8964;</span>
+                </button>
+
+                <div id="service-1-Bar-content" class="service-content is-closed">
+                    <ul class="service-details">
+                        <li>clock icon</li>
+                        <li>duration</li>
+                        <li>extras</li>
+                    </ul>
+                    <button type="button" class="appointment-booking">
+                        Book this Service
+                    </button>
+                
+                </div>
             </article>
 
-            <article class="serviceCard">
-                <img src="https://placehold.co/320x210?text=Barber+Cut" alt="Image of barber cut service">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                    <br>Ea optio perspiciatis quia assumenda porro similique consequatur ullam 
-                    <br>laudantium pariatur, tempore officia esse ducimus officiis deserunt? Unde et doloremque alias maxime?</p>
-                <h3>PRICE</h3>
-            </article>
+            <article class="service-card">
+                
+                <button type="button" class="service-header"
+                        aria-expanded="false" aria-controls="service-2-Bar-content">
+                    
+                    <div class="service-title-group">
+                        <h2>Service 1 bar</h2>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <p>FROM PRICE</p>
+                    </div>
 
-            <article class="serviceCard">
-                <img src="https://placehold.co/320x210?text=Barber+Cut" alt="Image of barber cut service">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                    <br>Ea optio perspiciatis quia assumenda porro similique consequatur ullam 
-                    <br>laudantium pariatur, tempore officia esse ducimus officiis deserunt? Unde et doloremque alias maxime?</p>
-                <h3>PRICE</h3>
-            </article>
+                    <span class="accordion-icon">&#8964;</span>
+                </button>
 
+                <div id="service-2-Bar-content" class="service-content is-closed">
+                    <ul class="service-details">
+                        <li>clock icon</li>
+                        <li>duration</li>
+                        <li>extras</li>
+                    </ul>
+                    <button type="button" class="appointment-booking">
+                        Book this Service
+                    </button>
+                
+                </div>
+            </article>
         </section>
     </main>
 
     <footer>
-
         <p>Contact Us</p>
         <ul>
-            <li><a href="https://www.instagram.com/" target="_blank">instagram</a></li>
-            <li><a href="https://www.facebook.com/" target="_blank">facebook</a></li>
+            <li><a href="https://www.instagram.com/" target="_blank">Instagram</a></li>
+            <li><a href="https://www.facebook.com/" target="_blank">Facebook</a></li>
         </ul>
 
         <p>© 2026 by Christopher Valle</p>
