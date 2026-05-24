@@ -18,6 +18,7 @@
         <nav class="top-nav" aria-label="Primary">
             <ul class="nav-links">
                 <li><a href="about.html">About</a></li>
+                <li><a href="book-appointment.html">Book with us</a></li>
                 <li><a href="#services">Services</a></li>
             </ul>
         </nav>
@@ -29,31 +30,22 @@
     </header>
 
     <main>
-        <section class="content-grid" aria-label="Location and booking">
-            <section id="map" class="panel">
-                <h2>Location</h2>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52896.46063052753!2d-118.24379712089842!3d34.0431326!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c60701da1d91%3A0x9e292fb128fbf175!2sYasmin%20Beauty%20Salon%20Unisex!5e0!3m2!1sen!2sus!4v1778407176796!5m2!1sen!2sus"
-                        width="300"
-                        loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-                        allowfullscreen title="Yasmin Beauty Salon location">
-                </iframe>
-            </section>
+        <section>
+            <section id="appointment-form">
+                <h2>Make an appointment</h2>
+                <form action="">
+                    <label for="customerName">Name</label>
+                    <input type="text" id="customerName" required
+                            name="name" placeholder="Your name">
 
-        <section id="appointments">
-            <h2>Make an appointment</h2>
-            <form action="">
-                <label for="customerName">Name</label>
-                <input type="text" id="customerName" required
-                        name="name" placeholder="Your name">
+                    <label for="customerEmail">Email</label>
+                    <input type="email" id="customerEmail" required
+                            name="email" placeholder="email@example.com"
+                            pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$">
 
-                <label for="customerEmail">Email</label>
-                <input type="email" id="customerEmail" required
-                        name="email" placeholder="email@example.com"
-                        pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$">
-
-                <label for="date">Date</label>
-                <input type="datetime-local" id="date"
-                        name="date">
+                    <label for="date">Date</label>
+                    <input type="datetime-local" id="date"
+                            name="date">
 
                     <button class="bookAppointment" type="submit">Book appointment</button>
                 </form>
@@ -91,8 +83,7 @@
 
                 <div id="service-1-BEAU-content" class="service-content is-closed">
                     <ul class="service-details">
-                        <li>clock icon</li>
-                        <li>duration</li>
+                        <li>&#128336; duration</li>
                         <li>extras</li>
                     </ul>
                     <button type="button" class="appointment-booking">
@@ -117,8 +108,7 @@
 
                 <div id="service-2-BEAU-content" class="service-content is-closed">
                     <ul class="service-details">
-                        <li>clock icon</li>
-                        <li>duration</li>
+                        <li>&#128336; duration</li>
                         <li>extras</li>
                     </ul>
                     <button type="button" class="appointment-booking">
@@ -146,8 +136,7 @@
 
                 <div id="service-1-Bar-content" class="service-content is-closed">
                     <ul class="service-details">
-                        <li>clock icon</li>
-                        <li>duration</li>
+                        <li>&#128336; duration</li>
                         <li>extras</li>
                     </ul>
                     <button type="button" class="appointment-booking">
@@ -163,7 +152,7 @@
                         aria-expanded="false" aria-controls="service-2-Bar-content">
                     
                     <div class="service-title-group">
-                        <h2>Service 1 bar</h2>
+                        <h2>Service 2 bar</h2>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                         <p>FROM PRICE</p>
                     </div>
@@ -173,8 +162,7 @@
 
                 <div id="service-2-Bar-content" class="service-content is-closed">
                     <ul class="service-details">
-                        <li>clock icon</li>
-                        <li>duration</li>
+                        <li>&#128336; duration</li>
                         <li>extras</li>
                     </ul>
                     <button type="button" class="appointment-booking">
