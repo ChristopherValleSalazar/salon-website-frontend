@@ -1,0 +1,36 @@
+:root {
+  --color-light: #F6F1E8;
+  --color-dark: #2D241F;
+  --color-primary: #B08A52;
+}
+
+/* GLOBAL STYLES */
+html {
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: var(--color-dark);
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.bg-light {
+  background: var(--color-light);
+}
+
