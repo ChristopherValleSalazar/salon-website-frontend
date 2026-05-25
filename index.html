@@ -7,26 +7,30 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="bg-light">
-    <header class="site-header">
-        <a class="brand" href="index.html" aria-label="Yasmin Beauty Salon home">
-            <img src="https://placehold.co/200x50?text=Yasmin+Beauty+Salon+Logo" alt="Yasmin Beauty Salon logo">
-            <span>Yasmin Beauty Salon</span>
+    <header>
+      <div class="brand">
+        <a href="index.html" class="logo"><img src="images/images.png"
+                                width="100"
+                                alt="Yasmin Beauty Salon logo">
         </a>
+        <h1>Yasmin Beauty Salon</h1>
+      </div>
 
-        <span class="header-divider" aria-hidden="true"></span>
-
-        <nav class="top-nav" aria-label="Primary">
-            <ul class="nav-links">
-                <li><a href="about.html">About</a></li>
-                <li><a href="book-appointment.html">Book with us</a></li>
-                <li><a href="#services">Services</a></li>
-            </ul>
-        </nav>
-
-        <div class="nav-controls">
-            <button id="languageToggle" type="button" class="control-button" aria-label="Switch language">EN</button>
-            <button id="themeToggle" type="button" class="control-button" aria-label="Toggle theme">Light mode</button>
+      <div class="header-right">
+        <div class="header-tools">
+          <button>Language</button>
+          <button>Theme</button>
         </div>
+
+        <nav class="top-nav" aria-label="Primary Navigation">
+          <div class="burger-menu">
+            <ul class="list-reset nav-list">
+              <li><a class="btn" href="index.html">Home</a></li>
+              <li><a class="btn" href="about.html">About</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
     </header>
 
     <main>
