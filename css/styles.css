@@ -1,37 +1,70 @@
 :root {
   --color-light: #F6F1E8;
   --color-dark: #2D241F;
+  --color-dark-secondary: #4B3B2B;
   --color-primary: #B08A52;
+
+  --font-size-h1:        1.5625rem;
+  --font-size-h2:        1.5rem;
+  --font-size-h3:        1.2rem;
+  --font-size-base:      .9375rem;
+  --font-size-p:         .680rem;
+  --font-size-tagline:   1.3rem;
+  --font-size-small:     .7rem;
 }
 
 /* GLOBAL STYLES */
 html {
   box-sizing: border-box;
 }
-
 *, *::before, *::after {
   box-sizing: inherit;
 }
-
 html, body {
   height: 100%;
 }
-
 body {
+  font-family: "Inter", sans-serif;
   margin: 0;
   padding: 0;
+  font-size: var(--font-size-base);
+  line-height: 1.4;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
-
+main {
+  flex: 1;
+}
 a {
   color: var(--color-dark);
+}
+h1 {
+  font-size: var(--font-size-h1);
+}
+h2 {
+  font-size: var(--font-size-h2);
+}
+
+h3 {
+  font-size: var(--font-size-h3);
+}
+P {
+  font-size: var(--font-size-p);
+  line-height: 1.7;
+}
+h1, h2, h3, h4 {
+  font-family: "Cormorant Garamond", serif;
 }
 
 .bg-light {
   background: var(--color-light);
+  color: var(--color-dark);
 }
 
 .bg-dark {
   background: var(--color-dark);
+  color: var(--color-light);
 }
 
 .list-reset{
@@ -45,18 +78,19 @@ header {
   position: sticky;
   top: 0;
   z-index: 1000;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   text-align: center;
-  padding: 1rem 2rem;
+  padding: 1rem 1.5rem;
   background: var(--color-dark);
   color: var(--color-light);
 }
 .brand {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
 }
 .brand h1 {
   margin: 0;
@@ -89,13 +123,76 @@ header {
   border-radius: .3rem;
   letter-spacing: 0.08rem;
 }
-
 .btn:hover {
   color: var(--color-dark);
   background: var(--color-light);
 }
 
+@media screen and (max-width: 768px) {
+  header {
+    position: inherit;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .brand {
+    justify-content:left;
+    gap: 1rem;
+  }
+
+  .brand h1 {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .header-right {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .nav-list li {
+    width: 100%;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
+
 /* FOOTER */
+footer {
+  width: 100%;
+  z-index: 1000;
+  text-align: center;
+  padding: 0.5rem;
+  margin-top: auto;
+}
+footer a {
+  color: var(--color-light);
+  text-decoration: none;
+}
+/* MAKE FONT JUST FOR THESE PARTS */
+footer p {
+  font-size: var(--font-size-tagline);
+}
 
-
-
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+.footer-links img {
+  width: 3rem;
+  margin: 1rem;
+}
+.copyright, .email, .phone {
+    margin: 0;
+  }
+.copyright {
+    font-size: var(--font-size-small);
+  }
+.phone {
+    padding: 1rem;
+  }
