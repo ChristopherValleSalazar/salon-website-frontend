@@ -61,12 +61,10 @@ h1, h2, h3, h4 {
   background: var(--color-light);
   color: var(--color-dark);
 }
-
 .bg-dark {
   background: var(--color-dark);
   color: var(--color-light);
 }
-
 .list-reset{
   list-style-type: none;
   margin: 0;
@@ -136,29 +134,65 @@ header {
     gap: 1rem;
     padding: 1rem;
   }
-
   .brand {
     justify-content:left;
     gap: 1rem;
   }
-
   .brand h1 {
     font-size: 20px;
     text-align: center;
   }
-
   .header-right {
     flex-direction: column;
     gap: 0.5rem;
   }
-
   .nav-list li {
     width: 100%;
   }
-
   .btn {
     width: 100%;
   }
+}
+
+/* APPOINTMENT FORM */
+form {
+  border-radius: 8px;
+  background: #f1e9da;
+  padding: 20px;
+  width: 100%;
+}
+label {
+  display: bl;
+}
+input, select {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input[type=datetime-local] {
+  width: 70%;
+}
+button[type=submit]{
+  width: 100%;
+  background-color: #614d38;
+  color: var(--color-light);
+  padding: 14px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+button[type=submit]:hover {
+  background: var(--color-dark-secondary);
+}
+
+#appointment-form {
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 /* FOOTER */
@@ -177,7 +211,6 @@ footer a {
 footer p {
   font-size: var(--font-size-tagline);
 }
-
 .footer-links {
   display: flex;
   justify-content: center;
@@ -189,10 +222,10 @@ footer p {
 }
 .copyright, .email, .phone {
     margin: 0;
-  }
+}
 .copyright {
     font-size: var(--font-size-small);
-  }
+}
 .phone {
     padding: 1rem;
-  }
+}
