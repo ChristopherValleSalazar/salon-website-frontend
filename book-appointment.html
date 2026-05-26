@@ -38,8 +38,47 @@
       </div>
     </header>
 
-    <section id="appointments" class="appointment-form">
-      <h2>Make an appointment</h2>
+    <section>
+        <section id="appointment-form">
+            <h2>Make an appointment</h2>
+            <form action="">
+                <label for="customerName">Name</label>
+                <input type="text" id="customerName" required
+                        name="clientName" placeholder="Your name">
+
+                <label for="customerEmail">Email</label>
+                <input type="email" id="customerEmail" required
+                        name="clientEmail" placeholder="email@example.com"
+                        pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$">
+                <label for="client-phone">Phone Number</label>
+                <input type="tel" id="client-phone" required
+                        name="clientPhone" placeholder="123-456-789"
+                        pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}">
+                
+                <label for="service">Services</label>
+                <select id="service" name="service" required>
+                  <option value="haircut">Haircut</option>
+                  <option value="hair_color">Hair Coloring</option>
+                  <option value="balayage">Balayage</option>
+                  <option value="highlighting">Highlights</option>
+                  <option value="blowout">Blowout Styling</option>
+                  <option value="keratin">Keratin Treatment</option>
+                  <option value="scalp_treatment">Scalp Treatment</option>
+                  <option value="facial">Facial Treatment</option>
+                  <option value="eyebrow_wax">Eyebrow Waxing</option>
+                  <option value="manicure">Manicure</option>
+                  <option value="pedicure">Pedicure</option>
+                  <option value="lash_extensions">Eyelash Extensions</option>
+                </select>
+
+                <label for="date">Dateasdasdsdsdss</label>
+                <input type="datetime-local" id="date"
+                        name="appointmentDate">
+                
+
+                <button class="bookAppointment" type="submit">Book appointment</button>
+            </form>
+        </section>
     </section>
   </main>
   <footer id="contact" class="bg-dark">
