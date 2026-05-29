@@ -200,37 +200,67 @@ textarea {
   width: 60%;
 }
 
+/* Map+HOURS */
+.map-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.horizontal-divider {
+  border: none;
+  border-top: 1px solid black;
+  margin: 1rem 0;
+}
+.map-hours-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.hours-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin: 0 15px
+}
+.hours-container h2 {
+  text-align: center;
+}
+.day-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 25px;
+}
+
+
+
 /* FOOTER */
 footer {
   width: 100%;
   z-index: 1000;
   text-align: center;
-  padding: 0.5rem;
   margin-top: auto;
 }
 footer a {
   color: var(--color-light);
   text-decoration: none;
 }
-/* MAKE FONT JUST FOR THESE PARTS */
-/* footer p {
-  font-size: var(--font-size-tagline);
-} */
+.footer-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+  margin: auto 60px;
+}
 .footer-links {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   gap: 1rem;
 }
 .footer-links img {
-  width: 3rem;
-  margin: 1rem;
-}
-.copyright, .email, .phone {
-    margin: 0;
-}
-.copyright {
-    font-size: var(--font-size-small);
-}
-.phone {
-    padding: 1rem;
+  width: 60px;
+  padding: 10px;
 }
