@@ -11,10 +11,11 @@
   --font-size-h1:        1.5625rem;
   --font-size-h2:        1.5rem;
   --font-size-h3:        1.2rem;
-  --font-size-base:      .9375rem;
-  --font-size-p:         .680rem;
-  --font-size-tagline:   1.3rem;
+  --font-size-base:      0.9375rem;
+  --font-size-p:         0.680rem;
+  --font-size-tagline:   0.850rem;
   --font-size-small:     .7rem;
+  --font-size-label:     1.2rem;
 }
 
 /* GLOBAL STYLES */
@@ -74,6 +75,16 @@ h1, h2, h3, h4 {
   margin: 0;
   padding: 0;
 }
+.btn-style {
+  color: inherit;
+  background: var(--color-submit-btn);
+  text-decoration: none;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.btn-style:hover {
+  background: var(--color-submit-btn-hover);
+}
 
 /* HEADER + NAV */
 header {
@@ -113,52 +124,23 @@ header {
   margin: 0;
   padding: 0;
 }
-.btn {
-  color: inherit;
-  background: var(--color-primary);
-  text-decoration: none;
-  display: inline-block;
-  font-weight: bold;
-  text-transform: uppercase;
+.nav-btn {
   padding: 5px;
   line-height: 1;
   border-radius: .3rem;
   letter-spacing: 0.08rem;
 }
-.btn:hover {
-  color: var(--color-dark);
-  background: var(--color-light);
-}
-
-@media screen and (max-width: 768px) {
-  header {
-    position: inherit;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 1rem;
-    padding: 1rem;
-  }
-  .brand {
-    justify-content:left;
-    gap: 1rem;
-  }
-  .brand h1 {
-    font-size: 20px;
-    text-align: center;
-  }
-  .header-right {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  .nav-list li {
-    width: 100%;
-  }
-  .btn {
-    width: 100%;
-  }
-}
 
 /* APPOINTMENT FORM */
+textarea {
+  width: 100%;
+  padding: 2px;
+  resize: vertical;
+}
+.form-description {
+  font-size: var(--font-size-tagline);
+  margin-left: 20px;
+}
 .main-form {
   border-radius: 8px;
   background: var(--color-form);
@@ -168,7 +150,10 @@ header {
 }
 .main-form label {
   display: inline-block;
-  margin: 12px 10px;
+  margin: 5px 10px;
+  color: var(--color-dark);
+  font-size: var(--font-size-label);
+  font-family: "Cormorant Garamond", serif;
 }
 .main-form input, select {
   width: 100%;
@@ -183,12 +168,13 @@ header {
   width: 50%;
 }
 .book-app-btn{
+  display: block;
   width: 50%;
   text-align: center;
   background-color: var(--color-submit-btn);
   color: var(--color-light);
   padding: 14px;
-  margin: 24px auto;
+  margin: 10px auto;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -197,13 +183,16 @@ header {
   background: var(--color-submit-btn-hover);
 }
 .app-form{
-  max-width: 80%;
+  max-width: 90%;
+  height: auto;
   margin: 0 auto;
+  margin-bottom: 40px;
 }
+
 .form-title {
   text-align: center;
-  margin: 1.5rem auto;
-  line-height: 2rem;
+  margin: 20px auto;
+  line-height: 1.5rem;
 }
 
 .main-form input[type=file] {
@@ -224,9 +213,9 @@ footer a {
   text-decoration: none;
 }
 /* MAKE FONT JUST FOR THESE PARTS */
-footer p {
+/* footer p {
   font-size: var(--font-size-tagline);
-}
+} */
 .footer-links {
   display: flex;
   justify-content: center;
