@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
-<body class="bg-light">
+<body>
   <header>
     <div class="brand">
       <a href="index.html" class="logo"><img src="images/images.png"
@@ -39,139 +39,152 @@
 
   <main>
     <section>
-        <section id="appointment-form">
-            <h2 class="form-title" >Make an appointment</h2>
-            <div class="app-form">
+      <section id="appointment-form">
+        <h2 class="form-title">Make an appointment</h2>
+        <div class="app-form">
+          <p class="form-description">Fill out the form below and we will contact you to confirm
+          your appointment.
+          </p>
 
-              <p class="form-description">Fill out the form below and we will contact you to confirm
-              your appointment.
-              </p>
+          <form class="main-form" action="">
+            <label for="customerName">Name</label>
+            <input type="text" id="customerName" required
+                    name="clientName" placeholder="Your name">
 
-              <form class="main-form" action="">
-                  <label for="customerName">Name</label>
-                  <input type="text" id="customerName" required
-                          name="clientName" placeholder="Your name">
+            <label for="customerEmail">Email</label>
+            <input type="email" id="customerEmail" required
+                    name="clientEmail" placeholder="email@example.com"
+                    pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$">
 
-                  <label for="customerEmail">Email</label>
-                  <input type="email" id="customerEmail" required
-                          name="clientEmail" placeholder="email@example.com"
-                          pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$">
+            <label for="client-phone">Phone Number</label>
+            <input type="tel" id="client-phone" required
+                    name="clientPhone" placeholder="123-456-789"
+                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}">
 
-                  <label for="client-phone">Phone Number</label>
-                  <input type="tel" id="client-phone" required
-                          name="clientPhone" placeholder="123-456-789"
-                          pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}">
+            <label for="service">Services</label>
+            <select id="service" name="service" required>
+              <option value="haircut">Haircut</option>
+              <option value="hair_color">Hair Coloring</option>
+              <option value="balayage">Balayage</option>
+              <option value="highlighting">Highlights</option>
+              <option value="blowout">Blowout Styling</option>
+              <option value="keratin">Keratin Treatment</option>
+              <option value="scalp_treatment">Scalp Treatment</option>
+              <option value="facial">Facial Treatment</option>
+              <option value="eyebrow_wax">Eyebrow Waxing</option>
+              <option value="manicure">Manicure</option>
+              <option value="pedicure">Pedicure</option>
+              <option value="lash_extensions">Eyelash Extensions</option>
+            </select>
 
-                  <label for="service">Services</label>
-                  <select id="service" name="service" required>
-                    <option value="haircut">Haircut</option>
-                    <option value="hair_color">Hair Coloring</option>
-                    <option value="balayage">Balayage</option>
-                    <option value="highlighting">Highlights</option>
-                    <option value="blowout">Blowout Styling</option>
-                    <option value="keratin">Keratin Treatment</option>
-                    <option value="scalp_treatment">Scalp Treatment</option>
-                    <option value="facial">Facial Treatment</option>
-                    <option value="eyebrow_wax">Eyebrow Waxing</option>
-                    <option value="manicure">Manicure</option>
-                    <option value="pedicure">Pedicure</option>
-                    <option value="lash_extensions">Eyelash Extensions</option>
-                  </select>
-
-                  <label for="hair-image">Hair Image</label>
-                  <div class="image-container">
-                    <input type="file" id="hair-image" accept=".png,.jpg,.jpeg,.webp"
-                            name="hairPic">
-                  </div>
-
-                  <label for="date">Date</label>
-                  <div class="app-date">
-                    <input type="datetime-local" id="date"
-                            name="appointmentDate">
-                  </div>
-
-                  <label for="notes">Additional Notes</label>
-                  <textarea name="notes" id="notes" rows="5"
-                            placeholder="Tell us about your hair goals, preferred stylist, allergies, etc."></textarea>
-                  <button class="book-app-btn btn-style" type="submit">Book Appointment</button>
-              </form>
+            <label for="hair-image">Hair Image</label>
+            <div class="img-container">
+              <input type="file" id="hair-image" accept=".png,.jpg,.jpeg,.webp"
+                      name="hairPic">
             </div>
-        </section>
-        <section id="location-hours">
-          <hr class="horizontal-divider">
-          <div class="map-hours-container">
-            <div class="map-container">
-              <h2>Location</h2>
-              <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d211585.84152414254!2d-118.20877800000001!3d34.043133!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c60701da1d91%3A0x9e292fb128fbf175!2sYasmin%20Beauty%20Salon%20Unisex!5e0!3m2!1sen!2sus!4v1780029000620!5m2!1sen!2sus" width="500" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+            <label for="date">Date</label>
+            <div class="date-container">
+              <input type="datetime-local" id="date"
+                      name="appointmentDate">
             </div>
-            <div class="hours-container">
-              <h2>Opening Times</h2>
-              <ul class="list-reset hours-container">
-                <li class="day-container">
-                  <span>Sunday</span>
-                  <div class="date-time">10:00AM<span>&#8722;</span>7:00PM</div>
-                </li>
-                <li class="day-container">
-                  <span>Monday</span>
-                  <div class="date-time">Closed</div>
-                </li>
-                <li class="day-container">
-                  <span>Tuesday</span>
-                  <div class="date-time">10:00AM<span>&#8722;</span>7:00PM</div>
-                </li>
-                <li class="day-container">
-                  <span>Wednesday</span>
-                  <div class="date-time">10:00AM<span>&#8722;</span>7:00PM</div>
-                </li>
-                <li class="day-container">
-                  <span>Thursday</span>
-                  <div class="date-time">10:00AM<span>&#8722;</span>7:00PM</div>
-                </li>
-                <li class="day-container">
-                  <span>Friday</span>
-                  <div class="date-time">10:00AM<span>&#8722;</span>7:00PM</div>
-                </li>
-                <li class="day-container">
-                  <span>Saturday</span>
-                  <div class="date-time">10:00AM<span>&#8722;</span>3:00PM</div>
-                </li>
-              </ul>
-            </div>
+
+            <label for="notes">Additional Notes</label>
+            <textarea name="notes" id="notes" rows="5"
+                      placeholder="Tell us about your hair goals, preferred stylist, allergies, etc.">
+            </textarea>
+          <button class="book-app-btn btn-style" type="submit">Book Appointment</button>
+        </form>
+      </div>
+      </section>
+      <section id="location-address-hours">
+        <hr class="horizontal-divider">
+        <div class="map-hours-container">
+          <div class="map-container">
+            <h2>Location</h2>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d211585.84152414254!2d-118.20877800000001!3d34.043133!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c60701da1d91%3A0x9e292fb128fbf175!2sYasmin%20Beauty%20Salon%20Unisex!5e0!3m2!1sen!2sus!4v1780029000620!5m2!1sen!2sus"
+              width="500"
+              height="400"
+              style="border:0;"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
           </div>
-        </section>
+          <div class="address-container">
+            <h2>Address</h2>
+            <a
+              href="https://maps.google.com/?q=Yasmin+Beauty+Salon+Unisex"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="address-link"
+            >
+              Yasmin Beauty Salon Unisex<br>
+              2438 1st St<br>
+              Los Angeles, CA 90033
+            </a>
+            <p>Click the address to open directions in Google Maps.</p>
+          </div>
+          <div class="hours-container">
+            <h2>Opening Times</h2>
+            <ul class="list-reset hours-container">
+              <li class="day-container">
+                <span>Sunday</span>
+                <div class="date-time">10:00AM<span>&#8722;</span>7:00PM</div>
+              </li>
+              <li class="day-container">
+                <span>Monday</span>
+                <div class="date-time">Closed</div>
+              </li>
+              <li class="day-container">
+                <span>Tuesday</span>
+                <div class="date-time">10:00AM<span>&#8722;</span>7:00PM</div>
+              </li>
+              <li class="day-container">
+                <span>Wednesday</span>
+                <div class="date-time">10:00AM<span>&#8722;</span>7:00PM</div>
+              </li>
+              <li class="day-container">
+                <span>Thursday</span>
+                <div class="date-time">10:00AM<span>&#8722;</span>7:00PM</div>
+              </li>
+              <li class="day-container">
+                <span>Friday</span>
+                <div class="date-time">10:00AM<span>&#8722;</span>7:00PM</div>
+              </li>
+              <li class="day-container">
+                <span>Saturday</span>
+                <div class="date-time">10:00AM<span>&#8722;</span>3:00PM</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
     </section>
   </main>
 
-  <footer id="site-footer" class="bg-dark">
-    <div class="footer-container">
-      <div class="contact">
-        <h3>Get In Touch</h3>
-        <p class="email" >Email:<a href="mailto:yasminbeautysalon+web-contact@gmail.com">yasminbeautysalon@gmail.com</a></p>
-        <p class="phone">Call us at <a href="tel:+13239075658">+1 (323) 907-5658</a></p>
-      </div>
+  <footer>
+    <div class="footer-content">
+      <h2>Get In Touch</h2>
+
+      <a href="tel:+13239075658" class="contact-link">
+          (323) 907-5658
+      </a>
+      <a href="mailto:yasminbeautysalon@gmail.com" class="contact-link">
+          yasminbeautysalon@gmail.com
+      </a>
+
       <div class="social-links">
-        <h3>Social Media</h3>
-        <ul class="list-reset footer-links">
-          <li><a href="https://www.instagram.com/" target="_blank">
-            <img src="images/social-media_15713399.png" alt="Takes to tiktok">
-            </a>
-          </li>
-          <li><a href="https://www.instagram.com/" target="_blank">
-              <img src="images/icon-instagram.png" alt="Takes to instagram">
-            </a>
-          </li>
-          <li><a href="https://www.youtube.com/" target="_blank">
-              <img src="images/youtube_2585154.png" alt="Takes to youtube">
-            </a>
-          </li>
-          <li><a href="https://www.linkedin.com/" target="_blank">
-              <img src="images/linkedin_2335321.png" alt="Takes to linkedin">
-            </a>
-          </li>
-        </ul>
+        <a href="#">Instagram</a>
+          <a href="#">TikTok</a>
+          <a href="#">YouTube</a>
       </div>
+
+      <p class="copyright">
+          © 2026 Yasmin Beauty Salon
+      </p>
     </div>
-    <p class="copyright">© 2026 by your name</p>
   </footer>
 </body>
 </html>
