@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css"/>
+    <script src="js/language.js" defer></script>
 </head>
 <body>
   <header>
@@ -16,13 +18,34 @@
                             width="100"
                             alt="Yasmin Beauty Salon logo">
       </a>
-      <h1>Home</h1>
+      <h1>Book An Appointment </h1>
     </div>
 
     <div class="header-right">
       <div class="header-tools">
-        <button>Language</button>
-        <button>Theme</button>
+        <div class="language-dropdown">
+          <button class="language-btn" type="button">
+            <span class="fi fi-us"></span>
+            <span>English</span>
+            <span class="arrow">▼</span>
+          </button>
+
+          <ul class="list-reset language-menu">
+            <li data-lang="en">
+              <span class="fi fi-us"></span>
+              English
+            </li>
+            <li data-lang="es">
+              <span class="fi fi-sv"></span>
+              Español
+            </li>
+          </ul>
+        </div>
+        <!-- CREATE THIS TOGGLE IF PEOPLE ACTUALLY USE THE WEBSITE -->
+        <!-- <div class="theme-toggle">
+          <span class="light"></span>
+          <span class="dark"></span>
+        </div> -->
       </div>
 
       <nav class="top-nav" aria-label="Primary Navigation">

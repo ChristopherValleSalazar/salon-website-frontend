@@ -82,10 +82,13 @@
             <label for="client-phone">Phone Number</label>
             <input type="tel" id="client-phone" required
                     name="clientPhone" placeholder="123-456-789"
-                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}">
+                    pattern="[0-9]{3}[0-9]{3}[0-9]{3}">
 
             <label for="service">Services</label>
             <select id="service" name="service" required>
+              <option class="service-placeholder" value="" selected disabled>
+                Select a service
+              </option>
               <option value="haircut">Haircut</option>
               <option value="hair_color">Hair Coloring</option>
               <option value="balayage">Balayage</option>
