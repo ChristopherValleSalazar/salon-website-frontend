@@ -1,0 +1,33 @@
+.service-switcher {
+    display: flex;
+    background: #ece7df;
+    padding: 6px;
+    border-radius: 30px;
+    width: min(95%, 900px);
+    margin: 1rem auto;
+}
+
+.service-switcher button {
+    flex: 1;
+    border: none;
+    background: transparent;
+    color: #4a3b2c;
+    padding: 18px 12px;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    border-radius: 24px;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.service-switcher button.active {
+    background: linear-gradient(
+        180deg,
+        #6c543d,
+        #3e3025
+    );
+    color: #F6F1E8;
+    box-shadow:
+        0 4px 12px rgba(0,0,0,.15);
+}

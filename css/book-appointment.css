@@ -78,7 +78,11 @@ textarea {
   border: none;
   border-radius: 40px;
   cursor: pointer;
-  /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); */
+  /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+   */
+  box-shadow:
+    0 0 15px 6px rgba(184,138,68,0.25),
+    0 2px 10px rgba(184,138,68,0.1);
 }
 .main-form button[type=submit]:hover {
   background: var(--color-submit-btn-hover);
