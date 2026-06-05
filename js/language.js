@@ -3,6 +3,7 @@ const languageMenu = document.querySelector(".language-menu");
 
 languageBtn.addEventListener("click", () => {
     languageMenu.classList.toggle("show");
+    languageBtn.classList.toggle("color-hover")
 })
 
 const options = document.querySelectorAll(".language-menu li");
@@ -20,7 +21,7 @@ options.forEach(option => {
         `;
 
         languageMenu.classList.remove("show");
-
+        languageBtn.classList.remove("color-hover");
     });
 });
 
