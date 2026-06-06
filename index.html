@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/global-layout.css">
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css"/>
+    <script src="js/home-toggle.js" defer></script>
     <script src="js/language.js" defer></script>
 </head>
 <body>
@@ -62,9 +63,11 @@
   </header>
 
     <main>
-        <div class="service-switcher">
+        <div class="service-toggle">
+            <div class="slider"></div>
+
             <button type="button" 
-                    class="toggle-btn active"
+                    class="toggle-btn"
                     data-target="services-beauty">
                 Beauty Salon
             </button>
@@ -76,7 +79,7 @@
             </button>
         </div>
 
-        <section id="services-beauty" class="services-section is-open">
+        <section id="services-beauty" class="beauty-services">
             <article class="service-card">
                 
                 <button type="button" class="service-header"
@@ -103,7 +106,6 @@
             </article>
 
             <article class="service-card">
-                
                 <button type="button" class="service-header"
                         aria-expanded="false" aria-controls="service-2-BEAU-content">
                     
