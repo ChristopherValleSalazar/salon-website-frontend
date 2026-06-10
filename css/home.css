@@ -23,7 +23,7 @@
 .service-toggle.active .slider {
     transform: translateX(100%);
 }
-.toggle-btn {
+.toggle-btn-beauty, .toggle-btn-barber  {
     flex: 1;
     position: relative;
     z-index: 1;
@@ -112,9 +112,6 @@
 .card-container.open .accordion-icon {
     transform: rotate(180deg);
 }
-.close {
-    display: none;
-}
 /* Seconday Content */
 .time-price-container {
     grid-column: 1 / 5;
@@ -130,10 +127,6 @@
     opacity: 1;
     padding-top: 1rem;
     border-top: 3px solid rgba(97,77,56,.15);
-}
-.time-price-container.close {
-    max-height: 0;
-    opacity: 0;
 }
 .estimate-time {
     grid-column: 1 / 2;
@@ -161,15 +154,20 @@
 .book-btn:hover {
     background: #4B3B2B;
 }
-.time-price-container.close  {
+.close  {
     display: none;
+    max-height: 0;
+    opacity: 0;
 }
 .unselected {
     display: none;
 }
+.unfocus-color {
+    color: black;
+}
 
 @media(max-width: 500px) {
-    .beauty-services {
+    .beauty-services, .barber-services {
         grid-template-columns: 1fr;
     }
 }

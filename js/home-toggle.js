@@ -1,11 +1,24 @@
 const toggle = document.querySelector(".service-toggle");
-const barberSection = document.querySelector(".barber-services");
-const beautySection = document.querySelector(".beauty-services");
+
+
+
 
 toggle.addEventListener("click", () => {
+
+    const barberSection = document.querySelector(".barber-services");
+    const beautySection = document.querySelector(".beauty-services");
+    
+    const toggleButtonBeauty = document.querySelector(".toggle-btn-beauty")
+    const toggleButtonBarber = document.querySelector(".toggle-btn-barber")
+
     toggle.classList.toggle("active");
+
     beautySection.classList.toggle("unselected");
     barberSection.classList.toggle("unselected");
+
+    toggleButtonBeauty.classList.toggle("unfocus-color");
+    toggleButtonBarber.classList.toggle("unfocus-color");
+
 });
 
 const cards = document.querySelectorAll(".card-container");
