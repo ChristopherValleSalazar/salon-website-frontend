@@ -29,6 +29,7 @@ document.addEventListener("click", (event) => {
 
     if (!event.target.closest(".language-dropdown")) {
         languageMenu.classList.remove("show");
+        languageBtn.classList.remove("color-hover");
     }
 
 });
