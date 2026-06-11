@@ -1,13 +1,8 @@
 const toggle = document.querySelector(".service-toggle");
 
-
-
-
 toggle.addEventListener("click", () => {
-
     const barberSection = document.querySelector(".barber-services");
     const beautySection = document.querySelector(".beauty-services");
-    
     const toggleButtonBeauty = document.querySelector(".toggle-btn-beauty")
     const toggleButtonBarber = document.querySelector(".toggle-btn-barber")
 
