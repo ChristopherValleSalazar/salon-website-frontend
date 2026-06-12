@@ -230,10 +230,10 @@
     grid-column: span 2;
     grid-row: span 2;
 }
-.gallery-item.medium-ver {
+.gallery-item.medium-hor {
     grid-column: span 2;
 }
-.gallery-item.medium-hor {
+.gallery-item.medium-ver {
     grid-row: span 2;
 }
 
@@ -245,6 +245,9 @@
     }
     .gallery-item.featured {
         grid-column: span 2;
+    }
+    .gallery-item.medium-hor {
+        grid-row: span 2;
     }
 }
 
