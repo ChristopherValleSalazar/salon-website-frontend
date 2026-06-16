@@ -23,7 +23,7 @@ textarea {
 }
 .main-form label {
   display: inline-block;
-  margin: 6px 10px;
+  margin: 12px 0 8px 10px ;
   color: var(--color-dark);
   font-size: var(--font-size-label);
   font-family: "Cormorant Garamond", serif;
@@ -59,29 +59,6 @@ textarea {
   font: inherit;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
-
-/* DATE PICKR */
-.booking-wrapper {
-  width: 50%;
-}
-.flatpickr-calendar {
-  position: absolute;
-  top: 50%;
-  left: 70%;
-  /* transform: translate(-50%, -50%); */
-}
-.flatpickr-months {
-  background: var(--color-light);
-}
-.flatpickr-month {
-  min-height: 48px;
-}
-.flatpickr-months .flatpickr-next-month, .flatpickr-months .flatpickr-prev-month {
-  margin-top: 6px;
-}
-
-
-
 .img-container {
   width: 83%;
 }
@@ -116,7 +93,33 @@ textarea {
 }
 .main-form input[type=file] {
   width: 60%;
-  /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12); */
+}
+
+.main-form input:focus, .main-form select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 12px rgba(184,138,68,0.25);
+}
+
+/* DATE PICKR */
+.booking-wrapper {
+  width: 50%;
+  cursor: pointer;
+}
+.flatpickr-months {
+  background: var(--color-light);
+}
+.flatpickr-month {
+  min-height: 48px;
+}
+.flatpickr-months .flatpickr-next-month, .flatpickr-months .flatpickr-prev-month {
+  margin-top: 6px;
+}
+.form-control {
+  cursor: pointer;
+}
+.flatpickr-weekdays, .flatpickr-days {
+  font-size: 18px;
 }
 
 /* Map+ADDRESS+HOURS */

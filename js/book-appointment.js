@@ -36,30 +36,23 @@ flatpickr("#date-input", {
     disableMobile: true,      // forces Flatpickr UI even on iOS/Android
     allowInput: false,        // no manual typing
     enableTime: true,
+    altInput: true,
     dateFormat: "Y-m-d H:i",
-    defaultDate: "2026-06-15 10:00",
+    altFormat: "F j, Y h:i K",
+    defaultHour: 10,
     minTime: "10:00",
-    maxTime: "17:00",
+    maxTime: "18:30",
 
+    disable: [
+        date => date.getDay() === 1
+    ],
 
+    onChange(selectedDates, datestr, instance) {
+        const day = selectedDates[0].getDay();
 
-    
-    onChange: async function(selectedDates, dateStr, fp) {
-        const container = document.getElementById("time-slots-container");
-        container.classList.add("visible");
-        container.innerHTML = `<span class="slots-title">Loading...</span>`;
-        positionSlotsPanel(fp.calendarContainer);
-        await loadTimeSlots(dateStr, selectedService, container);
-    },
-
-    onOpen: function(_, __, fp) {
-        positionSlotsPanel(fp.calendarContainer);
-    },
-
-    onClose: function() {
-        if (!selectedTime) {
-            document.getElementById("time-slots-container")
-                .classList.remove("visible");
+        if(day === 0) {
+            instance.set("maxTime", "15:00");
         }
     }
+
 });
