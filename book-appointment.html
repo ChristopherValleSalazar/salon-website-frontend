@@ -12,6 +12,10 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css"/>
   <script src="js/language.js" defer></script>
   <script src="js/book-appointment.js" defer></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/airbnb.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
 </head>
 <body>
   <header>
@@ -71,7 +75,7 @@
           your appointment.
           </p>
 
-          <form class="main-form" action="">
+          <form id="appointment-form" class="main-form" action="">
             <label for="customerName">Name</label>
             <input type="text" id="customerName" required
                     name="clientName" placeholder="Your name">
@@ -83,8 +87,8 @@
 
             <label for="client-phone">Phone Number</label>
             <input type="tel" id="client-phone" required
-                    name="clientPhone" placeholder="123-456-789"
-                    pattern="[0-9]{3}[0-9]{3}[0-9]{3}">
+                    name="clientPhone" placeholder="123 456 7893"
+                    pattern="[0-9]{3}[0-9]{3}[0-9]{4}">
 
             <label for="service">Services</label>
             <select id="service" name="service" required>
@@ -111,10 +115,13 @@
                       name="hairPic">
             </div>
 
-            <label for="date">Date</label>
-            <div class="date-container">
-              <input type="datetime-local" id="date"
-                      name="appointmentDate">
+            <label for="date-input">Date</label>
+            <div class="booking-wrapper">
+                <input type="text" id="date-input" placeholder="Select a date"
+                      inputmode="none" autocomplete="off" />
+                <div id="time-slots-container" class="time-slots-container">
+                    <input type="hidden" id="selected-time" name="time">
+                </div>
             </div>
 
             <label for="notes">Additional Notes</label>

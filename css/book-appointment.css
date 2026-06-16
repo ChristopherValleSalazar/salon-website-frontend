@@ -23,7 +23,7 @@ textarea {
 }
 .main-form label {
   display: inline-block;
-  margin: 5px 10px;
+  margin: 6px 10px;
   color: var(--color-dark);
   font-size: var(--font-size-label);
   font-family: "Cormorant Garamond", serif;
@@ -33,11 +33,12 @@ textarea {
   min-height: 50px;
   padding: 12px;
   font-size: 1rem;
-  margin: 8px 0;
+  margin: 2px 0;
   display: inline-block;
   border: 1px solid #ccc;
   border-radius: 40px;
   box-sizing: border-box;
+  background-color: #f8f4ed;
 }
 .main-form textarea {
   font-size: 1rem;
@@ -58,12 +59,29 @@ textarea {
   font: inherit;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
-.main-form select, [type=file] {
-  background-color: white;
-}
-.date-container{
+
+/* DATE PICKR */
+.booking-wrapper {
   width: 50%;
 }
+.flatpickr-calendar {
+  position: absolute;
+  top: 50%;
+  left: 70%;
+  /* transform: translate(-50%, -50%); */
+}
+.flatpickr-months {
+  background: var(--color-light);
+}
+.flatpickr-month {
+  min-height: 48px;
+}
+.flatpickr-months .flatpickr-next-month, .flatpickr-months .flatpickr-prev-month {
+  margin-top: 6px;
+}
+
+
+
 .img-container {
   width: 83%;
 }
