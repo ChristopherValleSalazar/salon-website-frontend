@@ -11,6 +11,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+const modalOverlay = document.querySelector(".modal-overlay");
+
+console.log(modalOverlay.classList)
+// cosnt
+
 document.getElementById("appointment-form").addEventListener("submit", async (e) => {
     e.preventDefault(); //preventing empty form from submitting
     console.log("something");
@@ -21,14 +26,36 @@ document.getElementById("appointment-form").addEventListener("submit", async (e)
     console.log(formData);
     console.log(data);
 
+    let test = true;
+
 // later add the api call 
 
-    if (Response.ok) {
-        // confirmation windows
-    } else {
-        console.error("booking failed");
-    }
+    modalBehaviour();
+
+    // if (Response.ok) {
+        
+    //     // document.getElementById("appointment-form").reset()
+    // } else {
+    //     console.error("booking failed");
+    // }
 });
+
+function modalBehaviour() {
+    const modalOverlay = document.querySelector(".modal-overlay");
+    const closeBtn = document.querySelector(".secondary-btn");
+
+    modalOverlay.classList.add("is-open");
+    
+    closeBtn.addEventListener("click", () =>  {
+        document.getElementById("appointment-form").reset();
+        modalOverlay.classList.remove("is-open");
+        
+    })
+
+
+}
+
+
 
 flatpickr("#date-input", {
     minDate: "today",
@@ -54,5 +81,4 @@ flatpickr("#date-input", {
             instance.set("maxTime", "15:00");
         }
     }
-
 });

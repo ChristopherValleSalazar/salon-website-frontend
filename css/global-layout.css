@@ -57,10 +57,12 @@ h3 {
   font-size: var(--font-size-h3);
 }
 P {
+  margin: 0;
   font-size: var(--font-size-p);
   line-height: 1.7;
 }
 h1, h2, h3, h4 {
+  margin: 0;
   font-family: "Cormorant Garamond", serif;
 }
 .bg-light {
@@ -92,7 +94,7 @@ h1, h2, h3, h4 {
 header {
   position: sticky;
   top: 0;
-  z-index: 1000;
+  /* z-index: 1; */
   width: 100%;
   display: flex;
   align-items: center;
@@ -195,7 +197,7 @@ header {
   background-color: var(--color-form);
   color: var(--color-submit-btn);
   border-radius: 8px;
-  z-index: 1000;
+  /* z-index: 2; */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 .language-menu.show {

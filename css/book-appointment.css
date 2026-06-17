@@ -199,3 +199,108 @@ textarea {
   justify-content: space-between;
   gap: 25px;
 }
+
+/* SUCCESS MODAL */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3 ease, visibility 0.3s ease;
+  opacity: 0;
+  visibility: hidden;
+}
+.modal-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+.modal-container {
+  background: #f1e9da;
+  color: #3B2A1E;
+  padding: 32px 36px; /* more breathing room */
+  border-radius: 24px;
+  width: 90%;
+  max-width: 550px;
+  box-shadow: 0 0 11px 1px 
+            rgba(53, 49, 49, 0.8), 0 2px 6px 
+            rgba(156, 118, 60, 0.1);
+  transform: scale(0.9);
+  transition: transform 0.3s ease; /* you were missing the 's' here */
+}
+
+/* MODAL TEXT */
+.modal-title {
+  font-size: 1.6rem;
+  line-height: 1.3;
+  margin: 0 0 12px 0;
+}
+.modal-message {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #6b5c4e;
+  margin: 0 0 28px 0; 
+}
+
+/* MODAL BUTTONS */
+button {
+  cursor: pointer;
+  padding: 10px 24px;
+  border-radius: 40px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+}
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.primary-btn {
+  background: var(--color-submit-btn);
+  color: var(--color-light);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.primary-btn:hover {
+  background: var(--color-submit-btn-hover);
+  transform: scale(1.03);
+}
+.secondary-btn {
+  background: transparent;
+  color: var(--color-dark);
+  border: 1px solid var(--color-dark);
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+.secondary-btn:hover {
+  background: var(--color-dark);
+  color: var(--color-light);
+  transform: scale(1.03);
+}
+@media (max-width: 480px) {
+  .modal-container {
+    padding: 24px 20px;
+  }
+
+  .modal-title {
+    font-size: 1.3rem;
+  }
+
+  .actions {
+    flex-direction: column-reverse;
+  }
+
+  .primary-btn, .secondary-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+
+
+
