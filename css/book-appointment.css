@@ -63,7 +63,7 @@ textarea {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 .img-container {
-  width: 83%;
+  width: 60%;
 }
 .book-app-btn{
   display: block;
@@ -94,14 +94,33 @@ textarea {
   margin: 20px auto;
   line-height: 1.5rem;
 }
-.main-form input[type=file] {
-  width: 60%;
-}
-
 .main-form input:focus, .main-form select:focus {
   outline: none;
   border-color: var(--color-primary);
   box-shadow: 0 4px 12px rgba(184,138,68,0.25);
+}
+
+.main-form input[type="checkbox"] {
+  width: 24px;
+  min-height: 18px;
+  height: 24px;
+  box-shadow: none;
+  border-radius: 4px;
+  margin: 0;
+}
+.consent-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  width: 80%;
+  margin: 8px auto;
+  align-items: center;
+}
+.consent-wrapper label {
+  font-size: 1.1rem;
+  color: var(--color-text);
+  line-height: 1.5;
+  cursor: pointer;
 }
 
 /* DATE PICKR */
@@ -126,6 +145,15 @@ textarea {
 }
 
 /* Map+ADDRESS+HOURS */
+.map-hours-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 1rem 2rem 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
 .map-container {
   display: flex;
   flex-direction: column;
@@ -133,52 +161,40 @@ textarea {
 }
 .map-container iframe {
   border: 1px solid #ccc;
-  border-radius: 20px;
+  border-radius: 8px;
+  width: 100%;
+  height: 100%;
+  min-width: 300px;
+  min-height: 200px;
+}
+.location-address-hours-title {
+  margin: 1rem 0;
 }
 .horizontal-divider {
   border: none;
   border-top: 1px solid black;
   margin: 1rem 0;
 }
-.map-hours-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 4rem;
-  align-items: start;
-}
-.location-section {
-  display: flex;
-  gap: 2rem;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-}
 .address-container {
   max-width: 250px;
   text-align: center;
   margin: 0 auto;
 }
-.address-container h2 {
-  text-align: center;
-}
 .address-link {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
   color: inherit;
   text-decoration: none;
   font-size: var(--font-size-contact);
   font-weight: 500;
-  line-height: 1.8;
+  line-height: 1.5;
   text-align: center;
   transition:
     transform 0.2s ease,
     color 0.2s ease;
+}
+.address-desc {
+  margin-top: 10px;
+  font-size: 12px;
 }
 .address-link:hover {
   color: var(--color-primary);
@@ -202,6 +218,20 @@ textarea {
   justify-content: space-between;
   gap: 25px;
 }
+
+@media (max-width: 700px) {
+  .map-hours-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .address-link {
+    text-align: ;
+  }
+
+
+}
+
+
 
 /* SUCCESS MODAL */
 .modal-overlay {
@@ -287,15 +317,12 @@ button {
   .modal-container {
     padding: 24px 20px;
   }
-
   .modal-title {
     font-size: 1.3rem;
   }
-
   .actions {
     flex-direction: column-reverse;
   }
-
   .primary-btn, .secondary-btn {
     width: 100%;
     text-align: center;

@@ -57,7 +57,7 @@ function modalBehaviour() {
 
 
 
-flatpickr("#date-input", {
+const datePIcker = flatpickr("#date-input", {
     minDate: "today",
     // maxDate: new Date().fp_incr(14),
     disableMobile: true,      // forces Flatpickr UI even on iOS/Android

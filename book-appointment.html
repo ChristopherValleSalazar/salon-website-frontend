@@ -80,11 +80,6 @@
             <input type="text" id="customerName" required
                     name="clientName" placeholder="Your name">
 
-            <label for="customerEmail">Email</label>
-            <input type="email" id="customerEmail" required
-                    name="clientEmail" placeholder="email@example.com"
-                    pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$">
-
             <label for="client-phone">Phone Number</label>
             <input type="tel" id="client-phone" required
                     name="clientPhone" placeholder="123 456 7893"
@@ -115,18 +110,21 @@
                       name="hairPic">
             </div>
 
-            <label for="date-input">Date</label>
+            <label for="date-input" onclick="datePicker.open()">Date</label>
             <div class="booking-wrapper">
-                <input type="text" id="date-input" placeholder="Select a date"
+                <input type="text" id="date-input"  placeholder="Select a date"
                       inputmode="none" autocomplete="off" />
-                <div id="time-slots-container" class="time-slots-container">
-                    <input type="hidden" id="selected-time" name="time">
-                </div>
             </div>
 
             <label for="notes">Additional Notes</label>
             <textarea name="notes" id="notes" rows="5"
                       placeholder="Tell us about your hair goals, preferred stylist, allergies, etc."></textarea>
+
+            <div class="consent-wrapper">
+              <input type="checkbox" id="consentSMS" name="consentSMS">
+              <label for="consentSMS">I agree to receive SMS confirmations and reminders. 
+              By booking, you agree to our <a href="/privacy">Privacy Policy</a>.</label>
+            </div>
           <button class="book-app-btn btn-style" type="submit">Book Appointment</button>
         </form>
       </div>
@@ -135,19 +133,11 @@
         <hr class="horizontal-divider">
         <div class="map-hours-container">
           <div class="map-container">
-            <h2>Location</h2>
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d211585.84152414254!2d-118.20877800000001!3d34.043133!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c60701da1d91%3A0x9e292fb128fbf175!2sYasmin%20Beauty%20Salon%20Unisex!5e0!3m2!1sen!2sus!4v1780029000620!5m2!1sen!2sus"
-              width="350"
-              height="300"
-              style="border:0;"
-              allowfullscreen=""
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
+            <h2 class="location-address-hours-title">Location</h2>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d846343.3660965702!2d-118.20877800000001!3d34.043133!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c60701da1d91%3A0x9e292fb128fbf175!2sYasmin%20Beauty%20Salon%20Unisex!5e0!3m2!1sen!2sus!4v1781750795074!5m2!1sen!2sus" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
           <div class="address-container">
-            <h2>Address</h2>
+            <h2 class="location-address-hours-title">Address</h2>
             <a
               href="https://maps.google.com/?q=Yasmin+Beauty+Salon+Unisex"
               target="_blank"
@@ -158,10 +148,10 @@
               2438 1st St<br>
               Los Angeles, CA 90033
             </a>
-            <p>Click the address to open directions in Google Maps.</p>
+            <p class="address-desc">Click the address to open directions in Google Maps.</p>
           </div>
           <div class="hours-container">
-            <h2>Opening Times</h2>
+            <h2 class="location-address-hours-title">Opening Times</h2>
             <ul class="list-reset hours-container">
               <li class="day-container">
                 <span>Sunday</span>
