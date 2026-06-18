@@ -224,9 +224,9 @@ textarea {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
-  .address-link {
+  /* .address-link {
     text-align: ;
-  }
+  } */
 
 
 }
