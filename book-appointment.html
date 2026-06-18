@@ -76,41 +76,43 @@
           </p>
 
           <form id="appointment-form" class="main-form" action="">
-            <label for="customerName">Name</label>
+            <label for="customerName">Name <span class="required">*</span></label>
             <input type="text" id="customerName" required
                     name="clientName" placeholder="Your name">
 
-            <label for="client-phone">Phone Number</label>
+            <label for="client-phone">Phone Number <span class="required">*</span></label>
             <input type="tel" id="client-phone" required
                     name="clientPhone" placeholder="123 456 7893"
                     pattern="[0-9]{3}[0-9]{3}[0-9]{4}">
 
-            <label for="service">Services</label>
+            <label for="service">Services <span class="required">*</span></label>
             <select id="service" name="service" required>
               <option class="service-placeholder" value="" selected disabled>
                 Select a service
               </option>
               <option value="haircut">Haircut</option>
-              <option value="hair_color">Hair Coloring</option>
-              <option value="balayage">Balayage</option>
-              <option value="highlighting">Highlights</option>
-              <option value="blowout">Blowout Styling</option>
-              <option value="keratin">Keratin Treatment</option>
-              <option value="scalp_treatment">Scalp Treatment</option>
-              <option value="facial">Facial Treatment</option>
-              <option value="eyebrow_wax">Eyebrow Waxing</option>
-              <option value="manicure">Manicure</option>
-              <option value="pedicure">Pedicure</option>
-              <option value="lash_extensions">Eyelash Extensions</option>
+              <option value="baby-highlight">Baby Highlight</option>
+              <option value="dyes">Dyes</option>
+              <option value="straightening">Straightening</option>
+              <option value="blow-drying">Blow Drying</option>
+              <option value="washing">Washing</option>
+              <option value="treatment-moisturizing">Treatment Moisturizing</option>
+              <option value="haircut-blow-dry">Haircut Blow Dry</option>
+              <option value="color-touch-up">Color Touch Up</option>
+              <option value="perm">Perm</option>
+              <option value="beard-trim">Beard Trim</option>
+              <option value="eyebrow-shaping">Eyebrow Shaping</option>
+              <option value="haircut-beard-trim">Haircut Beard Trim</option>
+              <option value="haircut-beard-trim-eyebrow-shaping">Haircut Beard Trim Eyebrow Shaping</option>
             </select>
 
-            <label for="hair-image">Hair Image</label>
+            <label for="hair-image">Hair Image <span class="required">*</span></label>
             <div class="img-container">
               <input type="file" id="hair-image" accept=".png,.jpg,.jpeg,.webp"
                       name="hairPic">
             </div>
 
-            <label for="date-input" onclick="datePicker.open()">Date</label>
+            <label for="date-input">Date <span class="required">*</span></label>
             <div class="booking-wrapper">
                 <input type="text" id="date-input"  placeholder="Select a date"
                       inputmode="none" autocomplete="off" />

@@ -28,6 +28,13 @@ textarea {
   font-size: var(--font-size-label);
   font-family: "Cormorant Garamond", serif;
 }
+.main-form .required {
+  color: red;
+  font-size: 1.2rem;
+  margin-left: 4px;
+}
+
+
 .main-form input, select {
   width: 80%;
   min-height: 50px;
