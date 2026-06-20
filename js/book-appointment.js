@@ -51,11 +51,7 @@ function modalBehaviour() {
         modalOverlay.classList.remove("is-open");
         
     })
-
-
 }
-
-
 
 const datePIcker = flatpickr("#date-input", {
     minDate: "today",
@@ -79,6 +75,16 @@ const datePIcker = flatpickr("#date-input", {
 
         if(day === 0) {
             instance.set("maxTime", "15:00");
+        } else {
+            instance.set("maxTime", "18:30");
         }
     }
 });
+
+function burgerBehaviour() {
+    const burgerMenu = document.getElementById("mobileMenu");
+    const burgerIconBtn = document.getElementById('burgerBtn');
+
+    burgerIconBtn.classList.toggle("expanded");
+    burgerMenu.classList.toggle("open");
+}

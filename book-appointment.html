@@ -26,7 +26,7 @@
       </a>
       <h1>Yasmin Beauty Salon</h1>
     </div>
-
+    
     <div class="header-right">
       <div class="header-tools">
         <div class="language-dropdown">
@@ -47,11 +47,6 @@
             </li>
           </ul>
         </div>
-        <!-- CREATE THIS TOGGLE IF PEOPLE ACTUALLY USE THE WEBSITE -->
-        <!-- <div class="theme-toggle">
-          <span class="light"></span>
-          <span class="dark"></span>
-        </div> -->
       </div>
 
       <nav class="top-nav" aria-label="Primary Navigation">
@@ -63,6 +58,45 @@
           </ul>
         </div>
       </nav>
+    </div>
+
+    <button class="burger-icon" id="burgerBtn" onclick="burgerBehaviour()" aria-label="Toggle menu">
+      <span class="bar top"></span>
+      <span class="bar middle"></span>
+      <span class="bar bottom"></span>
+    </button>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="mobile-menu-inner">
+        <nav class="burger-nav" aria-label="Primary Navigation">
+          <ul class="list-reset nav-list-burger">
+            <li><a class="nav-btn-burger" href="index.html">Home</a></li>
+            <li><a class="nav-btn-burger" href="about.html">About</a></li>
+            <li><a class="nav-btn-burger cta" href="book-appointment.html">Book Appointment</a></li>
+          </ul>
+        </nav>
+        
+          <!-- <div class="header-tools-burger">
+            <div class="language-dropdown-burger">
+              <button class="language-btn-burger" type="button">
+                <span class="fi fi-us"></span>
+                <span>English</span>
+                <span class="arrow-burger">▼</span>
+              </button>
+
+              <ul class="list-reset language-menu-burger">
+                <li data-lang="en">
+                  <span class="fi fi-us"></span>
+                  English
+                </li>
+                <li data-lang="es">
+                  <span class="fi fi-sv"></span>
+                  Español
+                </li>
+              </ul>
+            </div>
+          </div> -->
+      </div>
     </div>
   </header>
 
@@ -76,16 +110,16 @@
           </p>
 
           <form id="appointment-form" class="main-form" action="">
-            <label for="customerName">Name <span class="required">*</span></label>
+            <label for="customerName">Name<span class="required">*</span></label>
             <input type="text" id="customerName" required
                     name="clientName" placeholder="Your name">
 
-            <label for="client-phone">Phone Number <span class="required">*</span></label>
+            <label for="client-phone">Phone Number<span class="required">*</span></label>
             <input type="tel" id="client-phone" required
                     name="clientPhone" placeholder="123 456 7893"
                     pattern="[0-9]{3}[0-9]{3}[0-9]{4}">
 
-            <label for="service">Services <span class="required">*</span></label>
+            <label for="service">Services<span class="required">*</span></label>
             <select id="service" name="service" required>
               <option class="service-placeholder" value="" selected disabled>
                 Select a service
@@ -106,13 +140,13 @@
               <option value="haircut-beard-trim-eyebrow-shaping">Haircut Beard Trim Eyebrow Shaping</option>
             </select>
 
-            <label for="hair-image">Hair Image <span class="required">*</span></label>
+            <label for="hair-image">Hair Image<span class="required">*</span></label>
             <div class="img-container">
               <input type="file" id="hair-image" accept=".png,.jpg,.jpeg,.webp"
                       name="hairPic">
             </div>
 
-            <label for="date-input">Date <span class="required">*</span></label>
+            <label for="date-input">Date<span class="required">*</span></label>
             <div class="booking-wrapper">
                 <input type="text" id="date-input"  placeholder="Select a date"
                       inputmode="none" autocomplete="off" />
@@ -136,7 +170,7 @@
         <div class="map-hours-container">
           <div class="map-container">
             <h2 class="location-address-hours-title">Location</h2>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d846343.3660965702!2d-118.20877800000001!3d34.043133!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c60701da1d91%3A0x9e292fb128fbf175!2sYasmin%20Beauty%20Salon%20Unisex!5e0!3m2!1sen!2sus!4v1781750795074!5m2!1sen!2sus" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d846343.3660965702!2d-118.20877800000001!3d34.043133!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c60701da1d91%3A0x9e292fb128fbf175!2sYasmin%20Beauty%20Salon%20Unisex!5e0!3m2!1sen!2sus!4v1781750795074!5m2!1sen!2sus" allowfullscreen="" loading="lazy" height="auto" width="auto" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
           <div class="address-container">
             <h2 class="location-address-hours-title">Address</h2>
