@@ -259,8 +259,6 @@ header {
   }
 }
 
-
-
 /* SHARED STYLES HEADER BUTTONS */
 .nav-btn, .language-btn {
     display: inline-flex;    
@@ -306,7 +304,6 @@ header {
 .language-btn.color-hover {
   background: var(--color-submit-btn-hover);
 }
-
 .language-menu {
   display: none;
   position: absolute;
@@ -334,14 +331,6 @@ header {
   background: var(--color-submit-btn);
   color: var(--color-light);
   border-radius: 8px;
-}
-
-/* THEME TOGGLE */
-.theme-toggle {
-  background: var(--color-submit-btn);
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
 }
 
 /* FOOTER */

@@ -170,7 +170,7 @@ textarea {
   min-height: 250px;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 900px) {
   .map-container iframe {
     width: 100%;
   }
@@ -228,16 +228,11 @@ textarea {
   gap: 25px;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 900px) {
   .map-hours-container {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
-  /* .address-link {
-    text-align: ;
-  } */
-
-
 }
 
 
