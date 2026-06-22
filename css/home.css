@@ -2,8 +2,8 @@
 .service-toggle {
     position: relative;
     display: flex;
-    min-width: 300px;
-    max-width: 70%;
+    width: 100%;
+    max-width: 900px;
     background: #eadec8;
     border-radius: 50px;
     overflow: hidden;
@@ -127,8 +127,9 @@
     color: rgba(241, 233, 218, 0.9);
 }
 .book-btn {
-    width: 100%;
-    margin: 12px auto;;
+    width: calc(100% + 28px);
+    margin-left: -14px;
+    margin-top: 12px;
     padding: 10px 14px;
     text-align: center;
     cursor: pointer;
@@ -147,8 +148,6 @@
     font-size: 16px;
     padding-right: 6px;
 }
-
-
 .unselected {
     display: none;
 }
@@ -159,6 +158,9 @@
 @media (max-width: 950px) {
     .grid {
         grid-template-columns: 1fr
+    }
+    .service-toggle {
+        max-width: 370px;
     }
 }
 
