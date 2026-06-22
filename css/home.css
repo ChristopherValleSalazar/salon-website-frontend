@@ -79,6 +79,7 @@
     padding-left: 6px;
     border-left: 2px solid var(--accent);
     color: #392613;
+    font-weight: 600;
 }
 
 /* Main card */
@@ -100,6 +101,7 @@
 }
 .card-main h3 {
     font-weight: 700;
+    font-size: 20px;
 }
 .card-main p {
     font-size: 14px;
@@ -131,6 +133,7 @@
     margin-left: -14px;
     margin-top: 12px;
     padding: 10px 14px;
+    font-size: 16px;
     text-align: center;
     cursor: pointer;
     background: rgba(59, 42, 30, 0.9);
@@ -195,12 +198,14 @@
 /* GALLERY */
 .gallery-grid {
     display: grid;
-    grid-template-columns:
-        repeat(4, 1fr);
-    gap: 1rem;
-    grid-auto-rows: 400px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.7rem;
+    grid-auto-rows: 600px;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 .gallery-item {
+    height: 100%;
     overflow: hidden;
     border-radius: 20px;
     cursor: pointer;
