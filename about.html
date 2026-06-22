@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="css/global-layout.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css"/>
     <script src="js/language.js" defer></script>
+    <script src="js/home.js" defer></script>
+
 </head>
 <body>
   <header>
@@ -20,14 +22,14 @@
       </a>
       <h1>Yasmin Beauty Salon</h1>
     </div>
-
+    
     <div class="header-right">
       <div class="header-tools">
         <div class="language-dropdown">
           <button class="language-btn" type="button">
             <span class="fi fi-us"></span>
             <span>English</span>
-            <span class="arrow">▼</span>
+            <span class="language-arrow">▼</span>
           </button>
 
           <ul class="list-reset language-menu">
@@ -41,15 +43,10 @@
             </li>
           </ul>
         </div>
-        <!-- CREATE THIS TOGGLE IF PEOPLE ACTUALLY USE THE WEBSITE -->
-        <!-- <div class="theme-toggle">
-          <span class="light"></span>
-          <span class="dark"></span>
-        </div> -->
       </div>
 
       <nav class="top-nav" aria-label="Primary Navigation">
-        <div class="burger-menu">
+        <div class="nav-container">
           <ul class="list-reset nav-list">
             <li><a class="nav-btn btn-style" href="index.html">Home</a></li>
             <li><a class="nav-btn btn-style" href="about.html">About</a></li>
@@ -57,6 +54,30 @@
           </ul>
         </div>
       </nav>
+    </div>
+
+    <button class="burger-icon" id="burgerBtn" onclick="burgerBehaviour()" aria-label="Toggle menu">
+      <span class="bar top"></span>
+      <span class="bar middle"></span>
+      <span class="bar bottom"></span>
+    </button>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="mobile-menu-inner">
+        <nav class="burger-nav" aria-label="Primary Navigation">
+          <ul class="list-reset nav-list-burger">
+            <li><a class="nav-btn-burger" href="index.html">Home</a></li>
+            <li><a class="nav-btn-burger" href="about.html">About</a></li>
+            <li><a class="nav-btn-burger cta" href="book-appointment.html">Book Appointment</a></li>
+          </ul>
+        </nav>
+        
+        <div class="mobile-lang-toggle">
+          <span class="lang-opt active" data-lang="en">EN</span>
+          <span class="lang-divider">|</span>
+          <span class="lang-opt" data-lang="es">ES</span>
+        </div>
+      </div>
     </div>
   </header>
 

@@ -36,3 +36,11 @@ document.querySelectorAll(".book-btn").forEach(btn => {
         window.location.href = `book-appointment.html?service=${service}`;
     });
 });
+
+function burgerBehaviour() {
+    const burgerMenu = document.getElementById("mobileMenu");
+    const burgerIconBtn = document.getElementById('burgerBtn');
+
+    burgerIconBtn.classList.toggle("expanded");
+    burgerMenu.classList.toggle("open");
+}
