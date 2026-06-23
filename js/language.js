@@ -17,6 +17,15 @@ document.querySelectorAll(".language-menu li").forEach(option => {
         const lang = option.dataset.lang;
         languageMenu.classList.remove("show");
         languageBtn.classList.remove("color-hover");
+
+        const flag = option.querySelector(".fi").className;
+        const text = option.textContent.trim();
+        languageBtn.innerHTML = `
+            <span class="${flag}"></span>
+            <span>${text}</span>
+            <span class="arrow">▼</span>
+        `;
+
         switchLanguage(lang);
     });
 });
