@@ -137,7 +137,7 @@
     font-size: 16px;
     text-align: center;
     cursor: pointer;
-    background: rgba(59, 42, 30, 0.9);
+    background: #51402f;
     color: rgba(241, 233, 218, 0.9);
     outline: none;
     border: none;
@@ -146,7 +146,7 @@
     transition: background 0.2s ease;
 }
 .book-btn:hover { 
-    background: #5a3e30; 
+    background: #31261c;
 }
 .fa-calendar-plus {
     font-size: 16px;
