@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
 const modalOverlay = document.querySelector(".modal-overlay");
 
 console.log(modalOverlay.classList)
-// cosnt
 
 document.getElementById("appointment-form").addEventListener("submit", async (e) => {
     e.preventDefault(); //preventing empty form from submitting

@@ -1,6 +1,5 @@
 function switchLanguage(lang) {
-  // your language switching logic here
-  // e.g. update flag, text, i18n, etc.
+  //update flag, text, i18n
     console.log('switching to', lang);
 }
 
