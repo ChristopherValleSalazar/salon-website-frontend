@@ -53,9 +53,9 @@
       <nav class="top-nav" aria-label="Primary Navigation">
         <div class="nav-container">
           <ul class="list-reset nav-list">
-            <li><a class="nav-btn btn-style" href="index.html">Home</a></li>
-            <li><a class="nav-btn btn-style" href="about.html">About</a></li>
-            <li><a class="nav-btn btn-style cta" href="book-appointment.html">Book Appointment</a></li>
+            <li><a class="nav-btn btn-style" data-i18n="nav.home" href="index.html">Home</a></li>
+            <li><a class="nav-btn btn-style" data-i18n="nav.about" href="about.html">About</a></li>
+            <li><a class="nav-btn btn-style cta" data-i18n="nav.book" href="book-appointment.html">Book Now</a></li>
           </ul>
         </div>
       </nav>
@@ -71,9 +71,9 @@
       <div class="mobile-menu-inner">
         <nav class="burger-nav" aria-label="Primary Navigation">
           <ul class="list-reset nav-list-burger">
-            <li><a class="nav-btn-burger" href="index.html">Home</a></li>
-            <li><a class="nav-btn-burger" href="about.html">About</a></li>
-            <li><a class="nav-btn-burger cta" href="book-appointment.html">Book Appointment</a></li>
+            <li><a class="nav-btn-burger" data-i18n="nav.home" href="index.html">Home</a></li>
+            <li><a class="nav-btn-burger" data-i18n="nav.about" href="about.html">About</a></li>
+            <li><a class="nav-btn-burger cta" data-i18n="nav.book" href="book-appointment.html">Book Now</a></li>
           </ul>
         </nav>
         
@@ -89,65 +89,64 @@
   <main>
     <section>
       <section id="appointment-form-container">
-        <h2 class="form-title">Make an appointment</h2>
+        <h2 class="form-title" data-i18n="form.heading">Make an appointment</h2>
         <div class="app-form">
-          <p class="form-description">Fill out the form below and we will contact you to confirm
+          <p class="form-description" data-i18n="form.description">Fill out the form below and we will contact you to confirm
           your appointment.
           </p>
 
           <form id="appointment-form" class="main-form" action="">
-            <label for="customerName">Name<span class="required">*</span></label>
+            <label for="customerName" data-i18n="form.name">Name<span class="required">*</span></label>
             <input type="text" id="customerName" required
-                    name="clientName" placeholder="Your name">
+                    name="clientName" data-i18n="form.name.placeholder" placeholder="Your name">
 
-            <label for="client-phone">Phone Number<span class="required">*</span></label>
+            <label for="client-phone" data-i18n="form.phone">Phone Number<span class="required">*</span></label>
             <input type="tel" id="client-phone" required
                     name="clientPhone" placeholder="123 456 7893"
                     pattern="[0-9]{3}[0-9]{3}[0-9]{4}">
 
-            <label for="service">Services<span class="required">*</span></label>
+            <label for="service" data-i18n="form.services">Services<span class="required">*</span></label>
             <select id="service" name="service" required>
-              <option class="service-placeholder" value="" selected disabled>
+              <option class="service-placeholder" value="" selected disabled data-i18n="form.services.placeholder">
                 Select a service
               </option>
-              <option value="haircut">Haircut</option>
-              <option value="baby-highlight">Baby Highlight</option>
-              <option value="dyes">Dyes</option>
-              <option value="straightening">Straightening</option>
-              <option value="blow-drying">Blow Drying</option>
-              <option value="washing">Washing</option>
-              <option value="treatment-moisturizing">Treatment Moisturizing</option>
-              <option value="haircut-blow-dry">Haircut Blow Dry</option>
-              <option value="color-touch-up">Color Touch Up</option>
-              <option value="perm">Perm</option>
-              <option value="beard-trim">Beard Trim</option>
-              <option value="eyebrow-shaping">Eyebrow Shaping</option>
-              <option value="haircut-beard-trim">Haircut Beard Trim</option>
-              <option value="haircut-beard-trim-eyebrow-shaping">Haircut Beard Trim Eyebrow Shaping</option>
+              <option value="haircut" data-i18n="form.services.haircut">Haircut</option>
+              <option value="baby-highlight" data-i18n="form.services.baby-highlight">Baby Highlight</option>
+              <option value="dyes" data-i18n="form.services.dyes">Dyes</option>
+              <option value="straightening" data-i18n="form.services.straightening">Straightening</option>
+              <option value="blow-drying" data-i18n="form.services.blowdry">Blow Drying</option>
+              <option value="washing" data-i18n="form.services.washing">Washing</option>
+              <option value="treatment-moisturizing" data-i18n="form.services.treatment">Treatment Moisturizing</option>
+              <option value="haircut-blow-dry" data-i18n="form.services.haircut-blowdry">Haircut Blow Dry</option>
+              <option value="color-touch-up" data-i18n="form.services.color-touchup">Color Touch Up</option>
+              <option value="perm" data-i18n="form.services.perm">Perm</option>
+              <option value="beard-trim" data-i18n="form.services.beard-trim">Beard Trim</option>
+              <option value="eyebrow-shaping" data-i18n="form.services.eyebrow-shaping">Eyebrow Shaping</option>
+              <option value="haircut-beard-trim" data-i18n="form.services.haircut-beard-trim">Haircut Beard Trim</option>
+              <option value="haircut-beard-trim-eyebrow-shaping" data-i18n="form.services.haircut-beard-trim-eyebrow-shaping">Haircut Beard Trim Eyebrow Shaping</option>
             </select>
 
-            <label for="hair-image">Hair Image</label>
+            <label for="hair-image" data-i18n="form.hair-img">Hair Image</label>
             <div class="img-container">
               <input type="file" id="hair-image" accept=".png,.jpg,.jpeg,.webp"
                       name="hairPic">
             </div>
 
-            <label for="date-input">Date<span class="required">*</span></label>
+            <label for="date-input" data-i18n="form.date">Date<span class="required">*</span></label>
             <div class="booking-wrapper">
-                <input type="text" id="date-input"  placeholder="Select a date"
+                <input type="text" id="date-input" data-i18n="form.date.placeholder" placeholder="Select a date"
                       inputmode="none" autocomplete="off" />
             </div>
 
-            <label for="notes">Additional Notes</label>
+            <label for="notes" data-i18n="form.additional-notes">Additional Notes</label>
             <textarea name="notes" id="notes" rows="5"
-                      placeholder="Tell us about your hair goals, preferred stylist, allergies, etc."></textarea>
+                      data-i18n="form.additional-notes.placeholder" placeholder="Tell us about your hair goals, preferred stylist, allergies, etc."></textarea>
 
             <div class="consent-wrapper">
               <input type="checkbox" id="consentSMS" name="consentSMS" required>
-              <label for="consentSMS">I agree to receive SMS confirmations and reminders. 
-              By booking, you agree to our <a href="/privacy">Privacy Policy</a>.</label>
+              <label for="consentSMS" data-i18n="form.consentSMS" data-i18n-Html="true">I agree to receive SMS confirmations and reminders. By booking, you agree to our <a href="#">Privacy Policy</a>.</label>
             </div>
-          <button class="book-app-btn btn-style" type="submit">Book Appointment</button>
+          <button class="book-app-btn btn-style" type="submit" data-i18n="common.btn.appointment">Book Appointment</button>
         </form>
       </div>
       </section>
@@ -155,11 +154,11 @@
         <hr class="horizontal-divider">
         <div class="map-hours-container">
           <div class="map-container">
-            <h2 class="location-address-hours-title">Location</h2>
+            <h2 class="location-address-hours-title" data-i18n="booking.location.heading">Location</h2>
             <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d846343.3660965702!2d-118.20877800000001!3d34.043133!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c60701da1d91%3A0x9e292fb128fbf175!2sYasmin%20Beauty%20Salon%20Unisex!5e0!3m2!1sen!2sus!4v1781750795074!5m2!1sen!2sus" allowfullscreen="" loading="lazy" height="auto" width="auto" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
           <div class="address-container">
-            <h2 class="location-address-hours-title">Address</h2>
+            <h2 class="location-address-hours-title" data-i18n="booking.address.heading">Address</h2>
             <a
               href="https://maps.google.com/?q=Yasmin+Beauty+Salon+Unisex"
               target="_blank"
@@ -170,37 +169,37 @@
               2438 1st St<br>
               Los Angeles, CA 90033
             </a>
-            <p class="address-desc">Click the address to open directions in Google Maps.</p>
+            <p class="address-desc" data-i18n="booking.address.message">Click the address to open directions in Google Maps.</p>
           </div>
           <div class="hours-container">
-            <h2 class="location-address-hours-title">Opening Times</h2>
+            <h2 class="location-address-hours-title" data-i18n="booking.hours.heading">Opening Times</h2>
             <ul class="list-reset hours-container">
               <li class="day-container">
-                <span>Sunday</span>
+                <span data-i18n="booking.hours.sunday">Sunday</span>
                 <div class="date-time">10:00AM<span>&#8722;</span>3:00PM</div>
               </li>
               <li class="day-container">
-                <span>Monday</span>
-                <div class="date-time">Closed</div>
+                <span data-i18n="booking.hours.monday">Monday</span>
+                <div class="date-time" data-i18n="booking.hours.closed">Closed</div>
               </li>
               <li class="day-container">
-                <span>Tuesday</span>
+                <span data-i18n="booking.hours.tuesday">Tuesday</span>
                 <div class="date-time">10:00AM<span>&#8722;</span>7:00PM</div>
               </li>
               <li class="day-container">
-                <span>Wednesday</span>
+                <span data-i18n="booking.hours.wednesday">Wednesday</span>
                 <div class="date-time">10:00AM<span>&#8722;</span>7:00PM</div>
               </li>
               <li class="day-container">
-                <span>Thursday</span>
+                <span data-i18n="booking.hours.thursday">Thursday</span>
                 <div class="date-time">10:00AM<span>&#8722;</span>7:00PM</div>
               </li>
               <li class="day-container">
-                <span>Friday</span>
+                <span data-i18n="booking.hours.friday">Friday</span>
                 <div class="date-time">10:00AM<span>&#8722;</span>7:00PM</div>
               </li>
               <li class="day-container">
-                <span>Saturday</span>
+                <span data-i18n="booking.hours.saturday">Saturday</span>
                 <div class="date-time">10:00AM<span>&#8722;</span>7:00PM</div>
               </li>
             </ul>
@@ -212,7 +211,7 @@
 
   <footer>
     <div class="footer-content">
-      <h2>Get In Touch</h2>
+      <h2 data-i18n="footer.heading">Get In Touch</h2>
 
       <a href="tel:+13239075658" class="contact-link">
           (323) 907-5658

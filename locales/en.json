@@ -1,0 +1,138 @@
+{
+    "common.btn.appointment": "Book Appointment",
+    
+    "nav.home": "Home",
+    "nav.about": "About",
+    "nav.book": "Book Now",
+
+    "services.hair.label": "Hair services",
+    "services.color.label": "Color services",
+    "services.treatments.label": "Treatments",
+    "services.hair-styling.label": "Hair and Styling services",
+    "services.beard.label": "Beard and Detail services",
+    "services.combo.label": "Combo services",
+
+    "services.book": "Book this service",
+
+    "services.haircut.title": "Haircut",
+    "services.haircut.desc": "Precision cut tailored to your face shape and texture.",
+    "services.haircut.price": "from $25",
+
+    "services.blowdry.title": "Blow Drying",
+    "services.blowdry.desc": "Professional finish with volume, smoothness, or curl.",
+    "services.blowdry.time": "60 min",
+    "services.blowdry.price": "from $35",
+
+    "services.haircut-blowdry.title": "Haircut + Blow-Dry",
+    "services.haircut-blowdry.desc": "Cut and styled finish in one session — the most popular combo.",
+    "services.haircut-blowdry.price": "from $35",
+
+    "services.washing.title": "Washing",
+    "services.washing.desc": "Scalp massage and deep cleanse with salon-grade products.",
+    "services.washing.price": "from $8",
+
+    "services.dyes.title": "Dyes",
+    "services.dyes.desc": "Full color application root to tip. Includes toner and conditioning rinse.",
+    "services.dyes.price": "from $80",
+
+    "services.baby-highlight.title": "Baby Highlight",
+    "services.baby-highlight.desc": "Subtle face-framing highlights for a natural sun-kissed look.",
+    "services.baby-highlight.price": "from $180",
+
+    "services.color-touchup.title": "Color Touch-Up",
+    "services.color-touchup.desc": "Root retouch to blend regrowth with your existing color.",
+    "services.color-touchup.price": "from $50",
+
+    "services.treatment.title": "Treatment + Moisturizing",
+    "services.treatment.desc": "Deep repair mask for dry or damaged hair. Leaves hair soft and resilient.",
+    "services.treatment.price": "from $50",
+
+    "services.straightening.title": "Straightening",
+    "services.straightening.desc": "Keratin smoothing treatment for long-lasting frizz-free results.",
+    "services.straightening.price": "from $35",
+
+    "services.haircut-barber.title": "Haircut",
+    "services.haircut-barber.desc": "Classic haircut tailored to your style and face shape.",
+    "services.haircut-barber.price": "from $25",
+
+    "services.perm.title": "Perm",
+    "services.perm.desc": "Long-lasting texture and shape for a fuller styled finish.",
+    "services.perm.price": "from $50",
+
+    "services.beard-trim.title": "Beard Trim",
+    "services.beard-trim.desc": "Shape and clean up your beard for a sharp, polished look.",
+    "services.beard-trim.price": "from $10",
+
+    "services.eyebrow-shaping.title": "Eyebrow Shaping",
+    "services.eyebrow-shaping.desc": "Clean, precise shaping for a balanced and refined look.",
+    "services.eyebrow-shaping.price": "from $10",
+
+    "services.haircut-beard-trim.title": "Haircut + Beard Trim",
+    "services.haircut-beard-trim.desc": "A full grooming session for a clean haircut and beard refresh.",
+    "services.haircut-beard-trim.price": "from $30",
+
+    "services.haircut-beard-trim-eyebrow-shaping.title": "Haircut + Beard Trim + Eyebrow Shaping",
+    "services.haircut-beard-trim-eyebrow-shaping.desc": "Complete grooming package with haircut, beard trim, and brow shaping.",
+    "services.haircut-beard-trim-eyebrow-shaping.price": "from $45",
+
+    "gallery.heading": "Our Work",
+    "gallery.message": "Explore some of our recent transformations and styling work",
+
+    "cta.heading": "Ready to Book?",
+    "cta.message": "Schedule your appointment today.",
+
+    "footer.heading": "Get in Touch", 
+
+    "form.heading": "Make an appointment",
+    "form.description": "Fill our the form below and we will contact you to confirm your appointment",
+
+    "form.name": "Name",
+    "form.name.placeholder": "Your name",
+
+    "form.phone": "Phone Number",
+
+    "form.services": "Services",
+    "form.services.placeholder": "Select a service",
+    "form.services.haircut": "Haircut",
+    "form.services.blowdry": "Blow Drying",
+    "form.services.haircut-blowdry": "Haircut + Blow-Dry",
+    "form.services.washing": "Washing",
+    "form.services.dyes": "Dyes",
+    "form.services.baby-highlight": "Baby Highlight",
+    "form.services.color-touchup": "Color Touch-Up",
+    "form.services.treatment": "Treatment + Moisturizing",
+    "form.services.straightening": "Straightening",
+    "form.services.perm": "Perm",
+    "form.services.beard-trim": "Beard Trim",
+    "form.services.eyebrow-shaping": "Eyebrow Shaping",
+    "form.services.haircut-beard-trim": "Haircut + Beard Trim",
+    "form.services.haircut-beard-trim-eyebrow-shaping": "Haircut + Beard Trim + Eyebrow Shaping",
+
+    "form.hair-img": "Hair Image",
+
+    "form.date": "Date",
+    "form.date.placeholder": "Select a date",
+
+    "form.additional-notes": "Additional Notes",
+    "form.additional-notes.placeholder": "Tell us about your hair goals, preferred stylist, allergies, etc.",
+
+    "form.consentSMS": "I agree to receive SMS confirmations and reminders. By booking, you agree to our <a href='/privacy'>Privacy Policy</a>.",
+
+    "booking.location.heading": "Location",
+    "booking.address.heading": "Address",
+    "booking.address.message": "Click the address to open directions in Google Maps",
+
+    "booking.hours.heading": "Opening Times",
+    "booking.hours.sunday": "Sunday",
+    "booking.hours.tuesday": "Tuesday",
+    "booking.hours.wednesday": "Wednesday",
+    "booking.hours.thursday": "Thursday",
+    "booking.hours.friday": "Friday",
+    "booking.hours.saturday": "Saturday",
+    "booking.hours.closed": "Closed",
+
+    "modal.heading": "Thank your for booking an appointment",
+    "modal.message": "To view, cancel, or reschedule please check the SMS with your appointment link",
+    "modal.home": "Home",
+    "modal.close": "close"
+}

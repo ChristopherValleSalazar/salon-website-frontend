@@ -1,0 +1,138 @@
+{
+    "common.btn.book": "Reservar este servicio",
+    "common.btn.appointment": "Reservar Cita",
+    
+    "nav.home": "Home",
+    "nav.about": "Sobre Nosotros",
+    "nav.book": "Reservar Ahora",
+
+    "services.hair.label": "Servicios de cabello",
+    "services.color.label": "Servicios de color",
+    "services.treatments.label": "Tratamientos",
+    "services.hair-styling.label": "Servicios de cabello y estilo",
+    "services.beard.label": "Servicios de barba y detalle",
+    "services.combo.label": "Servicios combinados",
+
+    "services.book": "Reservar este servicio",
+
+    "services.haircut.title": "Corte de Cabello",
+    "services.haircut.desc": "Corte preciso adaptado a la forma de tu rostro y textura del cabello.",
+    "services.haircut.price": "desde $25",
+
+    "services.blowdry.title": "Secado con Secadora",
+    "services.blowdry.desc": "Finalización profesional con volumen, suavidad o rizo.",
+    "services.blowdry.price": "desde $35",
+
+    "services.haircut-blowdry.title": "Corte de Cabello + Secado",
+    "services.haircut-blowdry.desc": "Corte y finalización estilizada en una sesión — la combinación más popular.",
+    "services.haircut-blowdry.price": "desde $35",
+
+    "services.washing.title": "Lavado",
+    "services.washing.desc": "Masaje de cuero cabelludo y limpieza profunda con productos de salon.",
+    "services.washing.price": "desde $8",
+
+    "services.dyes.title": "Tintes",
+    "services.dyes.desc": "Aplicación completa de color desde la raíz hasta la punta. Incluye toner y enjuague condicionante.",
+    "services.dyes.price": "desde $80",
+
+    "services.baby-highlight.title": "Resaltado para Bebés",
+    "services.baby-highlight.desc": "Sutil resaltado que enmarca el rostro para un aspecto natural y solar.",
+    "services.baby-highlight.price": "desde $180",
+
+    "services.color-touchup.title": "Retoque de Color",
+    "services.color-touchup.desc": "Retoque de raíz para mezclar el crecimiento con tu color existente.",
+    "services.color-touchup.price": "desde $50",
+
+    "services.treatment.title": "Tratamiento + Hidratación",
+    "services.treatment.desc": "Máscara de reparación profunda para cabello seco o dañado. Deja el cabello suave y resistente.",
+    "services.treatment.price": "desde $50",
+
+    "services.straightening.title": "Alisado",
+    "services.straightening.desc": "Tratamiento de suavizado de queratina para resultados duraderos sin frizz.",
+    "services.straightening.price": "desde $35",
+
+    "services.haircut-barber.title": "Corte de Cabello",
+    "services.haircut-barber.desc": "Corte clasico adaptado a tu estilo y forma de rostro.",
+    "services.haircut-barber.price": "desde $25",
+
+    "services.perm.title": "Permanente",
+    "services.perm.desc": "Duradera texture y forma para un acabado más completo y estilizado.",
+    "services.perm.price": "desde $50",
+
+    "services.beard-trim.title": "Recorte de Barba",
+    "services.beard-trim.desc": "Dale forma y arregla tu barba para lograr un aspecto definido y pulcro.",
+    "services.beard-trim.price": "desde $10",
+
+    "services.eyebrow-shaping.title": "Diseño de Cejas",
+    "services.eyebrow-shaping.desc": "Definición limpia y precisa para un aspecto equilibrado y refinado.",
+    "services.eyebrow-shaping.price": "desde $10",
+
+    "services.haircut-beard-trim.title": "Corte de Cabello + Recorte de Barba",
+    "services.haircut-beard-trim.desc": "Una sesión completa de aseo personal para un corte de pelo limpio y un retoque de barba.",
+    "services.haircut-beard-trim.price": "desde $30",
+
+    "services.haircut-beard-trim-eyebrow-shaping.title": "Corte de Cabello + Recorte de Barba + Diseño de Cejas",
+    "services.haircut-beard-trim-eyebrow-shaping.desc": "Paquete completo de arreglo personal que incluye corte de cabello, recorte de barba y diseño de cejas.",
+    "services.haircut-beard-trim-eyebrow-shaping.price": "desde $45",
+
+    "gallery.heading": "Nuestro Trabajo",
+    "gallery.message": "Explora algunos de nuestros trabajos recientes de transformación y estilo",
+
+    "cta.heading": "¿Listo para reservar?",
+    "cta.message": "Programa tu cita hoy.",
+
+    "footer.heading": "Ponte en contacto",
+
+    "form.heading": "Haz una cita",
+    "form.description": "Llena el formulario de abajo y nos pondremos en contacto contigo para confirmar tu cita",
+
+    "form.name": "Nombre",
+    "form.name.placeholder": "Tu nombre",
+
+    "form.phone": "Número de Teléfono",
+
+    "form.services": "Servicios",
+    "form.services.placeholder": "Selecciona un servicio",
+    "form.services.haircut": "Corte de Cabello",
+    "form.services.blowdry": "Secado con Secadora",
+    "form.services.haircut-blowdry": "Corte de Cabello + Secado con Secadora",
+    "form.services.washing": "Lavado",
+    "form.services.dyes": "Tinturas",
+    "form.services.baby-highlight": "Destacados para Bebés",
+    "form.services.color-touchup": "Retoque de Color",
+    "form.services.treatment": "Tratamiento + Hidratación",
+    "form.services.straightening": "Estrafiamiento",
+    "form.services.perm": "Perm",
+    "form.services.beard-trim": "Recorte de Barba",
+    "form.services.eyebrow-shaping": "Diseño de Cejas",
+    "form.services.haircut-beard-trim": "Corte de Cabello + Recorte de Barba",
+    "form.services.haircut-beard-trim-eyebrow-shaping": "Corte de Cabello + Recorte de Barba + Diseño de Cejas",
+
+    "form.hair-img": "Imagen del Cabello",
+
+    "form.date": "Fecha",
+    "form.date.placeholder": "Selecciona una fecha",
+
+    "form.additional-notes": "Notas Adicionales",
+    "form.additional-notes.placeholder": "Dinos sobre tus objetivos de cabello, estilista preferido, alergias, etc.",
+
+    "form.consentSMS": "Acepto recibir confirmaciones y recordatorios por SMS. Al reservar, aceptas nuestra <a href='/privacy'>Política de privacidad</a>.",
+
+    "booking.location.heading": "Ubicación",
+    "booking.address.heading": "Dirección",
+    "booking.address.message": "Haz clic en la dirección para abrir las direcciones en Google Maps.",
+
+    "booking.hours.heading": "Horarios de Apertura",
+    "booking.hours.sunday": "Domingo",
+    "booking.hours.tuesday": "Martes",
+    "booking.hours.wednesday": "Miércoles",
+    "booking.hours.thursday": "Jueves",
+    "booking.hours.friday": "Viernes",
+    "booking.hours.saturday": "Sábado",
+    "booking.hours.closed": "Cerrado",
+
+    "modal.heading": "Gracias por reservar una cita",
+    "modal.message": "Para ver, cancelar o reprogramar, por favor revisa el SMS con el enlace de tu cita",
+    "modal.home": "Home",
+    "modal.close": "cerrar"
+}
