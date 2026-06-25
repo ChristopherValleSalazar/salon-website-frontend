@@ -1,0 +1,213 @@
+/* ── PRIVACY SHELL ── */
+.privacy-shell {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 3.5rem 1.5rem 5rem;
+}
+
+/* ── HERO ── */
+.privacy-hero {
+    background: #251D19;
+    color: var(--color-light);
+    text-align: center;
+    padding: 3.5rem 1.5rem 3rem;
+    border-bottom: 2px solid rgba(176, 138, 82, 0.25);
+}
+.privacy-hero .eyebrow {
+    font-family: "Inter", sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: 0.75rem;
+}
+.privacy-hero h2 {
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.75rem;
+}
+.privacy-hero .meta {
+    font-size: 0.75rem;
+    color: rgba(246, 241, 232, 0.45);
+    letter-spacing: 0.08em;
+}
+
+/* ── TABLE OF CONTENTS ── */
+.toc-box {
+    background: var(--color-form);
+    border-left: 3px solid var(--color-primary);
+    border-radius: 0 8px 8px 0;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 3rem;
+}
+.toc-box h3 {
+    font-family: "Inter", sans-serif;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: 0.85rem;
+}
+.toc-box ol {
+    margin: 0;
+    padding-left: 1.2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.3rem 2rem;
+}
+.toc-box ol li {
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+.toc-box ol li a {
+    color: var(--color-dark);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+.toc-box ol li a:hover {
+    color: var(--color-primary);
+}
+
+/* ── SECTIONS ── */
+.policy-section {
+    margin-bottom: 3rem;
+    scroll-margin-top: 80px;
+}
+.policy-section h3 {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-dark);
+    margin-bottom: 0.85rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid rgba(176, 138, 82, 0.3);
+    display: flex;
+    align-items: baseline;
+    gap: 0.65rem;
+}
+.section-num {
+    font-family: "Inter", sans-serif;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    flex-shrink: 0;
+}
+.policy-section p {
+    font-size: 0.875rem;
+    line-height: 1.8;
+    color: #4a3c32;
+    margin-bottom: 0.9rem;
+}
+.policy-section p:last-child {
+    margin-bottom: 0;
+}
+.policy-section ul,
+.policy-section ol {
+    margin: 0.6rem 0 0.9rem 1.1rem;
+    padding: 0;
+}
+.policy-section li {
+    font-size: 0.875rem;
+    line-height: 1.8;
+    color: #4a3c32;
+    margin-bottom: 0.25rem;
+}
+strong.term {
+    color: var(--color-dark);
+    font-weight: 600;
+}
+
+/* ── SECTION DIVIDER ── */
+.section-divider {
+    border: none;
+    border-top: 1px solid rgba(176, 138, 82, 0.2);
+    margin: 0 0 3rem;
+}
+
+/* ── CALLOUT BOX ── */
+.callout {
+    background: var(--color-form);
+    border-left: 3px solid var(--color-primary);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.25rem;
+    margin: 1rem 0;
+}
+.callout-label {
+    font-family: "Inter", sans-serif;
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+}
+.callout p {
+    font-size: 0.82rem;
+}
+
+/* ── CONTACT CARD ── */
+.contact-card {
+    background: var(--color-form);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+.cname {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--color-dark);
+    margin-bottom: 0.25rem;
+}
+.crow {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.82rem;
+    color: #4a3c32;
+}
+.clabel {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    min-width: 48px;
+}
+.contact-card a {
+    color: #4a3c32;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+.contact-card a:hover {
+    color: var(--color-primary);
+}
+
+/* ── PAGE FOOTER ── */
+.policy-footer {
+    margin-top: 3.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(176, 138, 82, 0.25);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-size: 0.72rem;
+    color: #a09080;
+    letter-spacing: 0.04em;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 560px) {
+    .toc-box ol {
+        grid-template-columns: 1fr;
+    }
+}
