@@ -10,13 +10,17 @@ async function switchLanguage(lang) {
         const val = translations[key];
         if (!val) return;
 
-        if (el.hasAttribute('placeholder')) {
-            el.placeholder = val;
-        } else if (el.dataset.i18nHtml) {
-            el.innerHTML = val;
-        } else {
-            el.textContent = val;
-        }
+    const containsHtml = /<\/?[a-z][\s\S]*>/i.test(val);
+
+    console.log(val);
+
+    if (el.hasAttribute("placeholder")) {
+        el.placeholder = val;
+    } else if (containsHtml) {
+        el.innerHTML = val;
+    } else {
+        el.textContent = val;
+    }
     });
 
     document.documentElement.lang = lang;

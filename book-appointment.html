@@ -96,7 +96,7 @@
           </p>
 
           <form id="appointment-form" class="main-form" action="">
-            <label for="customerName" data-i18n="form.name">Name<span class="required">*</span></label>
+            <label for="customerName" data-i18n="form.name">Name</label>
             <input type="text" id="customerName" required
                     name="clientName" data-i18n="form.name.placeholder" placeholder="Your name">
 
@@ -144,7 +144,7 @@
 
             <div class="consent-wrapper">
               <input type="checkbox" id="consentSMS" name="consentSMS" required>
-              <label for="consentSMS" data-i18n="form.consentSMS" data-i18n-Html="true">I agree to receive SMS confirmations and reminders. By booking, you agree to our <a href="#">Privacy Policy</a>.</label>
+              <label for="consentSMS" data-i18n="form.consentSMS">I agree to receive SMS confirmations and reminders. By booking, you agree to our <a href="privacy-policy.html">Privacy Policy</a>.</label>
             </div>
           <button class="book-app-btn btn-style" type="submit" data-i18n="common.btn.appointment">Book Appointment</button>
         </form>
@@ -221,25 +221,26 @@
       </a>
 
       <div class="social-links">
-        <!-- <a href="#">Instagram</a> -->
           <a href="https://www.tiktok.com/@yasmin.beauty.salon23">TikTok</a>
       </div>
 
-      <p class="copyright">
-          © 2026 Yasmin Beauty Salon
-      </p>
+      <div class="copyright">
+        <span>© 2026 Yasmin Beauty Salon</span>
+        <span class="footer-divider">|</span>
+        <a href="privacy-policy.html" class="footer-policy-link">Privacy Policy</a>
+      </div>
     </div>
   </footer>
 
   <div id="success-modal-overlay" class="modal-overlay">
     <div class="modal-container">
       <div class="modal-text">
-        <h2 class="modal-title">Thank you for booking an appointment <span class="customer-name"></span></h2>
-        <p class="modal-message">To view, cancel, or reschedule please check the SMS/Email with your appointment link</p>
+        <h2 class="modal-title" data-i18n="modal.heading">Thank you for booking an appointment <span class="customer-name"></span></h2>
+        <p class="modal-message" data-i18n="modal.message">To view, cancel, or reschedule please check the SMS/Email with your appointment link</p>
       </div>
       <div class="actions">
-        <button id="modal-btn-home" onclick="window.location.href='http://chris-fedora:5501/index.html';" class="primary-btn">Home</button>
-        <button id="modal-btn-close" class="secondary-btn">Close</button>
+        <button id="modal-btn-home" onclick="window.location.href='http://chris-fedora:5501/index.html';" class="primary-btn" data-i18n="modal.home">Home</button>
+        <button id="modal-btn-close" class="secondary-btn" data-i18n="modal.close">Close</button>
       </div>
     </div>
   </div>
