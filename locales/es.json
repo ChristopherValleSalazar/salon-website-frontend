@@ -82,9 +82,10 @@
     "cta.message": "Programa tu cita hoy.",
 
     "footer.heading": "Ponte en contacto",
+    "footer.privacy": "Política de Privacidad",
 
     "form.heading": "Haz una cita",
-    "form.description": "Llena el formulario de abajo y nos pondremos en contacto contigo para confirmar tu cita",
+    "form.description": "Reserve su cita a continuación. Una vez enviada la solicitud, nuestro equipo se pondrá en contacto con usted para confirmar la fecha y la hora; por lo general, en un plazo de pocas horas.",
 
     "form.name": "Nombre<span class=\"required\">*</span>",
     "form.name.placeholder": "Tu nombre",
@@ -249,5 +250,8 @@
     "privacy.s12.label.email": "Correo",
 
     "privacy.footer.copy": "© 2026 Yasmin Beauty Salon Unisex · Los Ángeles, CA",
-    "privacy.footer.effective": "Vigente desde el 23 de junio de 2026 · v1.0"
+    "privacy.footer.effective": "Vigente desde el 23 de junio de 2026 · v1.0",
+
+    "about.title": "Sobre Nosotros",
+    "about.p": "Hola, mi nombre es Claudia. Soy la duena des Yasmin Beauty Salon, tambien una estilista trabajando en este humilde negocio. Yo como una mujer que vino a este pais con muchos suenos, con ganas a salir adelate y triunfar en un pais de oportunidades. <Strong class=\"story-strong\">Te invito</Strong> a que nos visites y conozcas nuestro tabajo, te aseguro que no te arreppentiras."
 }

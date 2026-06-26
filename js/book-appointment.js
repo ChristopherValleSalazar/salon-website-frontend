@@ -17,17 +17,19 @@ console.log(modalOverlay.classList)
 
 document.getElementById("appointment-form").addEventListener("submit", async (e) => {
     e.preventDefault(); //preventing empty form from submitting
-    console.log("something");
 
+    const dateInput = document.getElementById("date-input");
+    const visibleInput = dateInput._flatpickr.altInput;
+
+    if (!dateInput.value) {
+        visibleInput.classList.add("input-error");
+        visibleInput.scrollIntoView({ behavior: "smooth", block: "center" });
+        return;
+    }
+    visibleInput.classList.remove("input-error");
+    
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
-
-    console.log(formData);
-    console.log(data);
-
-    let test = true;
-
-// later add the api call 
 
     modalBehaviour();
 
@@ -75,5 +77,9 @@ const datePIcker = flatpickr("#date-input", {
         } else {
             instance.set("maxTime", "18:30");
         }
+
+        if (dateStr) {
+        instance.altInput.classList.remove("input-error");
+    }
     }
 });

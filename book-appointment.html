@@ -13,7 +13,6 @@
   <script src="js/home.js" defer></script>
   <script src="js/language.js" defer></script>
   <script src="js/book-appointment.js" defer></script>
-
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/airbnb.min.css">
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
@@ -91,8 +90,7 @@
       <section id="appointment-form-container">
         <h2 class="form-title" data-i18n="form.heading">Make an appointment</h2>
         <div class="app-form">
-          <p class="form-description" data-i18n="form.description">Fill out the form below and we will contact you to confirm
-          your appointment.
+          <p class="form-description" data-i18n="form.description">Reserve your appointment below. Once submitted, our team will reach out to confirm your date and time — usually within a few hours.
           </p>
 
           <form id="appointment-form" class="main-form" action="">
@@ -134,7 +132,7 @@
 
             <label for="date-input" data-i18n="form.date">Date<span class="required">*</span></label>
             <div class="booking-wrapper">
-                <input type="text" id="date-input" data-i18n="form.date.placeholder" placeholder="Select a date"
+                <input type="text" id="date-input" data-i18n="form.date.placeholder" placeholder="June 30, 2026 10:00 AM"
                       inputmode="none" autocomplete="off" />
             </div>
 
@@ -150,8 +148,10 @@
         </form>
       </div>
       </section>
+
+      <hr class="form-divider">
+
       <section id="location-address-hours">
-        <hr class="horizontal-divider">
         <div class="map-hours-container">
           <div class="map-container">
             <h2 class="location-address-hours-title" data-i18n="booking.location.heading">Location</h2>
@@ -227,7 +227,7 @@
       <div class="copyright">
         <span>© 2026 Yasmin Beauty Salon</span>
         <span class="footer-divider">|</span>
-        <a href="privacy-policy.html" class="footer-policy-link">Privacy Policy</a>
+        <a href="privacy-policy.html" class="footer-policy-link" data-i18n="footer.privacy">Privacy Policy</a>
       </div>
     </div>
   </footer>

@@ -5,10 +5,13 @@ textarea {
   resize: vertical;
   border: 1px solid #ccc;
   border-radius: 8px;
+  background-color: #f8f4ed;
 }
 .form-description {
-  font-size: var(--font-size-tagline);
-  margin-left: 20px;
+  font-size: 0.9rem;
+  text-align: center;
+  color: var(--color-muted, #8a7f72); 
+  margin-bottom: 32px;
 }
 .main-form {
   border-radius: 40px;
@@ -73,6 +76,22 @@ textarea {
 .img-container {
   width: 100%;
 }
+
+/* Disable file and Services input default look */
+input[type="file"] {
+  display: block;
+  margin: 10px auto;
+}
+.main-form select:has(option[value=""]:checked) {
+  color: #a09585;
+}
+.main-form input[type="file"] {
+  color: transparent;
+}
+.main-form input[type="file"]::-webkit-file-upload-button,
+.main-form input[type="file"]::file-selector-button {
+  color: var(--color-dark);
+}
 .book-app-btn{
   display: block;
   width: 50%;
@@ -129,6 +148,10 @@ textarea {
   color: var(--color-text);
   line-height: 1.5;
   cursor: pointer;
+}
+.input-error {
+  border-color: red !important;
+  box-shadow: 0 0 2px rgba(255, 0, 0, 0.15) !important;
 }
 
 @media (max-width: 600px) {
@@ -194,10 +217,13 @@ textarea {
 .location-address-hours-title {
   margin: 1rem 0;
 }
-.horizontal-divider {
+hr.form-divider {
   border: none;
-  border-top: 1px solid black;
-  margin: 1rem 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--color-dark), transparent);
+  opacity: 0.25;
+  margin: 12px auto 28px;
+  width: 80%;
 }
 .address-container {
   max-width: 250px;
@@ -249,8 +275,6 @@ textarea {
     gap: 2rem;
   }
 }
-
-
 
 /* SUCCESS MODAL */
 .modal-overlay {
@@ -345,7 +369,3 @@ textarea {
     text-align: center;
   }
 }
-
-
-
-

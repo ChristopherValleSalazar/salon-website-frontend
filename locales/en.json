@@ -81,10 +81,11 @@
     "cta.heading": "Ready to Book?",
     "cta.message": "Schedule your appointment today.",
 
-    "footer.heading": "Get in Touch", 
+    "footer.heading": "Get in Touch",
+    "footer.privacy": "Privacy Policy",
 
     "form.heading": "Make an appointment",
-    "form.description": "Fill our the form below and we will contact you to confirm your appointment",
+    "form.description": "Reserve your appointment below. Once submitted, our team will reach out to confirm your date and time. Usually within a few hours.",
 
     "form.name": "Name<span class=\"required\">*</span>",
     "form.name.placeholder": "Your name",
@@ -247,5 +248,8 @@
     "privacy.s12.label.email": "Email",
 
     "privacy.footer.copy": "© 2026 Yasmin Beauty Salon Unisex · Los Angeles, CA",
-    "privacy.footer.effective": "Effective June 23, 2026 · v1.0"
+    "privacy.footer.effective": "Effective June 23, 2026 · v1.0",
+
+    "about.title": "About Us",
+    "about.p": "Hello, my name is Claudia. I am the owner of Yasmin Beauty Salon, as well as a stylist working in this humble business. I am a woman who came to this country with many dreams and a desire to get ahead and succeed in a land of opportunity. <strong class=\"story-strong\">I invite you</strong> to visit us and see our work; I assure you that you will not regret it."
 }
