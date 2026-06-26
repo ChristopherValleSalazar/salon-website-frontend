@@ -25,7 +25,6 @@ textarea {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 .main-form label {
-  display: inline-block;
   margin: 12px 0 8px 10px ;
   color: var(--color-dark);
   font-size: var(--font-size-label);
@@ -80,7 +79,7 @@ textarea {
 /* Disable file and Services input default look */
 input[type="file"] {
   display: block;
-  margin: 10px auto;
+  margin: 0;
 }
 .main-form select:has(option[value=""]:checked) {
   color: #a09585;
@@ -289,7 +288,7 @@ hr.form-divider {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.8s ease, visibility 0.10s ease;
+  transition: opacity 0.3s ease, visibility 0.5s ease;
   opacity: 0;
   visibility: hidden;
 }

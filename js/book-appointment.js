@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const modalOverlay = document.querySelector(".modal-overlay");
 
-console.log(modalOverlay.classList)
+// console.log(modalOverlay.classList)
 
 document.getElementById("appointment-form").addEventListener("submit", async (e) => {
     e.preventDefault(); //preventing empty form from submitting
@@ -69,17 +69,17 @@ const datePIcker = flatpickr("#date-input", {
         date => date.getDay() === 1
     ],
 
-    onChange(selectedDates, datestr, instance) {
+    onChange(selectedDates, dateStr, instance) {
         const day = selectedDates[0].getDay();
 
         if(day === 0) {
             instance.set("maxTime", "15:00");
         } else {
-            instance.set("maxTime", "19:00"); // Last booking slot, not closing time — allows buffer for longer services
+            instance.set("maxTime", "18:30"); // Last booking slot, not closing time — allows buffer for longer services
         }
 
         if (dateStr) {
-        instance.altInput.classList.remove("input-error");
-    }
+            instance.altInput.classList.remove("input-error");
+        }
     }
 });
