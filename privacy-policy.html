@@ -1,298 +1,365 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yasmin Beauty Salon | Privacy Policy</title>
     <link rel="stylesheet" href="css/global-layout.css">
     <link rel="stylesheet" href="css/privacy-policy.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css"/>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css" />
     <script src="js/home.js" defer></script>
     <script src="js/language.js" defer></script>
+    <script src="js/burger.js" defer></script>
 </head>
+
 <body>
-  <header>
-    <div class="brand">
-      <a href="index.html" class="logo"><img src="images/images.png"
-                            width="100"
-                            alt="Yasmin Beauty Salon logo">
-      </a>
-      <h1>Yasmin Beauty Salon</h1>
-    </div>
-    
-    <div class="header-right">
-      <div class="header-tools">
-        <div class="language-dropdown">
-          <button class="language-btn" type="button">
-            <span class="fi fi-us"></span>
-            <span>English</span>
-            <span class="language-arrow">▼</span>
-          </button>
-
-          <ul class="list-reset language-menu">
-            <li data-lang="en">
-              <span class="fi fi-us"></span>
-              English
-            </li>
-            <li data-lang="es">
-              <span class="fi fi-sv"></span>
-              Español
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <nav class="top-nav" aria-label="Primary Navigation">
-        <div class="nav-container">
-          <ul class="list-reset nav-list">
-            <li><a class="nav-btn btn-style" data-i18n="nav.home" href="index.html">Home</a></li>
-            <li><a class="nav-btn btn-style" data-i18n="nav.about" href="about.html">About</a></li>
-            <li><a class="nav-btn btn-style cta" data-i18n="nav.book" href="book-appointment.html">Book Now</a></li>
-          </ul>
-        </div>
-      </nav>
-    </div>
-
-    <button class="burger-icon" id="burgerBtn" onclick="burgerBehaviour()" aria-label="Toggle menu">
-      <span class="bar top"></span>
-      <span class="bar middle"></span>
-      <span class="bar bottom"></span>
-    </button>
-
-    <div class="mobile-menu" id="mobileMenu">
-      <div class="mobile-menu-inner">
-        <nav class="burger-nav" aria-label="Primary Navigation">
-          <ul class="list-reset nav-list-burger">
-            <li><a class="nav-btn-burger" data-i18n="nav.home" href="index.html">Home</a></li>
-            <li><a class="nav-btn-burger" data-i18n="nav.about" href="about.html">About</a></li>
-            <li><a class="nav-btn-burger cta" data-i18n="nav.book" href="book-appointment.html">Book Now</a></li>
-          </ul>
-        </nav>
-        
-        <div class="mobile-lang-toggle">
-          <span class="lang-opt active" data-lang="en">EN</span>
-          <span class="lang-divider">|</span>
-          <span class="lang-opt" data-lang="es">ES</span>
-        </div>
-      </div>
-    </div>
-  </header>
-
-<main>
-    <div class="privacy-shell">
-
-        <div class="toc-box">
-            <h3 data-i18n="privacy.toc.heading">On this page</h3>
-            <ol>
-                <li><a href="#overview" data-i18n="privacy.toc.overview">Overview</a></li>
-                <li><a href="#information-we-collect" data-i18n="privacy.toc.information">Information We Collect</a></li>
-                <li><a href="#how-we-use" data-i18n="privacy.toc.howweuse">How We Use It</a></li>
-                <li><a href="#sms-consent" data-i18n="privacy.toc.sms">SMS Consent &amp; TCPA</a></li>
-                <li><a href="#sharing" data-i18n="privacy.toc.sharing">Sharing &amp; Disclosure</a></li>
-                <li><a href="#analytics" data-i18n="privacy.toc.analytics">Analytics &amp; Cookies</a></li>
-                <li><a href="#ccpa" data-i18n="privacy.toc.ccpa">Your CCPA Rights</a></li>
-                <li><a href="#data-retention" data-i18n="privacy.toc.retention">Data Retention</a></li>
-                <li><a href="#security" data-i18n="privacy.toc.security">Security</a></li>
-                <li><a href="#children" data-i18n="privacy.toc.children">Children's Privacy</a></li>
-                <li><a href="#changes" data-i18n="privacy.toc.changes">Policy Changes</a></li>
-                <li><a href="#contact" data-i18n="privacy.toc.contact">Contact Us</a></li>
-            </ol>
+    <header>
+        <div class="brand">
+            <a href="index.html" class="logo"><img src="images/images.png" width="100" alt="Yasmin Beauty Salon logo">
+            </a>
+            <h1>Yasmin Beauty Salon</h1>
         </div>
 
-        <section class="policy-section" id="overview">
-            <h3>
-                <span class="section-num">01</span>
-                <span data-i18n="privacy.s01.title">Overview</span>
-            </h3>
-            <p data-i18n="privacy.s01.p1">Yasmin Beauty Salon Unisex ("we," "us," or "our") operates the website at <strong class="term">yasminbeauty.salon</strong> (the "Site"). This Privacy Policy explains what information we collect when you book an appointment, browse our Site, or communicate with us — and how we use, store, and protect that information.</p>
-            <p data-i18n="privacy.s01.p2">By using our Site or submitting a booking, you agree to the practices described here. If you do not agree, please do not use the Site.</p>
-        </section>
+        <div class="header-right">
+            <div class="header-tools">
+                <div class="language-dropdown">
+                    <button class="language-btn" type="button">
+                        <span class="fi fi-us"></span>
+                        <span>English</span>
+                        <span class="language-arrow">▼</span>
+                    </button>
 
-        <section class="policy-section" id="information-we-collect">
-            <h3>
-                <span class="section-num">02</span>
-                <span data-i18n="privacy.s02.title">Information We Collect</span>
-            </h3>
-            <p data-i18n="privacy.s02.direct.label"><strong class="term">Information you provide directly:</strong></p>
-            <ul>
-                <li data-i18n="privacy.s02.direct.li1">Full name</li>
-                <li data-i18n="privacy.s02.direct.li2">Phone number (for appointment confirmations and SMS reminders)</li>
-                <li data-i18n="privacy.s02.direct.li3">Preferred service, date, and time</li>
-                <li data-i18n="privacy.s02.direct.li4">Any notes or special requests included with your booking</li>
-                <li data-i18n="privacy.s02.direct.li5">Feedback or review content submitted through the Site</li>
-            </ul>
-            <p data-i18n="privacy.s02.auto.label"><strong class="term">Information collected automatically:</strong></p>
-            <ul>
-                <li data-i18n="privacy.s02.auto.li1">Browser type and version</li>
-                <li data-i18n="privacy.s02.auto.li2">Pages visited and time spent on each page</li>
-                <li data-i18n="privacy.s02.auto.li3">Referring URL</li>
-                <!-- <li>Truncated IP address (used for analytics only; not stored in full)</li> -->
-                <!-- <li>Device type and operating system</li> -->
-            </ul>
-        </section>
-
-        <section class="policy-section" id="how-we-use">
-            <h3>
-                <span class="section-num">03</span>
-                <span data-i18n="privacy.s03.title">How We Use Your Information</span>
-            </h3>
-            <ul>
-                <li data-i18n="privacy.s03.li1">To confirm, manage, and remind you of your appointment</li>
-                <li data-i18n="privacy.s03.li2">To send SMS notifications (only with your explicit consent — see Section 04)</li>
-                <li data-i18n="privacy.s03.li3">To respond to questions, feedback, or support requests</li>
-                <li data-i18n="privacy.s03.li4">To improve the Site using aggregated, anonymized analytics data</li>
-                <li data-i18n="privacy.s03.li5">To comply with applicable laws and regulations</li>
-            </ul>
-            <p data-i18n="privacy.s03.p">We do not use your personal information for automated decision-making or profiling.</p>
-        </section>
-
-        <section class="policy-section" id="sms-consent">
-            <h3>
-                <span class="section-num">04</span>
-                <span data-i18n="privacy.s04.title">SMS Consent &amp; TCPA Compliance</span>
-            </h3>
-            <div class="callout">
-                <p class="callout-label" data-i18n="privacy.s04.callout.label">Important — Please Read</p>
-                <p data-i18n="privacy.s04.callout.p">By checking the SMS consent box on our booking form, you expressly consent to receive text messages from Yasmin Beauty Salon Unisex at the phone number you provide. Message frequency varies. Standard message and data rates may apply.</p>
+                    <ul class="list-reset language-menu">
+                        <li data-lang="en">
+                            <span class="fi fi-us"></span>
+                            English
+                        </li>
+                        <li data-lang="es">
+                            <span class="fi fi-sv"></span>
+                            Español
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <p data-i18n="privacy.s04.limited">Our SMS messages are strictly limited to:</p>
-            <ul>
-                <li data-i18n="privacy.s04.li1">Appointment booking confirmations</li>
-                <li data-i18n="privacy.s04.li2">Appointment reminders (sent up to 24 hours before your scheduled visit)</li>
-                <li data-i18n="privacy.s04.li3">Cancellation or rescheduling notifications</li>
-            </ul>
-            <p data-i18n="privacy.s04.p1">We will never send promotional marketing texts without a separate, explicit opt-in.</p>
-            <p data-i18n="privacy.s04.optout"><strong class="term" data-i18n="privacy.s04.to-opt-out">To opt out:</strong> Reply <strong>STOP</strong> to any text we send. You will receive one final confirmation and no further messages. You may also contact us directly (see Section 12).</p>
-            <p data-i18n="privacy.s04.help"><strong class="term" data-i18n="privacy.s04.to-get-help">To get help:</strong> Reply <strong>HELP</strong> to any of our texts, or email us at the address in Section 12.</p>
-            <p data-i18n="privacy.s04.p2">SMS consent is never required to book an appointment. Unchecking the SMS box has no effect on your ability to schedule services.</p>
-            <p data-i18n="privacy.s04.p3">We use Twilio to deliver SMS messages. Twilio acts as a data processor under a data processing agreement and is prohibited from using your phone number for any other purpose. Your number is never sold or shared for marketing.</p>
-        </section>
 
-        <section class="policy-section" id="sharing">
-            <h3>
-                <span class="section-num">05</span>
-                <span data-i18n="privacy.s05.title">Sharing &amp; Disclosure</span>
-            </h3>
-            <p data-i18n="privacy.s05.intro">We do not sell, rent, or trade your personal information. We share data only in these limited circumstances:</p>
-            <ul>
-                <li data-i18n="privacy.s05.li1"><strong class="term">Service providers:</strong> Twilio (SMS), and Neon (database hosting) process data on our behalf under written agreements restricting their use of your information.</li>
-                <li data-i18n="privacy.s05.li2"><strong class="term">Legal compliance:</strong> We may disclose information when required by law, court order, or to protect the rights, property, or safety of our clients or others.</li>
-                <li data-i18n="privacy.s05.li3"><strong class="term">Business transfer:</strong> If the salon is sold or merged, your information may transfer as part of that transaction. You will be notified before your data becomes subject to a different privacy policy.</li>
-            </ul>
-        </section>
-
-        <section class="policy-section" id="analytics">
-            <h3>
-                <span class="section-num">06</span>
-                <span data-i18n="privacy.s06.title">Analytics &amp; Cookies</span>
-            </h3>
-            <p data-i18n="privacy.s06.p1">We use Google Analytics to understand how visitors interact with the Site. This data is aggregated and anonymized — we cannot use it to identify you personally.</p>
-            <p data-i18n="privacy.s06.p2">Google Analytics uses cookies (small text files stored in your browser). You can opt out by installing the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics Opt-out Browser Add-on</a>.</p>
-            <p data-i18n="privacy.s06.p3">We do not use advertising cookies, tracking pixels, or retargeting technology. The only cookies on this Site are those set by Google Analytics for session and behavior tracking.</p>
-        </section>
-
-        <section class="policy-section" id="ccpa">
-            <h3>
-                <span class="section-num">07</span>
-                <span data-i18n="privacy.s07.title">Your Rights Under California Law (CCPA)</span>
-            </h3>
-            <p data-i18n="privacy.s07.intro">As a California resident, the California Consumer Privacy Act grants you the following rights:</p>
-            <ul>
-                <li data-i18n="privacy.s07.li1"><strong class="term">Right to know:</strong> Request a list of personal information we have collected, its sources, our business purpose, and any third parties it was shared with.</li>
-                <li data-i18n="privacy.s07.li2"><strong class="term" data-i18n="privacy.s07.right-to-delete">Right to delete:</strong> Request deletion of your personal information, subject to certain legal exceptions.</li>
-                <li data-i18n="privacy.s07.li3"><strong class="term">Right to opt out of sale:</strong> We do not sell personal information. No opt-out action is required.</li>
-                <li data-i18n="privacy.s07.li4"><strong class="term">Right to non-discrimination:</strong> We will not deny services, charge different prices, or provide a different level of service because you exercised a CCPA right.</li>
-            </ul>
-            <div class="callout">
-                <p class="callout-label" data-i18n="privacy.s07.callout.label">How to Submit a CCPA Request</p>
-                <p data-i18n="privacy.s07.callout.p">Email <strong>yasminbeautysalon2024@gmail.com</strong> with the subject line "CCPA Privacy Request." Include your full name and the phone number or email used when booking. We will verify your identity and respond within 45 calendar days.</p>
-            </div>
-        </section>
-
-        <section class="policy-section" id="data-retention">
-            <h3>
-                <span class="section-num">08</span>
-                <span data-i18n="privacy.s08.title">Data Retention</span>
-            </h3>
-            <p data-i18n="privacy.s08.p1">We retain your booking information for up to <strong class="term" >2 years</strong> from the date of your last appointment, unless you request earlier deletion or a longer period is required by law. Anonymized analytics data has no fixed retention limit.</p>
-            <p data-i18n="privacy.s08.p2">Upon expiration or a valid deletion request, we permanently delete or de-identify your information from active systems. Database backups are purged on a rolling 90-day cycle.</p>
-        </section>
-
-        <section class="policy-section" id="security">
-            <h3>
-                <span class="section-num">09</span>
-                <span data-i18n="privacy.s09.title">Security</span>
-            </h3>
-            <p data-i18n="privacy.s09.intro">We use reasonable technical and organizational measures to protect your information, including:</p>
-            <ul>
-                <li data-i18n="privacy.s09.li1">HTTPS encryption for all data transmitted between your browser and our servers</li>
-                <li data-i18n="privacy.s09.li2">Encrypted database connections (TLS) to our hosted PostgreSQL instance</li>
-                <li data-i18n="privacy.s09.li3">JWT-based authentication for all admin access</li>
-                <li data-i18n="privacy.s09.li4">Access controls limiting which personnel can view personal data</li>
-            </ul>
-            <p data-i18n="privacy.s09.p">No method of internet transmission is 100% secure. We cannot guarantee absolute security, but we are committed to protecting your data using industry-standard practices.</p>
-        </section>
-
-        <section class="policy-section" id="children">
-            <h3>
-                <span class="section-num">10</span>
-                <span data-i18n="privacy.s10.title">Children's Privacy</span>
-            </h3>
-            <p data-i18n="privacy.s10.p">Our Site is not directed to children under 13, and we do not knowingly collect personal information from anyone under 13. If you believe we have inadvertently collected such information, please contact us and we will delete it promptly.</p>
-        </section>
-
-        <section class="policy-section" id="changes">
-            <h3>
-                <span class="section-num">11</span>
-                <span data-i18n="privacy.s11.title">Policy Changes</span>
-            </h3>
-            <p data-i18n="privacy.s11.p">We may update this Privacy Policy periodically to reflect changes in our practices or applicable law. When we make material changes, we will update the "Effective" date at the top of this page. Continued use of the Site after changes are posted constitutes acceptance of the updated policy.</p>
-        </section>
-
-        <section class="policy-section" id="contact">
-            <h3>
-                <span class="section-num">12</span>
-                <span data-i18n="privacy.s12.title">Contact Us</span>
-            </h3>
-            <p data-i18n="privacy.s12.intro">If you have questions about this policy, want to exercise your rights, or need to opt out of SMS communications:</p>
-            <div class="contact-card">
-                <div class="cname">Yasmin Beauty Salon Unisex</div>
-                <div class="crow"><span class="clabel" data-i18n="privacy.s12.label.address">Address</span> 2438 1st St, Los Angeles, CA 90033</div>
-                <div class="crow"><span class="clabel" data-i18n="privacy.s12.label.phone">Phone</span> <a href="tel:+13239075658">(323) 907-5658</a></div>
-                <div class="crow"><span class="clabel" data-i18n="privacy.s12.label.email">Email</span> <a href="mailto:yasminbeautysalon2024@gmail.com">yasminbeautysalon2024@gmail.com</a></div>
-            </div>
-        </section>
-
-        <div class="policy-footer">
-            <span>&copy; 2026 Yasmin Beauty Salon Unisex &middot; Los Angeles, CA</span>
-            <span data-i18n="privacy.footer.effective">Effective June 23, 2026 &middot; v1.0</span>
+            <nav class="top-nav" aria-label="Primary Navigation">
+                <div class="nav-container">
+                    <ul class="list-reset nav-list">
+                        <li><a class="nav-btn btn-style" data-i18n="nav.home" href="index.html">Home</a></li>
+                        <li><a class="nav-btn btn-style" data-i18n="nav.about" href="about.html">About</a></li>
+                        <li><a class="nav-btn btn-style cta" data-i18n="nav.book" href="book-appointment.html">Book
+                                Now</a></li>
+                    </ul>
+                </div>
+            </nav>
         </div>
 
+        <button class="burger-icon" id="burgerBtn" onclick="burgerBehaviour()" aria-label="Toggle menu">
+            <span class="bar top"></span>
+            <span class="bar middle"></span>
+            <span class="bar bottom"></span>
+        </button>
+
+        <div class="mobile-menu" id="mobileMenu">
+            <div class="mobile-menu-inner">
+                <nav class="burger-nav" aria-label="Primary Navigation">
+                    <ul class="list-reset nav-list-burger">
+                        <li><a class="nav-btn-burger" data-i18n="nav.home" href="index.html">Home</a></li>
+                        <li><a class="nav-btn-burger" data-i18n="nav.about" href="about.html">About</a></li>
+                        <li><a class="nav-btn-burger cta" data-i18n="nav.book" href="book-appointment.html">Book Now</a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <div class="mobile-lang-toggle">
+                    <span class="lang-opt active" data-lang="en">EN</span>
+                    <span class="lang-divider">|</span>
+                    <span class="lang-opt" data-lang="es">ES</span>
+                </div>
+            </div>
         </div>
-</main>
+    </header>
 
-  <footer>
-    <div class="footer-content">
-      <h2 data-i18n="footer.heading">Get In Touch</h2>
+    <main>
+        <div class="privacy-shell">
 
-      <a href="tel:+13239075658" class="contact-link">
-          (323) 907-5658
-      </a>
-      <a href="mailto:yasminbeautysalon2024@gmail.com" class="contact-link">
-          yasminbeautysalon2024@gmail.com
-      </a>
+            <div class="toc-box">
+                <h3 data-i18n="privacy.toc.heading">On this page</h3>
+                <ol>
+                    <li><a href="#overview" data-i18n="privacy.toc.overview">Overview</a></li>
+                    <li><a href="#information-we-collect" data-i18n="privacy.toc.information">Information We Collect</a>
+                    </li>
+                    <li><a href="#how-we-use" data-i18n="privacy.toc.howweuse">How We Use It</a></li>
+                    <li><a href="#sms-consent" data-i18n="privacy.toc.sms">SMS Consent &amp; TCPA</a></li>
+                    <li><a href="#sharing" data-i18n="privacy.toc.sharing">Sharing &amp; Disclosure</a></li>
+                    <li><a href="#analytics" data-i18n="privacy.toc.analytics">Analytics &amp; Cookies</a></li>
+                    <li><a href="#ccpa" data-i18n="privacy.toc.ccpa">Your CCPA Rights</a></li>
+                    <li><a href="#data-retention" data-i18n="privacy.toc.retention">Data Retention</a></li>
+                    <li><a href="#security" data-i18n="privacy.toc.security">Security</a></li>
+                    <li><a href="#children" data-i18n="privacy.toc.children">Children's Privacy</a></li>
+                    <li><a href="#changes" data-i18n="privacy.toc.changes">Policy Changes</a></li>
+                    <li><a href="#contact" data-i18n="privacy.toc.contact">Contact Us</a></li>
+                </ol>
+            </div>
 
-      <div class="social-links">
-          <a href="https://www.tiktok.com/@yasmin.beauty.salon23">TikTok</a>
-      </div>
+            <section class="policy-section" id="overview">
+                <h3>
+                    <span class="section-num">01</span>
+                    <span data-i18n="privacy.s01.title">Overview</span>
+                </h3>
+                <p data-i18n="privacy.s01.p1">Yasmin Beauty Salon Unisex ("we," "us," or "our") operates the website at
+                    <strong class="term">yasminbeauty.salon</strong> (the "Site"). This Privacy Policy explains what
+                    information we collect when you book an appointment, browse our Site, or communicate with us — and
+                    how we use, store, and protect that information.</p>
+                <p data-i18n="privacy.s01.p2">By using our Site or submitting a booking, you agree to the practices
+                    described here. If you do not agree, please do not use the Site.</p>
+            </section>
 
-      <div class="copyright">
-        <span>© 2026 Yasmin Beauty Salon</span>
-        <span class="footer-divider">|</span>
-        <a href="privacy-policy.html" class="footer-policy-link" data-i18n="footer.privacy">Privacy Policy</a>
-      </div>
-    </div>
-  </footer>
+            <section class="policy-section" id="information-we-collect">
+                <h3>
+                    <span class="section-num">02</span>
+                    <span data-i18n="privacy.s02.title">Information We Collect</span>
+                </h3>
+                <p data-i18n="privacy.s02.direct.label"><strong class="term">Information you provide directly:</strong>
+                </p>
+                <ul>
+                    <li data-i18n="privacy.s02.direct.li1">Full name</li>
+                    <li data-i18n="privacy.s02.direct.li2">Phone number (for appointment confirmations and SMS
+                        reminders)</li>
+                    <li data-i18n="privacy.s02.direct.li3">Preferred service, date, and time</li>
+                    <li data-i18n="privacy.s02.direct.li4">Any notes or special requests included with your booking</li>
+                    <li data-i18n="privacy.s02.direct.li5">Feedback or review content submitted through the Site</li>
+                </ul>
+                <p data-i18n="privacy.s02.auto.label"><strong class="term">Information collected automatically:</strong>
+                </p>
+                <ul>
+                    <li data-i18n="privacy.s02.auto.li1">Browser type and version</li>
+                    <li data-i18n="privacy.s02.auto.li2">Pages visited and time spent on each page</li>
+                    <li data-i18n="privacy.s02.auto.li3">Referring URL</li>
+                    <!-- <li>Truncated IP address (used for analytics only; not stored in full)</li> -->
+                    <!-- <li>Device type and operating system</li> -->
+                </ul>
+            </section>
+
+            <section class="policy-section" id="how-we-use">
+                <h3>
+                    <span class="section-num">03</span>
+                    <span data-i18n="privacy.s03.title">How We Use Your Information</span>
+                </h3>
+                <ul>
+                    <li data-i18n="privacy.s03.li1">To confirm, manage, and remind you of your appointment</li>
+                    <li data-i18n="privacy.s03.li2">To send SMS notifications (only with your explicit consent — see
+                        Section 04)</li>
+                    <li data-i18n="privacy.s03.li3">To respond to questions, feedback, or support requests</li>
+                    <li data-i18n="privacy.s03.li4">To improve the Site using aggregated, anonymized analytics data</li>
+                    <li data-i18n="privacy.s03.li5">To comply with applicable laws and regulations</li>
+                </ul>
+                <p data-i18n="privacy.s03.p">We do not use your personal information for automated decision-making or
+                    profiling.</p>
+            </section>
+
+            <section class="policy-section" id="sms-consent">
+                <h3>
+                    <span class="section-num">04</span>
+                    <span data-i18n="privacy.s04.title">SMS Consent &amp; TCPA Compliance</span>
+                </h3>
+                <div class="callout">
+                    <p class="callout-label" data-i18n="privacy.s04.callout.label">Important — Please Read</p>
+                    <p data-i18n="privacy.s04.callout.p">By checking the SMS consent box on our booking form, you
+                        expressly consent to receive text messages from Yasmin Beauty Salon Unisex at the phone number
+                        you provide. Message frequency varies. Standard message and data rates may apply.</p>
+                </div>
+                <p data-i18n="privacy.s04.limited">Our SMS messages are strictly limited to:</p>
+                <ul>
+                    <li data-i18n="privacy.s04.li1">Appointment booking confirmations</li>
+                    <li data-i18n="privacy.s04.li2">Appointment reminders (sent up to 24 hours before your scheduled
+                        visit)</li>
+                    <li data-i18n="privacy.s04.li3">Cancellation or rescheduling notifications</li>
+                </ul>
+                <p data-i18n="privacy.s04.p1">We will never send promotional marketing texts without a separate,
+                    explicit opt-in.</p>
+                <p data-i18n="privacy.s04.optout"><strong class="term" data-i18n="privacy.s04.to-opt-out">To opt
+                        out:</strong> Reply <strong>STOP</strong> to any text we send. You will receive one final
+                    confirmation and no further messages. You may also contact us directly (see Section 12).</p>
+                <p data-i18n="privacy.s04.help"><strong class="term" data-i18n="privacy.s04.to-get-help">To get
+                        help:</strong> Reply <strong>HELP</strong> to any of our texts, or email us at the address in
+                    Section 12.</p>
+                <p data-i18n="privacy.s04.p2">SMS consent is never required to book an appointment. Unchecking the SMS
+                    box has no effect on your ability to schedule services.</p>
+                <p data-i18n="privacy.s04.p3">We use Twilio to deliver SMS messages. Twilio acts as a data processor
+                    under a data processing agreement and is prohibited from using your phone number for any other
+                    purpose. Your number is never sold or shared for marketing.</p>
+            </section>
+
+            <section class="policy-section" id="sharing">
+                <h3>
+                    <span class="section-num">05</span>
+                    <span data-i18n="privacy.s05.title">Sharing &amp; Disclosure</span>
+                </h3>
+                <p data-i18n="privacy.s05.intro">We do not sell, rent, or trade your personal information. We share data
+                    only in these limited circumstances:</p>
+                <ul>
+                    <li data-i18n="privacy.s05.li1"><strong class="term">Service providers:</strong> Twilio (SMS), and
+                        Neon (database hosting) process data on our behalf under written agreements restricting their
+                        use of your information.</li>
+                    <li data-i18n="privacy.s05.li2"><strong class="term">Legal compliance:</strong> We may disclose
+                        information when required by law, court order, or to protect the rights, property, or safety of
+                        our clients or others.</li>
+                    <li data-i18n="privacy.s05.li3"><strong class="term">Business transfer:</strong> If the salon is
+                        sold or merged, your information may transfer as part of that transaction. You will be notified
+                        before your data becomes subject to a different privacy policy.</li>
+                </ul>
+            </section>
+
+            <section class="policy-section" id="analytics">
+                <h3>
+                    <span class="section-num">06</span>
+                    <span data-i18n="privacy.s06.title">Analytics &amp; Cookies</span>
+                </h3>
+                <p data-i18n="privacy.s06.p1">We use Google Analytics to understand how visitors interact with the Site.
+                    This data is aggregated and anonymized — we cannot use it to identify you personally.</p>
+                <p data-i18n="privacy.s06.p2">Google Analytics uses cookies (small text files stored in your browser).
+                    You can opt out by installing the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank"
+                        rel="noopener">Google Analytics Opt-out Browser Add-on</a>.</p>
+                <p data-i18n="privacy.s06.p3">We do not use advertising cookies, tracking pixels, or retargeting
+                    technology. The only cookies on this Site are those set by Google Analytics for session and behavior
+                    tracking.</p>
+            </section>
+
+            <section class="policy-section" id="ccpa">
+                <h3>
+                    <span class="section-num">07</span>
+                    <span data-i18n="privacy.s07.title">Your Rights Under California Law (CCPA)</span>
+                </h3>
+                <p data-i18n="privacy.s07.intro">As a California resident, the California Consumer Privacy Act grants
+                    you the following rights:</p>
+                <ul>
+                    <li data-i18n="privacy.s07.li1"><strong class="term">Right to know:</strong> Request a list of
+                        personal information we have collected, its sources, our business purpose, and any third parties
+                        it was shared with.</li>
+                    <li data-i18n="privacy.s07.li2"><strong class="term" data-i18n="privacy.s07.right-to-delete">Right
+                            to delete:</strong> Request deletion of your personal information, subject to certain legal
+                        exceptions.</li>
+                    <li data-i18n="privacy.s07.li3"><strong class="term">Right to opt out of sale:</strong> We do not
+                        sell personal information. No opt-out action is required.</li>
+                    <li data-i18n="privacy.s07.li4"><strong class="term">Right to non-discrimination:</strong> We will
+                        not deny services, charge different prices, or provide a different level of service because you
+                        exercised a CCPA right.</li>
+                </ul>
+                <div class="callout">
+                    <p class="callout-label" data-i18n="privacy.s07.callout.label">How to Submit a CCPA Request</p>
+                    <p data-i18n="privacy.s07.callout.p">Email <strong>yasminbeautysalon2024@gmail.com</strong> with the
+                        subject line "CCPA Privacy Request." Include your full name and the phone number or email used
+                        when booking. We will verify your identity and respond within 45 calendar days.</p>
+                </div>
+            </section>
+
+            <section class="policy-section" id="data-retention">
+                <h3>
+                    <span class="section-num">08</span>
+                    <span data-i18n="privacy.s08.title">Data Retention</span>
+                </h3>
+                <p data-i18n="privacy.s08.p1">We retain your booking information for up to <strong class="term">2
+                        years</strong> from the date of your last appointment, unless you request earlier deletion or a
+                    longer period is required by law. Anonymized analytics data has no fixed retention limit.</p>
+                <p data-i18n="privacy.s08.p2">Upon expiration or a valid deletion request, we permanently delete or
+                    de-identify your information from active systems. Database backups are purged on a rolling 90-day
+                    cycle.</p>
+            </section>
+
+            <section class="policy-section" id="security">
+                <h3>
+                    <span class="section-num">09</span>
+                    <span data-i18n="privacy.s09.title">Security</span>
+                </h3>
+                <p data-i18n="privacy.s09.intro">We use reasonable technical and organizational measures to protect your
+                    information, including:</p>
+                <ul>
+                    <li data-i18n="privacy.s09.li1">HTTPS encryption for all data transmitted between your browser and
+                        our servers</li>
+                    <li data-i18n="privacy.s09.li2">Encrypted database connections (TLS) to our hosted PostgreSQL
+                        instance</li>
+                    <li data-i18n="privacy.s09.li3">JWT-based authentication for all admin access</li>
+                    <li data-i18n="privacy.s09.li4">Access controls limiting which personnel can view personal data</li>
+                </ul>
+                <p data-i18n="privacy.s09.p">No method of internet transmission is 100% secure. We cannot guarantee
+                    absolute security, but we are committed to protecting your data using industry-standard practices.
+                </p>
+            </section>
+
+            <section class="policy-section" id="children">
+                <h3>
+                    <span class="section-num">10</span>
+                    <span data-i18n="privacy.s10.title">Children's Privacy</span>
+                </h3>
+                <p data-i18n="privacy.s10.p">Our Site is not directed to children under 13, and we do not knowingly
+                    collect personal information from anyone under 13. If you believe we have inadvertently collected
+                    such information, please contact us and we will delete it promptly.</p>
+            </section>
+
+            <section class="policy-section" id="changes">
+                <h3>
+                    <span class="section-num">11</span>
+                    <span data-i18n="privacy.s11.title">Policy Changes</span>
+                </h3>
+                <p data-i18n="privacy.s11.p">We may update this Privacy Policy periodically to reflect changes in our
+                    practices or applicable law. When we make material changes, we will update the "Effective" date at
+                    the top of this page. Continued use of the Site after changes are posted constitutes acceptance of
+                    the updated policy.</p>
+            </section>
+
+            <section class="policy-section" id="contact">
+                <h3>
+                    <span class="section-num">12</span>
+                    <span data-i18n="privacy.s12.title">Contact Us</span>
+                </h3>
+                <p data-i18n="privacy.s12.intro">If you have questions about this policy, want to exercise your rights,
+                    or need to opt out of SMS communications:</p>
+                <div class="contact-card">
+                    <div class="cname">Yasmin Beauty Salon Unisex</div>
+                    <div class="crow"><span class="clabel" data-i18n="privacy.s12.label.address">Address</span> 2438 1st
+                        St, Los Angeles, CA 90033</div>
+                    <div class="crow"><span class="clabel" data-i18n="privacy.s12.label.phone">Phone</span> <a
+                            href="tel:+13239075658">(323) 907-5658</a></div>
+                    <div class="crow"><span class="clabel" data-i18n="privacy.s12.label.email">Email</span> <a
+                            href="mailto:yasminbeautysalon2024@gmail.com">yasminbeautysalon2024@gmail.com</a></div>
+                </div>
+            </section>
+
+            <div class="policy-footer">
+                <span>&copy; 2026 Yasmin Beauty Salon Unisex &middot; Los Angeles, CA</span>
+                <span data-i18n="privacy.footer.effective">Effective June 23, 2026 &middot; v1.0</span>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <h2 data-i18n="footer.heading">Get In Touch</h2>
+
+            <a href="tel:+13239075658" class="contact-link">
+                (323) 907-5658
+            </a>
+            <a href="mailto:yasminbeautysalon2024@gmail.com" class="contact-link">
+                yasminbeautysalon2024@gmail.com
+            </a>
+
+            <div class="social-links">
+                <a href="https://www.tiktok.com/@yasmin.beauty.salon23">TikTok</a>
+            </div>
+
+            <div class="copyright">
+                <span>© 2026 Yasmin Beauty Salon</span>
+                <span class="footer-divider">|</span>
+                <a href="privacy-policy.html" class="footer-policy-link" data-i18n="footer.privacy">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
 </body>
+
 </html>

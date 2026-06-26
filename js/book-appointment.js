@@ -75,7 +75,7 @@ const datePIcker = flatpickr("#date-input", {
         if(day === 0) {
             instance.set("maxTime", "15:00");
         } else {
-            instance.set("maxTime", "18:30");
+            instance.set("maxTime", "19:00"); // Last booking slot, not closing time — allows buffer for longer services
         }
 
         if (dateStr) {

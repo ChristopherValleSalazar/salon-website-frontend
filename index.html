@@ -1,101 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yasmin Beauty Salon | Home</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="css/global-layout.css">
     <link rel="stylesheet" href="css/home.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
     <script src="js/home.js" defer></script>
     <script src="js/language.js" defer></script>
     <script src="js/burger.js" defer></script>
 </head>
+
 <body>
-  <header>
-    <div class="brand">
-      <a href="index.html" class="logo"><img src="images/images.png"
-                            width="100"
-                            alt="Yasmin Beauty Salon logo">
-      </a>
-      <h1>Yasmin Beauty Salon</h1>
-    </div>
-    
-    <div class="header-right">
-      <div class="header-tools">
-        <div class="language-dropdown">
-          <button class="language-btn" type="button">
-            <span class="fi fi-us"></span>
-            <span>English</span>
-            <span class="language-arrow">▼</span>
-          </button>
-
-          <ul class="list-reset language-menu">
-            <li data-lang="en">
-              <span class="fi fi-us"></span>
-              English
-            </li>
-            <li data-lang="es">
-              <span class="fi fi-sv"></span>
-              Español
-            </li>
-          </ul>
+    <header>
+        <div class="brand">
+            <a href="index.html" class="logo"><img src="images/images.png" width="100" alt="Yasmin Beauty Salon logo">
+            </a>
+            <h1>Yasmin Beauty Salon</h1>
         </div>
-      </div>
 
-      <nav class="top-nav" aria-label="Primary Navigation">
-        <div class="nav-container">
-          <ul class="list-reset nav-list">
-            <li><a class="nav-btn btn-style" data-i18n="nav.home" href="index.html">Home</a></li>
-            <li><a class="nav-btn btn-style" data-i18n="nav.about" href="about.html">About</a></li>
-            <li><a class="nav-btn btn-style cta" data-i18n="nav.book" href="book-appointment.html">Book Now</a></li>
-          </ul>
+        <div class="header-right">
+            <div class="header-tools">
+                <div class="language-dropdown">
+                    <button class="language-btn" type="button">
+                        <span class="fi fi-us"></span>
+                        <span>English</span>
+                        <span class="language-arrow">▼</span>
+                    </button>
+
+                    <ul class="list-reset language-menu">
+                        <li data-lang="en">
+                            <span class="fi fi-us"></span>
+                            English
+                        </li>
+                        <li data-lang="es">
+                            <span class="fi fi-sv"></span>
+                            Español
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <nav class="top-nav" aria-label="Primary Navigation">
+                <div class="nav-container">
+                    <ul class="list-reset nav-list">
+                        <li><a class="nav-btn btn-style" data-i18n="nav.home" href="index.html">Home</a></li>
+                        <li><a class="nav-btn btn-style" data-i18n="nav.about" href="about.html">About</a></li>
+                        <li><a class="nav-btn btn-style cta" data-i18n="nav.book" href="book-appointment.html">Book
+                                Now</a></li>
+                    </ul>
+                </div>
+            </nav>
         </div>
-      </nav>
-    </div>
 
-    <button class="burger-icon" id="burgerBtn" onclick="burgerBehaviour()" aria-label="Toggle menu">
-      <span class="bar top"></span>
-      <span class="bar middle"></span>
-      <span class="bar bottom"></span>
-    </button>
+        <button class="burger-icon" id="burgerBtn" onclick="burgerBehaviour()" aria-label="Toggle menu">
+            <span class="bar top"></span>
+            <span class="bar middle"></span>
+            <span class="bar bottom"></span>
+        </button>
 
-    <div class="mobile-menu" id="mobileMenu">
-      <div class="mobile-menu-inner">
-        <nav class="burger-nav" aria-label="Primary Navigation">
-          <ul class="list-reset nav-list-burger">
-            <li><a class="nav-btn-burger" data-i18n="nav.home" href="index.html">Home</a></li>
-            <li><a class="nav-btn-burger" data-i18n="nav.about" href="about.html">About</a></li>
-            <li><a class="nav-btn-burger cta" data-i18n="nav.book" href="book-appointment.html">Book Now</a></li>
-          </ul>
-        </nav>
-        
-        <div class="mobile-lang-toggle">
-          <span class="lang-opt active" data-lang="en">EN</span>
-          <span class="lang-divider">|</span>
-          <span class="lang-opt" data-lang="es">ES</span>
+        <div class="mobile-menu" id="mobileMenu">
+            <div class="mobile-menu-inner">
+                <nav class="burger-nav" aria-label="Primary Navigation">
+                    <ul class="list-reset nav-list-burger">
+                        <li><a class="nav-btn-burger" data-i18n="nav.home" href="index.html">Home</a></li>
+                        <li><a class="nav-btn-burger" data-i18n="nav.about" href="about.html">About</a></li>
+                        <li><a class="nav-btn-burger cta" data-i18n="nav.book" href="book-appointment.html">Book Now</a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <div class="mobile-lang-toggle">
+                    <span class="lang-opt active" data-lang="en">EN</span>
+                    <span class="lang-divider">|</span>
+                    <span class="lang-opt" data-lang="es">ES</span>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </header>
+    </header>
 
     <main>
         <div class="service-toggle">
             <div class="slider"></div>
 
-            <button type="button" 
-                    class="toggle-btn-beauty"
-                    data-target="services-beauty">
+            <button type="button" class="toggle-btn-beauty" data-target="services-beauty">
                 Beauty Salon
             </button>
 
-            <button type="button" 
-                    class="toggle-btn-barber unfocus-color"
-                    data-target="services-barber">
+            <button type="button" class="toggle-btn-barber unfocus-color" data-target="services-barber">
                 Barber Salon
             </button>
         </div>
@@ -106,56 +106,64 @@
                 <article class="service-card" style="--accent: #7a9e7e">
                     <div class="card-main">
                         <h3 class="card-title" data-i18n="services.haircut.title">Haircut</h3>
-                        <p class="card-desc" data-i18n="services.haircut.desc">Precision cut tailored to your face shape and texture.</p>
+                        <p class="card-desc" data-i18n="services.haircut.desc">Precision cut tailored to your face shape
+                            and texture.</p>
                         <div class="card-meta">
                             <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 45 min</span>
                             <span class="pill pill-price" data-i18n="services.haircut.price">from $25</span>
                         </div>
                     </div>
                     <button type="button" class="book-btn" data-service="haircut">
-                    <i class="fa-regular fa-calendar-plus"></i> <span data-i18n="services.book">Book this service</span>
+                        <i class="fa-regular fa-calendar-plus"></i> <span data-i18n="services.book">Book this
+                            service</span>
                     </button>
                 </article>
 
                 <article class="service-card" style="--accent: #7a9e7e">
                     <div class="card-main">
                         <h3 class="card-title" data-i18n="services.blowdry.title">Blow Drying</h3>
-                        <p class="card-desc" data-i18n="services.blowdry.desc">Professional finish with volume, smoothness, or curl.</p>
+                        <p class="card-desc" data-i18n="services.blowdry.desc">Professional finish with volume,
+                            smoothness, or curl.</p>
                         <div class="card-meta">
                             <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 60 min</span>
                             <span class="pill pill-price" data-i18n="services.blowdry.price">from $35</span>
                         </div>
                     </div>
                     <button type="button" class="book-btn" data-service="blow-drying">
-                    <i class="fa-regular fa-calendar-plus"></i> <span data-i18n="services.book">Book this service</span>
+                        <i class="fa-regular fa-calendar-plus"></i> <span data-i18n="services.book">Book this
+                            service</span>
                     </button>
                 </article>
 
                 <article class="service-card" style="--accent: #7a9e7e">
                     <div class="card-main">
-                    <h3 class="card-title" data-i18n="services.haircut-blowdry.title">Haircut + Blow-Dry</h3>
-                    <p class="card-desc" data-i18n="services.haircut-blowdry.desc">Cut and styled finish in one session — the most popular combo.</p>
-                    <div class="card-meta">
-                        <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 75 min</span>
-                        <span class="pill pill-price" data-i18n="services.haircut-blowdry.price">from $35</span>
-                    </div>
+                        <h3 class="card-title" data-i18n="services.haircut-blowdry.title">Haircut + Blow-Dry</h3>
+                        <p class="card-desc" data-i18n="services.haircut-blowdry.desc">Cut and styled finish in one
+                            session — the most popular combo.</p>
+                        <div class="card-meta">
+                            <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 75 min</span>
+                            <span class="pill pill-price" data-i18n="services.haircut-blowdry.price">from $35</span>
+                        </div>
                     </div>
                     <button type="button" class="book-btn" data-service="haircut-blowdry">
-                    <i class="fa-regular fa-calendar-plus"></i> <span data-i18n="services.book">Book this service</span>
+                        <i class="fa-regular fa-calendar-plus"></i> <span data-i18n="services.book">Book this
+                            service</span>
                     </button>
                 </article>
 
                 <article class="service-card" style="--accent: #7a9e7e">
                     <div class="card-main">
-                    <h3 class="card-title" data-i18n="services.washing.title">Washing</h3>
-                    <p class="card-desc" data-i18n="services.washing.desc">Scalp massage and deep cleanse with salon-grade products.</p>
-                    <div class="card-meta">
-                        <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 20 min</span>
-                        <span class="pill pill-price" data-i18n="services.washing.price">from $8</span>
-                    </div>
+                        <h3 class="card-title" data-i18n="services.washing.title">Washing</h3>
+                        <p class="card-desc" data-i18n="services.washing.desc">Scalp massage and deep cleanse with
+                            salon-grade products.</p>
+                        <div class="card-meta">
+                            <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 20 min</span>
+                            <span class="pill pill-price" data-i18n="services.washing.price">from $8</span>
+                        </div>
                     </div>
                     <button type="button" class="book-btn" data-service="washing">
-                    <i class="fa-regular fa-calendar-plus"></i> <span data-i18n="services.book">Book this service</span>
+                        <i class="fa-regular fa-calendar-plus"></i> <span data-i18n="services.book">Book this
+                            service</span>
                     </button>
                 </article>
             </div>
@@ -164,43 +172,49 @@
             <div class="grid">
                 <article class="service-card" style="--accent: #b07db0">
                     <div class="card-main">
-                    <h3 class="card-title" data-i18n="services.dyes.title">Dyes</h3>
-                    <p class="card-desc" data-i18n="services.dyes.desc">Full color application root to tip. Includes toner and conditioning rinse.</p>
-                    <div class="card-meta">
-                        <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 90 - 150 min</span>
-                        <span class="pill pill-price" data-i18n="services.dyes.price">from $80</span>
-                    </div>
+                        <h3 class="card-title" data-i18n="services.dyes.title">Dyes</h3>
+                        <p class="card-desc" data-i18n="services.dyes.desc">Full color application root to tip. Includes
+                            toner and conditioning rinse.</p>
+                        <div class="card-meta">
+                            <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 90 - 150 min</span>
+                            <span class="pill pill-price" data-i18n="services.dyes.price">from $80</span>
+                        </div>
                     </div>
                     <button type="button" class="book-btn" data-service="dyes">
-                    <i class="fa-regular fa-calendar-plus"></i> <span data-i18n="services.book">Book this service</span>
+                        <i class="fa-regular fa-calendar-plus"></i> <span data-i18n="services.book">Book this
+                            service</span>
                     </button>
                 </article>
 
                 <article class="service-card" style="--accent: #b07db0">
                     <div class="card-main">
-                    <h3 class="card-title" data-i18n="services.baby-highlight.title">Baby Highlight</h3>
-                    <p class="card-desc" data-i18n="services.baby-highlight.desc">Subtle face-framing highlights for a natural sun-kissed look.</p>
-                    <div class="card-meta">
-                        <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 3 - 4 hrs</span>
-                        <span class="pill pill-price" data-i18n="services.baby-highlight.price">from $180</span>
-                    </div>
+                        <h3 class="card-title" data-i18n="services.baby-highlight.title">Baby Highlight</h3>
+                        <p class="card-desc" data-i18n="services.baby-highlight.desc">Subtle face-framing highlights for
+                            a natural sun-kissed look.</p>
+                        <div class="card-meta">
+                            <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 3 - 4 hrs</span>
+                            <span class="pill pill-price" data-i18n="services.baby-highlight.price">from $180</span>
+                        </div>
                     </div>
                     <button type="button" class="book-btn" data-service="baby-highlight">
-                    <i class="fa-regular fa-calendar-plus"></i> <span data-i18n="services.book">Book this service</span>
+                        <i class="fa-regular fa-calendar-plus"></i> <span data-i18n="services.book">Book this
+                            service</span>
                     </button>
                 </article>
 
                 <article class="service-card" style="--accent: #b07db0">
                     <div class="card-main">
-                    <h3 class="card-title" data-i18n="services.color-touchup.title">Color Touch-Up</h3>
-                    <p class="card-desc" data-i18n="services.color-touchup.desc">Root retouch to blend regrowth with your existing color.</p>
-                    <div class="card-meta">
-                        <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 90 min</span>
-                        <span class="pill pill-price" data-i18n="services.color-touchup.price">from $50</span>
-                    </div>
+                        <h3 class="card-title" data-i18n="services.color-touchup.title">Color Touch-Up</h3>
+                        <p class="card-desc" data-i18n="services.color-touchup.desc">Root retouch to blend regrowth with
+                            your existing color.</p>
+                        <div class="card-meta">
+                            <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 90 min</span>
+                            <span class="pill pill-price" data-i18n="services.color-touchup.price">from $50</span>
+                        </div>
                     </div>
                     <button type="button" class="book-btn" data-service="color-touchup">
-                    <i class="fa-regular fa-calendar-plus"></i> <span data-i18n="services.book">Book this service</span>
+                        <i class="fa-regular fa-calendar-plus"></i> <span data-i18n="services.book">Book this
+                            service</span>
                     </button>
                 </article>
             </div>
@@ -209,93 +223,107 @@
             <div class="grid">
                 <article class="service-card" style="--accent: #c4956a">
                     <div class="card-main">
-                    <h3 class="card-title" data-i18n="services.treatment.title">Treatment + Moisturizing</h3>
-                    <p class="card-desc" data-i18n="services.treatment.desc">Deep repair mask for dry or damaged hair. Leaves hair soft and resilient.</p>
-                    <div class="card-meta">
-                        <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 90 min</span>
-                        <span class="pill pill-price" data-i18n="services.treatment.price">from $50</span>
-                    </div>
+                        <h3 class="card-title" data-i18n="services.treatment.title">Treatment + Moisturizing</h3>
+                        <p class="card-desc" data-i18n="services.treatment.desc">Deep repair mask for dry or damaged
+                            hair. Leaves hair soft and resilient.</p>
+                        <div class="card-meta">
+                            <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 90 min</span>
+                            <span class="pill pill-price" data-i18n="services.treatment.price">from $50</span>
+                        </div>
                     </div>
                     <button type="button" class="book-btn" data-service="treatment">
-                    <i class="fa-regular fa-calendar-plus"></i> <span data-i18n="services.book">Book this service</span> 
+                        <i class="fa-regular fa-calendar-plus"></i> <span data-i18n="services.book">Book this
+                            service</span>
                     </button>
                 </article>
 
                 <article class="service-card" style="--accent: #c4956a">
                     <div class="card-main">
-                    <h3 class="card-title" data-i18n="services.straightening.title">Straightening</h3>
-                    <p class="card-desc" data-i18n="services.straightening.desc">Keratin smoothing treatment for long-lasting frizz-free results.</p>
-                    <div class="card-meta">
-                        <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 60min</span>
-                        <span class="pill pill-price" data-i18n="services.straightening.price">from $35</span>
-                    </div>
+                        <h3 class="card-title" data-i18n="services.straightening.title">Straightening</h3>
+                        <p class="card-desc" data-i18n="services.straightening.desc">Keratin smoothing treatment for
+                            long-lasting frizz-free results.</p>
+                        <div class="card-meta">
+                            <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 60min</span>
+                            <span class="pill pill-price" data-i18n="services.straightening.price">from $35</span>
+                        </div>
                     </div>
                     <button type="button" class="book-btn" data-service="straightening">
-                    <i class="fa-regular fa-calendar-plus"></i> <span data-i18n="services.book">Book this service</span>
+                        <i class="fa-regular fa-calendar-plus"></i> <span data-i18n="services.book">Book this
+                            service</span>
                     </button>
                 </article>
             </div>
         </section>
 
         <section id="services-barber" class="barber-services unselected">
-            <p class="section-label" data-i18n="services.hair-styling.label" style="--accent: #7a9e7e">Hair and styling services</p>
+            <p class="section-label" data-i18n="services.hair-styling.label" style="--accent: #7a9e7e">Hair and styling
+                services</p>
             <div class="grid">
                 <article class="service-card" style="--accent: #7a9e7e">
                     <div class="card-main">
                         <h3 class="card-title" data-i18n="services.haircut-barber.title">Haircut</h3>
-                        <p class="card-desc" data-i18n="services.haircut-barber.desc">Classic haircut tailored to your style and face shape.</p>
+                        <p class="card-desc" data-i18n="services.haircut-barber.desc">Classic haircut tailored to your
+                            style and face shape.</p>
                         <div class="card-meta">
                             <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 45 Min</span>
                             <span class="pill pill-price" data-i18n="services.haircut-barber.price">from $25.00</span>
                         </div>
                     </div>
                     <button type="button" class="book-btn" data-service="haircut">
-                        <i class="fa-regular fa-calendar-plus"></i> <span data-i18n="services.book">Book this service</span>
+                        <i class="fa-regular fa-calendar-plus"></i> <span data-i18n="services.book">Book this
+                            service</span>
                     </button>
                 </article>
 
                 <article class="service-card" style="--accent: #7a9e7e">
                     <div class="card-main">
                         <h3 class="card-title" data-i18n="services.perm.title">Perm</h3>
-                        <p class="card-desc" data-i18n="services.perm.desc">Long-lasting texture and shape for a fuller styled finish.</p>
+                        <p class="card-desc" data-i18n="services.perm.desc">Long-lasting texture and shape for a fuller
+                            styled finish.</p>
                         <div class="card-meta">
                             <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 120 min</span>
                             <span class="pill pill-price" data-i18n="services.perm.price">from $50.00</span>
                         </div>
                     </div>
                     <button type="button" class="book-btn" data-service="perm">
-                        <i class="fa-regular fa-calendar-plus"></i><span data-i18n="services.book">Book this service</span>
+                        <i class="fa-regular fa-calendar-plus"></i><span data-i18n="services.book">Book this
+                            service</span>
                     </button>
                 </article>
             </div>
 
-            <p class="section-label" data-i18n="services.beard.label" style="--accent: #b07db0">Beard and detail services</p>
+            <p class="section-label" data-i18n="services.beard.label" style="--accent: #b07db0">Beard and detail
+                services</p>
             <div class="grid">
                 <article class="service-card" style="--accent: #b07db0">
                     <div class="card-main">
                         <h3 class="card-title" data-i18n="services.beard-trim.title">Beard Trim</h3>
-                        <p class="card-desc" data-i18n="services.beard-trim.desc">Shape and clean up your beard for a sharp, polished look.</p>
+                        <p class="card-desc" data-i18n="services.beard-trim.desc">Shape and clean up your beard for a
+                            sharp, polished look.</p>
                         <div class="card-meta">
                             <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 20 min</span>
                             <span class="pill pill-price" data-i18n="services.beard-trim.price">from $10.00</span>
                         </div>
                     </div>
                     <button type="button" class="book-btn" data-service="beard-trim">
-                        <i class="fa-regular fa-calendar-plus"></i><span data-i18n="services.book">Book this service</span>
+                        <i class="fa-regular fa-calendar-plus"></i><span data-i18n="services.book">Book this
+                            service</span>
                     </button>
                 </article>
 
                 <article class="service-card" style="--accent: #b07db0">
                     <div class="card-main">
                         <h3 class="card-title" data-i18n="services.eyebrow-shaping.title">Eyebrow Shaping</h3>
-                        <p class="card-desc" data-i18n="services.eyebrow-shaping.desc">Clean, precise shaping for a balanced and refined look.</p>
+                        <p class="card-desc" data-i18n="services.eyebrow-shaping.desc">Clean, precise shaping for a
+                            balanced and refined look.</p>
                         <div class="card-meta">
                             <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 15 Min</span>
                             <span class="pill pill-price" data-i18n="services.eyebrow-shaping.price">from $10.00</span>
                         </div>
                     </div>
                     <button type="button" class="book-btn" data-service="eyebrow-shaping">
-                        <i class="fa-regular fa-calendar-plus"></i> <span data-i18n="services.book">Book this service</span>
+                        <i class="fa-regular fa-calendar-plus"></i> <span data-i18n="services.book">Book this
+                            service</span>
                     </button>
                 </article>
             </div>
@@ -305,28 +333,35 @@
                 <article class="service-card" style="--accent: #c4956a">
                     <div class="card-main">
                         <h3 class="card-title" data-i18n="services.haircut-beard-trim.title">Haircut + Beard Trim</h3>
-                        <p class="card-desc" data-i18n="services.haircut-beard-trim.desc">A full grooming session for a clean haircut and beard refresh.</p>
+                        <p class="card-desc" data-i18n="services.haircut-beard-trim.desc">A full grooming session for a
+                            clean haircut and beard refresh.</p>
                         <div class="card-meta">
                             <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 60 min</span>
-                            <span class="pill pill-price" data-i18n="services.haircut-beard-trim.price">from $30.00</span>
+                            <span class="pill pill-price" data-i18n="services.haircut-beard-trim.price">from
+                                $30.00</span>
                         </div>
                     </div>
                     <button type="button" class="book-btn" data-service="haircut-beard-trim">
-                        <i class="fa-regular fa-calendar-plus"></i><span data-i18n="services.book">Book this service</span>
+                        <i class="fa-regular fa-calendar-plus"></i><span data-i18n="services.book">Book this
+                            service</span>
                     </button>
                 </article>
 
                 <article class="service-card" style="--accent: #c4956a">
                     <div class="card-main">
-                        <h3 class="card-title" data-i18n="services.haircut-beard-trim-eyebrow-shaping.title">Haircut + Beard Trim + Eyebrow Shaping</h3>
-                        <p class="card-desc" data-i18n="services.haircut-beard-trim-eyebrow-shaping.desc">Complete grooming package with haircut, beard trim, and brow shaping.</p>
+                        <h3 class="card-title" data-i18n="services.haircut-beard-trim-eyebrow-shaping.title">Haircut +
+                            Beard Trim + Eyebrow Shaping</h3>
+                        <p class="card-desc" data-i18n="services.haircut-beard-trim-eyebrow-shaping.desc">Complete
+                            grooming package with haircut, beard trim, and brow shaping.</p>
                         <div class="card-meta">
                             <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 80 min</span>
-                            <span class="pill pill-price" data-i18n="services.haircut-beard-trim-eyebrow-shaping.price">from $45.00</span>
+                            <span class="pill pill-price"
+                                data-i18n="services.haircut-beard-trim-eyebrow-shaping.price">from $45.00</span>
                         </div>
                     </div>
                     <button type="button" class="book-btn" data-service="haircut-beard-trim-eyebrow-shaping">
-                        <i class="fa-regular fa-calendar-plus"></i><span data-i18n="services.book">Book this service</span>
+                        <i class="fa-regular fa-calendar-plus"></i><span data-i18n="services.book">Book this
+                            service</span>
                     </button>
                 </article>
             </div>
@@ -335,7 +370,7 @@
         <!-- <section id="reviews" class="reviews"> 
         </section> -->
         <hr class="section-divider">
-        
+
         <section class="gallery-section">
             <div class="section-header">
                 <h2 data-i18n="gallery.heading">Our Work</h2>
@@ -346,7 +381,8 @@
 
             <div class="gallery-grid">
                 <div class="gallery-item featured">
-                    <img src="images/black-purple-color.jpg" alt="Featured Style" style="object-position: center right;">
+                    <img src="images/black-purple-color.jpg" alt="Featured Style"
+                        style="object-position: center right;">
                 </div>
                 <div class="gallery-item medium-hor">
                     <img src="images/blonde-curls.jpg" alt="Style Example" style="object-position: center 22%;">
@@ -361,9 +397,9 @@
                     <img src="images/layers.jpg" alt="Featured Style">
                 </div>
                 <div class="gallery-item featured">
-                    <img src="images/straight.jpg" alt="Featured Style" style="object-position:  70% center;"">
+                    <img src="images/straight.jpg" alt="Featured Style" style="object-position:  70% center;">
                 </div>
-                <div class="gallery-item medium-hor">
+                <div class=" gallery-item medium-hor">
                     <img src="images/red-color.jpg" alt="Featured Style" style="object-position: top center;">
                 </div>
             </div>
@@ -379,27 +415,28 @@
         </section>
     </main>
 
-  <footer>
-    <div class="footer-content">
-      <h2 data-i18n="footer.heading">Get In Touch</h2>
+    <footer>
+        <div class="footer-content">
+            <h2 data-i18n="footer.heading">Get In Touch</h2>
 
-      <a href="tel:+13239075658" class="contact-link">
-          (323) 907-5658
-      </a>
-      <a href="mailto:yasminbeautysalon2024@gmail.com" class="contact-link">
-          yasminbeautysalon2024@gmail.com
-      </a>
+            <a href="tel:+13239075658" class="contact-link">
+                (323) 907-5658
+            </a>
+            <a href="mailto:yasminbeautysalon2024@gmail.com" class="contact-link">
+                yasminbeautysalon2024@gmail.com
+            </a>
 
-      <div class="social-links">
-          <a href="https://www.tiktok.com/@yasmin.beauty.salon23">TikTok</a>
-      </div>
+            <div class="social-links">
+                <a href="https://www.tiktok.com/@yasmin.beauty.salon23">TikTok</a>
+            </div>
 
-      <div class="copyright">
-        <span>© 2026 Yasmin Beauty Salon</span>
-        <span class="footer-divider">|</span>
-        <a href="privacy-policy.html" class="footer-policy-link" data-i18n="footer.privacy">Privacy Policy</a>
-      </div>
-    </div>
-  </footer>
+            <div class="copyright">
+                <span>© 2026 Yasmin Beauty Salon</span>
+                <span class="footer-divider">|</span>
+                <a href="privacy-policy.html" class="footer-policy-link" data-i18n="footer.privacy">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
 </body>
+
 </html>
