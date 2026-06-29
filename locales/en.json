@@ -35,7 +35,6 @@
     "services.dyes.desc": "Full color application root to tip. Includes toner and conditioning rinse.",
     "services.dyes.price": "from $80",
 
-    "services.baby-highlight.title": "Baby Highlight",
     "services.baby-highlight.desc": "Subtle face-framing highlights for a natural sun-kissed look.",
     "services.baby-highlight.price": "from $180",
 
@@ -47,7 +46,7 @@
     "services.treatment.desc": "Deep repair mask for dry or damaged hair. Leaves hair soft and resilient.",
     "services.treatment.price": "from $50",
 
-    "services.straightening.title": "Straightening",
+    "services.straightening.title": "Keratin Treatment",
     "services.straightening.desc": "Keratin smoothing treatment for long-lasting frizz-free results.",
     "services.straightening.price": "from $35",
 

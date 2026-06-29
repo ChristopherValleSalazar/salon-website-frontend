@@ -35,7 +35,6 @@
     "services.dyes.desc": "Aplicación completa de color desde la raíz hasta la punta. Incluye toner y enjuague condicionante.",
     "services.dyes.price": "desde $80",
 
-    "services.baby-highlight.title": "Resaltado para Bebés",
     "services.baby-highlight.desc": "Sutil resaltado que enmarca el rostro para un aspecto natural y solar.",
     "services.baby-highlight.price": "desde $180",
 
@@ -47,7 +46,7 @@
     "services.treatment.desc": "Máscara de reparación profunda para cabello seco o dañado. Deja el cabello suave y resistente.",
     "services.treatment.price": "desde $50",
 
-    "services.straightening.title": "Alisado",
+    "services.straightening.title": "Tratamiento de Keratina",
     "services.straightening.desc": "Tratamiento de suavizado de queratina para resultados duraderos sin frizz.",
     "services.straightening.price": "desde $35",
 
