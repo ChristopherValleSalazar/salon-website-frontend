@@ -109,6 +109,8 @@
     "form.services.haircut-beard-trim-eyebrow-shaping": "Corte de Cabello + Recorte de Barba + Diseño de Cejas",
 
     "form.hair-img": "Imagen del Cabello",
+    "form.hair-img.prompt": "Haz clic o arrastra una foto aquí",
+    "form.hair-img.hint": "PNG, JPG o WEBP",
 
     "form.date": "Fecha<span class=\"required\">*</span>",
     "form.date.placeholder": "Selecciona una fecha",
