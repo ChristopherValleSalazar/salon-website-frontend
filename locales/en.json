@@ -136,6 +136,10 @@
     "modal.home": "Home",
     "modal.close": "close",
 
+    "modal.fail.heading": "Booking failed",
+    "modal.fail.message": "Something went wrong and we couldn't complete your booking. Please try again.",
+    "modal.fail.retry": "Try Again",
+
     "privacy.meta": "Yasmin Beauty Salon Unisex · Los Angeles, CA · Effective June 23, 2026",
 
     "privacy.toc.heading": "On this page",
