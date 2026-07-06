@@ -5,6 +5,11 @@
     "nav.about": "About",
     "nav.book": "Book Now",
 
+    "hero.eyebrow": "Beauty Salon & Barber Shop · Los Angeles",
+    "hero.heading": "Look your best, feel even better",
+    "hero.message": "Expert cuts, color, and styling for everyone — walk in as you are, leave feeling brand new.",
+    "hero.explore": "Explore Services",
+
     "services.hair.label": "Hair services",
     "services.color.label": "Color services",
     "services.treatments.label": "Treatments",
