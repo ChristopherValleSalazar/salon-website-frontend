@@ -114,6 +114,8 @@
     "form.services.haircut-beard-trim-eyebrow-shaping": "Haircut + Beard Trim + Eyebrow Shaping",
 
     "form.hair-img": "Hair Image",
+    "form.hair-img.prompt": "Click or drag a photo here",
+    "form.hair-img.hint": "PNG, JPG or WEBP",
 
     "form.date": "Date<span class=\"required\">*</span>",
     "form.date.placeholder": "Select a date",
