@@ -84,7 +84,6 @@ function closeFailureModal() {
 }
 
 if (failureOverlay) {
-    document.getElementById("failure-modal-btn-close").addEventListener("click", closeFailureModal);
     document.getElementById("failure-modal-btn-retry").addEventListener("click", closeFailureModal);
     // Clicking the blurred backdrop also closes the modal
     failureOverlay.addEventListener("click", (e) => {
