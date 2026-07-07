@@ -130,7 +130,8 @@ textarea {
     align-items: center;
     gap: 16px;
     width: 100%;
-    min-height: 64px;
+    max-width: 1000px;
+    min-height: 30px;
     margin: 2px 0;
     padding: 14px 18px;
     border: 1.5px dashed #c9bda8;
