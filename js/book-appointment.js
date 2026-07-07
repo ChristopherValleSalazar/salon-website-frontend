@@ -89,36 +89,77 @@ document.getElementById("appointment-form").addEventListener("submit", async (e)
         return;
     }
     visibleInput.classList.remove("input-error");
-    
+
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
 
+    // Prototype: show the success modal for now. Once the backend is wired up,
+    // branch on the response and pass the error text to failureModalBehaviour:
+    //
+    //   const res = await fetch("/api/appointments", { method: "POST", body: formData });
+    //   if (res.ok) {
+    //       modalBehaviour();
+    //   } else {
+    //       const body = await res.json().catch(() => ({}));
+    //       failureModalBehaviour(body.message); // message from the response body
+    //   }
     modalBehaviour();
-
-    // if (Response.ok) {
-        
-    //     // document.getElementById("appointment-form").reset()
-    // } else {
-    //     console.error("booking failed");
-    // }
 });
 
+// SUCCESS MODAL
 function modalBehaviour() {
-    const modalOverlay = document.querySelector(".modal-overlay");
-    const closeBtn = document.querySelector(".secondary-btn");
+    const modalOverlay = document.getElementById("success-modal-overlay");
+    const closeBtn = document.getElementById("modal-btn-close");
 
     modalOverlay.classList.add("is-open");
-    
-    closeBtn.addEventListener("click", () =>  {
+
+    closeBtn.addEventListener("click", () => {
         document.getElementById("appointment-form").reset();
         modalOverlay.classList.remove("is-open");
-        
-    })
+    });
+}
+
+// FAILURE MODAL (prototype)
+// `message` will come from the backend response body once the booking request
+// is wired up; when it's empty we fall back to the placeholder text already in
+// the markup.
+const failureOverlay = document.getElementById("failure-modal-overlay");
+const failureMessageEl = document.getElementById("failure-modal-message");
+let failurePlaceholder = failureMessageEl ? failureMessageEl.textContent : "";
+let customMessageShown = false;
+
+function failureModalBehaviour(message) {
+    if (failureMessageEl) {
+        if (message && message.trim()) {
+            // Remember the translated placeholder before swapping in the backend message
+            if (!customMessageShown) failurePlaceholder = failureMessageEl.textContent;
+            failureMessageEl.textContent = message;
+            customMessageShown = true;
+        } else if (customMessageShown) {
+            // No message this time — restore the placeholder we saved
+            failureMessageEl.textContent = failurePlaceholder;
+            customMessageShown = false;
+        }
+        // else: leave the existing (already translated) placeholder untouched
+    }
+    failureOverlay.classList.add("is-open");
+}
+
+function closeFailureModal() {
+    failureOverlay.classList.remove("is-open");
+}
+
+if (failureOverlay) {
+    document.getElementById("failure-modal-btn-retry").addEventListener("click", closeFailureModal);
+    // Clicking the blurred backdrop also closes the modal
+    failureOverlay.addEventListener("click", (e) => {
+        if (e.target === failureOverlay) closeFailureModal();
+    });
 }
 
 const datePIcker = flatpickr("#date-input", {
     minDate: "today",
-    allowInput: false,        
+    allowInput: false,
     enableTime: true,
     altInput: true,
     dateFormat: "Y-m-d H:i",

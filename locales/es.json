@@ -138,6 +138,10 @@
     "modal.home": "Home",
     "modal.close": "cerrar",
 
+    "modal.fail.heading": "No se pudo reservar",
+    "modal.fail.message": "Algo salió mal y no pudimos completar tu reserva. Por favor, inténtalo de nuevo.",
+    "modal.fail.retry": "Intentar de nuevo",
+
     "privacy.eyebrow": "Legal",
     "privacy.title": "Política de Privacidad",
     "privacy.meta": "Yasmin Beauty Salon Unisex · Los Ángeles, CA · Vigente desde el 23 de junio de 2026",

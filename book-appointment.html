@@ -272,6 +272,27 @@
       </div>
     </div>
   </div>
+
+  <div id="failure-modal-overlay" class="modal-overlay">
+    <div class="modal-container modal-fail">
+      <div class="modal-text">
+        <span class="modal-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"></circle>
+            <line x1="12" y1="7.5" x2="12" y2="13"></line>
+            <line x1="12" y1="16.5" x2="12" y2="16.5"></line>
+          </svg>
+        </span>
+        <h2 class="modal-title" data-i18n="modal.fail.heading">Booking failed</h2>
+        <p class="modal-message" id="failure-modal-message" data-i18n="modal.fail.message">Something went wrong and we
+          couldn't complete your booking. Please try again.</p>
+      </div>
+      <div class="actions">
+        <button id="failure-modal-btn-retry" class="primary-btn" data-i18n="modal.fail.retry">Try Again</button>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>
