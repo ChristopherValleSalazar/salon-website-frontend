@@ -1,13 +1,14 @@
 /* SERVICE TOGGLE */
 .service-toggle {
     position: relative;
+    scroll-margin-top: 100px;
     display: flex;
     width: 100%;
     max-width: 900px;
     background: #eadec8;
     border-radius: 50px;
     overflow: hidden;
-    margin: 1rem auto;
+    margin: 2.5rem auto 1rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 .slider {

@@ -73,23 +73,165 @@ textarea {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 .img-container {
+  position: relative;
   width: 100%;
 }
 
-/* Disable file and Services input default look */
-input[type="file"] {
-  display: block;
-  margin: 0;
-}
 .main-form select:has(option[value=""]:checked) {
   color: #a09585;
 }
+
+/* NATIVE FILE INPUT (used as-is on mobile so the OS photo picker stays unrestricted) */
 .main-form input[type="file"] {
-  color: transparent;
+  display: block;
+  margin: 0;
+  padding: 9px 12px;
+  color: #6b5c4e;
+  cursor: pointer;
 }
 .main-form input[type="file"]::-webkit-file-upload-button,
 .main-form input[type="file"]::file-selector-button {
-  color: var(--color-dark);
+  margin-right: 12px;
+  padding: 9px 18px;
+  border: none;
+  border-radius: 40px;
+  background: var(--color-submit-btn);
+  color: var(--color-light);
+  font: inherit;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.main-form input[type="file"]::-webkit-file-upload-button:hover,
+.main-form input[type="file"]::file-selector-button:hover {
+  background: var(--color-submit-btn-hover);
+}
+
+/* Custom drop zone hidden by default; shown on desktop only */
+.file-drop {
+  display: none;
+}
+
+@media (min-width: 601px) {
+  /* Visually hide the native input but keep it in the DOM so it still carries the file */
+  .img-container input[type="file"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    border: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+  }
+
+  .file-drop {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    max-width: 1000px;
+    min-height: 30px;
+    margin: 2px 0;
+    padding: 14px 18px;
+    border: 1.5px dashed #c9bda8;
+    border-radius: 20px;
+    background: #f8f4ed;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  .file-drop:hover,
+  .file-drop.is-dragover {
+    border-color: var(--color-primary);
+    background: #f3ecdf;
+  }
+  .file-drop.has-file {
+    border-style: solid;
+  }
+  .img-container input[type="file"]:focus-visible + .file-drop {
+    border-color: var(--color-primary);
+    box-shadow: 0 4px 12px rgba(184, 138, 68, 0.25);
+  }
+
+  .file-drop-empty {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+  }
+  .file-drop-icon {
+    flex-shrink: 0;
+    color: var(--color-primary);
+  }
+  .file-drop-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .file-drop-title {
+    font-family: "Inter", sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--color-dark);
+  }
+  .file-drop-hint {
+    font-family: "Inter", sans-serif;
+    font-size: 0.78rem;
+    color: #8a7f72;
+  }
+
+  .file-drop-selected {
+    display: none;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+  }
+  .file-drop.has-file .file-drop-empty {
+    display: none;
+  }
+  .file-drop.has-file .file-drop-selected {
+    display: flex;
+  }
+  .file-drop-thumb {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    object-fit: cover;
+    border-radius: 8px;
+    background: #e7decb;
+  }
+  .file-drop-name {
+    flex: 1;
+    min-width: 0;
+    font-family: "Inter", sans-serif;
+    font-size: 0.9rem;
+    color: var(--color-dark);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .file-drop-clear {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    font-size: 1.2rem;
+    line-height: 1;
+    color: var(--color-dark);
+    background: rgba(0, 0, 0, 0.06);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .file-drop-clear:hover {
+    background: var(--color-submit-btn);
+    color: var(--color-light);
+  }
 }
 .book-app-btn{
   display: block;
@@ -374,6 +516,11 @@ hr.form-divider {
   text-align: center;
 }
 .modal-success .modal-icon {
+/* FAILURE MODAL (prototype) — reuses .modal-overlay / .modal-container */
+.modal-fail {
+  text-align: center;
+}
+.modal-fail .modal-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -391,5 +538,16 @@ hr.form-divider {
   margin-bottom: 24px;
 }
 .modal-success .actions {
+  color: #b3402e;
+  background: rgba(179, 64, 46, 0.12);
+  border-radius: 50%;
+}
+.modal-fail .modal-title {
+  color: #b3402e;
+}
+.modal-fail .modal-message {
+  margin-bottom: 24px;
+}
+.modal-fail .actions {
   justify-content: center;
 }

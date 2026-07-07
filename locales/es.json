@@ -108,7 +108,9 @@
     "form.services.haircut-beard-trim": "Corte de Cabello + Recorte de Barba",
     "form.services.haircut-beard-trim-eyebrow-shaping": "Corte de Cabello + Recorte de Barba + Diseño de Cejas",
 
-    "form.hair-img": "Imagen del Cabello",
+    "form.hair-img": "Imagen del Cabello<span class=\"required\">*</span>",
+    "form.hair-img.prompt": "Haz clic o arrastra una foto aquí",
+    "form.hair-img.hint": "PNG, JPG o WEBP",
 
     "form.date": "Fecha<span class=\"required\">*</span>",
     "form.date.placeholder": "Selecciona una fecha",
@@ -135,6 +137,10 @@
     "modal.message": "Para ver, cancelar o reprogramar, por favor revisa el SMS con el enlace de tu cita",
     "modal.home": "Home",
     "modal.close": "cerrar",
+
+    "modal.fail.heading": "No se pudo reservar",
+    "modal.fail.message": "Algo salió mal y no pudimos completar tu reserva. Por favor, inténtalo de nuevo.",
+    "modal.fail.retry": "Intentar de nuevo",
 
     "privacy.eyebrow": "Legal",
     "privacy.title": "Política de Privacidad",

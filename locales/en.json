@@ -108,7 +108,9 @@
     "form.services.haircut-beard-trim": "Haircut + Beard Trim",
     "form.services.haircut-beard-trim-eyebrow-shaping": "Haircut + Beard Trim + Eyebrow Shaping",
 
-    "form.hair-img": "Hair Image",
+    "form.hair-img": "Hair Image<span class=\"required\">*</span>",
+    "form.hair-img.prompt": "Click or drag a photo here",
+    "form.hair-img.hint": "PNG, JPG or WEBP",
 
     "form.date": "Date<span class=\"required\">*</span>",
     "form.date.placeholder": "Select a date",
@@ -135,6 +137,10 @@
     "modal.message": "To view, cancel, or reschedule please check the SMS with your appointment link",
     "modal.home": "Home",
     "modal.close": "close",
+
+    "modal.fail.heading": "Booking failed",
+    "modal.fail.message": "Something went wrong and we couldn't complete your booking. Please try again.",
+    "modal.fail.retry": "Try Again",
 
     "privacy.meta": "Yasmin Beauty Salon Unisex · Los Angeles, CA · Effective June 23, 2026",
 
