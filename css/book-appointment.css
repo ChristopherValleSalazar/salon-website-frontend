@@ -511,6 +511,11 @@ hr.form-divider {
   }
 }
 
+/* SUCCESS MODAL (prototype restyle) — centered scheme with green accent */
+.modal-success {
+  text-align: center;
+}
+.modal-success .modal-icon {
 /* FAILURE MODAL (prototype) — reuses .modal-overlay / .modal-container */
 .modal-fail {
   text-align: center;
@@ -522,6 +527,17 @@ hr.form-divider {
   width: 60px;
   height: 60px;
   margin-bottom: 16px;
+  color: #2f855a;
+  background: rgba(47, 133, 90, 0.12);
+  border-radius: 50%;
+}
+.modal-success .modal-title {
+  color: #2f855a;
+}
+.modal-success .modal-message {
+  margin-bottom: 24px;
+}
+.modal-success .actions {
   color: #b3402e;
   background: rgba(179, 64, 46, 0.12);
   border-radius: 50%;
