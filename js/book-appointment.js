@@ -11,6 +11,72 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+// Custom hair-image drop zone (desktop). Mobile keeps the native OS picker untouched.
+const fileInput = document.getElementById("hair-image");
+const fileDrop = document.getElementById("file-drop");
+
+if (fileInput && fileDrop) {
+    const thumb = fileDrop.querySelector(".file-drop-thumb");
+    const nameEl = fileDrop.querySelector(".file-drop-name");
+    const clearBtn = fileDrop.querySelector(".file-drop-clear");
+
+    function showFile(file) {
+        if (!file) {
+            fileDrop.classList.remove("has-file");
+            thumb.removeAttribute("src");
+            nameEl.textContent = "";
+            return;
+        }
+
+        nameEl.textContent = file.name;
+        fileDrop.classList.add("has-file");
+
+        if (file.type.startsWith("image/")) {
+            const reader = new FileReader();
+            reader.onload = (e) => { thumb.src = e.target.result; };
+            reader.readAsDataURL(file);
+        } else {
+            thumb.removeAttribute("src");
+        }
+    }
+
+    fileInput.addEventListener("change", () => showFile(fileInput.files[0]));
+
+    clearBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        fileInput.value = "";
+        showFile(null);
+    });
+
+    ["dragenter", "dragover"].forEach((ev) =>
+        fileDrop.addEventListener(ev, (e) => {
+            e.preventDefault();
+            fileDrop.classList.add("is-dragover");
+        })
+    );
+    ["dragleave", "dragend"].forEach((ev) =>
+        fileDrop.addEventListener(ev, () => fileDrop.classList.remove("is-dragover"))
+    );
+    fileDrop.addEventListener("drop", (e) => {
+        e.preventDefault();
+        fileDrop.classList.remove("is-dragover");
+
+        const dropped = e.dataTransfer.files;
+        if (dropped && dropped.length) {
+            fileInput.files = dropped;
+            showFile(fileInput.files[0]);
+        }
+    });
+
+    // Keep the custom UI in sync when the form is reset after a successful booking
+    document.getElementById("appointment-form").addEventListener("reset", () => showFile(null));
+}
+
+const modalOverlay = document.querySelector(".modal-overlay");
+
+// console.log(modalOverlay.classList)
+
 document.getElementById("appointment-form").addEventListener("submit", async (e) => {
     e.preventDefault(); //preventing empty form from submitting
 
