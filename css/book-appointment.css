@@ -511,16 +511,11 @@ hr.form-divider {
   }
 }
 
-/* SUCCESS MODAL (prototype restyle) — centered scheme with green accent */
+/* SUCCESS MODAL (restyle) — centered scheme with green accent */
 .modal-success {
   text-align: center;
 }
 .modal-success .modal-icon {
-/* FAILURE MODAL (prototype) — reuses .modal-overlay / .modal-container */
-.modal-fail {
-  text-align: center;
-}
-.modal-fail .modal-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -538,6 +533,20 @@ hr.form-divider {
   margin-bottom: 24px;
 }
 .modal-success .actions {
+  justify-content: center;
+}
+
+/* FAILURE MODAL — reuses .modal-overlay / .modal-container */
+.modal-fail {
+  text-align: center;
+}
+.modal-fail .modal-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  margin-bottom: 16px;
   color: #b3402e;
   background: rgba(179, 64, 46, 0.12);
   border-radius: 50%;
