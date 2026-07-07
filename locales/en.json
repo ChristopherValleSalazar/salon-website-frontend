@@ -7,14 +7,11 @@
     "nav.about": "About",
     "nav.book": "Book Now",
 
-    "hero.eyebrow": "Beauty · Confidence · You",
     "hero.heading": "Look your best, <em>feel even better</em>",
     "hero.message": "Expert cuts, color, styling, and treatments for everyone — walk in as you are, leave feeling brand new.",
     "hero.explore": "View Services",
 
-    "services.eyebrow": "Salon & Barber",
     "services.heading": "Our <em>Services</em>",
-    "services.intro": "Cuts, color, styling, and grooming — for everyone.",
 
     "services.hair.label": "Hair services",
     "services.color.label": "Color services",
@@ -85,9 +82,7 @@
     "services.haircut-beard-trim-eyebrow-shaping.desc": "Complete grooming package with haircut, beard trim, and brow shaping.",
     "services.haircut-beard-trim-eyebrow-shaping.price": "from $45",
 
-    "gallery.eyebrow": "Portfolio",
     "gallery.heading": "Our <em>Work</em>",
-    "gallery.message": "A look at some of our recent transformations.",
 
     "cta.heading": "Ready to Book?",
     "cta.message": "Schedule your appointment today.",
