@@ -36,3 +36,11 @@ document.querySelectorAll(".book-btn").forEach(btn => {
         window.location.href = `book-appointment.html?service=${service}`;
     });
 });
+
+// Close the mobile menu when a nav link is tapped (so in-page anchors scroll into view)
+document.querySelectorAll(".nav-btn-burger").forEach(link => {
+    link.addEventListener("click", () => {
+        document.getElementById("mobileMenu").classList.remove("open");
+        document.getElementById("burgerBtn").classList.remove("expanded");
+    });
+});

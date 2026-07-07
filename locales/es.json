@@ -3,8 +3,15 @@
     "common.btn.appointment": "Reservar Cita",
     
     "nav.home": "Home",
+    "nav.services": "Servicios",
+    "nav.gallery": "Galería",
     "nav.about": "Sobre Nosotros",
     "nav.book": "Reservar Ahora",
+
+    "hero.eyebrow": "Belleza · Confianza · Tú",
+    "hero.heading": "Luce increíble, <em>siéntete aún mejor</em>",
+    "hero.message": "Cortes, color, estilismo y tratamientos expertos para todos — llega como eres y sal sintiéndote como nuevo.",
+    "hero.explore": "Ver Servicios",
 
     "services.hair.label": "Servicios de cabello",
     "services.color.label": "Servicios de color",

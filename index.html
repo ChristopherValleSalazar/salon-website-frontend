@@ -53,6 +53,8 @@
                 <div class="nav-container">
                     <ul class="list-reset nav-list">
                         <li><a class="nav-btn btn-style" data-i18n="nav.home" href="index.html">Home</a></li>
+                        <li><a class="nav-btn btn-style" data-i18n="nav.services" href="#services">Services</a></li>
+                        <li><a class="nav-btn btn-style" data-i18n="nav.gallery" href="#gallery">Gallery</a></li>
                         <li><a class="nav-btn btn-style" data-i18n="nav.about" href="about.html">About</a></li>
                         <li><a class="nav-btn btn-style cta" data-i18n="nav.book" href="book-appointment.html">Book
                                 Now</a></li>
@@ -72,6 +74,8 @@
                 <nav class="burger-nav" aria-label="Primary Navigation">
                     <ul class="list-reset nav-list-burger">
                         <li><a class="nav-btn-burger" data-i18n="nav.home" href="index.html">Home</a></li>
+                        <li><a class="nav-btn-burger" data-i18n="nav.services" href="#services">Services</a></li>
+                        <li><a class="nav-btn-burger" data-i18n="nav.gallery" href="#gallery">Gallery</a></li>
                         <li><a class="nav-btn-burger" data-i18n="nav.about" href="about.html">About</a></li>
                         <li><a class="nav-btn-burger cta" data-i18n="nav.book" href="book-appointment.html">Book Now</a>
                         </li>
@@ -88,7 +92,31 @@
     </header>
 
     <main>
-        <div class="service-toggle">
+        <section class="hero">
+            <div class="hero-inner">
+                <div class="hero-copy">
+                    <p class="hero-eyebrow" data-i18n="hero.eyebrow">Beauty · Confidence · You</p>
+                    <h2 class="hero-title" data-i18n="hero.heading">Look your best, <em>feel even better</em></h2>
+                    <p class="hero-sub" data-i18n="hero.message">Expert cuts, color, styling, and treatments for
+                        everyone — walk in as you are, leave feeling brand new.</p>
+                    <div class="hero-actions">
+                        <a href="book-appointment.html" class="hero-btn-primary">
+                            <span data-i18n="common.btn.appointment">Book Appointment</span>
+                            <span class="btn-arrow" aria-hidden="true">→</span>
+                        </a>
+                        <a href="#services" class="hero-btn-secondary">
+                            <span data-i18n="hero.explore">View Services</span>
+                            <span class="btn-arrow" aria-hidden="true">→</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-media">
+                    <img src="images/blonde-curls.jpg" alt="Hair styling at Yasmin Beauty Salon">
+                </div>
+            </div>
+        </section>
+
+        <div class="service-toggle" id="services">
             <div class="slider"></div>
 
             <button type="button" class="toggle-btn-beauty" data-target="services-beauty">
@@ -371,7 +399,7 @@
         </section> -->
         <hr class="section-divider">
 
-        <section class="gallery-section">
+        <section class="gallery-section" id="gallery">
             <div class="section-header">
                 <h2 data-i18n="gallery.heading">Our Work</h2>
                 <p data-i18n="gallery.message">

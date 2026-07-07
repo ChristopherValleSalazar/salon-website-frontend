@@ -2,8 +2,15 @@
     "common.btn.appointment": "Book Appointment",
     
     "nav.home": "Home",
+    "nav.services": "Services",
+    "nav.gallery": "Gallery",
     "nav.about": "About",
     "nav.book": "Book Now",
+
+    "hero.eyebrow": "Beauty · Confidence · You",
+    "hero.heading": "Look your best, <em>feel even better</em>",
+    "hero.message": "Expert cuts, color, styling, and treatments for everyone — walk in as you are, leave feeling brand new.",
+    "hero.explore": "View Services",
 
     "services.hair.label": "Hair services",
     "services.color.label": "Color services",
