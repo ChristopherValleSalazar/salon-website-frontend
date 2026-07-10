@@ -124,7 +124,7 @@
     "form.additional-notes": "Notas Adicionales",
     "form.additional-notes.placeholder": "Dinos sobre tus objetivos de cabello, estilista preferido, alergias, etc.",
 
-    "form.consentSMS": "Acepto recibir confirmaciones y recordatorios por SMS. Al reservar, aceptas nuestra <a href='privacy-policy.html'>Política de privacidad</a>.<span class=\"required\">*</span>",
+    "form.consentSMS": "Acepto recibir confirmaciones y recordatorios por SMS. Al reservar, aceptas nuestra <a href='privacy-policy.html'>Política de privacidad</a>.",
 
     "booking.location.heading": "Ubicación",
     "booking.address.heading": "Dirección",

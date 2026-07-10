@@ -125,7 +125,7 @@
     "form.additional-notes": "Additional Notes",
     "form.additional-notes.placeholder": "Tell us about your hair goals, preferred stylist, allergies, etc.",
 
-    "form.consentSMS": "I agree to receive SMS confirmations and reminders. By booking, you agree to our <a href='privacy-policy.html'>Privacy Policy</a>.<span class=\"required\">*</span>",
+    "form.consentSMS": "I agree to receive SMS confirmations and reminders. By booking, you agree to our <a href='privacy-policy.html'>Privacy Policy</a>.",
 
     "booking.location.heading": "Location",
     "booking.address.heading": "Address",
