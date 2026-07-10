@@ -8,14 +8,11 @@
     "nav.about": "Sobre Nosotros",
     "nav.book": "Reservar Ahora",
 
-    "hero.eyebrow": "Belleza · Confianza · Tú",
     "hero.heading": "Luce increíble, <em>siéntete aún mejor</em>",
     "hero.message": "Cortes, color, estilismo y tratamientos expertos para todos — llega como eres y sal sintiéndote como nuevo.",
     "hero.explore": "Ver Servicios",
 
-    "services.eyebrow": "Salón y Barbería",
     "services.heading": "Nuestros <em>Servicios</em>",
-    "services.intro": "Cortes, color, estilismo y arreglo personal — para todos.",
 
     "services.hair.label": "Servicios de cabello",
     "services.color.label": "Servicios de color",
@@ -85,10 +82,7 @@
     "services.haircut-beard-trim-eyebrow-shaping.desc": "Paquete completo de arreglo personal que incluye corte de cabello, recorte de barba y diseño de cejas.",
     "services.haircut-beard-trim-eyebrow-shaping.price": "desde $45",
 
-    "gallery.eyebrow": "Portafolio",
     "gallery.heading": "Nuestro <em>Trabajo</em>",
-    "gallery.message": "Un vistazo a algunas de nuestras transformaciones recientes.",
-
     "cta.heading": "¿Listo para reservar?",
     "cta.message": "Programa tu cita hoy.",
 
@@ -130,7 +124,7 @@
     "form.additional-notes": "Notas Adicionales",
     "form.additional-notes.placeholder": "Dinos sobre tus objetivos de cabello, estilista preferido, alergias, etc.",
 
-    "form.consentSMS": "Acepto recibir confirmaciones y recordatorios por SMS. Al reservar, aceptas nuestra <a href='privacy-policy.html'>Política de privacidad</a>.<span class=\"required\">*</span>",
+    "form.consentSMS": "Acepto recibir confirmaciones y recordatorios por SMS. Al reservar, aceptas nuestra <a href='privacy-policy.html'>Política de privacidad</a>.",
 
     "booking.location.heading": "Ubicación",
     "booking.address.heading": "Dirección",
