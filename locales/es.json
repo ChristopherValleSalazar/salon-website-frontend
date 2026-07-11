@@ -54,9 +54,9 @@
     "services.treatment.desc": "Máscara de reparación profunda para cabello seco o dañado. Deja el cabello suave y resistente.",
     "services.treatment.price": "desde $50",
 
-    "services.straightening.title": "Tratamiento de Keratina",
-    "services.straightening.desc": "Tratamiento de suavizado de queratina para resultados duraderos sin frizz.",
-    "services.straightening.price": "desde $35",
+    "services.keratin.title": "Tratamiento de Keratina",
+    "services.keratin.desc": "Tratamiento de suavizado de queratina para resultados duraderos sin frizz.",
+    "services.keratin.price": "desde $35",
 
     "services.haircut-barber.title": "Corte de Cabello",
     "services.haircut-barber.desc": "Corte clasico adaptado a tu estilo y forma de rostro.",
@@ -107,14 +107,14 @@
     "form.services.baby-highlight": "Destacados para Bebés",
     "form.services.color-touchup": "Retoque de Color",
     "form.services.treatment": "Tratamiento + Hidratación",
-    "form.services.straightening": "Estrafiamiento",
+    "form.services.keratin": "Tratamiento de Keratina",
     "form.services.perm": "Perm",
     "form.services.beard-trim": "Recorte de Barba",
     "form.services.eyebrow-shaping": "Diseño de Cejas",
     "form.services.haircut-beard-trim": "Corte de Cabello + Recorte de Barba",
     "form.services.haircut-beard-trim-eyebrow-shaping": "Corte de Cabello + Recorte de Barba + Diseño de Cejas",
 
-    "form.hair-img": "Imagen del Cabello<span class=\"required\">*</span>",
+    "form.hair-img": "Imagen del Cabello",
     "form.hair-img.prompt": "Haz clic o arrastra una foto aquí",
     "form.hair-img.hint": "PNG, JPG o WEBP",
 

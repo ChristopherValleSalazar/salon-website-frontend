@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="css/global-layout.css">
   <link rel="stylesheet" href="css/book-appointment.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css" />
+  <script src="js/config.js" defer></script>
   <script src="js/language.js" defer></script>
   <script src="js/book-appointment.js" defer></script>
   <script src="js/burger.js" defer></script>
@@ -96,8 +97,8 @@
         </p>
 
         <form id="appointment-form" class="main-form">
-          <label for="customerName" data-i18n="form.name">Name<span class="required">*</span></label>
-          <input type="text" id="customerName" required name="clientName" data-i18n="form.name.placeholder"
+          <label for="customer-name" data-i18n="form.name">Name<span class="required">*</span></label>
+          <input type="text" id="customer-name" required name="clientName" data-i18n="form.name.placeholder"
             placeholder="Your name">
 
           <label for="client-phone" data-i18n="form.phone">Phone Number<span class="required">*</span></label>
@@ -112,7 +113,7 @@
             <option value="HAIRCUT" data-i18n="form.services.haircut">Haircut</option>
             <option value="BABY_HIGHLIGHT" data-i18n="form.services.baby-highlight">Baby Highlight</option>
             <option value="DYES" data-i18n="form.services.dyes">Dyes</option>
-            <option value="STRAIGHTENING" data-i18n="form.services.straightening">Keratin Treatment</option>
+            <option value="KERATIN_TREATMENT" data-i18n="form.services.keratin">Keratin Treatment</option>
             <option value="BLOW_DRYING" data-i18n="form.services.blowdry">Blow Drying</option>
             <option value="WASHING" data-i18n="form.services.washing">Washing</option>
             <option value="TREATMENT_MOISTURIZING" data-i18n="form.services.treatment">Treatment Moisturizing</option>
@@ -126,7 +127,7 @@
               data-i18n="form.services.haircut-beard-trim-eyebrow-shaping">Haircut Beard Trim Eyebrow Shaping</option>
           </select>
 
-          <label for="hair-image" data-i18n="form.hair-img">Hair Image</label>
+          <label class="hair-image-label" for="hair-image"><span data-i18n="form.hair-img">Hair Image</span><span class="required">*</span></label>
           <div class="img-container">
             <input type="file" id="hair-image" accept=".png,.jpg,.jpeg,.webp" name="hairPic">
 
@@ -164,11 +165,11 @@
             placeholder="Tell us about your hair goals, preferred stylist, allergies, etc."></textarea>
 
           <div class="consent-wrapper">
-            <input type="checkbox" id="consentSMS" name="consentSMS">
-            <label for="consentSMS" data-i18n="form.consentSMS">I agree to receive SMS confirmations and reminders. By
+            <input type="checkbox" id="consent-sms" name="consentSMS">
+            <label for="consent-sms" data-i18n="form.consentSMS">I agree to receive SMS confirmations and reminders. By
               booking, you agree to our <a href="privacy-policy.html">Privacy Policy</a>.</label>
           </div>
-          <button class="book-app-btn btn-style" type="submit" data-i18n="common.btn.appointment">Book
+          <button id="book-app-btn" class="book-app-btn btn-style" type="submit" data-i18n="common.btn.appointment">Book
             Appointment</button>
         </form>
       </div>

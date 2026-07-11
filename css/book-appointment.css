@@ -35,6 +35,10 @@ textarea {
   font-size: 1.2rem;
   margin-left: 4px;
 }
+.hair-image-label .required {
+  display: none;
+}
+
 .main-form input, select {
   width: 100%;
   min-height: 50px;

@@ -54,9 +54,9 @@
     "services.treatment.desc": "Deep repair mask for dry or damaged hair. Leaves hair soft and resilient.",
     "services.treatment.price": "from $50",
 
-    "services.straightening.title": "Keratin Treatment",
-    "services.straightening.desc": "Keratin smoothing treatment for long-lasting frizz-free results.",
-    "services.straightening.price": "from $35",
+    "services.keratin.title": "Keratin Treatment",
+    "services.keratin.desc": "Keratin smoothing treatment for long-lasting frizz-free results.",
+    "services.keratin.price": "from $35",
 
     "services.haircut-barber.title": "Haircut",
     "services.haircut-barber.desc": "Classic haircut tailored to your style and face shape.",
@@ -108,14 +108,14 @@
     "form.services.baby-highlight": "Baby Highlight",
     "form.services.color-touchup": "Color Touch-Up",
     "form.services.treatment": "Treatment + Moisturizing",
-    "form.services.straightening": "Straightening",
+    "form.services.keratin": "Keratin Treatment",
     "form.services.perm": "Perm",
     "form.services.beard-trim": "Beard Trim",
     "form.services.eyebrow-shaping": "Eyebrow Shaping",
     "form.services.haircut-beard-trim": "Haircut + Beard Trim",
     "form.services.haircut-beard-trim-eyebrow-shaping": "Haircut + Beard Trim + Eyebrow Shaping",
 
-    "form.hair-img": "Hair Image<span class=\"required\">*</span>",
+    "form.hair-img": "Hair Image",
     "form.hair-img.prompt": "Click or drag a photo here",
     "form.hair-img.hint": "PNG, JPG or WEBP",
 

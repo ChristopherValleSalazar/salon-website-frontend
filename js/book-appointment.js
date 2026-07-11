@@ -74,8 +74,10 @@ if (fileInput && fileDrop) {
 }
 
 const modalOverlay = document.querySelector(".modal-overlay");
-
-// console.log(modalOverlay.classList)
+const IMAGE_REQUIRED_SERVICES = new Set([
+    "DYES", "BABY_HIGHLIGHT", "COLOR_TOUCH_UP", "TREATMENT_MOISTURIZING",
+    "KERATIN_TREATMENT", "PERM"
+])
 
 document.getElementById("appointment-form").addEventListener("submit", async (e) => {
     e.preventDefault(); //preventing empty form from submitting
@@ -85,25 +87,61 @@ document.getElementById("appointment-form").addEventListener("submit", async (e)
 
     if (!dateInput.value) {
         visibleInput.classList.add("input-error");
-        visibleInput.scrollIntoView({ behavior: "smooth", block: "center" });
+        visibleInput.scrollIntoView({behavior: "smooth", block: "center" });
         return;
     }
     visibleInput.classList.remove("input-error");
 
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData);
+    const [date, time] = dateInput.value.split(" ");
 
-    // Prototype: show the success modal for now. Once the backend is wired up,
-    // branch on the response and pass the error text to failureModalBehaviour:
-    //
-    //   const res = await fetch("/api/appointments", { method: "POST", body: formData });
-    //   if (res.ok) {
-    //       modalBehaviour();
-    //   } else {
-    //       const body = await res.json().catch(() => ({}));
-    //       failureModalBehaviour(body.message); // message from the response body
-    //   }
-    modalBehaviour();
+    const serviceSelector = document.getElementById("service-label");
+    const hairImageInput = document.getElementById("hair-image");
+    const requiredMark = document.querySelector(".hair-image-label .required");
+
+    console.log(serviceSelector, hairImageInput, requiredMark);
+    
+    serviceSelector.addEventListener("change", () => {
+        const needsImage = IMAGE_REQUIRED_SERVICES.has(serviceSelector.value);
+        
+        hairImageInput.required = needsImage;
+        requiredMark.style.display = needsImage ? "inline" : "none";
+    });
+
+    const payload = {
+        name: document.getElementById("customer-name").value,
+        phoneNumber: document.getElementById("client-phone").value,
+        serviceType: document.getElementById("service").value,
+        date: date,
+        startTime: time,
+        smsConsent: document.getElementById("consent-sms").checked,
+        additionalNotes: document.getElementById("notes").value.trim() || null,
+        hairImageUrl: null // Placeholder for the uploaded hair image URL, if applicable
+    };
+
+    const submitBtn = document.getElementById("book-app-btn");
+    submitBtn.disabled = true;
+
+    console.log("Submitting appointment:", payload);
+
+    try {
+        const res = await fetch(API_BASE_URL, {
+            method: "POST",
+            headers: { "content-type": "application/json"},
+            body: JSON.stringify(payload)
+        });
+
+        if(res.ok) {
+            const body = await res.json();
+            modalBehaviour(body); // implement body in modalBehaviour to show the success message
+        } else {
+            const body = await res.json().catch(() => ({}));
+            failureModalBehaviour(body.error || "An error occurred while submitting the appointment."); // message from the response body
+        }
+    } catch (error) {
+        failureModalBehaviour();
+    } finally {
+        submitBtn.disabled = false;
+    }
 });
 
 // SUCCESS MODAL
