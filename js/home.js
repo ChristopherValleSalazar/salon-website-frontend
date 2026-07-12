@@ -1,46 +1,28 @@
-const toggle = document.querySelector(".service-toggle");
+const serviceToggle = document.querySelector(".service-toggle");
+const beautyBtn = document.querySelector(".toggle-btn-beauty");
+const barberBtn = document.querySelector(".toggle-btn-barber");
+const beautySection = document.querySelector(".beauty-services");
+const barberSection = document.querySelector(".barber-services");
 
-toggle.addEventListener("click", () => {
-    const barberSection = document.querySelector(".barber-services");
-    const beautySection = document.querySelector(".beauty-services");
-    const toggleButtonBeauty = document.querySelector(".toggle-btn-beauty")
-    const toggleButtonBarber = document.querySelector(".toggle-btn-barber")
+function selectCategory(category) {
+    const isBarber = category === "barber";
 
-    toggle.classList.toggle("active");
+    serviceToggle.classList.toggle("active", isBarber);
 
-    beautySection.classList.toggle("unselected");
-    barberSection.classList.toggle("unselected");
+    barberSection.classList.toggle("unselected", !isBarber);
+    beautySection.classList.toggle("unselected", isBarber);
 
-    toggleButtonBeauty.classList.toggle("unfocus-color");
-    toggleButtonBarber.classList.toggle("unfocus-color");
+    barberBtn.classList.toggle("unfocus-color", !isBarber);
+    beautyBtn.classList.toggle("unfocus-color", isBarber);
+}
 
-});
-
-const cards = document.querySelectorAll(".card-container");
-
-cards.forEach(card => {
-    const cardMain = card.querySelector(".card-main");
-
-    cardMain.addEventListener("click", () => {
-        const cardTime = card.querySelector(".time-price-container");
-
-        cardTime.classList.toggle("close");
-        card.classList.toggle("open");
-    });
-});
+beautyBtn.addEventListener("click", () => selectCategory("beauty"));
+barberBtn.addEventListener("click", () => selectCategory("barber"));
 
 document.querySelectorAll(".book-btn").forEach(btn => {
     btn.addEventListener("click", () => {
         const service = btn.dataset.service;
         console.log(service);
         window.location.href = `book-appointment.html?service=${service}`;
-    });
-});
-
-// Close the mobile menu when a nav link is tapped (so in-page anchors scroll into view)
-document.querySelectorAll(".nav-btn-burger").forEach(link => {
-    link.addEventListener("click", () => {
-        document.getElementById("mobileMenu").classList.remove("open");
-        document.getElementById("burgerBtn").classList.remove("expanded");
     });
 });
