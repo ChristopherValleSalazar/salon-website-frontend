@@ -38,6 +38,9 @@ textarea {
 .hair-image-label .required {
   display: none;
 }
+.hair-image-label.is-required .required {
+  display: inline;
+}
 
 .main-form input, select {
   width: 100%;
@@ -135,7 +138,7 @@ textarea {
     gap: 16px;
     width: 100%;
     max-width: 1000px;
-    min-height: 30px;
+    min-height: 20px;
     margin: 2px 0;
     padding: 14px 18px;
     border: 1.5px dashed #c9bda8;

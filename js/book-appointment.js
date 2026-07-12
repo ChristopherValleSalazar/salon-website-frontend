@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (select) {
             select.value = service;
+            select.dispatchEvent(new Event("change"));
         }
     }
 });
@@ -73,11 +74,22 @@ if (fileInput && fileDrop) {
     document.getElementById("appointment-form").addEventListener("reset", () => showFile(null));
 }
 
-const modalOverlay = document.querySelector(".modal-overlay");
+const serviceSelector = document.getElementById("service");
+const hairImageInput = document.getElementById("hair-image");
+const hairImageLabel = document.querySelector(".hair-image-label");
 const IMAGE_REQUIRED_SERVICES = new Set([
     "DYES", "BABY_HIGHLIGHT", "COLOR_TOUCH_UP", "TREATMENT_MOISTURIZING",
     "KERATIN_TREATMENT", "PERM"
 ])
+
+function updateHairImageRequirement() {
+    const needsImage = IMAGE_REQUIRED_SERVICES.has(serviceSelector.value);
+
+    hairImageInput.required = needsImage;
+    hairImageLabel.classList.toggle("is-required", needsImage);
+}
+
+serviceSelector.addEventListener("change", updateHairImageRequirement);
 
 document.getElementById("appointment-form").addEventListener("submit", async (e) => {
     e.preventDefault(); //preventing empty form from submitting
@@ -92,57 +104,70 @@ document.getElementById("appointment-form").addEventListener("submit", async (e)
     }
     visibleInput.classList.remove("input-error");
 
-    const [date, time] = dateInput.value.split(" ");
-
-    const serviceSelector = document.getElementById("service-label");
-    const hairImageInput = document.getElementById("hair-image");
-    const requiredMark = document.querySelector(".hair-image-label .required");
-
-    console.log(serviceSelector, hairImageInput, requiredMark);
-    
-    serviceSelector.addEventListener("change", () => {
-        const needsImage = IMAGE_REQUIRED_SERVICES.has(serviceSelector.value);
-        
-        hairImageInput.required = needsImage;
-        requiredMark.style.display = needsImage ? "inline" : "none";
-    });
-
-    const payload = {
-        name: document.getElementById("customer-name").value,
-        phoneNumber: document.getElementById("client-phone").value,
-        serviceType: document.getElementById("service").value,
-        date: date,
-        startTime: time,
-        smsConsent: document.getElementById("consent-sms").checked,
-        additionalNotes: document.getElementById("notes").value.trim() || null,
-        hairImageUrl: null // Placeholder for the uploaded hair image URL, if applicable
-    };
-
-    const submitBtn = document.getElementById("book-app-btn");
-    submitBtn.disabled = true;
-
-    console.log("Submitting appointment:", payload);
-
     try {
-        const res = await fetch(API_BASE_URL, {
+        let imageUrl = null;
+        let imagePublicId = null;
+
+        const sig = await fetch(`${API_BASE_URL}/api/v1/uploads/signature`).then(r => r.json());
+
+        const fd = new FormData();
+        fd.append('file', hairImageInput.files[0]);
+        fd.append('api_key', sig.apiKey);
+        fd.append('timestamp', sig.timestamp);
+        fd.append('signature', sig.signature);
+        fd.append('folder', sig.folder);
+
+        const res = await fetch(
+            `https://api.cloudinary.com/v1_1/yfmlabi1/image/upload`,
+            { method: 'POST', body: fd }
+        );
+        if(!res.ok) throw new Error('image upload failed');
+        const data = await res.json();
+        imageUrl = data.secure_url;
+        imagePublicId = data.public_id;
+
+        const [date, time] = dateInput.value.split(" ");
+
+        const payload = {
+            name: document.getElementById("customer-name").value,
+            phoneNumber: document.getElementById("client-phone").value,
+            serviceType: document.getElementById("service").value,
+            date: date,
+            startTime: time,
+            smsConsent: document.getElementById("consent-sms").checked,
+            additionalNotes: document.getElementById("notes").value.trim() || null,
+            hairImageUrl: imageUrl,
+            hairImagePublicId: imagePublicId
+        };
+
+        console.log(payload);
+
+        const submitBtn = document.getElementById("book-app-btn");
+        submitBtn.disabled = true;
+
+        console.log("Submitting appointment:", payload);
+
+        const resPost = await fetch((`${API_BASE_URL}/api/v1/appointments`), {
             method: "POST",
             headers: { "content-type": "application/json"},
             body: JSON.stringify(payload)
         });
 
-        if(res.ok) {
-            const body = await res.json();
+        if(resPost.ok) {
+            const body = await resPost.json();
             modalBehaviour(body); // implement body in modalBehaviour to show the success message
         } else {
-            const body = await res.json().catch(() => ({}));
+            const body = await resPost.json().catch(() => ({}));
             failureModalBehaviour(body.error || "An error occurred while submitting the appointment."); // message from the response body
         }
-    } catch (error) {
-        failureModalBehaviour();
+    } catch (err) {
+        failureModalBehaviour(err.message);
     } finally {
-        submitBtn.disabled = false;
+        submitBtn.disabled = false
     }
 });
+
+const modalOverlay = document.querySelector(".modal-overlay");
 
 // SUCCESS MODAL
 function modalBehaviour() {
