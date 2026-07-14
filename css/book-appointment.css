@@ -399,6 +399,9 @@ textarea {
   font-size: 0.9rem;
   color: #8a7f72;
 }
+.time-panel-error {
+  color: #b3402e;
+}
 .slot-button {
   padding: 10px 6px;
   font-family: "Inter", sans-serif;

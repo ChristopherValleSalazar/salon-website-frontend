@@ -123,6 +123,7 @@
     "form.date.placeholder": "Select a date",
     "form.time.heading": "Available times",
     "form.time.empty": "Pick a date to see available times",
+    "form.time.need-service": "Please select a service first to see available times",
 
     "form.additional-notes": "Additional Notes",
     "form.additional-notes.placeholder": "Tell us about your hair goals, preferred stylist, allergies, etc.",

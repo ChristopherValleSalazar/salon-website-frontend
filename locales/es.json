@@ -122,6 +122,7 @@
     "form.date.placeholder": "Selecciona una fecha",
     "form.time.heading": "Horarios disponibles",
     "form.time.empty": "Elige una fecha para ver los horarios",
+    "form.time.need-service": "Primero selecciona un servicio para ver los horarios",
 
     "form.additional-notes": "Notas Adicionales",
     "form.additional-notes.placeholder": "Dinos sobre tus objetivos de cabello, estilista preferido, alergias, etc.",

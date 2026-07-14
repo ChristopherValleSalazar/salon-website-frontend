@@ -236,29 +236,17 @@ const datePIcker = flatpickr("#date-input", {
         date => date.getDay() === 1 //disable Mondays
     ],
 
-    async onChange(selectedDates, dateStr, instance) {
-        const container = document.querySelector(".container-time-slot");
-
+    onChange(selectedDates, dateStr, instance) {
         // a new date invalidates any previously selected time
-        document.getElementById("time-input").value = "";
-        hideBookingSummary();
+        clearTimeSelection();
 
-        container.innerHTML = "<p class='time-panel-empty'>Loading times...</p>";
-
-        const params = new URLSearchParams({
-            requestDate: dateStr,
-            requestService: serviceSelector.value
-        });
-
-        try {
-            const res = await fetch(`${API_BASE_URL}/api/v1/appointments/timeSlots?${params}`);
-            if (!res.ok) throw new Error("Failed to load slots");
-
-            const slots = await res.json();
-            renderTimeSlots(container, slots);
-        } catch (err) {
-            container.innerHTML = "<p class='time-panel-empty'>Couldn't load times. Please try again later.</p>";
+        // slots depend on the service, so it has to be chosen first
+        if (!serviceSelector.value) {
+            showServiceRequiredError();
+            return;
         }
+
+        loadTimeSlots(dateStr);
     }
 });
 
@@ -268,9 +256,52 @@ const timeSlotEmptyStateHTML = timeSlotContainer.innerHTML;
 
 document.getElementById("appointment-form").addEventListener("reset", () => {
     datePIcker.clear(false);
-    hideBookingSummary();
+    clearTimeSelection();
     timeSlotContainer.innerHTML = timeSlotEmptyStateHTML;
 });
+
+// A different service means different slot spacing: drop the chosen time and refetch
+serviceSelector.addEventListener("change", () => {
+    serviceSelector.classList.remove("input-error");
+    clearTimeSelection();
+
+    if (datePIcker.selectedDates.length) {
+        loadTimeSlots(datePIcker.formatDate(datePIcker.selectedDates[0], "Y-m-d"));
+    } else {
+        timeSlotContainer.innerHTML = timeSlotEmptyStateHTML;
+    }
+});
+
+function clearTimeSelection() {
+    document.getElementById("time-input").value = "";
+    hideBookingSummary();
+}
+
+function showServiceRequiredError() {
+    timeSlotContainer.innerHTML =
+        "<p class='time-panel-empty time-panel-error' data-i18n='form.time.need-service'>Please select a service first to see available times</p>";
+    serviceSelector.classList.add("input-error");
+    serviceSelector.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+async function loadTimeSlots(dateStr) {
+    timeSlotContainer.innerHTML = "<p class='time-panel-empty'>Loading times...</p>";
+
+    const params = new URLSearchParams({
+        requestDate: dateStr,
+        requestService: serviceSelector.value
+    });
+
+    try {
+        const res = await fetch(`${API_BASE_URL}/api/v1/appointments/timeSlots?${params}`);
+        if (!res.ok) throw new Error("Failed to load slots");
+
+        const slots = await res.json();
+        renderTimeSlots(timeSlotContainer, slots);
+    } catch (err) {
+        timeSlotContainer.innerHTML = "<p class='time-panel-empty'>Couldn't load times. Please try again later.</p>";
+    }
+}
 
 function hideBookingSummary() {
     const summary = document.querySelector(".booking-summary");
