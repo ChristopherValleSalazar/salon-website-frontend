@@ -17,6 +17,7 @@
     <script src="js/home.js" defer></script>
     <script src="js/language.js" defer></script>
     <script src="js/burger.js" defer></script>
+    <script src="js/appointment-link.js" defer></script>
 </head>
 
 <body>
@@ -52,10 +53,11 @@
             <nav class="top-nav" aria-label="Primary Navigation">
                 <div class="nav-container">
                     <ul class="list-reset nav-list">
-                        <li><a class="nav-btn btn-style" data-i18n="nav.home" href="index.html">Home</a></li>
                         <li><a class="nav-btn btn-style" data-i18n="nav.services" href="#services">Services</a></li>
                         <li><a class="nav-btn btn-style" data-i18n="nav.gallery" href="#gallery">Gallery</a></li>
                         <li><a class="nav-btn btn-style" data-i18n="nav.about" href="about.html">About</a></li>
+                        <li class="appointment-nav-item" hidden><a class="nav-btn btn-style" data-i18n="nav.view-appointment"
+                            href="view-appointment.html">My Appointment</a></li>
                         <li><a class="nav-btn btn-style cta" data-i18n="nav.book" href="book-appointment.html">Book
                                 Now</a></li>
                     </ul>
@@ -73,10 +75,11 @@
             <div class="mobile-menu-inner">
                 <nav class="burger-nav" aria-label="Primary Navigation">
                     <ul class="list-reset nav-list-burger">
-                        <li><a class="nav-btn-burger" data-i18n="nav.home" href="index.html">Home</a></li>
                         <li><a class="nav-btn-burger" data-i18n="nav.services" href="#services">Services</a></li>
                         <li><a class="nav-btn-burger" data-i18n="nav.gallery" href="#gallery">Gallery</a></li>
                         <li><a class="nav-btn-burger" data-i18n="nav.about" href="about.html">About</a></li>
+                        <li class="appointment-nav-item" hidden><a class="nav-btn-burger" data-i18n="nav.view-appointment"
+                            href="view-appointment.html">My Appointment</a></li>
                         <li><a class="nav-btn-burger cta" data-i18n="nav.book" href="book-appointment.html">Book Now</a>
                         </li>
                     </ul>
@@ -110,7 +113,7 @@
                     </div>
                 </div>
                 <div class="hero-media">
-                    <img src="images/blonde-curls.jpg" alt="Hair styling at Yasmin Beauty Salon">
+                    <img src="https://res.cloudinary.com/yfmlabi1/image/upload/v1783755063/highlights_q6b9jo.jpg" alt="Hair styling at Yasmin Beauty Salon">
                 </div>
             </div>
         </section>
@@ -270,15 +273,15 @@
 
                 <article class="service-card" style="--accent: #c4956a">
                     <div class="card-main">
-                        <h3 class="card-title" data-i18n="services.straightening.title">Keratin Treatment</h3>
-                        <p class="card-desc" data-i18n="services.straightening.desc">Keratin smoothing treatment for
+                        <h3 class="card-title" data-i18n="services.keratin.title">Keratin Treatment</h3>
+                        <p class="card-desc" data-i18n="services.keratin.desc">Keratin smoothing treatment for
                             long-lasting frizz-free results.</p>
                         <div class="card-meta">
                             <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 90 min</span>
-                            <span class="pill pill-price" data-i18n="services.straightening.price">from $50</span>
+                            <span class="pill pill-price" data-i18n="services.keratin.price">from $50</span>
                         </div>
                     </div>
-                    <button type="button" class="book-btn" data-service="STRAIGHTENING">
+                    <button type="button" class="book-btn" data-service="KERATIN_TREATMENT">
                         <i class="fa-regular fa-calendar-plus"></i> <span data-i18n="services.book">Book this
                             service</span>
                     </button>
@@ -409,26 +412,26 @@
 
             <div class="gallery-grid">
                 <div class="gallery-item featured">
-                    <img src="images/black-purple-color.jpg" alt="Featured Style"
+                    <img src="https://res.cloudinary.com/yfmlabi1/image/upload/f_auto,q_auto/black-purple-color_f9g5lg" alt="Purple and black hair color"
                         style="object-position: center right;">
                 </div>
                 <div class="gallery-item medium-hor">
-                    <img src="images/blonde-curls.jpg" alt="Style Example" style="object-position: center 22%;">
+                    <img src="https://res.cloudinary.com/yfmlabi1/image/upload/v1783755049/blonde-curls_lmhute.jpg" alt="blonde curls" style="object-position: center 22%;">
                 </div>
                 <div class="gallery-item medium-hor">
-                    <img src="images/blue-color.jpg" alt="Style Example">
+                    <img src="https://res.cloudinary.com/yfmlabi1/image/upload/v1783755063/blue-color_rlzshp.jpg" alt="blue hair color">
                 </div>
                 <div class="gallery-item featured">
-                    <img src="images/highlights.jpg" alt="Style Example">
+                    <img src="https://res.cloudinary.com/yfmlabi1/image/upload/v1783755063/highlights_q6b9jo.jpg" alt="Style Example">
                 </div>
                 <div class="gallery-item medium-hor">
-                    <img src="images/layers.jpg" alt="Featured Style">
+                    <img src="https://res.cloudinary.com/yfmlabi1/image/upload/v1783755064/layers_iety4p.jpg" alt="Featured Style">
                 </div>
                 <div class="gallery-item featured">
-                    <img src="images/straight.jpg" alt="Featured Style" style="object-position:  70% center;">
+                    <img src="https://res.cloudinary.com/yfmlabi1/image/upload/v1783755066/straight_mqeuql.jpg" alt="Featured Style" style="object-position:  70% center;">
                 </div>
                 <div class="gallery-item medium-hor">
-                    <img src="images/red-color.jpg" alt="Featured Style" style="object-position: top center;">
+                    <img src="https://res.cloudinary.com/yfmlabi1/image/upload/v1783755064/red-color_mql70p.jpg" alt="Featured Style" style="object-position: top center;">
                 </div>
             </div>
         </section>

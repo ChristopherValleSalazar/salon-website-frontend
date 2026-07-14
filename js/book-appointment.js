@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (select) {
             select.value = service;
+            select.dispatchEvent(new Event("change"));
         }
     }
 });
@@ -73,43 +74,123 @@ if (fileInput && fileDrop) {
     document.getElementById("appointment-form").addEventListener("reset", () => showFile(null));
 }
 
-const modalOverlay = document.querySelector(".modal-overlay");
+const serviceSelector = document.getElementById("service");
+const hairImageInput = document.getElementById("hair-image");
+const hairImageLabel = document.querySelector(".hair-image-label");
+const submitBtn = document.getElementById("book-app-btn");
+const IMAGE_REQUIRED_SERVICES = new Set([
+    "DYES", "BABY_HIGHLIGHT", "COLOR_TOUCH_UP", "TREATMENT_MOISTURIZING",
+    "KERATIN_TREATMENT", "PERM"
+])
 
-// console.log(modalOverlay.classList)
+function updateHairImageRequirement() {
+    const needsImage = IMAGE_REQUIRED_SERVICES.has(serviceSelector.value);
+
+    hairImageInput.required = needsImage;
+    hairImageLabel.classList.toggle("is-required", needsImage);
+}
+
+serviceSelector.addEventListener("change", updateHairImageRequirement);
 
 document.getElementById("appointment-form").addEventListener("submit", async (e) => {
     e.preventDefault(); //preventing empty form from submitting
 
     const dateInput = document.getElementById("date-input");
-    const visibleInput = dateInput._flatpickr.altInput;
+    const timeInput = document.getElementById("time-input");
+    const bookingWrapper = document.getElementById("booking-wrapper");
 
-    if (!dateInput.value) {
-        visibleInput.classList.add("input-error");
-        visibleInput.scrollIntoView({ behavior: "smooth", block: "center" });
+    // `required` is ignored on hidden inputs, so date and time need an explicit check
+    if (!dateInput.value || !timeInput.value) {
+        bookingWrapper.classList.add("input-error");
+        bookingWrapper.scrollIntoView({ behavior: "smooth", block: "center" });
         return;
     }
-    visibleInput.classList.remove("input-error");
+    bookingWrapper.classList.remove("input-error");
 
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData);
+async function imageUploader() {
+    if(hairImageInput.files.length === 0) {
+        return;
+    }
 
-    // Prototype: show the success modal for now. Once the backend is wired up,
-    // branch on the response and pass the error text to failureModalBehaviour:
-    //
-    //   const res = await fetch("/api/appointments", { method: "POST", body: formData });
-    //   if (res.ok) {
-    //       modalBehaviour();
-    //   } else {
-    //       const body = await res.json().catch(() => ({}));
-    //       failureModalBehaviour(body.message); // message from the response body
-    //   }
-    modalBehaviour();
+    const sig = await fetch(`${API_BASE_URL}/api/v1/uploads/signature`).then(r => r.json());
+
+    const fd = new FormData();
+    fd.append('file', hairImageInput.files[0]);
+    fd.append('api_key', sig.apiKey);
+    fd.append('timestamp', sig.timestamp);
+    fd.append('signature', sig.signature);
+    fd.append('folder', sig.folder);
+
+    const res = await fetch(
+        `https://api.cloudinary.com/v1_1/yfmlabi1/image/upload`,
+        { method: 'POST', body: fd }
+    );
+    if(!res.ok) throw new Error('image upload failed');
+    const data = await res.json();
+    imageUrl = data.secure_url;
+    imagePublicId = data.public_id;
+}
+
+    try {
+        let imageUrl = null;
+        let imagePublicId = null;
+
+        await imageUploader();
+
+        const payload = {
+            name: document.getElementById("customer-name").value,
+            phoneNumber: document.getElementById("client-phone").value,
+            serviceType: document.getElementById("service").value,
+            date: document.getElementById("date-input").value,
+            startTime: document.getElementById("time-input").value,
+            smsConsent: document.getElementById("consent-sms").checked,
+            additionalNotes: document.getElementById("notes").value.trim() || null,
+            hairImageUrl: imageUrl,
+            hairImagePublicId: imagePublicId
+        };
+
+        submitBtn.disabled = true;
+
+        console.log("Submitting appointment:", payload);
+
+        const resPost = await fetch((`${API_BASE_URL}/api/v1/appointments`), {
+            method: "POST",
+            headers: { "content-type": "application/json"},
+            body: JSON.stringify(payload)
+        });
+
+        if(resPost.ok) {
+            const body = await resPost.json();
+            modalBehaviour(body); // implement body in modalBehaviour to show the success message
+        } else {
+            const body = await resPost.json().catch(() => ({}));
+            failureModalBehaviour(body.error || "An error occurred while submitting the appointment."); // message from the response body
+        }
+    } catch (err) {
+        failureModalBehaviour(err.message);
+    } finally {
+        submitBtn.disabled = false;
+    }
 });
 
+const modalOverlay = document.querySelector(".modal-overlay");
+
 // SUCCESS MODAL
-function modalBehaviour() {
+function modalBehaviour(appointment) {
     const modalOverlay = document.getElementById("success-modal-overlay");
     const closeBtn = document.getElementById("modal-btn-close");
+
+    // The view code is the customer's key to see/cancel/reschedule this booking
+    if (appointment.viewCode) {
+        localStorage.setItem("appointmentViewCode", appointment.viewCode);
+        document.querySelectorAll(".appointment-nav-item").forEach(li => { li.hidden = false; });
+    }
+
+    modalOverlay.querySelector(".customer-name").textContent = appointment.name;
+    modalOverlay.querySelector(".detail-service").textContent = serviceLabel(appointment.serviceType);
+    modalOverlay.querySelector(".detail-date").textContent = formatLongDate(appointment.date);
+    modalOverlay.querySelector(".detail-time").textContent =
+        formatTime(appointment.startTime) + " – " + formatTime(appointment.endTime);
 
     modalOverlay.classList.add("is-open");
 
@@ -158,31 +239,135 @@ if (failureOverlay) {
 }
 
 const datePIcker = flatpickr("#date-input", {
+    inline: true,
     minDate: "today",
     allowInput: false,
-    enableTime: true,
-    altInput: true,
-    dateFormat: "Y-m-d H:i",
-    altFormat: "F j, Y h:i K",
-    defaultHour: 10,
-    minTime: "10:00",
-    maxTime: "18:30",
-
+    enableTime: false,
+    dateFormat: "Y-m-d",
     disable: [
-        date => date.getDay() === 1
+        date => date.getDay() === 1 //disable Mondays
     ],
 
     onChange(selectedDates, dateStr, instance) {
-        const day = selectedDates[0].getDay();
+        // a new date invalidates any previously selected time
+        clearTimeSelection();
 
-        if(day === 0) {
-            instance.set("maxTime", "15:00");
-        } else {
-            instance.set("maxTime", "18:30"); // Last booking slot, not closing time — allows buffer for longer services
+        // slots depend on the service, so it has to be chosen first
+        if (!serviceSelector.value) {
+            showServiceRequiredError();
+            return;
         }
 
-        if (dateStr) {
-            instance.altInput.classList.remove("input-error");
-        }
+        loadTimeSlots(dateStr);
     }
 });
+
+// Clear the booking card along with the rest of the form after a successful booking
+const timeSlotContainer = document.querySelector(".container-time-slot");
+const timeSlotEmptyStateHTML = timeSlotContainer.innerHTML;
+
+document.getElementById("appointment-form").addEventListener("reset", () => {
+    datePIcker.clear(false);
+    clearTimeSelection();
+    timeSlotContainer.innerHTML = timeSlotEmptyStateHTML;
+});
+
+// A different service means different slot spacing: drop the chosen time and refetch
+serviceSelector.addEventListener("change", () => {
+    serviceSelector.classList.remove("input-error");
+    clearTimeSelection();
+
+    if (datePIcker.selectedDates.length) {
+        loadTimeSlots(datePIcker.formatDate(datePIcker.selectedDates[0], "Y-m-d"));
+    } else {
+        timeSlotContainer.innerHTML = timeSlotEmptyStateHTML;
+    }
+});
+
+function clearTimeSelection() {
+    document.getElementById("time-input").value = "";
+    hideBookingSummary();
+}
+
+function showServiceRequiredError() {
+    timeSlotContainer.innerHTML =
+        "<p class='time-panel-empty time-panel-error' data-i18n='form.time.need-service'>Please select a service first to see available times</p>";
+    serviceSelector.classList.add("input-error");
+    serviceSelector.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+async function loadTimeSlots(dateStr) {
+    timeSlotContainer.innerHTML = "<p class='time-panel-empty'>Loading times...</p>";
+
+    const params = new URLSearchParams({
+        requestDate: dateStr,
+        requestService: serviceSelector.value
+    });
+
+    try {
+        const res = await fetch(`${API_BASE_URL}/api/v1/appointments/timeSlots?${params}`);
+        if (!res.ok) throw new Error("Failed to load slots");
+
+        const slots = await res.json();
+        renderTimeSlots(timeSlotContainer, slots);
+    } catch (err) {
+        timeSlotContainer.innerHTML = "<p class='time-panel-empty'>Couldn't load times. Please try again later.</p>";
+    }
+}
+
+function hideBookingSummary() {
+    const summary = document.querySelector(".booking-summary");
+    summary.hidden = true;
+    summary.textContent = "";
+}
+
+function showBookingSummary(timeSlot) {
+    const summary = document.querySelector(".booking-summary");
+    summary.textContent =
+        datePIcker.formatDate(datePIcker.selectedDates[0], "l, F j")
+        + " at " + formatTime(timeSlot);
+    summary.hidden = false;
+}
+
+function renderTimeSlots(container, slots) {
+    if (slots.length === 0) {
+        container.innerHTML = "<p class='time-panel-empty'>No times available this day.</p>";
+        return;
+    }
+
+    container.innerHTML = "";
+    slots.forEach(slot => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "slot-button";
+        btn.textContent = formatTime(slot.availableTimeSlot);
+
+        btn.addEventListener("click", () => {
+            document.getElementById("time-input").value = slot.availableTimeSlot;
+            document.getElementById("booking-wrapper").classList.remove("input-error");
+            showBookingSummary(slot.availableTimeSlot);
+
+            container.querySelectorAll(".slot-button").forEach(b => b.classList.remove("selected"));
+            btn.classList.add("selected");
+        });
+        container.appendChild(btn);
+    });
+}
+
+// The option label doubles as the display name (and is already translated)
+function serviceLabel(serviceType) {
+    const option = serviceSelector.querySelector(`option[value="${serviceType}"]`);
+    return option ? option.textContent.trim() : serviceType;
+}
+
+function formatLongDate(dateStr) {
+    const [y, m, d] = dateStr.split("-").map(Number);
+    return datePIcker.formatDate(new Date(y, m - 1, d), "l, F j, Y");
+}
+
+function formatTime(timeStr) {
+    const [h, m] = timeStr.split(":");
+    const d = new Date();
+    d.setHours(h, m);
+    return d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+}

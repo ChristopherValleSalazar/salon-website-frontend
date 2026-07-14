@@ -12,8 +12,6 @@ async function switchLanguage(lang) {
 
     const containsHtml = /<\/?[a-z][\s\S]*>/i.test(val);
 
-    console.log(val);
-
     if (el.hasAttribute("placeholder")) {
         el.placeholder = val;
     } else if (containsHtml) {

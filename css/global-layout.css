@@ -6,6 +6,7 @@
 
   --color-submit-btn-hover: #4B3B2B;
   --color-submit-btn: #614d38;
+  --color-accent-from-logo: #b08a52;
 
   --color-img-input: #eadec8;
 
@@ -81,14 +82,13 @@ h1, h2, h3, h4 {
 }
 .btn-style {
   color: inherit;
-  background: var(--color-submit-btn);
   text-decoration: none;
   font-weight: bold;
   text-transform: uppercase;
   transition: background 0.3s ease;
 }
 .btn-style:hover {
-  background: var(--color-submit-btn-hover);
+  background: var(--color-accent-from-logo);
 }
 
 /* HEADER + NAV*/
@@ -117,7 +117,7 @@ header {
 .header-right {
   display: flex;
   align-items: center;
-  gap: 3rem;
+  gap: 1.5rem;
 }
 .nav-list {
   display: flex;
@@ -266,7 +266,7 @@ header {
     align-items: center;
     justify-content: center;
     padding: 0 18px;         
-    height: 42px;
+    height: 40px;
     font-size: 1rem;
     line-height: 1;
     letter-spacing: 0.08rem;
@@ -291,7 +291,7 @@ header {
   cursor: pointer;
   padding: 8px;
   min-width: 125px;
-  background: var(--color-submit-btn);
+  background: transparent;
   color: inherit;
   border: none;
   outline: none;
@@ -300,10 +300,10 @@ header {
   transition: background 0.35s ease;
 }
 .language-btn:hover {
-  background: var(--color-submit-btn-hover);
+  background: var(--color-accent-from-logo);
 }
 .language-btn.color-hover {
-  background: var(--color-submit-btn-hover);
+  background: var(--color-accent-from-logo);
 }
 .language-menu {
   display: none;
@@ -329,7 +329,7 @@ header {
   gap: 0.5rem;
 }
 .language-menu li:hover {
-  background: var(--color-submit-btn);
+  background: var(--color-accent-from-logo);
   color: var(--color-light);
   border-radius: 8px;
 }

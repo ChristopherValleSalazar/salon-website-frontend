@@ -16,6 +16,7 @@
   <script src="js/language.js" defer></script>
   <script src="js/home.js" defer></script>
   <script src="js/burger.js" defer></script>
+  <script src="js/appointment-link.js" defer></script>
 
 </head>
 
@@ -52,8 +53,9 @@
       <nav class="top-nav" aria-label="Primary Navigation">
         <div class="nav-container">
           <ul class="list-reset nav-list">
-            <li><a class="nav-btn btn-style" data-i18n="nav.home" href="index.html">Home</a></li>
             <li><a class="nav-btn btn-style" data-i18n="nav.about" href="about.html">About</a></li>
+            <li class="appointment-nav-item" hidden><a class="nav-btn btn-style" data-i18n="nav.view-appointment"
+                href="view-appointment.html">My Appointment</a></li>
             <li><a class="nav-btn btn-style cta" data-i18n="nav.book" href="book-appointment.html">Book Now</a></li>
           </ul>
         </div>
@@ -70,8 +72,9 @@
       <div class="mobile-menu-inner">
         <nav class="burger-nav" aria-label="Primary Navigation">
           <ul class="list-reset nav-list-burger">
-            <li><a class="nav-btn-burger" data-i18n="nav.home" href="index.html">Home</a></li>
             <li><a class="nav-btn-burger" data-i18n="nav.about" href="about.html">About</a></li>
+            <li class="appointment-nav-item" hidden><a class="nav-btn-burger" data-i18n="nav.view-appointment"
+                href="view-appointment.html">My Appointment</a></li>
             <li><a class="nav-btn-burger cta" data-i18n="nav.book" href="book-appointment.html">Book Now</a></li>
           </ul>
         </nav>

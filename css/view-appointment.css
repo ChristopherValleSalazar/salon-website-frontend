@@ -1,0 +1,166 @@
+/* VIEW APPOINTMENT PAGE */
+#view-appointment-container {
+  max-width: 900px;
+  margin: 0 auto 40px;
+  padding: 0 5%;
+}
+
+.appointment-card {
+  background: var(--color-form);
+  border-radius: 40px;
+  padding: 32px 28px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.appointment-loading,
+.appointment-missing p {
+  text-align: center;
+  font-size: 1rem;
+  color: #8a7f72;
+  margin: 12px 0;
+}
+
+.appointment-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.appointment-name {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+/* Status badge */
+.status-badge {
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 40px;
+  font-family: "Inter", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+.status-booked {
+  color: var(--color-primary);
+  background: rgba(176, 138, 82, 0.15);
+}
+.status-confirmed {
+  color: #2f855a;
+  background: rgba(47, 133, 90, 0.12);
+}
+.status-canceled,
+.status-no_show {
+  color: #b3402e;
+  background: rgba(179, 64, 46, 0.12);
+}
+.status-rescheduled,
+.status-completed {
+  color: #6b5c4e;
+  background: rgba(107, 92, 78, 0.12);
+}
+
+/* The details list reuses .appointment-details from book-appointment.css,
+   just left-aligned and full width inside the card */
+.appointment-card .appointment-details {
+  max-width: none;
+  margin: 0 0 28px;
+}
+.appointment-card .appointment-details li {
+  font-size: 1.05rem;
+}
+
+/* Action buttons */
+.appointment-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.action-btn {
+  flex: 1;
+  min-width: 140px;
+  padding: 13px 20px;
+  border-radius: 40px;
+  font-family: "Inter", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+.action-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+.action-confirm {
+  background: var(--color-submit-btn);
+  color: var(--color-light);
+}
+.action-confirm:hover:not(:disabled) {
+  background: var(--color-submit-btn-hover);
+  transform: scale(1.02);
+}
+.action-reschedule {
+  background: transparent;
+  color: var(--color-dark);
+  border-color: var(--color-dark);
+}
+.action-reschedule:hover:not(:disabled) {
+  background: var(--color-dark);
+  color: var(--color-light);
+  transform: scale(1.02);
+}
+.action-cancel {
+  background: transparent;
+  color: #b3402e;
+  border-color: #b3402e;
+}
+.action-cancel:hover:not(:disabled) {
+  background: #b3402e;
+  color: var(--color-light);
+  transform: scale(1.02);
+}
+
+/* Reschedule panel (reuses the booking card styles from book-appointment.css) */
+.reschedule-panel {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px dashed rgba(107, 92, 78, 0.25);
+}
+.reschedule-hint {
+  margin: 0 0 14px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: var(--font-size-label);
+  color: var(--color-dark);
+}
+.reschedule-panel .book-app-btn {
+  margin-top: 20px;
+}
+
+/* Missing state */
+.appointment-missing {
+  text-align: center;
+}
+.missing-book-link {
+  display: inline-block;
+  width: auto;
+  padding: 14px 32px;
+  text-decoration: none;
+  margin-top: 12px;
+}
+
+@media (max-width: 600px) {
+  .appointment-card {
+    padding: 24px 18px;
+    border-radius: 24px;
+  }
+  .appointment-actions {
+    flex-direction: column;
+  }
+  .action-btn {
+    width: 100%;
+  }
+}

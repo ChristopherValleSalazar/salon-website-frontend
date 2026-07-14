@@ -25,7 +25,7 @@ textarea {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 .main-form label {
-  margin: 12px 0 8px 10px ;
+  margin: 12px 0 8px 8px;
   color: var(--color-dark);
   font-size: var(--font-size-label);
   font-family: "Cormorant Garamond", serif;
@@ -35,6 +35,13 @@ textarea {
   font-size: 1.2rem;
   margin-left: 4px;
 }
+.hair-image-label .required {
+  display: none;
+}
+.hair-image-label.is-required .required {
+  display: inline;
+}
+
 .main-form input, select {
   width: 100%;
   min-height: 50px;
@@ -131,8 +138,7 @@ textarea {
     gap: 16px;
     width: 100%;
     max-width: 1000px;
-    min-height: 30px;
-    margin: 2px 0;
+    min-height: 20px;
     padding: 14px 18px;
     border: 1.5px dashed #c9bda8;
     border-radius: 20px;
@@ -307,13 +313,37 @@ textarea {
   }
 }
 
-/* DATE PICKR */
+/* DATE + TIME BOOKING CARD */
 .booking-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
   width: 100%;
-  cursor: pointer;
+  max-width: 1000px;
+  padding: 16px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background: #f8f4ed;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
+}
+.booking-wrapper.input-error {
+  border-color: red;
+  box-shadow: 0 0 2px rgba(255, 0, 0, 0.15);
+}
+
+/* flatpickr reveals its input in inline mode — the calendar itself is the control */
+.booking-wrapper .flatpickr-input {
+  display: none;
+}
+
+/* Blend the inline flatpickr calendar into the card */
+.flatpickr-calendar.inline {
+  box-shadow: none;
+  background: transparent;
 }
 .flatpickr-months {
-  background: var(--color-light);
+  background: transparent;
 }
 .flatpickr-month {
   min-height: 48px;
@@ -326,6 +356,100 @@ textarea {
 }
 .flatpickr-weekdays, .flatpickr-days {
   font-size: 18px;
+}
+/* Match the theme's accent to the site's gold palette.
+   Scoped under .booking-wrapper so it outranks the CDN theme loaded after this file. */
+.booking-wrapper .flatpickr-day.selected,
+.booking-wrapper .flatpickr-day.selected:hover,
+.booking-wrapper .flatpickr-day.selected:focus {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-light);
+}
+.booking-wrapper .flatpickr-day.today:not(.selected) {
+  border-color: var(--color-primary);
+}
+
+/* TIME SLOT PANEL */
+.time-panel {
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+}
+.time-panel-title {
+  margin: 4px 0 12px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: var(--font-size-label);
+  font-weight: 600;
+  color: var(--color-dark);
+}
+.container-time-slot {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  gap: 8px;
+  align-content: start;
+  max-height: 280px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+.time-panel-empty {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: 0.9rem;
+  color: #8a7f72;
+}
+.time-panel-error {
+  color: #b3402e;
+}
+.slot-button {
+  padding: 10px 6px;
+  font-family: "Inter", sans-serif;
+  font-size: 0.9rem;
+  color: var(--color-dark);
+  background: var(--color-light);
+  border: 1px solid #ccc;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+.slot-button:hover {
+  border-color: var(--color-primary);
+}
+.slot-button.selected {
+  background: var(--color-submit-btn);
+  border-color: var(--color-submit-btn);
+  color: var(--color-light);
+}
+
+/* Confirmation bar shown once a date and time are both chosen */
+.booking-summary {
+  flex-basis: 100%;
+  padding: 10px 16px;
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-submit-btn);
+  background: rgba(176, 138, 82, 0.12);
+  border-radius: 40px;
+}
+
+@media (max-width: 699px) {
+  .booking-wrapper {
+    flex-direction: column;
+  }
+  .booking-wrapper .flatpickr-calendar,
+  .booking-wrapper .flatpickr-rContainer,
+  .booking-wrapper .flatpickr-days,
+  .booking-wrapper .dayContainer {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+  .container-time-slot {
+    max-height: 220px;
+  }
 }
 
 /* Map+ADDRESS+HOURS */
@@ -458,7 +582,28 @@ hr.form-divider {
   font-size: 0.95rem;
   line-height: 1.6;
   color: #6b5c4e;
-  margin: 0 0 28px 0; 
+  margin: 0 0 28px 0;
+}
+.appointment-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0 auto 24px;
+  max-width: 340px;
+  text-align: left;
+}
+.appointment-details li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 6px;
+  font-size: 0.95rem;
+  color: #6b5c4e;
+  border-bottom: 1px dashed rgba(107, 92, 78, 0.25);
+}
+.appointment-details strong {
+  color: var(--color-dark);
+  text-align: right;
 }
 
 /* MODAL BUTTONS */
