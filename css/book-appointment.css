@@ -334,6 +334,50 @@ textarea {
   font-size: 18px;
 }
 
+
+/* TIME SLOT */
+.flatpickr-calendar {
+  anchor-name: --slot;
+}
+
+.container-time-slot {
+  display: none;
+}
+.container-time-slot.visible {
+  display: block;
+}
+.slot-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100px;
+  height: 40px;
+  align-self: center;
+}
+
+@media (min-width: 700px) {
+  .container-time-slot.visible {
+    position: absolute;
+    position-anchor: --slot;
+    left: anchor(right);
+    top: anchor(top);
+    margin-left: 16px;
+    width: 260px;
+    max-height: 300px;
+    overflow-y: auto;
+
+    background-color: skyblue;
+  }
+}
+
+@media (max-width: 699px) {
+  .container-time-slot.visible {
+    position: static;
+    width: 100%;
+    margin-top: 12px;
+  }
+}
+
 /* Map+ADDRESS+HOURS */
 .map-hours-container {
   max-width: 1200px;

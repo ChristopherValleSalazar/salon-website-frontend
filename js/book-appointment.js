@@ -77,6 +77,7 @@ if (fileInput && fileDrop) {
 const serviceSelector = document.getElementById("service");
 const hairImageInput = document.getElementById("hair-image");
 const hairImageLabel = document.querySelector(".hair-image-label");
+const submitBtn = document.getElementById("book-app-btn");
 const IMAGE_REQUIRED_SERVICES = new Set([
     "DYES", "BABY_HIGHLIGHT", "COLOR_TOUCH_UP", "TREATMENT_MOISTURIZING",
     "KERATIN_TREATMENT", "PERM"
@@ -104,45 +105,48 @@ document.getElementById("appointment-form").addEventListener("submit", async (e)
     }
     visibleInput.classList.remove("input-error");
 
+async function imageUploader() {
+    if(hairImageInput.files.length === 0) {
+        return;
+    }
+
+    const sig = await fetch(`${API_BASE_URL}/api/v1/uploads/signature`).then(r => r.json());
+
+    const fd = new FormData();
+    fd.append('file', hairImageInput.files[0]);
+    fd.append('api_key', sig.apiKey);
+    fd.append('timestamp', sig.timestamp);
+    fd.append('signature', sig.signature);
+    fd.append('folder', sig.folder);
+
+    const res = await fetch(
+        `https://api.cloudinary.com/v1_1/yfmlabi1/image/upload`,
+        { method: 'POST', body: fd }
+    );
+    if(!res.ok) throw new Error('image upload failed');
+    const data = await res.json();
+    imageUrl = data.secure_url;
+    imagePublicId = data.public_id;
+}
+
     try {
         let imageUrl = null;
         let imagePublicId = null;
 
-        const sig = await fetch(`${API_BASE_URL}/api/v1/uploads/signature`).then(r => r.json());
-
-        const fd = new FormData();
-        fd.append('file', hairImageInput.files[0]);
-        fd.append('api_key', sig.apiKey);
-        fd.append('timestamp', sig.timestamp);
-        fd.append('signature', sig.signature);
-        fd.append('folder', sig.folder);
-
-        const res = await fetch(
-            `https://api.cloudinary.com/v1_1/yfmlabi1/image/upload`,
-            { method: 'POST', body: fd }
-        );
-        if(!res.ok) throw new Error('image upload failed');
-        const data = await res.json();
-        imageUrl = data.secure_url;
-        imagePublicId = data.public_id;
-
-        const [date, time] = dateInput.value.split(" ");
+        await imageUploader();
 
         const payload = {
             name: document.getElementById("customer-name").value,
             phoneNumber: document.getElementById("client-phone").value,
             serviceType: document.getElementById("service").value,
-            date: date,
-            startTime: time,
+            date: document.getElementById("date-input").value,
+            startTime: document.getElementById("time-input").value,
             smsConsent: document.getElementById("consent-sms").checked,
             additionalNotes: document.getElementById("notes").value.trim() || null,
             hairImageUrl: imageUrl,
             hairImagePublicId: imagePublicId
         };
 
-        console.log(payload);
-
-        const submitBtn = document.getElementById("book-app-btn");
         submitBtn.disabled = true;
 
         console.log("Submitting appointment:", payload);
@@ -163,7 +167,7 @@ document.getElementById("appointment-form").addEventListener("submit", async (e)
     } catch (err) {
         failureModalBehaviour(err.message);
     } finally {
-        submitBtn.disabled = false
+        submitBtn.disabled = false;
     }
 });
 
@@ -221,31 +225,74 @@ if (failureOverlay) {
 }
 
 const datePIcker = flatpickr("#date-input", {
+    static: true,
+    inline: true,
     minDate: "today",
     allowInput: false,
-    enableTime: true,
+    enableTime: false,
     altInput: true,
-    dateFormat: "Y-m-d H:i",
-    altFormat: "F j, Y h:i K",
-    defaultHour: 10,
-    minTime: "10:00",
-    maxTime: "18:30",
-
+    dateFormat: "Y-m-d",
+    altFormat: "F j, Y",
     disable: [
-        date => date.getDay() === 1
+        date => date.getDay() === 1 //disable Mondays
     ],
 
-    onChange(selectedDates, dateStr, instance) {
-        const day = selectedDates[0].getDay();
+    async onChange(selectedDates, dateStr, instance) {
+        const container = document.querySelector(".container-time-slot");
 
-        if(day === 0) {
-            instance.set("maxTime", "15:00");
-        } else {
-            instance.set("maxTime", "18:30"); // Last booking slot, not closing time — allows buffer for longer services
-        }
+        container.classList.add("visible");
+        container.innerHTML = "<p>Loading times...</p>";
 
-        if (dateStr) {
-            instance.altInput.classList.remove("input-error");
+        const params = new URLSearchParams({
+            requestDate: dateStr,
+            requestService: serviceSelector.value
+        });
+
+        try {
+            const res = await fetch(`${API_BASE_URL}/api/v1/appointments/timeSlots?${params}`);
+            if (!res.ok) throw new Error("Failed to load slots");
+
+            const slots = await res.json();
+            renderTimeSlots(container, slots);
+        } catch (err) {
+            container.innerHTML = "<p>Couldn't load times. Please try again later.</p>";
         }
     }
 });
+
+function renderTimeSlots(container, slots) {
+    const inputToAppend = document.getElementById("date-input");
+
+    if (slots.length === 0) {
+        container.innerHTML = "<p>No times available this day.</p>";
+        return;
+    }
+
+    container.innerHTML = "";
+    slots.forEach(slot => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "slot-button";
+        btn.textContent = formatTime(slot.availableTimeSlot);
+
+        btn.addEventListener("click", () => {
+            document.getElementById("time-input").value = slot.availableTimeSlot;
+
+            // display only — the real values stay untouched
+            datePIcker.altInput.value =
+                datePIcker.formatDate(datePIcker.selectedDates[0], "F j, Y")
+                + " at " + formatTime(slot.availableTimeSlot);
+
+            container.querySelectorAll(".slot-button").forEach(b => b.classList.remove("selected"));
+            btn.classList.add("selected");
+        });
+        container.appendChild(btn);
+    });
+}
+
+function formatTime(timeStr) {
+    const [h, m] = timeStr.split(":");
+    const d = new Date();
+    d.setHours(h, m);
+    return d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+}
