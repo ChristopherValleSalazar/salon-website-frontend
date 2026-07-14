@@ -1,103 +1,76 @@
 {
     "common.btn.appointment": "Book Appointment",
-    
     "nav.home": "Home",
     "nav.services": "Services",
     "nav.gallery": "Gallery",
     "nav.about": "About",
     "nav.book": "Book Now",
-
     "hero.heading": "Look your best, <em>feel even better</em>",
     "hero.message": "Expert cuts, color, styling, and treatments for everyone — walk in as you are, leave feeling brand new.",
     "hero.explore": "View Services",
-
     "services.heading": "Our <em>Services</em>",
-
     "services.hair.label": "Hair services",
     "services.color.label": "Color services",
     "services.treatments.label": "Treatments",
     "services.hair-styling.label": "Hair and Styling services",
     "services.beard.label": "Beard and Detail services",
     "services.combo.label": "Combo services",
-
     "services.book": "Book this service",
-
     "services.haircut.title": "Haircut",
     "services.haircut.desc": "Precision cut tailored to your face shape and texture.",
     "services.haircut.price": "from $25",
-
     "services.blowdry.title": "Blow Drying",
     "services.blowdry.desc": "Professional finish with volume, smoothness, or curl.",
     "services.blowdry.time": "60 min",
     "services.blowdry.price": "from $35",
-
     "services.haircut-blowdry.title": "Haircut + Blow-Dry",
     "services.haircut-blowdry.desc": "Cut and styled finish in one session — the most popular combo.",
     "services.haircut-blowdry.price": "from $35",
-
     "services.washing.title": "Washing",
     "services.washing.desc": "Scalp massage and deep cleanse with salon-grade products.",
     "services.washing.price": "from $8",
-
     "services.dyes.title": "Dyes",
     "services.dyes.desc": "Full color application root to tip. Includes toner and conditioning rinse.",
     "services.dyes.price": "from $80",
-
     "services.baby-highlight.desc": "Subtle face-framing highlights for a natural sun-kissed look.",
     "services.baby-highlight.price": "from $180",
-
     "services.color-touchup.title": "Color Touch-Up",
     "services.color-touchup.desc": "Root retouch to blend regrowth with your existing color.",
     "services.color-touchup.price": "from $50",
-
     "services.treatment.title": "Treatment + Moisturizing",
     "services.treatment.desc": "Deep repair mask for dry or damaged hair. Leaves hair soft and resilient.",
     "services.treatment.price": "from $50",
-
     "services.keratin.title": "Keratin Treatment",
     "services.keratin.desc": "Keratin smoothing treatment for long-lasting frizz-free results.",
     "services.keratin.price": "from $35",
-
     "services.haircut-barber.title": "Haircut",
     "services.haircut-barber.desc": "Classic haircut tailored to your style and face shape.",
     "services.haircut-barber.price": "from $25",
-
     "services.perm.title": "Perm",
     "services.perm.desc": "Long-lasting texture and shape for a fuller styled finish.",
     "services.perm.price": "from $50",
-
     "services.beard-trim.title": "Beard Trim",
     "services.beard-trim.desc": "Shape and clean up your beard for a sharp, polished look.",
     "services.beard-trim.price": "from $10",
-
     "services.eyebrow-shaping.title": "Eyebrow Shaping",
     "services.eyebrow-shaping.desc": "Clean, precise shaping for a balanced and refined look.",
     "services.eyebrow-shaping.price": "from $10",
-
     "services.haircut-beard-trim.title": "Haircut + Beard Trim",
     "services.haircut-beard-trim.desc": "A full grooming session for a clean haircut and beard refresh.",
     "services.haircut-beard-trim.price": "from $30",
-
     "services.haircut-beard-trim-eyebrow-shaping.title": "Haircut + Beard Trim + Eyebrow Shaping",
     "services.haircut-beard-trim-eyebrow-shaping.desc": "Complete grooming package with haircut, beard trim, and brow shaping.",
     "services.haircut-beard-trim-eyebrow-shaping.price": "from $45",
-
     "gallery.heading": "Our <em>Work</em>",
-
     "cta.heading": "Ready to Book?",
     "cta.message": "Schedule your appointment today.",
-
     "footer.heading": "Get in Touch",
     "footer.privacy": "Privacy Policy",
-
     "form.heading": "Make an appointment",
     "form.description": "Reserve your appointment below. Once submitted, our team will reach out to confirm your date and time. Usually within a few hours.",
-
     "form.name": "Name<span class=\"required\">*</span>",
     "form.name.placeholder": "Your name",
-
     "form.phone": "Phone Number<span class=\"required\">*</span>",
-
     "form.services": "Services<span class=\"required\">*</span>",
     "form.services.placeholder": "Select a service",
     "form.services.haircut": "Haircut",
@@ -114,26 +87,20 @@
     "form.services.eyebrow-shaping": "Eyebrow Shaping",
     "form.services.haircut-beard-trim": "Haircut + Beard Trim",
     "form.services.haircut-beard-trim-eyebrow-shaping": "Haircut + Beard Trim + Eyebrow Shaping",
-
     "form.hair-img": "Hair Image",
     "form.hair-img.prompt": "Click or drag a photo here",
     "form.hair-img.hint": "PNG, JPG or WEBP",
-
     "form.date": "Date &amp; Time<span class=\"required\">*</span>",
     "form.date.placeholder": "Select a date",
     "form.time.heading": "Available times",
     "form.time.empty": "Pick a date to see available times",
     "form.time.need-service": "Please select a service first to see available times",
-
     "form.additional-notes": "Additional Notes",
     "form.additional-notes.placeholder": "Tell us about your hair goals, preferred stylist, allergies, etc.",
-
     "form.consentSMS": "I agree to receive SMS confirmations and reminders. By booking, you agree to our <a href='privacy-policy.html'>Privacy Policy</a>.",
-
     "booking.location.heading": "Location",
     "booking.address.heading": "Address",
     "booking.address.message": "Click the address to open directions in Google Maps",
-
     "booking.hours.heading": "Opening Times",
     "booking.hours.sunday": "Sunday",
     "booking.hours.tuesday": "Tuesday",
@@ -142,18 +109,14 @@
     "booking.hours.friday": "Friday",
     "booking.hours.saturday": "Saturday",
     "booking.hours.closed": "Closed",
-
-    "modal.heading": "Thank your for booking an appointment",
+    "modal.heading": "Thank you for booking an appointment <span class=\"customer-name\"></span>",
     "modal.message": "To view, cancel, or reschedule please check the SMS with your appointment link",
     "modal.home": "Home",
     "modal.close": "close",
-
     "modal.fail.heading": "Booking failed",
     "modal.fail.message": "Something went wrong and we couldn't complete your booking. Please try again.",
     "modal.fail.retry": "Try Again",
-
     "privacy.meta": "Yasmin Beauty Salon Unisex · Los Angeles, CA · Effective June 23, 2026",
-
     "privacy.toc.heading": "On this page",
     "privacy.toc.overview": "Overview",
     "privacy.toc.information": "Information We Collect",
@@ -167,12 +130,10 @@
     "privacy.toc.children": "Children's Privacy",
     "privacy.toc.changes": "Policy Changes",
     "privacy.toc.contact": "Contact Us",
-
     "privacy.s01.num": "01",
     "privacy.s01.title": "Overview",
     "privacy.s01.p1": "Yasmin Beauty Salon Unisex (\"we,\" \"us,\" or \"our\") operates the website at <strong class=\"term\">yasminbeauty.salon</strong> (the \"Site\"). This Privacy Policy explains what information we collect when you book an appointment, browse our Site, or communicate with us — and how we use, store, and protect that information.",
     "privacy.s01.p2": "By using our Site or submitting a booking, you agree to the practices described here. If you do not agree, please do not use the Site.",
-
     "privacy.s02.num": "02",
     "privacy.s02.title": "Information We Collect",
     "privacy.s02.direct.label": "Information you provide directly:",
@@ -185,7 +146,6 @@
     "privacy.s02.auto.li1": "Browser type and version",
     "privacy.s02.auto.li2": "Pages visited and time spent on each page",
     "privacy.s02.auto.li3": "Referring URL",
-
     "privacy.s03.num": "03",
     "privacy.s03.title": "How We Use Your Information",
     "privacy.s03.li1": "To confirm, manage, and remind you of your appointment",
@@ -194,7 +154,6 @@
     "privacy.s03.li4": "To improve the Site using aggregated, anonymized analytics data",
     "privacy.s03.li5": "To comply with applicable laws and regulations",
     "privacy.s03.p": "We do not use your personal information for automated decision-making or profiling.",
-
     "privacy.s04.num": "04",
     "privacy.s04.title": "SMS Consent & TCPA Compliance",
     "privacy.s04.callout.label": "Important — Please Read",
@@ -208,20 +167,17 @@
     "privacy.s04.help": "<strong class=\"term\">To get help:</strong> Reply <strong>HELP</strong> to any of our texts, or email us at the address in Section 12.",
     "privacy.s04.p2": "SMS consent is never required to book an appointment. Unchecking the SMS box has no effect on your ability to schedule services.",
     "privacy.s04.p3": "We use Twilio to deliver SMS messages. Twilio acts as a data processor under a data processing agreement and is prohibited from using your phone number for any other purpose. Your number is never sold or shared for marketing.",
-
     "privacy.s05.num": "05",
     "privacy.s05.title": "Sharing & Disclosure",
     "privacy.s05.intro": "We do not sell, rent, or trade your personal information. We share data only in these limited circumstances:",
     "privacy.s05.li1": "<strong class=\"term\">Service providers:</strong> Twilio (SMS), and Neon (database hosting) process data on our behalf under written agreements restricting their use of your information.",
     "privacy.s05.li2": "<strong class=\"term\">Legal compliance:</strong> We may disclose information when required by law, court order, or to protect the rights, property, or safety of our clients or others.",
     "privacy.s05.li3": "<strong class=\"term\">Business transfer:</strong> If the salon is sold or merged, your information may transfer as part of that transaction. You will be notified before your data becomes subject to a different privacy policy.",
-
     "privacy.s06.num": "06",
     "privacy.s06.title": "Analytics & Cookies",
     "privacy.s06.p1": "We use Google Analytics to understand how visitors interact with the Site. This data is aggregated and anonymized — we cannot use it to identify you personally.",
     "privacy.s06.p2": "Google Analytics uses cookies (small text files stored in your browser). You can opt out by installing the <a href=\"https://tools.google.com/dlpage/gaoptout\" target=\"_blank\" rel=\"noopener\">Google Analytics Opt-out Browser Add-on</a>.",
     "privacy.s06.p3": "We do not use advertising cookies, tracking pixels, or retargeting technology. The only cookies on this Site are those set by Google Analytics for session and behavior tracking.",
-
     "privacy.s07.num": "07",
     "privacy.s07.title": "Your Rights Under California Law (CCPA)",
     "privacy.s07.intro": "As a California resident, the California Consumer Privacy Act grants you the following rights:",
@@ -231,12 +187,10 @@
     "privacy.s07.li4": "<strong class=\"term\">Right to non-discrimination:</strong> We will not deny services, charge different prices, or provide a different level of service because you exercised a CCPA right.",
     "privacy.s07.callout.label": "How to Submit a CCPA Request",
     "privacy.s07.callout.p": "Email <strong>yasminbeautysalon2024@gmail.com</strong> with the subject line \"CCPA Privacy Request.\" Include your full name and the phone number or email used when booking. We will verify your identity and respond within 45 calendar days.",
-
     "privacy.s08.num": "08",
     "privacy.s08.title": "Data Retention",
     "privacy.s08.p1": "We retain your booking information for up to <strong class=\"term\">2 years</strong> from the date of your last appointment, unless you request earlier deletion or a longer period is required by law. Anonymized analytics data has no fixed retention limit.",
     "privacy.s08.p2": "Upon expiration or a valid deletion request, we permanently delete or de-identify your information from active systems. Database backups are purged on a rolling 90-day cycle.",
-
     "privacy.s09.num": "09",
     "privacy.s09.title": "Security",
     "privacy.s09.intro": "We use reasonable technical and organizational measures to protect your information, including:",
@@ -245,15 +199,12 @@
     "privacy.s09.li3": "JWT-based authentication for all admin access",
     "privacy.s09.li4": "Access controls limiting which personnel can view personal data",
     "privacy.s09.p": "No method of internet transmission is 100% secure. We cannot guarantee absolute security, but we are committed to protecting your data using industry-standard practices.",
-
     "privacy.s10.num": "10",
     "privacy.s10.title": "Children's Privacy",
     "privacy.s10.p": "Our Site is not directed to children under 13, and we do not knowingly collect personal information from anyone under 13. If you believe we have inadvertently collected such information, please contact us and we will delete it promptly.",
-
     "privacy.s11.num": "11",
     "privacy.s11.title": "Policy Changes",
     "privacy.s11.p": "We may update this Privacy Policy periodically to reflect changes in our practices or applicable law. When we make material changes, we will update the \"Effective\" date at the top of this page. Continued use of the Site after changes are posted constitutes acceptance of the updated policy.",
-
     "privacy.s12.num": "12",
     "privacy.s12.title": "Contact Us",
     "privacy.s12.intro": "If you have questions about this policy, want to exercise your rights, or need to opt out of SMS communications:",
@@ -261,10 +212,34 @@
     "privacy.s12.label.address": "Address",
     "privacy.s12.label.phone": "Phone",
     "privacy.s12.label.email": "Email",
-
     "privacy.footer.copy": "© 2026 Yasmin Beauty Salon Unisex · Los Angeles, CA",
     "privacy.footer.effective": "Effective June 23, 2026 · v1.0",
-
     "about.title": "About Us",
-    "about.p": "Hello, my name is Claudia. I am the owner of Yasmin Beauty Salon, as well as a stylist working in this humble business. I am a woman who came to this country with many dreams and a desire to get ahead and succeed in a land of opportunity. <strong class=\"story-strong\">I invite you</strong> to visit us and see our work; I assure you that you will not regret it."
+    "about.p": "Hello, my name is Claudia. I am the owner of Yasmin Beauty Salon, as well as a stylist working in this humble business. I am a woman who came to this country with many dreams and a desire to get ahead and succeed in a land of opportunity. <strong class=\"story-strong\">I invite you</strong> to visit us and see our work; I assure you that you will not regret it.",
+    "nav.view-appointment": "My Appointment",
+    "modal.view": "View Appointment",
+    "detail.service": "Service",
+    "detail.date": "Date",
+    "detail.time": "Time",
+    "view.heading": "Your Appointment",
+    "view.loading": "Loading your appointment...",
+    "view.missing": "We couldn't find an appointment. Please use the link from your SMS, or book a new appointment below.",
+    "view.confirm": "Confirm",
+    "view.cancel": "Cancel",
+    "view.reschedule": "Reschedule",
+    "view.reschedule.hint": "Pick a new date and time for your appointment",
+    "view.reschedule.submit": "Confirm New Time",
+    "view.status.booked": "Booked",
+    "view.status.confirmed": "Confirmed",
+    "view.status.canceled": "Canceled",
+    "view.status.rescheduled": "Rescheduled",
+    "view.status.completed": "Completed",
+    "view.status.no_show": "No Show",
+    "view.modal.confirmed.heading": "Appointment confirmed!",
+    "view.modal.confirmed.message": "We look forward to seeing you. You'll receive a reminder the day before.",
+    "view.modal.canceled.heading": "Appointment canceled",
+    "view.modal.canceled.message": "Your appointment has been canceled. We hope to see you again soon.",
+    "view.modal.rescheduled.heading": "Appointment rescheduled!",
+    "view.modal.fail.heading": "Something went wrong",
+    "view.modal.fail.message": "We couldn't complete your request. Please try again."
 }

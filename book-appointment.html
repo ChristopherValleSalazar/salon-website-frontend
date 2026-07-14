@@ -17,6 +17,7 @@
   <script src="js/language.js" defer></script>
   <script src="js/book-appointment.js" defer></script>
   <script src="js/burger.js" defer></script>
+  <script src="js/appointment-link.js" defer></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/airbnb.min.css">
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
@@ -56,6 +57,8 @@
         <div class="nav-container">
           <ul class="list-reset nav-list">
             <li><a class="nav-btn btn-style" data-i18n="nav.about" href="about.html">About</a></li>
+            <li class="appointment-nav-item" hidden><a class="nav-btn btn-style" data-i18n="nav.view-appointment"
+                href="view-appointment.html">My Appointment</a></li>
             <li><a class="nav-btn btn-style cta" data-i18n="nav.book" href="book-appointment.html">Book Now</a></li>
           </ul>
         </div>
@@ -73,6 +76,8 @@
         <nav class="burger-nav" aria-label="Primary Navigation">
           <ul class="list-reset nav-list-burger">
             <li><a class="nav-btn-burger" data-i18n="nav.about" href="about.html">About</a></li>
+            <li class="appointment-nav-item" hidden><a class="nav-btn-burger" data-i18n="nav.view-appointment"
+                href="view-appointment.html">My Appointment</a></li>
             <li><a class="nav-btn-burger cta" data-i18n="nav.book" href="book-appointment.html">Book Now</a></li>
           </ul>
         </nav>
@@ -275,9 +280,16 @@
             class="customer-name"></span></h2>
         <p class="modal-message" data-i18n="modal.message">To view, cancel, or reschedule please check the SMS/Email
           with your appointment link</p>
+        <ul class="list-reset appointment-details">
+          <li><span data-i18n="detail.service">Service</span><strong class="detail-service"></strong></li>
+          <li><span data-i18n="detail.date">Date</span><strong class="detail-date"></strong></li>
+          <li><span data-i18n="detail.time">Time</span><strong class="detail-time"></strong></li>
+        </ul>
       </div>
       <div class="actions">
-        <button id="modal-btn-home" onclick="window.location.href='index.html'" class="primary-btn"
+        <button id="modal-btn-view" onclick="window.location.href='view-appointment.html'" class="primary-btn"
+          data-i18n="modal.view">View Appointment</button>
+        <button id="modal-btn-home" onclick="window.location.href='index.html'" class="secondary-btn"
           data-i18n="modal.home">Home</button>
         <button id="modal-btn-close" class="secondary-btn" data-i18n="modal.close">Close</button>
       </div>

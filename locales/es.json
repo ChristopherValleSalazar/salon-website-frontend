@@ -1,102 +1,76 @@
 {
     "common.btn.book": "Reservar este servicio",
     "common.btn.appointment": "Reservar Cita",
-    
     "nav.home": "Home",
     "nav.services": "Servicios",
     "nav.gallery": "Galería",
     "nav.about": "Sobre Nosotros",
     "nav.book": "Reservar Ahora",
-
     "hero.heading": "Luce increíble, <em>siéntete aún mejor</em>",
     "hero.message": "Cortes, color, estilismo y tratamientos expertos para todos — llega como eres y sal sintiéndote como nuevo.",
     "hero.explore": "Ver Servicios",
-
     "services.heading": "Nuestros <em>Servicios</em>",
-
     "services.hair.label": "Servicios de cabello",
     "services.color.label": "Servicios de color",
     "services.treatments.label": "Tratamientos",
     "services.hair-styling.label": "Servicios de cabello y estilo",
     "services.beard.label": "Servicios de barba y detalle",
     "services.combo.label": "Servicios combinados",
-
     "services.book": "Reservar este servicio",
-
     "services.haircut.title": "Corte de Cabello",
     "services.haircut.desc": "Corte preciso adaptado a la forma de tu rostro y textura del cabello.",
     "services.haircut.price": "desde $25",
-
     "services.blowdry.title": "Secado con Secadora",
     "services.blowdry.desc": "Finalización profesional con volumen, suavidad o rizo.",
     "services.blowdry.price": "desde $35",
-
     "services.haircut-blowdry.title": "Corte de Cabello + Secado",
     "services.haircut-blowdry.desc": "Corte y finalización estilizada en una sesión — la combinación más popular.",
     "services.haircut-blowdry.price": "desde $35",
-
     "services.washing.title": "Lavado",
     "services.washing.desc": "Masaje de cuero cabelludo y limpieza profunda con productos de salon.",
     "services.washing.price": "desde $8",
-
     "services.dyes.title": "Tintes",
     "services.dyes.desc": "Aplicación completa de color desde la raíz hasta la punta. Incluye toner y enjuague condicionante.",
     "services.dyes.price": "desde $80",
-
     "services.baby-highlight.desc": "Sutil resaltado que enmarca el rostro para un aspecto natural y solar.",
     "services.baby-highlight.price": "desde $180",
-
     "services.color-touchup.title": "Retoque de Color",
     "services.color-touchup.desc": "Retoque de raíz para mezclar el crecimiento con tu color existente.",
     "services.color-touchup.price": "desde $50",
-
     "services.treatment.title": "Tratamiento + Hidratación",
     "services.treatment.desc": "Máscara de reparación profunda para cabello seco o dañado. Deja el cabello suave y resistente.",
     "services.treatment.price": "desde $50",
-
     "services.keratin.title": "Tratamiento de Keratina",
     "services.keratin.desc": "Tratamiento de suavizado de queratina para resultados duraderos sin frizz.",
     "services.keratin.price": "desde $35",
-
     "services.haircut-barber.title": "Corte de Cabello",
     "services.haircut-barber.desc": "Corte clasico adaptado a tu estilo y forma de rostro.",
     "services.haircut-barber.price": "desde $25",
-
     "services.perm.title": "Permanente",
     "services.perm.desc": "Duradera texture y forma para un acabado más completo y estilizado.",
     "services.perm.price": "desde $50",
-
     "services.beard-trim.title": "Recorte de Barba",
     "services.beard-trim.desc": "Dale forma y arregla tu barba para lograr un aspecto definido y pulcro.",
     "services.beard-trim.price": "desde $10",
-
     "services.eyebrow-shaping.title": "Diseño de Cejas",
     "services.eyebrow-shaping.desc": "Definición limpia y precisa para un aspecto equilibrado y refinado.",
     "services.eyebrow-shaping.price": "desde $10",
-
     "services.haircut-beard-trim.title": "Corte de Cabello + Recorte de Barba",
     "services.haircut-beard-trim.desc": "Una sesión completa de aseo personal para un corte de pelo limpio y un retoque de barba.",
     "services.haircut-beard-trim.price": "desde $30",
-
     "services.haircut-beard-trim-eyebrow-shaping.title": "Corte de Cabello + Recorte de Barba + Diseño de Cejas",
     "services.haircut-beard-trim-eyebrow-shaping.desc": "Paquete completo de arreglo personal que incluye corte de cabello, recorte de barba y diseño de cejas.",
     "services.haircut-beard-trim-eyebrow-shaping.price": "desde $45",
-
     "gallery.heading": "Nuestro <em>Trabajo</em>",
     "cta.heading": "¿Listo para reservar?",
     "cta.message": "Programa tu cita hoy.",
-
     "footer.heading": "Ponte en contacto",
     "footer.privacy": "Política de Privacidad",
-
     "form.heading": "Haz una cita",
     "form.description": "Reserve su cita a continuación. Una vez enviada la solicitud, nuestro equipo se pondrá en contacto con usted para confirmar la fecha y la hora; por lo general, en un plazo de pocas horas.",
-
     "form.name": "Nombre<span class=\"required\">*</span>",
     "form.name.placeholder": "Tu nombre",
-
     "form.phone": "Número de Teléfono<span class=\"required\">*</span>",
-
     "form.services": "Servicios<span class=\"required\">*</span>",
     "form.services.placeholder": "Selecciona un servicio",
     "form.services.haircut": "Corte de Cabello",
@@ -113,26 +87,20 @@
     "form.services.eyebrow-shaping": "Diseño de Cejas",
     "form.services.haircut-beard-trim": "Corte de Cabello + Recorte de Barba",
     "form.services.haircut-beard-trim-eyebrow-shaping": "Corte de Cabello + Recorte de Barba + Diseño de Cejas",
-
     "form.hair-img": "Imagen del Cabello",
     "form.hair-img.prompt": "Haz clic o arrastra una foto aquí",
     "form.hair-img.hint": "PNG, JPG o WEBP",
-
     "form.date": "Fecha y Hora<span class=\"required\">*</span>",
     "form.date.placeholder": "Selecciona una fecha",
     "form.time.heading": "Horarios disponibles",
     "form.time.empty": "Elige una fecha para ver los horarios",
     "form.time.need-service": "Primero selecciona un servicio para ver los horarios",
-
     "form.additional-notes": "Notas Adicionales",
     "form.additional-notes.placeholder": "Dinos sobre tus objetivos de cabello, estilista preferido, alergias, etc.",
-
     "form.consentSMS": "Acepto recibir confirmaciones y recordatorios por SMS. Al reservar, aceptas nuestra <a href='privacy-policy.html'>Política de privacidad</a>.",
-
     "booking.location.heading": "Ubicación",
     "booking.address.heading": "Dirección",
     "booking.address.message": "Haz clic en la dirección para abrir las direcciones en Google Maps.",
-
     "booking.hours.heading": "Horarios de Apertura",
     "booking.hours.sunday": "Domingo",
     "booking.hours.tuesday": "Martes",
@@ -141,20 +109,16 @@
     "booking.hours.friday": "Viernes",
     "booking.hours.saturday": "Sábado",
     "booking.hours.closed": "Cerrado",
-
-    "modal.heading": "Gracias por reservar una cita",
+    "modal.heading": "Gracias por reservar una cita <span class=\"customer-name\"></span>",
     "modal.message": "Para ver, cancelar o reprogramar, por favor revisa el SMS con el enlace de tu cita",
     "modal.home": "Home",
     "modal.close": "cerrar",
-
     "modal.fail.heading": "No se pudo reservar",
     "modal.fail.message": "Algo salió mal y no pudimos completar tu reserva. Por favor, inténtalo de nuevo.",
     "modal.fail.retry": "Intentar de nuevo",
-
     "privacy.eyebrow": "Legal",
     "privacy.title": "Política de Privacidad",
     "privacy.meta": "Yasmin Beauty Salon Unisex · Los Ángeles, CA · Vigente desde el 23 de junio de 2026",
-
     "privacy.toc.heading": "En esta página",
     "privacy.toc.overview": "Descripción general",
     "privacy.toc.information": "Información que recopilamos",
@@ -168,12 +132,10 @@
     "privacy.toc.children": "Privacidad infantil",
     "privacy.toc.changes": "Cambios a esta política",
     "privacy.toc.contact": "Contáctenos",
-
     "privacy.s01.num": "01",
     "privacy.s01.title": "Descripción general",
     "privacy.s01.p1": "Yasmin Beauty Salon Unisex (\"nosotros\" o \"nuestro\") opera el sitio web en <strong class=\"term\">yasminbeauty.salon</strong> (el \"Sitio\"). Esta Política de Privacidad explica qué información recopilamos cuando reserva una cita, navega por nuestro Sitio o se comunica con nosotros, y cómo usamos, almacenamos y protegemos esa información.",
     "privacy.s01.p2": "Al usar nuestro Sitio o enviar una reserva, usted acepta las prácticas descritas aquí. Si no está de acuerdo, por favor no utilice el Sitio.",
-
     "privacy.s02.num": "02",
     "privacy.s02.title": "Información que recopilamos",
     "privacy.s02.direct.label": "Información que usted proporciona directamente:",
@@ -186,7 +148,6 @@
     "privacy.s02.auto.li1": "Tipo y versión del navegador",
     "privacy.s02.auto.li2": "Páginas visitadas y tiempo en cada página",
     "privacy.s02.auto.li3": "URL de referencia",
-
     "privacy.s03.num": "03",
     "privacy.s03.title": "Cómo usamos su información",
     "privacy.s03.li1": "Para confirmar, gestionar y recordarle su cita",
@@ -195,7 +156,6 @@
     "privacy.s03.li4": "Para mejorar el Sitio usando datos analíticos agregados y anonimizados",
     "privacy.s03.li5": "Para cumplir con las leyes y regulaciones aplicables",
     "privacy.s03.p": "No usamos su información personal para toma de decisiones automatizada ni elaboración de perfiles.",
-
     "privacy.s04.num": "04",
     "privacy.s04.title": "Consentimiento SMS y cumplimiento de la TCPA",
     "privacy.s04.callout.label": "Importante — Por favor lea",
@@ -209,20 +169,17 @@
     "privacy.s04.help": "<strong class=\"term\">Para obtener ayuda:</strong> Responda <strong>HELP</strong> a cualquiera de nuestros mensajes, o envíenos un correo a la dirección indicada en la Sección 12.",
     "privacy.s04.p2": "El consentimiento para SMS nunca es obligatorio para reservar una cita. Desmarcar la casilla SMS no afecta su capacidad para agendar servicios.",
     "privacy.s04.p3": "Usamos Twilio para entregar mensajes SMS. Twilio actúa como procesador de datos bajo un acuerdo de procesamiento y tiene prohibido usar su número de teléfono para cualquier otro fin. Su número nunca se vende ni se comparte con fines de marketing.",
-
     "privacy.s05.num": "05",
     "privacy.s05.title": "Compartir información",
     "privacy.s05.intro": "No vendemos, alquilamos ni intercambiamos su información personal. Compartimos datos solo en estas circunstancias limitadas:",
     "privacy.s05.li1": "<strong class=\"term\">Proveedores de servicios:</strong> Twilio (SMS) y Neon (alojamiento de base de datos) procesan datos en nuestro nombre bajo acuerdos escritos que restringen el uso de su información.",
     "privacy.s05.li2": "<strong class=\"term\">Cumplimiento legal:</strong> Podemos divulgar información cuando lo exija la ley, una orden judicial, o para proteger los derechos, la propiedad o la seguridad de nuestros clientes u otras personas.",
     "privacy.s05.li3": "<strong class=\"term\">Transferencia comercial:</strong> Si el salón es vendido o fusionado, su información puede transferirse como parte de esa transacción. Se le notificará antes de que sus datos queden sujetos a una política de privacidad diferente.",
-
     "privacy.s06.num": "06",
     "privacy.s06.title": "Análisis y cookies",
     "privacy.s06.p1": "Usamos Google Analytics para entender cómo los visitantes interactúan con el Sitio. Estos datos son agregados y anonimizados — no podemos usarlos para identificarle personalmente.",
     "privacy.s06.p2": "Google Analytics usa cookies (pequeños archivos de texto almacenados en su navegador). Puede cancelar su participación instalando el <a href=\"https://tools.google.com/dlpage/gaoptout\" target=\"_blank\" rel=\"noopener\">complemento de inhabilitación para navegadores de Google Analytics</a>.",
     "privacy.s06.p3": "No usamos cookies publicitarias, píxeles de seguimiento ni tecnología de retargeting. Las únicas cookies en este Sitio son las establecidas por Google Analytics para el seguimiento de sesiones y comportamiento.",
-
     "privacy.s07.num": "07",
     "privacy.s07.title": "Sus derechos bajo la ley de California (CCPA)",
     "privacy.s07.intro": "Como residente de California, la Ley de Privacidad del Consumidor de California le otorga los siguientes derechos:",
@@ -232,12 +189,10 @@
     "privacy.s07.li4": "<strong class=\"term\">Derecho a la no discriminación:</strong> No negaremos servicios, cobraremos precios diferentes ni proporcionaremos un nivel de servicio distinto por haber ejercido un derecho bajo la CCPA.",
     "privacy.s07.callout.label": "Cómo enviar una solicitud CCPA",
     "privacy.s07.callout.p": "Envíe un correo a <strong>yasminbeautysalon2024@gmail.com</strong> con el asunto \"CCPA Privacy Request.\" Incluya su nombre completo y el número de teléfono o correo electrónico usado al reservar. Verificaremos su identidad y responderemos en un plazo de 45 días calendario.",
-
     "privacy.s08.num": "08",
     "privacy.s08.title": "Retención de datos",
     "privacy.s08.p1": "Conservamos su información de reserva por hasta <strong class=\"term\">2 años</strong> a partir de la fecha de su última cita, a menos que solicite una eliminación anticipada o la ley exija un período más largo. Los datos analíticos anonimizados no tienen un límite de retención fijo.",
     "privacy.s08.p2": "Al vencer el período o ante una solicitud de eliminación válida, eliminamos permanentemente o desidentificamos su información de los sistemas activos. Las copias de seguridad de la base de datos se purgan en un ciclo continuo de 90 días.",
-
     "privacy.s09.num": "09",
     "privacy.s09.title": "Seguridad",
     "privacy.s09.intro": "Aplicamos medidas técnicas y organizativas razonables para proteger su información, incluyendo:",
@@ -246,15 +201,12 @@
     "privacy.s09.li3": "Autenticación basada en JWT para todo el acceso administrativo",
     "privacy.s09.li4": "Controles de acceso que limitan qué personal puede ver los datos personales",
     "privacy.s09.p": "Ningún método de transmisión por internet es 100% seguro. No podemos garantizar seguridad absoluta, pero nos comprometemos a proteger sus datos con prácticas estándar del sector.",
-
     "privacy.s10.num": "10",
     "privacy.s10.title": "Privacidad infantil",
     "privacy.s10.p": "Nuestro Sitio no está dirigido a menores de 13 años y no recopilamos conscientemente información personal de nadie menor de 13 años. Si cree que hemos recopilado dicha información inadvertidamente, contáctenos y la eliminaremos de inmediato.",
-
     "privacy.s11.num": "11",
     "privacy.s11.title": "Cambios a esta política",
     "privacy.s11.p": "Podemos actualizar esta Política de Privacidad periódicamente para reflejar cambios en nuestras prácticas o en la ley aplicable. Cuando hagamos cambios importantes, actualizaremos la fecha \"Vigente desde\" en la parte superior de esta página. El uso continuado del Sitio después de publicar los cambios constituye la aceptación de la política actualizada.",
-
     "privacy.s12.num": "12",
     "privacy.s12.title": "Contáctenos",
     "privacy.s12.intro": "Si tiene preguntas sobre esta política, desea ejercer sus derechos o necesita cancelar las comunicaciones por SMS:",
@@ -262,10 +214,34 @@
     "privacy.s12.label.address": "Dirección",
     "privacy.s12.label.phone": "Teléfono",
     "privacy.s12.label.email": "Correo",
-
     "privacy.footer.copy": "© 2026 Yasmin Beauty Salon Unisex · Los Ángeles, CA",
     "privacy.footer.effective": "Vigente desde el 23 de junio de 2026 · v1.0",
-
     "about.title": "Sobre Nosotros",
-    "about.p": "Hola, mi nombre es Claudia. Soy la duena des Yasmin Beauty Salon, tambien una estilista trabajando en este humilde negocio. Yo como una mujer que vino a este pais con muchos suenos, con ganas a salir adelate y triunfar en un pais de oportunidades. <Strong class=\"story-strong\">Te invito</Strong> a que nos visites y conozcas nuestro tabajo, te aseguro que no te arreppentiras."
+    "about.p": "Hola, mi nombre es Claudia. Soy la duena des Yasmin Beauty Salon, tambien una estilista trabajando en este humilde negocio. Yo como una mujer que vino a este pais con muchos suenos, con ganas a salir adelate y triunfar en un pais de oportunidades. <Strong class=\"story-strong\">Te invito</Strong> a que nos visites y conozcas nuestro tabajo, te aseguro que no te arreppentiras.",
+    "nav.view-appointment": "Mi Cita",
+    "modal.view": "Ver Cita",
+    "detail.service": "Servicio",
+    "detail.date": "Fecha",
+    "detail.time": "Hora",
+    "view.heading": "Tu Cita",
+    "view.loading": "Cargando tu cita...",
+    "view.missing": "No encontramos ninguna cita. Usa el enlace de tu SMS o reserva una nueva cita abajo.",
+    "view.confirm": "Confirmar",
+    "view.cancel": "Cancelar",
+    "view.reschedule": "Reprogramar",
+    "view.reschedule.hint": "Elige una nueva fecha y hora para tu cita",
+    "view.reschedule.submit": "Confirmar Nueva Hora",
+    "view.status.booked": "Reservada",
+    "view.status.confirmed": "Confirmada",
+    "view.status.canceled": "Cancelada",
+    "view.status.rescheduled": "Reprogramada",
+    "view.status.completed": "Completada",
+    "view.status.no_show": "No Asistió",
+    "view.modal.confirmed.heading": "¡Cita confirmada!",
+    "view.modal.confirmed.message": "Esperamos verte pronto. Recibirás un recordatorio el día anterior.",
+    "view.modal.canceled.heading": "Cita cancelada",
+    "view.modal.canceled.message": "Tu cita ha sido cancelada. Esperamos verte de nuevo pronto.",
+    "view.modal.rescheduled.heading": "¡Cita reprogramada!",
+    "view.modal.fail.heading": "Algo salió mal",
+    "view.modal.fail.message": "No pudimos completar tu solicitud. Por favor, inténtalo de nuevo."
 }

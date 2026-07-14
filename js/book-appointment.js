@@ -176,9 +176,21 @@ async function imageUploader() {
 const modalOverlay = document.querySelector(".modal-overlay");
 
 // SUCCESS MODAL
-function modalBehaviour() {
+function modalBehaviour(appointment) {
     const modalOverlay = document.getElementById("success-modal-overlay");
     const closeBtn = document.getElementById("modal-btn-close");
+
+    // The view code is the customer's key to see/cancel/reschedule this booking
+    if (appointment.viewCode) {
+        localStorage.setItem("appointmentViewCode", appointment.viewCode);
+        document.querySelectorAll(".appointment-nav-item").forEach(li => { li.hidden = false; });
+    }
+
+    modalOverlay.querySelector(".customer-name").textContent = appointment.name;
+    modalOverlay.querySelector(".detail-service").textContent = serviceLabel(appointment.serviceType);
+    modalOverlay.querySelector(".detail-date").textContent = formatLongDate(appointment.date);
+    modalOverlay.querySelector(".detail-time").textContent =
+        formatTime(appointment.startTime) + " – " + formatTime(appointment.endTime);
 
     modalOverlay.classList.add("is-open");
 
@@ -340,6 +352,17 @@ function renderTimeSlots(container, slots) {
         });
         container.appendChild(btn);
     });
+}
+
+// The option label doubles as the display name (and is already translated)
+function serviceLabel(serviceType) {
+    const option = serviceSelector.querySelector(`option[value="${serviceType}"]`);
+    return option ? option.textContent.trim() : serviceType;
+}
+
+function formatLongDate(dateStr) {
+    const [y, m, d] = dateStr.split("-").map(Number);
+    return datePIcker.formatDate(new Date(y, m - 1, d), "l, F j, Y");
 }
 
 function formatTime(timeStr) {
