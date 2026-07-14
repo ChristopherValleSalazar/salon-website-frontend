@@ -313,13 +313,37 @@ textarea {
   }
 }
 
-/* DATE PICKR */
+/* DATE + TIME BOOKING CARD */
 .booking-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
   width: 100%;
-  cursor: pointer;
+  max-width: 1000px;
+  padding: 16px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background: #f8f4ed;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
+}
+.booking-wrapper.input-error {
+  border-color: red;
+  box-shadow: 0 0 2px rgba(255, 0, 0, 0.15);
+}
+
+/* flatpickr reveals its input in inline mode — the calendar itself is the control */
+.booking-wrapper .flatpickr-input {
+  display: none;
+}
+
+/* Blend the inline flatpickr calendar into the card */
+.flatpickr-calendar.inline {
+  box-shadow: none;
+  background: transparent;
 }
 .flatpickr-months {
-  background: var(--color-light);
+  background: transparent;
 }
 .flatpickr-month {
   min-height: 48px;
@@ -333,48 +357,95 @@ textarea {
 .flatpickr-weekdays, .flatpickr-days {
   font-size: 18px;
 }
-
-
-/* TIME SLOT */
-.flatpickr-calendar {
-  anchor-name: --slot;
+/* Match the theme's accent to the site's gold palette.
+   Scoped under .booking-wrapper so it outranks the CDN theme loaded after this file. */
+.booking-wrapper .flatpickr-day.selected,
+.booking-wrapper .flatpickr-day.selected:hover,
+.booking-wrapper .flatpickr-day.selected:focus {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-light);
+}
+.booking-wrapper .flatpickr-day.today:not(.selected) {
+  border-color: var(--color-primary);
 }
 
-.container-time-slot {
-  display: none;
-}
-.container-time-slot.visible {
-  display: block;
-}
-.slot-button {
+/* TIME SLOT PANEL */
+.time-panel {
+  flex: 1;
+  min-width: 200px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 100px;
-  height: 40px;
-  align-self: center;
+}
+.time-panel-title {
+  margin: 4px 0 12px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: var(--font-size-label);
+  font-weight: 600;
+  color: var(--color-dark);
+}
+.container-time-slot {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  gap: 8px;
+  align-content: start;
+  max-height: 280px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+.time-panel-empty {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: 0.9rem;
+  color: #8a7f72;
+}
+.slot-button {
+  padding: 10px 6px;
+  font-family: "Inter", sans-serif;
+  font-size: 0.9rem;
+  color: var(--color-dark);
+  background: var(--color-light);
+  border: 1px solid #ccc;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+.slot-button:hover {
+  border-color: var(--color-primary);
+}
+.slot-button.selected {
+  background: var(--color-submit-btn);
+  border-color: var(--color-submit-btn);
+  color: var(--color-light);
 }
 
-@media (min-width: 700px) {
-  .container-time-slot.visible {
-    position: absolute;
-    position-anchor: --slot;
-    left: anchor(right);
-    top: anchor(top);
-    margin-left: 16px;
-    width: 260px;
-    max-height: 300px;
-    overflow-y: auto;
-
-    background-color: skyblue;
-  }
+/* Confirmation bar shown once a date and time are both chosen */
+.booking-summary {
+  flex-basis: 100%;
+  padding: 10px 16px;
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-submit-btn);
+  background: rgba(176, 138, 82, 0.12);
+  border-radius: 40px;
 }
 
 @media (max-width: 699px) {
-  .container-time-slot.visible {
-    position: static;
+  .booking-wrapper {
+    flex-direction: column;
+  }
+  .booking-wrapper .flatpickr-calendar,
+  .booking-wrapper .flatpickr-rContainer,
+  .booking-wrapper .flatpickr-days,
+  .booking-wrapper .dayContainer {
     width: 100%;
-    margin-top: 12px;
+    max-width: 100%;
+    min-width: 0;
+  }
+  .container-time-slot {
+    max-height: 220px;
   }
 }
 

@@ -152,15 +152,18 @@
             </label>
           </div>
 
-          <label for="date-input" data-i18n="form.date">Date<span class="required">*</span></label>
+          <label for="date-input" data-i18n="form.date">Date &amp; Time<span class="required">*</span></label>
           <div class="booking-wrapper" id="booking-wrapper">
-            <input type="hidden" id="date-input" data-i18n="form.date.placeholder" placeholder="Select a date" required
-              inputmode="none" autocomplete="off" />
+            <input type="hidden" id="date-input" required autocomplete="off" />
+            <div class="time-panel">
+              <h3 class="time-panel-title" data-i18n="form.time.heading">Available times</h3>
+              <div class="container-time-slot">
+                <p class="time-panel-empty" data-i18n="form.time.empty">Pick a date to see available times</p>
+              </div>
+            </div>
+            <div class="booking-summary" hidden></div>
           </div>
-
-          <div id="anchor-time-slot"></div>
           <input id="time-input" name="time" type="hidden" required>
-          <div class="container-time-slot"></div>
 
           <label for="notes" data-i18n="form.additional-notes">Additional Notes</label>
           <textarea name="notes" id="notes" rows="5" data-i18n="form.additional-notes.placeholder"

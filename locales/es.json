@@ -118,8 +118,10 @@
     "form.hair-img.prompt": "Haz clic o arrastra una foto aquí",
     "form.hair-img.hint": "PNG, JPG o WEBP",
 
-    "form.date": "Fecha<span class=\"required\">*</span>",
+    "form.date": "Fecha y Hora<span class=\"required\">*</span>",
     "form.date.placeholder": "Selecciona una fecha",
+    "form.time.heading": "Horarios disponibles",
+    "form.time.empty": "Elige una fecha para ver los horarios",
 
     "form.additional-notes": "Notas Adicionales",
     "form.additional-notes.placeholder": "Dinos sobre tus objetivos de cabello, estilista preferido, alergias, etc.",

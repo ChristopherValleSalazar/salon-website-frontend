@@ -96,14 +96,16 @@ document.getElementById("appointment-form").addEventListener("submit", async (e)
     e.preventDefault(); //preventing empty form from submitting
 
     const dateInput = document.getElementById("date-input");
-    const visibleInput = dateInput._flatpickr.altInput;
+    const timeInput = document.getElementById("time-input");
+    const bookingWrapper = document.getElementById("booking-wrapper");
 
-    if (!dateInput.value) {
-        visibleInput.classList.add("input-error");
-        visibleInput.scrollIntoView({behavior: "smooth", block: "center" });
+    // `required` is ignored on hidden inputs, so date and time need an explicit check
+    if (!dateInput.value || !timeInput.value) {
+        bookingWrapper.classList.add("input-error");
+        bookingWrapper.scrollIntoView({ behavior: "smooth", block: "center" });
         return;
     }
-    visibleInput.classList.remove("input-error");
+    bookingWrapper.classList.remove("input-error");
 
 async function imageUploader() {
     if(hairImageInput.files.length === 0) {
@@ -225,14 +227,11 @@ if (failureOverlay) {
 }
 
 const datePIcker = flatpickr("#date-input", {
-    static: true,
     inline: true,
     minDate: "today",
     allowInput: false,
     enableTime: false,
-    altInput: true,
     dateFormat: "Y-m-d",
-    altFormat: "F j, Y",
     disable: [
         date => date.getDay() === 1 //disable Mondays
     ],
@@ -240,8 +239,11 @@ const datePIcker = flatpickr("#date-input", {
     async onChange(selectedDates, dateStr, instance) {
         const container = document.querySelector(".container-time-slot");
 
-        container.classList.add("visible");
-        container.innerHTML = "<p>Loading times...</p>";
+        // a new date invalidates any previously selected time
+        document.getElementById("time-input").value = "";
+        hideBookingSummary();
+
+        container.innerHTML = "<p class='time-panel-empty'>Loading times...</p>";
 
         const params = new URLSearchParams({
             requestDate: dateStr,
@@ -255,16 +257,38 @@ const datePIcker = flatpickr("#date-input", {
             const slots = await res.json();
             renderTimeSlots(container, slots);
         } catch (err) {
-            container.innerHTML = "<p>Couldn't load times. Please try again later.</p>";
+            container.innerHTML = "<p class='time-panel-empty'>Couldn't load times. Please try again later.</p>";
         }
     }
 });
 
-function renderTimeSlots(container, slots) {
-    const inputToAppend = document.getElementById("date-input");
+// Clear the booking card along with the rest of the form after a successful booking
+const timeSlotContainer = document.querySelector(".container-time-slot");
+const timeSlotEmptyStateHTML = timeSlotContainer.innerHTML;
 
+document.getElementById("appointment-form").addEventListener("reset", () => {
+    datePIcker.clear(false);
+    hideBookingSummary();
+    timeSlotContainer.innerHTML = timeSlotEmptyStateHTML;
+});
+
+function hideBookingSummary() {
+    const summary = document.querySelector(".booking-summary");
+    summary.hidden = true;
+    summary.textContent = "";
+}
+
+function showBookingSummary(timeSlot) {
+    const summary = document.querySelector(".booking-summary");
+    summary.textContent =
+        datePIcker.formatDate(datePIcker.selectedDates[0], "l, F j")
+        + " at " + formatTime(timeSlot);
+    summary.hidden = false;
+}
+
+function renderTimeSlots(container, slots) {
     if (slots.length === 0) {
-        container.innerHTML = "<p>No times available this day.</p>";
+        container.innerHTML = "<p class='time-panel-empty'>No times available this day.</p>";
         return;
     }
 
@@ -277,11 +301,8 @@ function renderTimeSlots(container, slots) {
 
         btn.addEventListener("click", () => {
             document.getElementById("time-input").value = slot.availableTimeSlot;
-
-            // display only — the real values stay untouched
-            datePIcker.altInput.value =
-                datePIcker.formatDate(datePIcker.selectedDates[0], "F j, Y")
-                + " at " + formatTime(slot.availableTimeSlot);
+            document.getElementById("booking-wrapper").classList.remove("input-error");
+            showBookingSummary(slot.availableTimeSlot);
 
             container.querySelectorAll(".slot-button").forEach(b => b.classList.remove("selected"));
             btn.classList.add("selected");

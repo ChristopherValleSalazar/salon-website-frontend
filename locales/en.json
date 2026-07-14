@@ -119,8 +119,10 @@
     "form.hair-img.prompt": "Click or drag a photo here",
     "form.hair-img.hint": "PNG, JPG or WEBP",
 
-    "form.date": "Date<span class=\"required\">*</span>",
+    "form.date": "Date &amp; Time<span class=\"required\">*</span>",
     "form.date.placeholder": "Select a date",
+    "form.time.heading": "Available times",
+    "form.time.empty": "Pick a date to see available times",
 
     "form.additional-notes": "Additional Notes",
     "form.additional-notes.placeholder": "Tell us about your hair goals, preferred stylist, allergies, etc.",
