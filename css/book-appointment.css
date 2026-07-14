@@ -19,7 +19,7 @@ textarea {
   flex-direction: column;
   background: var(--color-form);
   padding: 20px;
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
   height: auto;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -264,16 +264,38 @@ textarea {
   margin-bottom: 40px;
 }
 .form-title {
-  text-align: center;
-  margin: 20px auto;
-  line-height: 1.5rem;
+    font-size: clamp(2.2rem, 3.6vw, 2.5rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
 }
+.form-title::before {
+    content: "";
+    width: 34px;
+    height: 2px;
+    background: var(--color-primary);
+}
+.form-title::after {
+    content: "";
+    width: 34px;
+    height: 2px;
+    background: var(--color-primary);
+}
+.form-title em {
+  font-style: italic;
+  color: #6b4f2e;
+}
+
+
+
 .main-form input:focus, .main-form select:focus {
   outline: none;
   border-color: var(--color-primary);
   box-shadow: 0 4px 12px rgba(184,138,68,0.25);
 }
 
+/* Sms Consent */
 .main-form input[type="checkbox"] {
   width: 24px;
   min-height: 18px;
@@ -291,11 +313,13 @@ textarea {
   align-items: center;
 }
 .consent-wrapper label {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: var(--color-text);
   line-height: 1.5;
   cursor: pointer;
 }
+
+/* DATE + TIME ERROR */
 .input-error {
   border-color: red !important;
   box-shadow: 0 0 2px rgba(255, 0, 0, 0.15) !important;

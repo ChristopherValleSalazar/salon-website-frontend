@@ -129,13 +129,18 @@ async function imageUploader() {
     const data = await res.json();
     imageUrl = data.secure_url;
     imagePublicId = data.public_id;
+
+    return {imageUrl, imagePublicId};
 }
 
     try {
         let imageUrl = null;
         let imagePublicId = null;
 
-        await imageUploader();
+        const result = await imageUploader();
+        imageUrl = result?.imageUrl || null;
+        imagePublicId = result?.imagePublicId || null;
+
 
         const payload = {
             name: document.getElementById("customer-name").value,
