@@ -269,6 +269,7 @@ textarea {
     align-items: center;
     justify-content: center;
     gap: 0.7rem;
+    margin: 24px 0 12px 0;
 }
 .form-title::before {
     content: "";
@@ -317,6 +318,12 @@ textarea {
   color: var(--color-text);
   line-height: 1.5;
   cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .consent-wrapper label {
+    font-size: 0.9rem;
+  }
 }
 
 /* DATE + TIME ERROR */
