@@ -113,21 +113,20 @@ header {
   padding: 0.75rem 1.5rem;
   background: var(--color-dark);
   color: var(--color-light);
-  border-bottom: 2px solid rgba(0, 0, 0, 0.2);
 }
 .brand {
   display: inline-block;
   line-height: 0;
 }
 .brand svg {
-  width: 350px;
+  width: 300px;
   height: auto;
   display: block;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1130px) {
   .brand svg {
-    width: 270px;
+    width: 200px;
   }
 }
 
@@ -190,6 +189,7 @@ header {
     display: flex;
     align-items: center;
     gap: 0.1rem;
+    
   }
   .nav-list {
     display: flex;
@@ -199,8 +199,7 @@ header {
   }
 }
 
-
-@media (max-width: 1250px) {
+@media (max-width: 1130px) {
   .header-right {
     display: none;
   }
