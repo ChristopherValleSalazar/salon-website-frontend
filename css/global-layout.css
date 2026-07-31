@@ -173,9 +173,10 @@ header {
   top: 100%;
   left: 0;
   width: 100%;
-  background: #1a1310;
+  background: var(--color-dark);
   border-top: 2px solid rgba(176, 138, 82, 0.2);
   opacity: 0;
+  overflow-y: auto;
   visibility: hidden;
   pointer-events: none;
   transform: translateY(-8px);
@@ -233,11 +234,16 @@ header {
   .burger-icon.expanded .bar.bottom {
     transform: translateY(-8px) rotate(-45deg);
   }
+
+  /* BURGER MENU INTERACTION */
   .mobile-menu.open {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
     transform: translateY(0);
+  }
+  body.no-scroll {
+    overflow: hidden;
   }
   .mobile-menu-inner {
     display: flex;
@@ -249,21 +255,20 @@ header {
     color: #f6f1e8;
     background-color: transparent;
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 1.15rem;
     letter-spacing: 0.06em;
     padding: 14px 24px;
     border-bottom: 1px solid rgba(255,255,255,0.06);
-    transition: color 0.2s ease, background 0.2s ease;
+    transition: background 0.2s ease;
   }
   .nav-btn-burger:hover {
-    color: var(--color-primary);
-    background: rgba(176, 138, 82, 0.07);
+    background: rgb(168, 136, 58, 0.2);
   }
   .nav-btn-burger.cta {
   margin: 16px 24px 8px;
   padding: 12px 24px;
-  background: #f1e9da;
-  color: #3B2A1E;
+  background: var(--color-logo-buttefly-wings);
+  color: var(--color-logo-text-light);
   font-weight: 600;
   border-radius: 999px;
   border-bottom: none;
@@ -271,7 +276,7 @@ header {
   transition: background 0.2s ease;
   }
   .nav-btn-burger.cta:hover {
-    background: #e3d3b5;
+    background: var(--color-logo-buttefly-wings-hover);
   }
 
   /* LANGUAGE MENU */
@@ -443,7 +448,7 @@ footer a:hover {
 .company-p {
   margin: 0 0 1rem;
   max-width: 40ch;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   color: var(--f-text);
 }
 .company-reminder {
