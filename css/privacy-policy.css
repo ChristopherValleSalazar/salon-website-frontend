@@ -1,4 +1,8 @@
 /* ── PRIVACY SHELL ── */
+body {
+    font-family: "Inter", sans-serif;
+}
+
 .privacy-shell {
     max-width: 100%;
     margin: 0 auto;
