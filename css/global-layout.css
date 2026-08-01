@@ -405,13 +405,12 @@ footer {
 
   background: var(--f-bg);
   color: var(--f-text);
-  padding: 3.5rem 1.5rem 1.5rem;
+  padding: 3rem 1.5rem 1.5rem;
   font-size: 0.9rem;
   line-height: 1.6;
   text-align: left;
   font-variant-numeric: lining-nums tabular-nums;
 }
-
 footer a {
   color: inherit;
   text-decoration: none;
@@ -500,7 +499,7 @@ footer a:hover {
 
 /* bottom bar */
 .footer-divider {
-  margin: 3rem 0 1.5rem;
+  margin: 2rem 0 1.5rem;
   border: none;
   border-top: 1px solid var(--f-rule);
 }

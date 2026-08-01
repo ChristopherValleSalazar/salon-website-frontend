@@ -69,7 +69,7 @@
     "footer.explore": "Explore",
     "footer.opening": "Opening Times",
     "footer.contact": "Get in touch",
-    "footer-policy-link": "Privacy Policy",
+    "footer.privacy": "Privacy Policy",
     "form.heading": "Make an <em>Appointment</em>",
     "form.description": "Reserve your appointment below. Once submitted, our team will reach out to confirm your date and time. Usually within a few hours.",
     "form.name": "Name<span class=\"required\">*</span>",

@@ -69,7 +69,7 @@
     "footer.explore": "Explora",
     "footer.opening": "Horario de Apertura",
     "footer.contact": "Contáctanos",
-    "footer-policy-link": "Política de Privacidad",
+    "footer.privacy": "Política de Privacidad",
     "form.heading": "Haz una <em>Cita</em>",
     "form.description": "Reserve su cita a continuación. Una vez enviada la solicitud, nuestro equipo se pondrá en contacto con usted para confirmar la fecha y la hora; por lo general, en un plazo de pocas horas.",
     "form.name": "Nombre<span class=\"required\">*</span>",
