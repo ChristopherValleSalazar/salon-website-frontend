@@ -402,10 +402,9 @@ footer {
   --f-muted: rgba(246, 241, 232, 0.55);
   --f-heading: var(--color-logo-petal-dark);
   --f-rule: rgba(246, 241, 232, 0.25);
-
   background: var(--f-bg);
   color: var(--f-text);
-  padding: 3rem 1.5rem 1.5rem;
+  padding: 1.5rem 1.5rem 1.5rem;
   font-size: 0.9rem;
   line-height: 1.6;
   text-align: left;
@@ -419,7 +418,6 @@ footer a:hover {
   text-decoration: underline;
 }
 .footer-inner {
-  max-width: 1200px;
   margin: 0 auto;
 }
 .info-container {
