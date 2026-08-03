@@ -1,3 +1,7 @@
+const today = new Date().getDay();
+document.querySelector(`.day-container[data-day="${today}"]`)?.classList.add("is-today");
+
+
 document.addEventListener("DOMContentLoaded", () => {
     const params = new URLSearchParams(window.location.search);
     const service = params.get("service");
@@ -99,7 +103,6 @@ document.getElementById("appointment-form").addEventListener("submit", async (e)
     const timeInput = document.getElementById("time-input");
     const bookingWrapper = document.getElementById("booking-wrapper");
 
-    // `required` is ignored on hidden inputs, so date and time need an explicit check
     if (!dateInput.value || !timeInput.value) {
         bookingWrapper.classList.add("input-error");
         bookingWrapper.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -120,6 +123,9 @@ async function imageUploader() {
     fd.append('timestamp', sig.timestamp);
     fd.append('signature', sig.signature);
     fd.append('folder', sig.folder);
+
+    console.log(JSON.stringify(sig, null, 2));
+    console.log('sig len:', sig.signature?.length, 'key len:', sig.apiKey?.length);
 
     const res = await fetch(
         `https://api.cloudinary.com/v1_1/yfmlabi1/image/upload`,
@@ -205,10 +211,6 @@ function modalBehaviour(appointment) {
     });
 }
 
-// FAILURE MODAL (prototype)
-// `message` will come from the backend response body once the booking request
-// is wired up; when it's empty we fall back to the placeholder text already in
-// the markup.
 const failureOverlay = document.getElementById("failure-modal-overlay");
 const failureMessageEl = document.getElementById("failure-modal-message");
 let failurePlaceholder = failureMessageEl ? failureMessageEl.textContent : "";
@@ -246,6 +248,7 @@ if (failureOverlay) {
 const datePIcker = flatpickr("#date-input", {
     inline: true,
     minDate: "today",
+    maxDate: new Date().fp_incr(30), // 30 days from now
     allowInput: false,
     enableTime: false,
     dateFormat: "Y-m-d",

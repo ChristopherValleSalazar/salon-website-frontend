@@ -140,7 +140,6 @@
           <div class="img-container">
             <input type="file" id="hair-image" accept=".png,.jpg,.jpeg,.webp" name="hairPic">
 
-            <!-- Custom drop zone: desktop only. Mobile falls back to the native picker above. -->
             <label for="hair-image" class="file-drop" id="file-drop">
               <span class="file-drop-empty">
                 <svg class="file-drop-icon" viewBox="0 0 24 24" width="26" height="26" fill="none"
@@ -195,57 +194,64 @@
     <hr class="form-divider">
 
     <section id="location-address-hours">
+      <h2 class="form-title" data-i18n="info.title">Find the <em>Salon</em></h2>
+
       <div class="map-hours-container">
+
         <div class="map-container">
-          <h2 class="location-address-hours-title" data-i18n="booking.location.heading">Location</h2>
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d846343.3660965702!2d-118.20877800000001!3d34.043133!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c60701da1d91%3A0x9e292fb128fbf175!2sYasmin%20Beauty%20Salon%20Unisex!5e0!3m2!1sen!2sus!4v1781750795074!5m2!1sen!2sus"
-            allowfullscreen="" loading="lazy" height="auto" width="auto"
+            allowfullscreen loading="lazy"
+            title="Map to Yasmin Beauty Salon Unisex"
             referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
-        <div class="address-container">
-          <h2 class="location-address-hours-title" data-i18n="booking.address.heading">Address</h2>
-          <a href="https://maps.google.com/?q=Yasmin+Beauty+Salon+Unisex" target="_blank" rel="noopener noreferrer"
-            class="address-link">
-            Yasmin Beauty Salon Unisex<br>
-            2438 1st St<br>
-            Los Angeles, CA 90033
-          </a>
-          <p class="address-desc" data-i18n="booking.address.message">Click the address to open directions in Google
-            Maps.</p>
-        </div>
-        <div class="hours-container">
-          <h2 class="location-address-hours-title" data-i18n="booking.hours.heading">Opening Times</h2>
-          <ul class="list-reset hours-container">
-            <li class="day-container">
-              <span data-i18n="booking.hours.sunday">Sunday</span>
-              <div class="date-time">10:00AM<span>&#8722;</span>3:00PM</div>
-            </li>
-            <li class="day-container">
-              <span data-i18n="booking.hours.monday">Monday</span>
-              <div class="date-time" data-i18n="booking.hours.closed">Closed</div>
-            </li>
-            <li class="day-container">
-              <span data-i18n="booking.hours.tuesday">Tuesday</span>
-              <div class="date-time">10:00AM<span>&#8722;</span>7:00PM</div>
-            </li>
-            <li class="day-container">
-              <span data-i18n="booking.hours.wednesday">Wednesday</span>
-              <div class="date-time">10:00AM<span>&#8722;</span>7:00PM</div>
-            </li>
-            <li class="day-container">
-              <span data-i18n="booking.hours.thursday">Thursday</span>
-              <div class="date-time">10:00AM<span>&#8722;</span>7:00PM</div>
-            </li>
-            <li class="day-container">
-              <span data-i18n="booking.hours.friday">Friday</span>
-              <div class="date-time">10:00AM<span>&#8722;</span>7:00PM</div>
-            </li>
-            <li class="day-container">
-              <span data-i18n="booking.hours.saturday">Saturday</span>
-              <div class="date-time">10:00AM<span>&#8722;</span>7:00PM</div>
-            </li>
-          </ul>
+
+        <div class="info-column">
+          <div class="address-card">
+            <span class="card-eyebrow" data-i18n="booking.address.heading">Address</span>
+            <a href="https://maps.google.com/?q=Yasmin+Beauty+Salon+Unisex"
+              target="_blank" rel="noopener noreferrer" class="address-link">
+              <span class="address-name">Yasmin Beauty Salon Unisex</span>
+              <span class="address-street">2438 1st St<br>Los Angeles, CA 90033</span>
+              <span class="address-cta" data-i18n="booking.address.open">Open in Google Maps →</span>
+            </a>
+            <p class="address-desc" data-i18n="booking.address.message">Click the address to open directions.</p>
+          </div>
+
+          <div class="hours-card">
+            <span class="card-eyebrow" data-i18n="booking.hours.heading">Opening Times</span>
+            <ul class="list-reset hours-list">
+              <li class="day-container" data-day="0">
+                <span class="day-name" data-i18n="booking.hours.sunday">Sunday</span>
+                <span class="day-time">10:00AM &#8722; 3:00PM</span>
+              </li>
+              <li class="day-container is-closed" data-day="1">
+                <span class="day-name" data-i18n="booking.hours.monday">Monday</span>
+                <span class="day-time" data-i18n="booking.hours.closed">Closed</span>
+              </li>
+              <li class="day-container" data-day="2">
+                <span class="day-name" data-i18n="booking.hours.tuesday">Tuesday</span>
+                <span class="day-time">10:00AM &#8722; 7:00PM</span>
+              </li>
+              <li class="day-container" data-day="3">
+                <span class="day-name" data-i18n="booking.hours.wednesday">Wednesday</span>
+                <span class="day-time">10:00AM &#8722; 7:00PM</span>
+              </li>
+              <li class="day-container" data-day="4">
+                <span class="day-name" data-i18n="booking.hours.thursday">Thursday</span>
+                <span class="day-time">10:00AM &#8722; 7:00PM</span>
+              </li>
+              <li class="day-container" data-day="5">
+                <span class="day-name" data-i18n="booking.hours.friday">Friday</span>
+                <span class="day-time">10:00AM &#8722; 7:00PM</span>
+              </li>
+              <li class="day-container" data-day="6">
+                <span class="day-name" data-i18n="booking.hours.saturday">Saturday</span>
+                <span class="day-time">10:00AM &#8722; 7:00PM</span>
+              </li>
+            </ul>
+            <span class="hours-note" data-i18n="booking.hours.walkins">Walk-ins welcome</span>
+          </div>
         </div>
       </div>
     </section>

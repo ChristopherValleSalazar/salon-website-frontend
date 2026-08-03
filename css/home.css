@@ -60,7 +60,6 @@
     transform: translateY(-2px);
 }
 .hero-btn-secondary {
-    color: var(--color-dark);
     border: 1.5px solid var(--color-logo-buttefly-wings);
     color: var(--color-logo-buttefly-wings);
 }
@@ -235,6 +234,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    max-height: 300px;
     padding: 16px;
     border: 1px solid rgba(0, 0, 0, 0.1);          
     border-radius: 6px;
@@ -296,8 +296,8 @@
     max-width: 800px;
     align-self: center;
     margin: 0;
-    padding: 11px 14px;
-    font-size: 11px;
+    padding: 12px 14px;
+    font-size: 14px;
     font-weight: 500;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -335,6 +335,7 @@
     display: flex;
     gap: 28px;
     padding: 16px;
+    max-height: 250px;
     border: 1px solid rgba(0, 0, 0, 0.1);          
     border-radius: 6px;
     background: var(--color-panel);            
