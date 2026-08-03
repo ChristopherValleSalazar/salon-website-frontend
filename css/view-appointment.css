@@ -44,7 +44,7 @@
   letter-spacing: 0.03em;
 }
 .status-booked {
-  color: var(--color-primary);
+  color: var(--color-accent-from-logo);
   background: rgba(176, 138, 82, 0.15);
 }
 .status-confirmed {
@@ -62,14 +62,12 @@
   background: rgba(107, 92, 78, 0.12);
 }
 
-/* The details list reuses .appointment-details from book-appointment.css,
-   just left-aligned and full width inside the card */
 .appointment-card .appointment-details {
   max-width: none;
   margin: 0 0 28px;
 }
 .appointment-card .appointment-details li {
-  font-size: 1.05rem;
+  font-size: 1.2rem;
 }
 
 /* Action buttons */
@@ -96,17 +94,17 @@
   transform: none;
 }
 .action-confirm {
-  background: var(--color-submit-btn);
+  background: var(--color-logo-buttefly-wings);
   color: var(--color-light);
 }
 .action-confirm:hover:not(:disabled) {
-  background: var(--color-submit-btn-hover);
+  background: var(--color-logo-buttefly-wings-hover);
   transform: scale(1.02);
 }
 .action-reschedule {
   background: transparent;
-  color: var(--color-dark);
-  border-color: var(--color-dark);
+  color: var(--color-accent-from-logo);
+  border-color: var(--color-logo-petal-dark);
 }
 .action-reschedule:hover:not(:disabled) {
   background: var(--color-dark);

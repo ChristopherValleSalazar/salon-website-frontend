@@ -1,4 +1,4 @@
-// The magic-link code from the SMS URL always wins and refreshes the stored one;
+// The magic-link code from the SMS URL always refreshes the stored one;
 // otherwise fall back to the code saved when the appointment was booked.
 const urlViewCode = new URLSearchParams(window.location.search).get("c");
 if (urlViewCode) localStorage.setItem("appointmentViewCode", urlViewCode);
@@ -152,6 +152,7 @@ function initReschedulePicker() {
     reschedulePicker = flatpickr("#date-input", {
         inline: true,
         minDate: "today",
+        maxDate: new Date().fp_incr(30),
         allowInput: false,
         enableTime: false,
         dateFormat: "Y-m-d",

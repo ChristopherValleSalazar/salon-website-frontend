@@ -279,9 +279,9 @@ textarea {
   font-style: italic;
   color: var(--color-logo-buttefly-wings);
 }
-.main-form input:focus, .main-form select:focus {
+.main-form input:focus, .main-form select:focus, .main-form textarea:focus {
   outline: none;
-  border-color: var(--color-primary);
+  border-color: var(--color-logo-petal-text-light);
   box-shadow: 0 4px 12px rgba(184,138,68,0.25);
 }
 
@@ -551,7 +551,7 @@ textarea {
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--color-primary);
+  color: var(--color-logo-petal-dark);
   margin-bottom: 1rem;
 }
 
@@ -562,7 +562,7 @@ textarea {
   background: var(--color-dark);
 }
 .address-card .card-eyebrow {
-  color: var(--color-primary);
+  color: var(--color-logo-petal-text-light);
 }
 .address-link {
   display: flex;
@@ -655,7 +655,7 @@ textarea {
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--color-primary);
+  color: var(--color-logo-petal-dark);
 }
 
 @media (max-width: 900px) {
