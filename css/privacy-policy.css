@@ -1,13 +1,19 @@
 /* ── PRIVACY SHELL ── */
+body {
+    font-family: "Inter", sans-serif;
+}
+header, footer {
+    font-family: "Cormorant Garamond", serif;
+}
+
 .privacy-shell {
     max-width: 100%;
     margin: 0 auto;
-    padding: 3.5rem 1.5rem 5rem;
+    padding: 3rem 1.5rem 5rem;
 }
 
 /* ── HERO ── */
 .privacy-hero {
-    background: #251D19;
     color: var(--color-light);
     text-align: center;
     padding: 3.5rem 1.5rem 3rem;

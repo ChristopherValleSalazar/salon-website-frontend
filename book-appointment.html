@@ -14,8 +14,8 @@
   <link rel="stylesheet" href="css/book-appointment.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css" />
   <script src="js/config.js" defer></script>
-  <script src="js/language.js" defer></script>
-  <script src="js/book-appointment.js" defer></script>
+  <script src="js/language.js" defer type="module"></script>
+  <script src="js/book-appointment.js" defer type="module"></script>
   <script src="js/burger.js" defer></script>
   <script src="js/appointment-link.js" defer></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/airbnb.min.css">
@@ -24,72 +24,78 @@
 </head>
 
 <body>
-  <header>
-    <div class="brand">
-      <a href="index.html" class="logo"><img src="images/images.png" width="100" alt="Yasmin Beauty Salon logo">
-      </a>
-      <h1>Yasmin Beauty Salon</h1>
-    </div>
-
-    <div class="header-right">
-      <div class="header-tools">
-        <div class="language-dropdown">
-          <button class="language-btn" type="button">
-            <span class="fi fi-us"></span>
-            <span>English</span>
-            <span class="language-arrow">▼</span>
-          </button>
-
-          <ul class="list-reset language-menu">
-            <li data-lang="en">
-              <span class="fi fi-us"></span>
-              English
-            </li>
-            <li data-lang="es">
-              <span class="fi fi-sv"></span>
-              Español
-            </li>
-          </ul>
+    <header>
+        <div class="brand">
+            <a href="index.html" class="logo">
+                <img src="images/flower-and-text-hor-final-final.svg" alt="Yasmin Beauty Salon Logo">
+            </a>
         </div>
-      </div>
 
-      <nav class="top-nav" aria-label="Primary Navigation">
-        <div class="nav-container">
-          <ul class="list-reset nav-list">
-            <li><a class="nav-btn btn-style" data-i18n="nav.about" href="about.html">About</a></li>
-            <li class="appointment-nav-item" hidden><a class="nav-btn btn-style" data-i18n="nav.view-appointment"
-                href="view-appointment.html">My Appointment</a></li>
-            <li><a class="nav-btn btn-style cta" data-i18n="nav.book" href="book-appointment.html">Book Now</a></li>
-          </ul>
+        <div class="header-right">
+            <div class="header-tools">
+                <div class="language-dropdown">
+                    <button class="language-btn" type="button">
+                        <span class="fi fi-us"></span>
+                        <span>English</span>
+                        <span class="language-arrow">▼</span>
+                    </button>
+
+                    <ul class="list-reset language-menu">
+                        <li data-lang="en">
+                            <span class="fi fi-us"></span>
+                            English
+                        </li>
+                        <li data-lang="es">
+                            <span class="fi fi-sv"></span>
+                            Español
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <nav class="top-nav" aria-label="Primary Navigation">
+                <div class="nav-container">
+                    <ul class="list-reset nav-list">
+                        <li><a class="nav-btn btn-style" data-i18n="nav.services" href="index.html#services">Services</a></li>
+                        <li><a class="nav-btn btn-style" data-i18n="nav.gallery" href="index.html#gallery">Gallery</a></li>
+                        <li><a class="nav-btn btn-style" data-i18n="nav.about" href="about.html">About</a></li>
+                        <li class="appointment-nav-item" hidden><a class="nav-btn btn-style" data-i18n="nav.view-appointment"
+                            href="view-appointment.html">My Appointment</a></li>
+                        <li><a class="nav-cta btn-style" data-i18n="nav.book" href="book-appointment.html">Book
+                                Now</a></li>
+                    </ul>
+                </div>
+            </nav>
         </div>
-      </nav>
-    </div>
 
-    <button class="burger-icon" id="burgerBtn" onclick="burgerBehaviour()" aria-label="Toggle menu">
-      <span class="bar top"></span>
-      <span class="bar middle"></span>
-      <span class="bar bottom"></span>
-    </button>
+        <button class="burger-icon" id="burgerBtn" onclick="burgerBehaviour()" aria-label="Toggle menu">
+            <span class="bar top"></span>
+            <span class="bar middle"></span>
+            <span class="bar bottom"></span>
+        </button>
 
-    <div class="mobile-menu" id="mobileMenu">
-      <div class="mobile-menu-inner">
-        <nav class="burger-nav" aria-label="Primary Navigation">
-          <ul class="list-reset nav-list-burger">
-            <li><a class="nav-btn-burger" data-i18n="nav.about" href="about.html">About</a></li>
-            <li class="appointment-nav-item" hidden><a class="nav-btn-burger" data-i18n="nav.view-appointment"
-                href="view-appointment.html">My Appointment</a></li>
-            <li><a class="nav-btn-burger cta" data-i18n="nav.book" href="book-appointment.html">Book Now</a></li>
-          </ul>
-        </nav>
+        <div class="mobile-menu" id="mobileMenu">
+            <div class="mobile-menu-inner">
+                <nav class="burger-nav" aria-label="Primary Navigation">
+                    <ul class="list-reset nav-list-burger">
+                        <li><a class="nav-btn-burger" data-i18n="nav.services" href="index.html#services">Services</a></li>
+                        <li><a class="nav-btn-burger" data-i18n="nav.gallery" href="index.html#gallery">Gallery</a></li>
+                        <li><a class="nav-btn-burger" data-i18n="nav.about" href="about.html">About</a></li>
+                        <li class="appointment-nav-item" hidden><a class="nav-btn-burger" data-i18n="nav.view-appointment"
+                            href="view-appointment.html">My Appointment</a></li>
+                        <li><a class="nav-btn-burger cta" data-i18n="nav.book" href="book-appointment.html">Book Now</a>
+                        </li>
+                    </ul>
+                </nav>
 
-        <div class="mobile-lang-toggle">
-          <span class="lang-opt active" data-lang="en">EN</span>
-          <span class="lang-divider">|</span>
-          <span class="lang-opt" data-lang="es">ES</span>
+                <div class="mobile-lang-toggle">
+                    <span class="lang-opt active" data-lang="en">EN</span>
+                    <span class="lang-divider">|</span>
+                    <span class="lang-opt" data-lang="es">ES</span>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </header>
+    </header>
 
   <main>
     <section id="appointment-form-container">
@@ -134,7 +140,6 @@
           <div class="img-container">
             <input type="file" id="hair-image" accept=".png,.jpg,.jpeg,.webp" name="hairPic">
 
-            <!-- Custom drop zone: desktop only. Mobile falls back to the native picker above. -->
             <label for="hair-image" class="file-drop" id="file-drop">
               <span class="file-drop-empty">
                 <svg class="file-drop-icon" viewBox="0 0 24 24" width="26" height="26" fill="none"
@@ -189,84 +194,134 @@
     <hr class="form-divider">
 
     <section id="location-address-hours">
+      <h2 class="form-title" data-i18n="info.title">Find the <em>Salon</em></h2>
+
       <div class="map-hours-container">
+
         <div class="map-container">
-          <h2 class="location-address-hours-title" data-i18n="booking.location.heading">Location</h2>
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d846343.3660965702!2d-118.20877800000001!3d34.043133!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c60701da1d91%3A0x9e292fb128fbf175!2sYasmin%20Beauty%20Salon%20Unisex!5e0!3m2!1sen!2sus!4v1781750795074!5m2!1sen!2sus"
-            allowfullscreen="" loading="lazy" height="auto" width="auto"
+            allowfullscreen loading="lazy"
+            title="Map to Yasmin Beauty Salon Unisex"
             referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
-        <div class="address-container">
-          <h2 class="location-address-hours-title" data-i18n="booking.address.heading">Address</h2>
-          <a href="https://maps.google.com/?q=Yasmin+Beauty+Salon+Unisex" target="_blank" rel="noopener noreferrer"
-            class="address-link">
-            Yasmin Beauty Salon Unisex<br>
-            2438 1st St<br>
-            Los Angeles, CA 90033
-          </a>
-          <p class="address-desc" data-i18n="booking.address.message">Click the address to open directions in Google
-            Maps.</p>
-        </div>
-        <div class="hours-container">
-          <h2 class="location-address-hours-title" data-i18n="booking.hours.heading">Opening Times</h2>
-          <ul class="list-reset hours-container">
-            <li class="day-container">
-              <span data-i18n="booking.hours.sunday">Sunday</span>
-              <div class="date-time">10:00AM<span>&#8722;</span>3:00PM</div>
-            </li>
-            <li class="day-container">
-              <span data-i18n="booking.hours.monday">Monday</span>
-              <div class="date-time" data-i18n="booking.hours.closed">Closed</div>
-            </li>
-            <li class="day-container">
-              <span data-i18n="booking.hours.tuesday">Tuesday</span>
-              <div class="date-time">10:00AM<span>&#8722;</span>7:00PM</div>
-            </li>
-            <li class="day-container">
-              <span data-i18n="booking.hours.wednesday">Wednesday</span>
-              <div class="date-time">10:00AM<span>&#8722;</span>7:00PM</div>
-            </li>
-            <li class="day-container">
-              <span data-i18n="booking.hours.thursday">Thursday</span>
-              <div class="date-time">10:00AM<span>&#8722;</span>7:00PM</div>
-            </li>
-            <li class="day-container">
-              <span data-i18n="booking.hours.friday">Friday</span>
-              <div class="date-time">10:00AM<span>&#8722;</span>7:00PM</div>
-            </li>
-            <li class="day-container">
-              <span data-i18n="booking.hours.saturday">Saturday</span>
-              <div class="date-time">10:00AM<span>&#8722;</span>7:00PM</div>
-            </li>
-          </ul>
+
+        <div class="info-column">
+          <div class="address-card">
+            <span class="card-eyebrow" data-i18n="booking.address.heading">Address</span>
+            <a href="https://maps.google.com/?q=Yasmin+Beauty+Salon+Unisex"
+              target="_blank" rel="noopener noreferrer" class="address-link">
+              <span class="address-name">Yasmin Beauty Salon Unisex</span>
+              <span class="address-street">2438 1st St<br>Los Angeles, CA 90033</span>
+              <span class="address-cta" data-i18n="booking.address.open">Open in Google Maps →</span>
+            </a>
+            <p class="address-desc" data-i18n="booking.address.message">Click the address to open directions.</p>
+          </div>
+
+          <div class="hours-card">
+            <span class="card-eyebrow" data-i18n="booking.hours.heading">Opening Times</span>
+            <ul class="list-reset hours-list">
+              <li class="day-container" data-day="0">
+                <span class="day-name" data-i18n="booking.hours.sunday">Sunday</span>
+                <span class="day-time">10:00AM &#8722; 3:00PM</span>
+              </li>
+              <li class="day-container is-closed" data-day="1">
+                <span class="day-name" data-i18n="booking.hours.monday">Monday</span>
+                <span class="day-time" data-i18n="booking.hours.closed">Closed</span>
+              </li>
+              <li class="day-container" data-day="2">
+                <span class="day-name" data-i18n="booking.hours.tuesday">Tuesday</span>
+                <span class="day-time">10:00AM &#8722; 7:00PM</span>
+              </li>
+              <li class="day-container" data-day="3">
+                <span class="day-name" data-i18n="booking.hours.wednesday">Wednesday</span>
+                <span class="day-time">10:00AM &#8722; 7:00PM</span>
+              </li>
+              <li class="day-container" data-day="4">
+                <span class="day-name" data-i18n="booking.hours.thursday">Thursday</span>
+                <span class="day-time">10:00AM &#8722; 7:00PM</span>
+              </li>
+              <li class="day-container" data-day="5">
+                <span class="day-name" data-i18n="booking.hours.friday">Friday</span>
+                <span class="day-time">10:00AM &#8722; 7:00PM</span>
+              </li>
+              <li class="day-container" data-day="6">
+                <span class="day-name" data-i18n="booking.hours.saturday">Saturday</span>
+                <span class="day-time">10:00AM &#8722; 7:00PM</span>
+              </li>
+            </ul>
+            <span class="hours-note" data-i18n="booking.hours.walkins">Walk-ins welcome</span>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div class="footer-content">
-      <h2 data-i18n="footer.heading">Get In Touch</h2>
+    <footer>
+        <div class="footer-inner">
+            <div class="info-container">
+                <div class="company-info footer-col">
+                    <img src="images/logo-yasmin-vertical.svg" alt="Yasmin Beauty Salon" class="footer-logo" width="150">
+                    <p class="company-p" data-i18n="footer.tagline">Unisex beauty and barber salon located in Boyle Heights.</p>
+                    <span class="company-reminder">Se habla español</span>
+                </div>
 
-      <a href="tel:+13239075658" class="contact-link">
-        (323) 907-5658
-      </a>
-      <a href="mailto:yasminbeautysalon2024@gmail.com" class="contact-link">
-        yasminbeautysalon2024@gmail.com
-      </a>
+                <div class="explore footer-col">
+                    <h3 class="explore-heading" data-i18n="footer.explore">Explore</h3>
+                    <ul class="explore-links list-reset">
+                    <li><a href="index.html#services" data-i18n="nav.services">Services</a></li>
+                    <li><a href="index.html#gallery" data-i18n="nav.gallery">Gallery</a></li>
+                    <li><a href="about.html" data-i18n="nav.about">About</a></li>
+                    <li><a href="book-appointment.html" data-i18n="nav.book">Book Now</a></li>
+                    <li><a href="privacy-policy.html" data-i18n="footer.privacy">Privacy Policy</a></li>
+                    </ul>
+                </div>
 
-      <div class="social-links">
-        <a href="https://www.tiktok.com/@yasmin.beauty.salon23">TikTok</a>
-      </div>
+                <div class="opening-times footer-col">
+                    <h3 class="opening-heading" data-i18n="footer.opening">Opening Times</h3>
+                    <ul class="times list-reset">
+                    <li><span data-i18n="days.sun">Sun</span><span>10AM &mdash; 3PM</span></li>
+                    <li class="is-closed"><span data-i18n="days.mon">Mon</span><span data-i18n="opening.closed">Closed</span></li>
+                    <li><span data-i18n="days.tueSat">Tue &mdash; Sat</span><span>10AM &mdash; 7PM</span></li>
+                    </ul>
+                </div>
 
-      <div class="copyright">
-        <span>© 2026 Yasmin Beauty Salon</span>
-        <span class="footer-divider">|</span>
-        <a href="privacy-policy.html" class="footer-policy-link" data-i18n="footer.privacy">Privacy Policy</a>
-      </div>
-    </div>
-  </footer>
+                <div class="contact-info footer-col">
+                    <h3 class="contact-heading" data-i18n="footer.contact">Get in touch</h3>
+                    <div class="contact-info-list">
+                        <a href="tel:+13239075658" class="contact-phone">(323) 907-5658</a>
+                        <a href="mailto:yasminbeautysalon2024@gmail.com" class="contact-email">yasminbeautysalon2024@gmail.com</a>
+                        <address class="contact-address">
+                            <a href="https://maps.app.goo.gl/q5Vv3P4v4Z2xzB596" target="_blank" rel="noopener">
+                                <span>2438 1st St<br>Los Angeles, CA 90033</span>
+                            </a>
+                        </address>
+                        <ul class="social-links list-reset">
+                            <li>
+                            <a href="https://www.tiktok.com/@yasmin.beauty.salon23" target="_blank" rel="noopener">TikTok</a>
+                            <span class="social-sep">&middot;</span>
+                            <a href="https://www.tiktok.com/@yasmin.beauty.salon23" target="_blank" rel="noopener">@yasmin.beauty.salon23</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="footer-divider">
+
+            <div class="legal-container">
+                <span class="copyright">&copy; 2026 Yasmin Beauty Salon</span>
+                <div class="legal-right">
+                    <a href="privacy-policy.html" class="footer-policy-link" data-i18n="footer.privacy">Privacy Policy</a>
+                    <div class="footer-lang">
+                        <span class="lang-opt active" data-lang="en">EN</span>
+                        <span class="lang-divider">|</span>
+                        <span class="lang-opt" data-lang="es">ES</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
   <div id="success-modal-overlay" class="modal-overlay">
     <div class="modal-container modal-success">

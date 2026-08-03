@@ -17,7 +17,7 @@ textarea {
   border-radius: 40px;
   display: flex;
   flex-direction: column;
-  background: var(--color-form);
+  background: var(--color-panel);
   padding: 20px;
   max-width: 1000px;
   margin: 0 auto;
@@ -28,7 +28,6 @@ textarea {
   margin: 12px 0 8px 8px;
   color: var(--color-dark);
   font-size: var(--font-size-label);
-  font-family: "Cormorant Garamond", serif;
 }
 .main-form .required {
   color: red;
@@ -42,7 +41,8 @@ textarea {
   display: inline;
 }
 
-.main-form input, select {
+.main-form input,
+.main-form select {
   width: 100%;
   min-height: 50px;
   padding: 12px;
@@ -50,16 +50,15 @@ textarea {
   margin: 2px 0;
   display: inline-block;
   border: 1px solid #ccc;
-  border-radius: 40px;
+  border-radius: 14px;
   box-sizing: border-box;
   background-color: #f8f4ed;
 }
-.main-form input, select, textarea {
+.main-form input,
+.main-form select,
+.main-form textarea {
   max-width: 1000px;
 }
-.main-form select option {
-  background-color: #f8f4ed;
-} 
 .main-form textarea {
   font-size: 1rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -71,24 +70,27 @@ textarea {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  color: var(--color-text);
+  color: var(--color-logo-inner-circle);
   border: 1px solid var(--color-border);
-  border-radius: 40px;
-  padding: 0.75rem 1rem;
   width: 100%;
   font: inherit;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
+.main-form select:has(option[value=""]:checked) {
+  color: rgba(22, 15, 10, 0.55);
+  font-size: 1.3rem;
+}
+.main-form select option {
+  background-color: #f8f4ed;
+  font-size: 1.2rem;
+  color: var(--color-dark);
+}
+
+/* FILE INPUT */
 .img-container {
   position: relative;
   width: 100%;
 }
-
-.main-form select:has(option[value=""]:checked) {
-  color: #a09585;
-}
-
-/* NATIVE FILE INPUT (used as-is on mobile so the OS photo picker stays unrestricted) */
 .main-form input[type="file"] {
   display: block;
   margin: 0;
@@ -136,12 +138,12 @@ textarea {
     display: flex;
     align-items: center;
     gap: 16px;
-    width: 100%;
-    max-width: 1000px;
+    width: 99%;
+    max-width: 980px;
     min-height: 20px;
     padding: 14px 18px;
     border: 1.5px dashed #c9bda8;
-    border-radius: 20px;
+    border-radius: 14px;
     background: #f8f4ed;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     cursor: pointer;
@@ -168,7 +170,7 @@ textarea {
   }
   .file-drop-icon {
     flex-shrink: 0;
-    color: var(--color-primary);
+    color: var(--color-logo-butterfly-body);
   }
   .file-drop-copy {
     display: flex;
@@ -179,7 +181,7 @@ textarea {
     font-family: "Inter", sans-serif;
     font-size: 0.95rem;
     font-weight: 500;
-    color: var(--color-dark);
+    color: rgba(22, 15, 10, 0.65);
   }
   .file-drop-hint {
     font-family: "Inter", sans-serif;
@@ -243,19 +245,21 @@ textarea {
   display: block;
   width: 50%;
   text-align: center;
-  background-color: var(--color-submit-btn);
-  color: var(--color-light);
-  padding: 14px;
+  background: transparent;
+  border: 2px solid var(--color-logo-buttefly-wings);
+  color: var(--color-logo-buttefly-wings);
+  padding: 18px 0;
+  font-size: 0.9rem;
+  font-weight: 600;
   margin: 10px auto;
-  border: none;
-  border-radius: 40px;
+  border-radius: 30px;
   cursor: pointer;
-  box-shadow:
-    0 0 15px 6px rgba(184,138,68,0.25),
-    0 2px 10px rgba(184,138,68,0.1);
+  transition: color 0.25s ease, background 0.25s ease, transform 0.2s ease, border-color 0.25s ease;
 }
-.main-form button[type=submit]:hover {
-  background: var(--color-submit-btn-hover);
+.book-app-btn:hover {
+  background: var(--color-logo-buttefly-wings-hover);
+  color: var(--color-logo-text-light);
+  transform: translateY(-2px);
 }
 .app-form{
   max-width: 90%;
@@ -271,28 +275,13 @@ textarea {
     gap: 0.7rem;
     margin: 24px 0 12px 0;
 }
-.form-title::before {
-    content: "";
-    width: 34px;
-    height: 2px;
-    background: var(--color-primary);
-}
-.form-title::after {
-    content: "";
-    width: 34px;
-    height: 2px;
-    background: var(--color-primary);
-}
 .form-title em {
   font-style: italic;
-  color: #6b4f2e;
+  color: var(--color-logo-buttefly-wings);
 }
-
-
-
-.main-form input:focus, .main-form select:focus {
+.main-form input:focus, .main-form select:focus, .main-form textarea:focus {
   outline: none;
-  border-color: var(--color-primary);
+  border-color: var(--color-logo-petal-text-light);
   box-shadow: 0 4px 12px rgba(184,138,68,0.25);
 }
 
@@ -353,7 +342,7 @@ textarea {
   max-width: 1000px;
   padding: 16px;
   border: 1px solid #ccc;
-  border-radius: 20px;
+  border-radius: 14px;
   background: #f8f4ed;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   box-sizing: border-box;
@@ -363,12 +352,9 @@ textarea {
   box-shadow: 0 0 2px rgba(255, 0, 0, 0.15);
 }
 
-/* flatpickr reveals its input in inline mode — the calendar itself is the control */
 .booking-wrapper .flatpickr-input {
   display: none;
 }
-
-/* Blend the inline flatpickr calendar into the card */
 .flatpickr-calendar.inline {
   box-shadow: none;
   background: transparent;
@@ -388,18 +374,43 @@ textarea {
 .flatpickr-weekdays, .flatpickr-days {
   font-size: 18px;
 }
-/* Match the theme's accent to the site's gold palette.
-   Scoped under .booking-wrapper so it outranks the CDN theme loaded after this file. */
+
 .booking-wrapper .flatpickr-day.selected,
 .booking-wrapper .flatpickr-day.selected:hover,
 .booking-wrapper .flatpickr-day.selected:focus {
-  background: var(--color-primary);
-  border-color: var(--color-primary);
+  background: var(--color-logo-buttefly-wings);
+  border-color: var(--color-logo-buttefly-wings);
   color: var(--color-light);
 }
 .booking-wrapper .flatpickr-day.today:not(.selected) {
-  border-color: var(--color-primary);
+  border-color: var(--color-logo-butterfly-body);
 }
+
+.booking-wrapper .flatpickr-current-month select.flatpickr-monthDropdown-months,
+.booking-wrapper .flatpickr-current-month input.cur-year,
+.booking-wrapper .numInputWrapper input.cur-year {
+  height: auto;
+  min-height: 0;
+  padding: 0 2px;
+  margin: 0;
+  font-size: 1.05rem;
+  color: var(--color-dark);
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.booking-wrapper .numInputWrapper,
+.booking-wrapper .numInputWrapper:hover {
+  background: transparent;
+}
+.booking-wrapper .numInputWrapper span {
+  display: none;
+}
+
 
 /* TIME SLOT PANEL */
 .time-panel {
@@ -427,16 +438,34 @@ textarea {
 .time-panel-empty {
   grid-column: 1 / -1;
   margin: 0;
-  font-size: 0.9rem;
+  font-size: 1.2rem;
   color: #8a7f72;
 }
+.time-panel-phone {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-align: left;
+    cursor: pointer;
+    background: transparent;
+    color: var(--color-logo-buttefly-wings);             
+    text-decoration: none;
+    transition: transform 0.2s ease;
+    font-family: 'Inter', sans-serif;
+    font-variant-numeric: lining-nums tabular-nums;
+}
+.time-panel-phone:hover {            
+    transform: translateY(-2px);
+}
+
 .time-panel-error {
   color: #b3402e;
 }
 .slot-button {
   padding: 10px 6px;
-  font-family: "Inter", sans-serif;
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: var(--color-dark);
   background: var(--color-light);
   border: 1px solid #ccc;
@@ -445,25 +474,28 @@ textarea {
   transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
 }
 .slot-button:hover {
-  border-color: var(--color-primary);
+  border-color: var(--color-logo-butterfly-body);
 }
 .slot-button.selected {
-  background: var(--color-submit-btn);
-  border-color: var(--color-submit-btn);
+  background: var(--color-logo-buttefly-wings);
+  border-color: var(--color-logo-buttefly-wings);
   color: var(--color-light);
 }
 
 /* Confirmation bar shown once a date and time are both chosen */
 .booking-summary {
   flex-basis: 100%;
+  max-width: 600px;
+  margin: 0 auto;
   padding: 10px 16px;
   text-align: center;
   font-family: "Inter", sans-serif;
   font-size: 0.95rem;
   font-weight: 500;
-  color: var(--color-submit-btn);
-  background: rgba(176, 138, 82, 0.12);
-  border-radius: 40px;
+  color: var(--color-logo-text-light);
+  background: var(--colot-accent-panel);
+  border-radius: 14px;
+  height: auto;
 }
 
 @media (max-width: 699px) {
@@ -487,88 +519,152 @@ textarea {
 .map-hours-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 1rem 1rem 2rem 1rem;
+  padding: 1rem 1rem 3rem;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 4rem;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 2rem;
   align-items: start;
 }
-.map-container {
+
+/* MAP */
+.map-container iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 620px;
+  border: 1px solid rgba(22, 15, 10, 0.12);
+  border-radius: 14px;
+}
+
+/* RIGHT COLUMN */
+.info-column {
   display: flex;
   flex-direction: column;
-  align-items: center;
-}
-.map-container iframe {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  min-height: 250px;
+  gap: 1.5rem;
+  font-variant-numeric: lining-nums tabular-nums;
 }
 
-@media (max-width: 900px) {
-  .map-container iframe {
-    width: 100%;
-  }
+.card-eyebrow {
+  display: block;
+  font-family: "Inter", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-logo-petal-dark);
+  margin-bottom: 1rem;
 }
 
-.location-address-hours-title {
-  margin: 1rem 0;
+/* ADDRESS CARD */
+.address-card {
+  padding: 2rem;
+  border-radius: 10px;
+  background: var(--color-dark);
 }
-hr.form-divider {
-  border: none;
-  height: 1px;
-  background: linear-gradient(to right, transparent, var(--color-dark), transparent);
-  opacity: 0.25;
-  margin: 12px auto 28px;
-  width: 80%;
-}
-.address-container {
-  max-width: 250px;
-  text-align: center;
-  margin: 0 auto;
+.address-card .card-eyebrow {
+  color: var(--color-logo-petal-text-light);
 }
 .address-link {
   display: flex;
-  color: inherit;
+  flex-direction: column;
+  gap: 0.9rem;
   text-decoration: none;
-  font-size: var(--font-size-contact);
-  font-weight: 500;
-  line-height: 1.5;
-  text-align: center;
-  transition:
-    transform 0.2s ease,
-    color 0.2s ease;
-}
-.address-desc {
-  margin-top: 10px;
-  font-size: 12px;
+  color: var(--color-light);
+  transition: transform 0.2s ease;
 }
 .address-link:hover {
-  color: var(--color-primary);
   transform: translateY(-2px);
 }
-.hours-container {
+.address-name {
+  font-size: 1.75rem;
+  line-height: 1.2;
+}
+.address-street {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.75);
+}
+.address-cta {
+  font-family: "Inter", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-logo-butterfly-body);
+}
+.address-desc {
+  margin: 1rem 0 0;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* HOURS CARD */
+.hours-card {
+  padding: 2rem;
+  border-radius: 10px;
+  background: #faf6ef;
+  border: 1px solid rgba(22, 15, 10, 0.1);
+}
+.hours-list {
   display: flex;
   flex-direction: column;
-  margin: 0 15px
-}
-.hours-container ul {
-  gap: 25px;
-  font-weight: 500;
-}
-.hours-container h2 {
-  text-align: center;
 }
 .day-container {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  gap: 25px;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.7rem 0.6rem;
+  border-bottom: 1px solid rgba(22, 15, 10, 0.08);
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+.day-container:last-child {
+  border-bottom: none;
+}
+.day-name {
+  color: var(--color-dark);
+}
+.day-time {
+  color: rgba(22, 15, 10, 0.7);
+  white-space: nowrap;
+}
+.day-container.is-closed .day-name,
+.day-container.is-closed .day-time {
+  color: rgba(22, 15, 10, 0.35);
+}
+.day-container.is-today {
+  background: rgba(216, 138, 165, 0.1);
+}
+.day-container.is-today .day-name {
+  font-weight: 600;
+}
+.day-container.is-today .day-name::after {
+  content: " · TODAY";
+  font-family: "Inter", sans-serif;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--color-logo-buttefly-wings);
+}
+.hours-note {
+  display: block;
+  margin-top: 1.2rem;
+  font-family: "Inter", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-logo-petal-dark);
 }
 
 @media (max-width: 900px) {
   .map-hours-container {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.5rem;
+  }
+  .map-container iframe {
+    min-height: 320px;
   }
 }
 

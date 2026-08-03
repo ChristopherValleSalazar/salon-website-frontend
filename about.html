@@ -2,132 +2,207 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yasmin Beauty Salon | About</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="css/global-layout.css">
-  <link rel="stylesheet" href="css/about.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css" />
-  <script src="js/language.js" defer></script>
-  <script src="js/home.js" defer></script>
-  <script src="js/burger.js" defer></script>
-  <script src="js/appointment-link.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yasmin Beauty Salon | About</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/global-layout.css">
+    <link rel="stylesheet" href="css/about.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css" />
+    <script src="js/language.js" defer type="module"></script>
+    <script src="js/burger.js" defer ></script>
+    <script src="js/appointment-link.js" defer></script>
 
 </head>
 
 <body>
-  <header>
-    <div class="brand">
-      <a href="index.html" class="logo"><img src="images/images.png" width="100" alt="Yasmin Beauty Salon logo">
-      </a>
-      <h1>Yasmin Beauty Salon</h1>
-    </div>
-
-    <div class="header-right">
-      <div class="header-tools">
-        <div class="language-dropdown">
-          <button class="language-btn" type="button">
-            <span class="fi fi-us"></span>
-            <span>English</span>
-            <span class="language-arrow">▼</span>
-          </button>
-
-          <ul class="list-reset language-menu">
-            <li data-lang="en">
-              <span class="fi fi-us"></span>
-              English
-            </li>
-            <li data-lang="es">
-              <span class="fi fi-sv"></span>
-              Español
-            </li>
-          </ul>
+    <header>
+        <div class="brand">
+            <a href="index.html" class="logo">
+                <img src="images/flower-and-text-hor-final-final.svg" alt="Yasmin Beauty Salon Logo">
+            </a>
         </div>
-      </div>
 
-      <nav class="top-nav" aria-label="Primary Navigation">
-        <div class="nav-container">
-          <ul class="list-reset nav-list">
-            <li><a class="nav-btn btn-style" data-i18n="nav.about" href="about.html">About</a></li>
-            <li class="appointment-nav-item" hidden><a class="nav-btn btn-style" data-i18n="nav.view-appointment"
-                href="view-appointment.html">My Appointment</a></li>
-            <li><a class="nav-btn btn-style cta" data-i18n="nav.book" href="book-appointment.html">Book Now</a></li>
-          </ul>
+        <div class="header-right">
+            <div class="header-tools">
+                <div class="language-dropdown">
+                    <button class="language-btn" type="button">
+                        <span class="fi fi-us"></span>
+                        <span>English</span>
+                        <span class="language-arrow">▼</span>
+                    </button>
+
+                    <ul class="list-reset language-menu">
+                        <li data-lang="en">
+                            <span class="fi fi-us"></span>
+                            English
+                        </li>
+                        <li data-lang="es">
+                            <span class="fi fi-sv"></span>
+                            Español
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <nav class="top-nav" aria-label="Primary Navigation">
+                <div class="nav-container">
+                    <ul class="list-reset nav-list">
+                        <li><a class="nav-btn btn-style" data-i18n="nav.services" href="index.html#services">Services</a></li>
+                        <li><a class="nav-btn btn-style" data-i18n="nav.gallery" href="index.html#gallery">Gallery</a></li>
+                        <li><a class="nav-btn btn-style" data-i18n="nav.about" href="about.html">About</a></li>
+                        <li class="appointment-nav-item" hidden><a class="nav-btn btn-style" data-i18n="nav.view-appointment"
+                            href="view-appointment.html">My Appointment</a></li>
+                        <li><a class="nav-cta btn-style" data-i18n="nav.book" href="book-appointment.html">Book
+                                Now</a></li>
+                    </ul>
+                </div>
+            </nav>
         </div>
-      </nav>
-    </div>
 
-    <button class="burger-icon" id="burgerBtn" onclick="burgerBehaviour()" aria-label="Toggle menu">
-      <span class="bar top"></span>
-      <span class="bar middle"></span>
-      <span class="bar bottom"></span>
-    </button>
+        <button class="burger-icon" id="burgerBtn" onclick="burgerBehaviour()" aria-label="Toggle menu">
+            <span class="bar top"></span>
+            <span class="bar middle"></span>
+            <span class="bar bottom"></span>
+        </button>
 
-    <div class="mobile-menu" id="mobileMenu">
-      <div class="mobile-menu-inner">
-        <nav class="burger-nav" aria-label="Primary Navigation">
-          <ul class="list-reset nav-list-burger">
-            <li><a class="nav-btn-burger" data-i18n="nav.about" href="about.html">About</a></li>
-            <li class="appointment-nav-item" hidden><a class="nav-btn-burger" data-i18n="nav.view-appointment"
-                href="view-appointment.html">My Appointment</a></li>
-            <li><a class="nav-btn-burger cta" data-i18n="nav.book" href="book-appointment.html">Book Now</a></li>
-          </ul>
-        </nav>
+        <div class="mobile-menu" id="mobileMenu">
+            <div class="mobile-menu-inner">
+                <nav class="burger-nav" aria-label="Primary Navigation">
+                    <ul class="list-reset nav-list-burger">
+                        <li><a class="nav-btn-burger" data-i18n="nav.services" href="index.html#services">Services</a></li>
+                        <li><a class="nav-btn-burger" data-i18n="nav.gallery" href="index.html#gallery">Gallery</a></li>
+                        <li><a class="nav-btn-burger" data-i18n="nav.about" href="about.html">About</a></li>
+                        <li class="appointment-nav-item" hidden><a class="nav-btn-burger" data-i18n="nav.view-appointment"
+                            href="view-appointment.html">My Appointment</a></li>
+                        <li><a class="nav-btn-burger cta" data-i18n="nav.book" href="book-appointment.html">Book Now</a>
+                        </li>
+                    </ul>
+                </nav>
 
-        <div class="mobile-lang-toggle">
-          <span class="lang-opt active" data-lang="en">EN</span>
-          <span class="lang-divider">|</span>
-          <span class="lang-opt" data-lang="es">ES</span>
+                <div class="mobile-lang-toggle">
+                    <span class="lang-opt active" data-lang="en">EN</span>
+                    <span class="lang-divider">|</span>
+                    <span class="lang-opt" data-lang="es">ES</span>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </header>
+    </header>
 
-  <main>
-    <div class="main-container">
-      <div class="story-text">
-        <h2 class="story-heading" data-i18n="about.title">About Us</h2>
-        <p class="story-p" data-i18n="about.p">
-          Hola, mi nombre es Claudia. Soy la dueña des Yasmin Beauty Salon, tambien una estilista trabajando en este
-          humilde negocio. Yo como una mujer que vino a este pais con muchos sueños, con ganas a salir adelate y
-          triunfar en un pais de oportunidades. <Strong class="story-strong">Te invito</Strong> a que nos visites y
-          conozcas nuestro tabajo, te aseguro que no te arreppentiras.
-        </p>
-        <!-- <span class="brand-name">Yasmin Beauty Salon</span> -->
-      </div>
-      <div class="business-img">
-        <!-- <img src="https://placehold.co/600x500?text=Business+Image" alt="Placeholder"> -->
-      </div>
-    </div>
-  </main>
+    <main>
+        <div class="main-inner">
+            <div class="business-img">
+                <img src="https://placehold.co/450x500">
+            </div>
+            <div class="main-container">
+                <div class="story-text">
+                    <h2 class="section-eyebrow" data-i18n="about.title">About <em>Us</em></h2>
+                    <p class="story-p" data-i18n="about.p">
+                    Hola, mi nombre es Claudia. Soy la dueña des Yasmin Beauty Salon, tambien una estilista trabajando en este
+                    humilde negocio. Yo como una mujer que vino a este pais con muchos sueños, con ganas a salir adelate y
+                    triunfar en un pais de oportunidades. <strong class="story-strong">Te invito</Strong> a que nos visites y
+                    conozcas nuestro tabajo, te aseguro que no te arreppentiras.
+                    </p>
+                </div>
+                <div class="info-container">
+                    <ul class="list-reset info-list">
+                        <li>
+                            <h3>Unisex</h3>
+                            <span>Beauty and barber services</span>
+                        </li>
+                        <li>
+                            <h3>No appointment needed</h3>
+                            <span>Walk-ins welcome, or book online any time</span>
+                        </li>
+                        <li>
+                            <h3>Español</h3>
+                            <span>Primarily Spanish-speaking, some English</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="cta-container">
+                    <a href="book-appointment.html" class="cta-btn-primary">
+                        <span data-i18n="common.btn.appointment">Book Appointment</span>
+                        <span class="btn-arrow" aria-hidden="true">→</span>
+                    </a>
+                    <a href="index.html#services" class="cta-btn-secondary">
+                        <span data-i18n="hero.explore">View Services</span>
+                        <span class="btn-arrow" aria-hidden="true">→</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
 
-  <footer>
-    <div class="footer-content">
-      <h2 data-i18n="footer.heading">Get In Touch</h2>
+    <footer>
+        <div class="footer-inner">
+            <div class="info-container">
+                <div class="company-info footer-col">
+                    <img src="images/logo-yasmin-vertical.svg" alt="Yasmin Beauty Salon" class="footer-logo" width="150">
+                    <p class="company-p" data-i18n="footer.tagline">Unisex beauty and barber salon located in Boyle Heights.</p>
+                    <span class="company-reminder">Se habla español</span>
+                </div>
 
-      <a href="tel:+13239075658" class="contact-link">
-        (323) 907-5658
-      </a>
-      <a href="mailto:yasminbeautysalon2024@gmail.com" class="contact-link">
-        yasminbeautysalon2024@gmail.com
-      </a>
+                <div class="explore footer-col">
+                    <h3 class="explore-heading" data-i18n="footer.explore">Explore</h3>
+                    <ul class="explore-links list-reset">
+                    <li><a href="index.html#services" data-i18n="nav.services">Services</a></li>
+                    <li><a href="index.html#gallery" data-i18n="nav.gallery">Gallery</a></li>
+                    <li><a href="about.html" data-i18n="nav.about">About</a></li>
+                    <li><a href="book-appointment.html" data-i18n="nav.book">Book Now</a></li>
+                    <li><a href="privacy-policy.html" data-i18n="footer.privacy">Privacy Policy</a></li>
+                    </ul>
+                </div>
 
-      <div class="social-links">
-        <a href="https://www.tiktok.com/@yasmin.beauty.salon23">TikTok</a>
-      </div>
+                <div class="opening-times footer-col">
+                    <h3 class="opening-heading" data-i18n="footer.opening">Opening Times</h3>
+                    <ul class="times list-reset">
+                    <li><span data-i18n="days.sun">Sun</span><span>10AM &mdash; 3PM</span></li>
+                    <li class="is-closed"><span data-i18n="days.mon">Mon</span><span data-i18n="opening.closed">Closed</span></li>
+                    <li><span data-i18n="days.tueSat">Tue &mdash; Sat</span><span>10AM &mdash; 7PM</span></li>
+                    </ul>
+                </div>
 
-      <div class="copyright">
-        <span>© 2026 Yasmin Beauty Salon</span>
-        <span class="footer-divider">|</span>
-        <a href="privacy-policy.html" class="footer-policy-link" data-i18n="footer.privacy">Privacy Policy</a>
-      </div>
-    </div>
-  </footer>
+                <div class="contact-info footer-col">
+                    <h3 class="contact-heading" data-i18n="footer.contact">Get in touch</h3>
+                    <div class="contact-info-list">
+                        <a href="tel:+13239075658" class="contact-phone">(323) 907-5658</a>
+                        <a href="mailto:yasminbeautysalon2024@gmail.com" class="contact-email">yasminbeautysalon2024@gmail.com</a>
+                        <address class="contact-address">
+                            <a href="https://maps.app.goo.gl/q5Vv3P4v4Z2xzB596" target="_blank" rel="noopener">
+                                <span>2438 1st St<br>Los Angeles, CA 90033</span>
+                            </a>
+                        </address>
+                        <ul class="social-links list-reset">
+                            <li>
+                            <a href="https://www.tiktok.com/@yasmin.beauty.salon23" target="_blank" rel="noopener">TikTok</a>
+                            <span class="social-sep">&middot;</span>
+                            <a href="https://www.tiktok.com/@yasmin.beauty.salon23" target="_blank" rel="noopener">@yasmin.beauty.salon23</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="footer-divider">
+
+            <div class="legal-container">
+                <span class="copyright">&copy; 2026 Yasmin Beauty Salon</span>
+                <div class="legal-right">
+                    <a href="privacy-policy.html" class="footer-policy-link" data-i18n="footer.privacy">Privacy Policy</a>
+                    <div class="footer-lang">
+                        <span class="lang-opt active" data-lang="en">EN</span>
+                        <span class="lang-divider">|</span>
+                        <span class="lang-opt" data-lang="es">ES</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>

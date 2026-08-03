@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
     <script src="js/home.js" defer></script>
-    <script src="js/language.js" defer></script>
+    <script src="js/language.js" defer type="module"></script>
     <script src="js/burger.js" defer></script>
     <script src="js/appointment-link.js" defer></script>
 </head>
@@ -23,9 +23,9 @@
 <body>
     <header>
         <div class="brand">
-            <a href="index.html" class="logo"><img src="images/images.png" width="100" alt="Yasmin Beauty Salon logo">
+            <a href="index.html" class="logo">
+                <img src="images/flower-and-text-hor-final-final.svg" alt="Yasmin Beauty Salon Logo">
             </a>
-            <h1>Yasmin Beauty Salon</h1>
         </div>
 
         <div class="header-right">
@@ -58,7 +58,7 @@
                         <li><a class="nav-btn btn-style" data-i18n="nav.about" href="about.html">About</a></li>
                         <li class="appointment-nav-item" hidden><a class="nav-btn btn-style" data-i18n="nav.view-appointment"
                             href="view-appointment.html">My Appointment</a></li>
-                        <li><a class="nav-btn btn-style cta" data-i18n="nav.book" href="book-appointment.html">Book
+                        <li><a class="nav-cta btn-style" data-i18n="nav.book" href="book-appointment.html">Book
                                 Now</a></li>
                     </ul>
                 </div>
@@ -100,7 +100,7 @@
                 <div class="hero-copy">
                     <h2 class="hero-title" data-i18n="hero.heading">Look your best, <em>feel even better</em></h2>
                     <p class="hero-sub" data-i18n="hero.message">Expert cuts, color, styling, and treatments for
-                        everyone — walk in as you are, leave feeling brand new.</p>
+                        everyone walk in as you are, leave feeling brand new.</p>
                     <div class="hero-actions">
                         <a href="book-appointment.html" class="hero-btn-primary">
                             <span data-i18n="common.btn.appointment">Book Appointment</span>
@@ -111,6 +111,16 @@
                             <span class="btn-arrow" aria-hidden="true">→</span>
                         </a>
                     </div>
+
+                    <hr class="gold-divider">
+                    <div class="info-panel">
+                        <a href="tel:+13239075658" class="panel-phone">
+                            <span>(323) 907-5658</span>
+                        </a>
+                        <span>Walk-ins welcome</span>
+                        <span class="panel-lang">Se habla Español</span>
+                    </div>
+
                 </div>
                 <div class="hero-media">
                     <img src="https://res.cloudinary.com/yfmlabi1/image/upload/v1783755063/highlights_q6b9jo.jpg" alt="Hair styling at Yasmin Beauty Salon">
@@ -135,16 +145,16 @@
         </div>
 
         <section id="services-beauty" class="beauty-services">
-            <p class="section-label" data-i18n="services.hair.label" style="--accent: #7a9e7e">Hair services</p>
+            <p class="section-label" data-i18n="services.hair.label">Hair services</p>
             <div class="grid">
-                <article class="service-card" style="--accent: #7a9e7e">
+                <article class="service-card">
                     <div class="card-main">
                         <h3 class="card-title" data-i18n="services.haircut.title">Haircut</h3>
                         <p class="card-desc" data-i18n="services.haircut.desc">Precision cut tailored to your face shape
                             and texture.</p>
                         <div class="card-meta">
                             <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 45 min</span>
-                            <span class="pill pill-price" data-i18n="services.haircut.price">from $25</span>
+                            <span class="pill pill-price" data-i18n="services.haircut.price">starting $25</span>
                         </div>
                     </div>
                     <button type="button" class="book-btn" data-service="HAIRCUT">
@@ -160,7 +170,7 @@
                             smoothness, or curl.</p>
                         <div class="card-meta">
                             <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 60 min</span>
-                            <span class="pill pill-price" data-i18n="services.blowdry.price">from $35</span>
+                            <span class="pill pill-price" data-i18n="services.blowdry.price">starting $35</span>
                         </div>
                     </div>
                     <button type="button" class="book-btn" data-service="BLOW_DRYING">
@@ -173,10 +183,10 @@
                     <div class="card-main">
                         <h3 class="card-title" data-i18n="services.haircut-blowdry.title">Haircut + Blow-Dry</h3>
                         <p class="card-desc" data-i18n="services.haircut-blowdry.desc">Cut and styled finish in one
-                            session — the most popular combo.</p>
+                            session the most popular combo.</p>
                         <div class="card-meta">
                             <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 70 min</span>
-                            <span class="pill pill-price" data-i18n="services.haircut-blowdry.price">from $35</span>
+                            <span class="pill pill-price" data-i18n="services.haircut-blowdry.price">starting $35</span>
                         </div>
                     </div>
                     <button type="button" class="book-btn" data-service="HAIRCUT_BLOW_DRY">
@@ -192,7 +202,7 @@
                             salon-grade products.</p>
                         <div class="card-meta">
                             <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 20 min</span>
-                            <span class="pill pill-price" data-i18n="services.washing.price">from $8</span>
+                            <span class="pill pill-price" data-i18n="services.washing.price">starting $8</span>
                         </div>
                     </div>
                     <button type="button" class="book-btn" data-service="WASHING">
@@ -211,7 +221,7 @@
                             toner and conditioning rinse.</p>
                         <div class="card-meta">
                             <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 90 - 150 min</span>
-                            <span class="pill pill-price" data-i18n="services.dyes.price">from $80</span>
+                            <span class="pill pill-price" data-i18n="services.dyes.price">starting $80</span>
                         </div>
                     </div>
                     <button type="button" class="book-btn" data-service="DYES">
@@ -227,7 +237,7 @@
                             a natural sun-kissed look.</p>
                         <div class="card-meta">
                             <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 3 - 4 hrs</span>
-                            <span class="pill pill-price" data-i18n="services.baby-highlight.price">from $180</span>
+                            <span class="pill pill-price" data-i18n="services.baby-highlight.price">starting $180</span>
                         </div>
                     </div>
                     <button type="button" class="book-btn" data-service="BABY_HIGHLIGHT">
@@ -236,14 +246,14 @@
                     </button>
                 </article>
 
-                <article class="service-card" style="--accent: #b07db0">
+                <article class="service-card">
                     <div class="card-main">
                         <h3 class="card-title" data-i18n="services.color-touchup.title">Color Touch-Up</h3>
                         <p class="card-desc" data-i18n="services.color-touchup.desc">Root retouch to blend regrowth with
                             your existing color.</p>
                         <div class="card-meta">
                             <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 90 min</span>
-                            <span class="pill pill-price" data-i18n="services.color-touchup.price">from $50</span>
+                            <span class="pill pill-price" data-i18n="services.color-touchup.price">starting $50</span>
                         </div>
                     </div>
                     <button type="button" class="book-btn" data-service="COLOR_TOUCH_UP">
@@ -251,6 +261,22 @@
                             service</span>
                     </button>
                 </article>
+
+                <article class="info-card">
+                    <img src="images/flower-only-final.svg" alt="Yasmin Beauty Salon Logo" class="info-logo">
+                    <div class="service-info-container">
+                        <h3 class="info-title">Not sure the color will work?</h3>
+                        <p class="info-paragraph">Book your appointment and leave a note. We'll test a strand first, free, and let you know what's achievable with your hair.</p>
+                        <a href="tel:+13239075658" class="info-phoneLink">
+                            <span>CALL US AND WE'LL TALK IT THROUGH</span>
+                        </a>
+                        <br>
+                        <a href="book-appointment.html" class="info-notesLink">
+                            <span>or book online</span>
+                        </a>
+                    </div>
+                </article>
+
             </div>
 
             <p class="section-label" data-i18n="services.treatments.label" style="--accent: #c4956a">Treatments</p>
@@ -262,7 +288,7 @@
                             hair. Leaves hair soft and resilient.</p>
                         <div class="card-meta">
                             <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 90 min</span>
-                            <span class="pill pill-price" data-i18n="services.treatment.price">from $50</span>
+                            <span class="pill pill-price" data-i18n="services.treatment.price">starting $50</span>
                         </div>
                     </div>
                     <button type="button" class="book-btn" data-service="TREATMENT_MOISTURIZING">
@@ -278,7 +304,7 @@
                             long-lasting frizz-free results.</p>
                         <div class="card-meta">
                             <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 90 min</span>
-                            <span class="pill pill-price" data-i18n="services.keratin.price">from $50</span>
+                            <span class="pill pill-price" data-i18n="services.keratin.price">starting $50</span>
                         </div>
                     </div>
                     <button type="button" class="book-btn" data-service="KERATIN_TREATMENT">
@@ -300,7 +326,7 @@
                             style and face shape.</p>
                         <div class="card-meta">
                             <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 45 min</span>
-                            <span class="pill pill-price" data-i18n="services.haircut-barber.price">from $25.00</span>
+                            <span class="pill pill-price" data-i18n="services.haircut-barber.price">starting $25.00</span>
                         </div>
                     </div>
                     <button type="button" class="book-btn" data-service="HAIRCUT">
@@ -316,7 +342,7 @@
                             styled finish.</p>
                         <div class="card-meta">
                             <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 120 min</span>
-                            <span class="pill pill-price" data-i18n="services.perm.price">from $50.00</span>
+                            <span class="pill pill-price" data-i18n="services.perm.price">starting $50.00</span>
                         </div>
                     </div>
                     <button type="button" class="book-btn" data-service="PERM">
@@ -336,7 +362,7 @@
                             sharp, polished look.</p>
                         <div class="card-meta">
                             <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 20 min</span>
-                            <span class="pill pill-price" data-i18n="services.beard-trim.price">from $10.00</span>
+                            <span class="pill pill-price" data-i18n="services.beard-trim.price">starting $10.00</span>
                         </div>
                     </div>
                     <button type="button" class="book-btn" data-service="BEARD_TRIM">
@@ -352,7 +378,7 @@
                             balanced and refined look.</p>
                         <div class="card-meta">
                             <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 15 Min</span>
-                            <span class="pill pill-price" data-i18n="services.eyebrow-shaping.price">from $10.00</span>
+                            <span class="pill pill-price" data-i18n="services.eyebrow-shaping.price">starting $10.00</span>
                         </div>
                     </div>
                     <button type="button" class="book-btn" data-service="EYEBROW_SHAPING">
@@ -371,7 +397,7 @@
                             clean haircut and beard refresh.</p>
                         <div class="card-meta">
                             <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 60 min</span>
-                            <span class="pill pill-price" data-i18n="services.haircut-beard-trim.price">from
+                            <span class="pill pill-price" data-i18n="services.haircut-beard-trim.price">starting
                                 $30.00</span>
                         </div>
                     </div>
@@ -390,7 +416,7 @@
                         <div class="card-meta">
                             <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 80 min</span>
                             <span class="pill pill-price"
-                                data-i18n="services.haircut-beard-trim-eyebrow-shaping.price">from $45.00</span>
+                                data-i18n="services.haircut-beard-trim-eyebrow-shaping.price">starting $45.00</span>
                         </div>
                     </div>
                     <button type="button" class="book-btn" data-service="HAIRCUT_BEARD_TRIM_EYEBROW_SHAPING">
@@ -401,13 +427,9 @@
             </div>
         </section>
 
-        <!-- <section id="reviews" class="reviews"> 
-        </section> -->
-        <hr class="section-divider">
-
         <section class="gallery-section" id="gallery">
             <div class="section-header">
-                <h2 class="section-eyebrow" data-i18n="gallery.heading">Our <em>Work</em></h2>
+                <h2 class="section-eyebrow gallery" data-i18n="gallery.heading">Our <em>Work</em></h2>
             </div>
 
             <div class="gallery-grid">
@@ -421,9 +443,6 @@
                 <div class="gallery-item medium-hor">
                     <img src="https://res.cloudinary.com/yfmlabi1/image/upload/v1783755063/blue-color_rlzshp.jpg" alt="blue hair color">
                 </div>
-                <div class="gallery-item featured">
-                    <img src="https://res.cloudinary.com/yfmlabi1/image/upload/v1783755063/highlights_q6b9jo.jpg" alt="Style Example">
-                </div>
                 <div class="gallery-item medium-hor">
                     <img src="https://res.cloudinary.com/yfmlabi1/image/upload/v1783755064/layers_iety4p.jpg" alt="Featured Style">
                 </div>
@@ -436,38 +455,83 @@
             </div>
         </section>
 
-        <section class="cta-section">
-            <h2 data-i18n="cta.heading">Ready to Book?</h2>
-            <p data-i18n="cta.message">Schedule your appointment today.</p>
-
+        <section id="cta-section">
+            <img src="images/flower-only-final.svg" alt="Yasmin Beauty Salon Logo" class="cta-logo">
+            <h2 class="section-eyebrow" data-i18n="cta.heading">Ready to <em>Book?</em></h2>
+            <p class="cta-message" data-i18n="cta.message">Schedule your appointment today.</p>
             <a href="book-appointment.html" class="btn-style cta-btn" data-i18n="common.btn.appointment">
                 Book Appointment
+            </a>
+            <a href="tel:+13239075658" class="cta-phone">
+                <span data-i18n="cta.phone">OR CALL </span><span>(323) 907-5658</span>
             </a>
         </section>
     </main>
 
     <footer>
-        <div class="footer-content">
-            <h2 data-i18n="footer.heading">Get In Touch</h2>
+        <div class="footer-inner">
+            <div class="info-container">
+                <div class="company-info footer-col">
+                    <img src="images/logo-yasmin-vertical.svg" alt="Yasmin Beauty Salon" class="footer-logo" width="150">
+                    <p class="company-p" data-i18n="footer.tagline">Unisex beauty and barber salon located in Boyle Heights.</p>
+                    <span class="company-reminder">Se habla español</span>
+                </div>
 
-            <a href="tel:+13239075658" class="contact-link">
-                (323) 907-5658
-            </a>
-            <a href="mailto:yasminbeautysalon2024@gmail.com" class="contact-link">
-                yasminbeautysalon2024@gmail.com
-            </a>
+                <div class="explore footer-col">
+                    <h3 class="explore-heading" data-i18n="footer.explore">Explore</h3>
+                    <ul class="explore-links list-reset">
+                    <li><a href="#services" data-i18n="nav.services">Services</a></li>
+                    <li><a href="#gallery" data-i18n="nav.gallery">Gallery</a></li>
+                    <li><a href="about.html" data-i18n="nav.about">About</a></li>
+                    <li><a href="book-appointment.html" data-i18n="nav.book">Book Now</a></li>
+                    <li><a href="privacy-policy.html" data-i18n="footer.privacy">Privacy Policy</a></li>
+                    </ul>
+                </div>
 
-            <div class="social-links">
-                <a href="https://www.tiktok.com/@yasmin.beauty.salon23">TikTok</a>
+                <div class="opening-times footer-col">
+                    <h3 class="opening-heading" data-i18n="footer.opening">Opening Times</h3>
+                    <ul class="times list-reset">
+                    <li><span data-i18n="days.sun">Sun</span><span>10AM &mdash; 3PM</span></li>
+                    <li class="is-closed"><span data-i18n="days.mon">Mon</span><span data-i18n="opening.closed">Closed</span></li>
+                    <li><span data-i18n="days.tueSat">Tue &mdash; Sat</span><span>10AM &mdash; 7PM</span></li>
+                    </ul>
+                </div>
+
+                <div class="contact-info footer-col">
+                    <h3 class="contact-heading" data-i18n="footer.contact">Get in touch</h3>
+                    <div class="contact-info-list">
+                        <a href="tel:+13239075658" class="contact-phone">(323) 907-5658</a>
+                        <a href="mailto:yasminbeautysalon2024@gmail.com" class="contact-email">yasminbeautysalon2024@gmail.com</a>
+                        <address class="contact-address">
+                            <a href="https://maps.app.goo.gl/q5Vv3P4v4Z2xzB596" target="_blank" rel="noopener">
+                                <span>2438 1st St<br>Los Angeles, CA 90033</span>
+                            </a>
+                        </address>
+                        <ul class="social-links list-reset">
+                            <li>
+                            <a href="https://www.tiktok.com/@yasmin.beauty.salon23" target="_blank" rel="noopener">TikTok</a>
+                            <span class="social-sep">&middot;</span>
+                            <a href="https://www.tiktok.com/@yasmin.beauty.salon23" target="_blank" rel="noopener">@yasmin.beauty.salon23</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
 
-            <div class="copyright">
-                <span>© 2026 Yasmin Beauty Salon</span>
-                <span class="footer-divider">|</span>
-                <a href="privacy-policy.html" class="footer-policy-link" data-i18n="footer.privacy">Privacy Policy</a>
+            <hr class="footer-divider">
+
+            <div class="legal-container">
+                <span class="copyright">&copy; 2026 Yasmin Beauty Salon</span>
+                <div class="legal-right">
+                    <a href="privacy-policy.html" class="footer-policy-link" data-i18n="footer.privacy">Privacy Policy</a>
+                    <div class="footer-lang">
+                        <span class="lang-opt active" data-lang="en">EN</span>
+                        <span class="lang-divider">|</span>
+                        <span class="lang-opt" data-lang="es">ES</span>
+                    </div>
+                </div>
             </div>
         </div>
     </footer>
 </body>
-
 </html>
