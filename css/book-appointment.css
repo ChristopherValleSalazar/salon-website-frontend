@@ -78,6 +78,7 @@ textarea {
 }
 .main-form select:has(option[value=""]:checked) {
   color: rgba(22, 15, 10, 0.55);
+  font-size: 1.3rem;
 }
 .main-form select option {
   background-color: #f8f4ed;
@@ -437,9 +438,28 @@ textarea {
 .time-panel-empty {
   grid-column: 1 / -1;
   margin: 0;
-  font-size: 0.9rem;
+  font-size: 1.2rem;
   color: #8a7f72;
 }
+.time-panel-phone {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-align: left;
+    cursor: pointer;
+    background: transparent;
+    color: var(--color-logo-buttefly-wings);             
+    text-decoration: none;
+    transition: transform 0.2s ease;
+    font-family: 'Inter', sans-serif;
+    font-variant-numeric: lining-nums tabular-nums;
+}
+.time-panel-phone:hover {            
+    transform: translateY(-2px);
+}
+
 .time-panel-error {
   color: #b3402e;
 }

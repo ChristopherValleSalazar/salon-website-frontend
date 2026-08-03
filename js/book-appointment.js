@@ -1,3 +1,5 @@
+import { t } from './language.js';
+
 const today = new Date().getDay();
 document.querySelector(`.day-container[data-day="${today}"]`)?.classList.add("is-today");
 
@@ -299,13 +301,13 @@ function clearTimeSelection() {
 
 function showServiceRequiredError() {
     timeSlotContainer.innerHTML =
-        "<p class='time-panel-empty time-panel-error' data-i18n='form.time.need-service'>Please select a service first to see available times</p>";
+        `<p class="time-panel-empty time-panel-error">${t("form.time.need-service")}</p>`;
     serviceSelector.classList.add("input-error");
     serviceSelector.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
 async function loadTimeSlots(dateStr) {
-    timeSlotContainer.innerHTML = "<p class='time-panel-empty'>Loading times...</p>";
+    timeSlotContainer.innerHTML = `<p class="time-panel-empty">${t("form.time.loading")}</p>`;;
 
     const params = new URLSearchParams({
         requestDate: dateStr,
@@ -319,7 +321,7 @@ async function loadTimeSlots(dateStr) {
         const slots = await res.json();
         renderTimeSlots(timeSlotContainer, slots);
     } catch (err) {
-        timeSlotContainer.innerHTML = "<p class='time-panel-empty'>Couldn't load times. Please try again later.</p>";
+        timeSlotContainer.innerHTML = `<p class="time-panel-empty">${t("form.time.error")}</p>`;
     }
 }
 
@@ -339,7 +341,9 @@ function showBookingSummary(timeSlot) {
 
 function renderTimeSlots(container, slots) {
     if (slots.length === 0) {
-        container.innerHTML = "<p class='time-panel-empty'>No times available this day.</p>";
+        container.innerHTML = `<p class="time-panel-empty">${t("form.time.none")}
+                <a class="time-panel-phone" href="tel:+13239075658">(323) 907-5658</a>
+            </p>`;
         return;
     }
 
