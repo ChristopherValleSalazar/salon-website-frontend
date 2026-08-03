@@ -260,6 +260,30 @@
       </div>
     </div>
   </div>
+
+  <!-- Native <dialog>: an "are you sure?" wall shown before confirm / cancel / reschedule -->
+  <dialog id="confirm-dialog" class="confirm-dialog" aria-labelledby="confirm-dialog-title">
+    <form method="dialog" class="confirm-dialog-body">
+      <div class="modal-text">
+        <span class="modal-icon confirm-dialog-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"></circle>
+            <path d="M9.5 9.2a2.5 2.5 0 0 1 4.8 1c0 1.6-2.3 2-2.3 3.3"></path>
+            <line x1="12" y1="17" x2="12" y2="17"></line>
+          </svg>
+        </span>
+        <h2 class="modal-title" id="confirm-dialog-title"></h2>
+        <p class="modal-message" id="confirm-dialog-message"></p>
+      </div>
+      <div class="actions">
+        <!-- value="cancel" => dismiss (go back); value="confirm" => proceed -->
+        <button type="submit" value="cancel" class="secondary-btn" id="confirm-dialog-dismiss"
+          data-i18n="view.confirm.dialog.dismiss">No, go back</button>
+        <button type="submit" value="confirm" class="primary-btn" id="confirm-dialog-proceed"></button>
+      </div>
+    </form>
+  </dialog>
 </body>
 
 </html>

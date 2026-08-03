@@ -95,9 +95,9 @@ function setActionsBusy(busy) {
     }
 }
 
-// CONFIRM / CANCEL
-confirmBtn.addEventListener("click", () => sendCancelOrConfirm("CONFIRM"));
-cancelBtn.addEventListener("click", () => sendCancelOrConfirm("CANCEL"));
+// CONFIRM / CANCEL — a confirmation dialog now sits between the click and the request
+confirmBtn.addEventListener("click", () => openConfirmDialog("confirm"));
+cancelBtn.addEventListener("click", () => openConfirmDialog("cancel"));
 
 async function sendCancelOrConfirm(action) {
     setActionsBusy(true);
@@ -211,17 +211,25 @@ function renderTimeSlots(slots) {
     });
 }
 
-rescheduleSubmit.addEventListener("click", async () => {
+rescheduleSubmit.addEventListener("click", () => {
     const dateVal = document.getElementById("date-input").value;
     const timeVal = document.getElementById("time-input").value;
     const bookingWrapper = document.getElementById("booking-wrapper");
 
+    // validate the picked slot before the "are you sure?" dialog ever opens
     if (!dateVal || !timeVal) {
         bookingWrapper.classList.add("input-error");
         bookingWrapper.scrollIntoView({ behavior: "smooth", block: "center" });
         return;
     }
     bookingWrapper.classList.remove("input-error");
+
+    openConfirmDialog("reschedule");
+});
+
+async function submitReschedule() {
+    const dateVal = document.getElementById("date-input").value;
+    const timeVal = document.getElementById("time-input").value;
 
     setActionsBusy(true);
 
@@ -271,7 +279,7 @@ rescheduleSubmit.addEventListener("click", async () => {
     } finally {
         setActionsBusy(false);
     }
-});
+}
 
 function clearTimeSelection() {
     document.getElementById("time-input").value = "";
@@ -291,6 +299,74 @@ function showBookingSummary(timeSlot) {
         + " at " + formatTime(timeSlot);
     summary.hidden = false;
 }
+
+// CONFIRM DIALOG (native <dialog>) — one action table keyed by the action string holds
+// each action's copy AND its handler, so a new action is a single new entry
+const confirmDialog = document.getElementById("confirm-dialog");
+const confirmDialogTitle = document.getElementById("confirm-dialog-title");
+const confirmDialogMessage = document.getElementById("confirm-dialog-message");
+const confirmDialogProceed = document.getElementById("confirm-dialog-proceed");
+let pendingAction = null;
+
+const CONFIRM_ACTIONS = {
+    confirm: {
+        titleKey: "view.confirm.dialog.confirm.heading",
+        messageKey: "view.confirm.dialog.confirm.message",
+        proceedKey: "view.confirm.dialog.confirm.proceed",
+        run: () => sendCancelOrConfirm("CONFIRM"),
+    },
+    cancel: {
+        titleKey: "view.confirm.dialog.cancel.heading",
+        messageKey: "view.confirm.dialog.cancel.message",
+        proceedKey: "view.confirm.dialog.cancel.proceed",
+        danger: true,
+        run: () => sendCancelOrConfirm("CANCEL"),
+    },
+    reschedule: {
+        titleKey: "view.confirm.dialog.reschedule.heading",
+        proceedKey: "view.confirm.dialog.reschedule.proceed",
+        // dynamic date/time instead of a static messageKey; reuse formatLongDate/formatTime
+        dynamicMessage: () =>
+            formatLongDate(document.getElementById("date-input").value)
+            + " · " + formatTime(document.getElementById("time-input").value),
+        run: submitReschedule,
+    },
+};
+
+function openConfirmDialog(action) {
+    const cfg = CONFIRM_ACTIONS[action];
+    pendingAction = action;
+
+    setDialogText(confirmDialogTitle, cfg.titleKey);
+    setDialogText(confirmDialogProceed, cfg.proceedKey);
+
+    // a keyed message keeps its data-i18n; a dynamic one drops data-i18n so a language
+    // switch won't overwrite it, exactly like showSuccessModal()
+    if (cfg.messageKey) {
+        setDialogText(confirmDialogMessage, cfg.messageKey);
+    } else {
+        delete confirmDialogMessage.dataset.i18n;
+        confirmDialogMessage.textContent = cfg.dynamicMessage();
+    }
+
+    confirmDialog.classList.toggle("is-danger", !!cfg.danger);
+    confirmDialog.showModal();   // native modal: backdrop, focus-trap, ESC-to-close
+}
+
+// Keep data-i18n (so a later language toggle re-translates the open dialog via
+// language.js) AND fill the text now in the active language via the global t() helper.
+function setDialogText(el, key) {
+    el.dataset.i18n = key;
+    el.textContent = (typeof window.t === "function") ? window.t(key) : el.textContent;
+}
+
+// The form's buttons close the dialog natively and set returnValue; dispatch on close so
+// the dialog finishes its focus-return first, then only "confirm" fires the action's run()
+confirmDialog.addEventListener("close", () => {
+    const action = pendingAction;
+    pendingAction = null;
+    if (confirmDialog.returnValue === "confirm") CONFIRM_ACTIONS[action].run();
+});
 
 // MODALS (same look as the booking page; text is set per action)
 function showSuccessModal({ titleKey, titleText, messageKey, messageText }) {

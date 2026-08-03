@@ -253,5 +253,14 @@
     "view.modal.canceled.message": "Your appointment has been canceled. We hope to see you again soon.",
     "view.modal.rescheduled.heading": "Appointment rescheduled!",
     "view.modal.fail.heading": "Something went wrong",
-    "view.modal.fail.message": "We couldn't complete your request. Please try again."
+    "view.modal.fail.message": "We couldn't complete your request. Please try again.",
+    "view.confirm.dialog.dismiss": "No, go back",
+    "view.confirm.dialog.confirm.heading": "Confirm this appointment?",
+    "view.confirm.dialog.confirm.message": "We'll let the salon know you're coming.",
+    "view.confirm.dialog.confirm.proceed": "Yes, confirm",
+    "view.confirm.dialog.cancel.heading": "Cancel this appointment?",
+    "view.confirm.dialog.cancel.message": "This can't be undone. You'd need to book again.",
+    "view.confirm.dialog.cancel.proceed": "Yes, cancel",
+    "view.confirm.dialog.reschedule.heading": "Reschedule your appointment?",
+    "view.confirm.dialog.reschedule.proceed": "Yes, reschedule"
 }
