@@ -11,7 +11,6 @@ export function t(key) {
 }
 
 // Expose the lookup to classic (non-module) scripts so they can translate
-// dynamically-created content in the active language (e.g. the confirm dialog).
 window.t = t;
 
 export async function switchLanguage(lang) {

@@ -114,7 +114,7 @@ document.getElementById("appointment-form").addEventListener("submit", async (e)
 
 async function imageUploader() {
     if(hairImageInput.files.length === 0) {
-        return;
+        return {imageUrl: null, imagePublicId: null};
     }
 
     const sig = await fetch(`${API_BASE_URL}/api/v1/uploads/signature`).then(r => r.json());
@@ -135,8 +135,11 @@ async function imageUploader() {
     );
     if(!res.ok) throw new Error('image upload failed');
     const data = await res.json();
-    imageUrl = data.secure_url;
-    imagePublicId = data.public_id;
+
+    console.log("Image upload result:", data);
+
+    const imageUrl = data.secure_url;
+    const imagePublicId = data.public_id;
 
     return {imageUrl, imagePublicId};
 }
