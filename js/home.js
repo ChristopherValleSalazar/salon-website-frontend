@@ -14,6 +14,9 @@ function selectCategory(category) {
 
     barberBtn.classList.toggle("unfocus-color", !isBarber);
     beautyBtn.classList.toggle("unfocus-color", isBarber);
+
+    barberBtn.setAttribute("aria-pressed", String(isBarber));
+    beautyBtn.setAttribute("aria-pressed", String(!isBarber));
 }
 
 beautyBtn.addEventListener("click", () => selectCategory("beauty"));
@@ -22,7 +25,7 @@ barberBtn.addEventListener("click", () => selectCategory("barber"));
 document.querySelectorAll(".book-btn").forEach(btn => {
     btn.addEventListener("click", () => {
         const service = btn.dataset.service;
-        console.log(service);
+        window.track?.("booking_started", { service_type: service });
         window.location.href = `book-appointment.html?service=${service}`;
     });
 });

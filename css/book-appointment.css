@@ -832,3 +832,15 @@ textarea {
 .modal-fail .actions {
   justify-content: center;
 }
+/* Inline validation message (phone). */
+.field-error {
+  margin: 2px 0 8px;
+  color: #a3282f;
+  font-family: "Inter", sans-serif;
+  font-size: 0.875rem;
+}
+
+/* Time slots were ~42px tall; lift to the 44px minimum tap target. */
+.slot-button {
+  min-height: 44px;
+}

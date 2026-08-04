@@ -4,41 +4,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yasmin Beauty Salon | Privacy Policy</title>
+    <title data-i18n-title="title.privacy">Yasmin Beauty Salon | Privacy Policy</title>
+    <meta name="description" content="How Yasmin Beauty Salon collects, uses and protects your personal information, including SMS consent and your CCPA rights.">
+    <link rel="canonical" href="https://yasminbeauty.salon/privacy-policy.html">
+    <meta name="theme-color" content="#191310">
+
+    <link rel="icon" type="image/png" href="/favicon-96x96.png?v=20260803" sizes="96x96"/>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260803"/>
+    <link rel="shortcut icon" href="/favicon.ico?v=20260803"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=20260803"/>
+    <link rel="manifest" href="/site.webmanifest?v=20260803"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/global-layout.css">
     <link rel="stylesheet" href="css/privacy-policy.css">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css" />
+
+    <script src="js/appointment-link.js" defer></script>
+    <script src="js/analytics.js" defer></script>
     <script src="js/language.js" defer type="module"></script>
     <script src="js/burger.js" defer></script>
-    <script src="js/appointment-link.js" defer></script>
 </head>
 
 <body>
+    <a class="skip-link" href="#main-content" data-i18n="a11y.skip">Skip to content</a>
     <header>
         <div class="brand">
             <a href="index.html" class="logo">
-                <img src="images/flower-and-text-hor-final-final.svg" alt="Yasmin Beauty Salon Logo">
+                <img src="images/flower-and-text-hor-final-final.svg" alt="Yasmin Beauty Salon — home"
+                    data-i18n-alt="a11y.logo" width="220" height="48">
             </a>
         </div>
 
         <div class="header-right">
             <div class="header-tools">
                 <div class="language-dropdown">
-                    <button class="language-btn" type="button">
+                    <button class="language-btn" type="button" aria-haspopup="listbox" aria-expanded="false"
+                        aria-label="Change language" data-i18n-aria-label="a11y.language">
                         <span class="fi fi-us"></span>
                         <span>English</span>
-                        <span class="language-arrow">▼</span>
+                        <span class="language-arrow" aria-hidden="true">▼</span>
                     </button>
 
-                    <ul class="list-reset language-menu">
-                        <li data-lang="en">
+                    <ul class="list-reset language-menu" role="listbox">
+                        <li data-lang="en" role="option" aria-selected="true" tabindex="0">
                             <span class="fi fi-us"></span>
                             English
                         </li>
-                        <li data-lang="es">
+                        <li data-lang="es" role="option" aria-selected="false" tabindex="0">
                             <span class="fi fi-sv"></span>
                             Español
                         </li>
@@ -46,7 +60,7 @@
                 </div>
             </div>
 
-            <nav class="top-nav" aria-label="Primary Navigation">
+            <nav class="top-nav" aria-label="Primary navigation" data-i18n-aria-label="a11y.nav">
                 <div class="nav-container">
                     <ul class="list-reset nav-list">
                         <li><a class="nav-btn btn-style" data-i18n="nav.services" href="index.html#services">Services</a></li>
@@ -61,7 +75,8 @@
             </nav>
         </div>
 
-        <button class="burger-icon" id="burgerBtn" onclick="burgerBehaviour()" aria-label="Toggle menu">
+        <button class="burger-icon" id="burgerBtn" type="button" aria-label="Menu"
+            data-i18n-aria-label="a11y.menu" aria-expanded="false" aria-controls="mobileMenu">
             <span class="bar top"></span>
             <span class="bar middle"></span>
             <span class="bar bottom"></span>
@@ -69,7 +84,7 @@
 
         <div class="mobile-menu" id="mobileMenu">
             <div class="mobile-menu-inner">
-                <nav class="burger-nav" aria-label="Primary Navigation">
+                <nav class="burger-nav" aria-label="Primary navigation" data-i18n-aria-label="a11y.nav">
                     <ul class="list-reset nav-list-burger">
                         <li><a class="nav-btn-burger" data-i18n="nav.services" href="index.html#services">Services</a></li>
                         <li><a class="nav-btn-burger" data-i18n="nav.gallery" href="index.html#gallery">Gallery</a></li>
@@ -82,16 +97,17 @@
                 </nav>
 
                 <div class="mobile-lang-toggle">
-                    <span class="lang-opt active" data-lang="en">EN</span>
-                    <span class="lang-divider">|</span>
-                    <span class="lang-opt" data-lang="es">ES</span>
+                    <button type="button" class="lang-opt active" data-lang="en" aria-pressed="true">EN</button>
+                    <span class="lang-divider" aria-hidden="true">|</span>
+                    <button type="button" class="lang-opt" data-lang="es" aria-pressed="false">ES</button>
                 </div>
             </div>
         </div>
     </header>
 
-    <main>
+    <main id="main-content">
         <div class="privacy-shell">
+            <h1 class="privacy-title" data-i18n="privacy.title">Privacy Policy</h1>
 
             <div class="toc-box">
                 <h3 data-i18n="privacy.toc.heading">On this page</h3>
@@ -138,7 +154,9 @@
                         reminders)</li>
                     <li data-i18n="privacy.s02.direct.li3">Preferred service, date, and time</li>
                     <li data-i18n="privacy.s02.direct.li4">Any notes or special requests included with your booking</li>
-                    <li data-i18n="privacy.s02.direct.li5">Feedback or review content submitted through the Site</li>
+                    <li data-i18n="privacy.s02.direct.li6">Photographs of your hair that you choose to upload with a
+                        colour or treatment booking, so your stylist can assess the work before your visit. Uploading a
+                        photo is optional for most services and is never required to book.</li>
                 </ul>
                 <p data-i18n="privacy.s02.auto.label"><strong class="term">Information collected automatically:</strong>
                 </p>
@@ -146,8 +164,6 @@
                     <li data-i18n="privacy.s02.auto.li1">Browser type and version</li>
                     <li data-i18n="privacy.s02.auto.li2">Pages visited and time spent on each page</li>
                     <li data-i18n="privacy.s02.auto.li3">Referring URL</li>
-                    <!-- <li>Truncated IP address (used for analytics only; not stored in full)</li> -->
-                    <!-- <li>Device type and operating system</li> -->
                 </ul>
             </section>
 
@@ -176,8 +192,8 @@
                 <div class="callout">
                     <p class="callout-label" data-i18n="privacy.s04.callout.label">Important — Please Read</p>
                     <p data-i18n="privacy.s04.callout.p">By checking the SMS consent box on our booking form, you
-                        expressly consent to receive text messages from Yasmin Beauty Salon at the phone number
-                        you provide. Message frequency varies. Standard message and data rates may apply.</p>
+                        expressly consent to receive automated text messages from Yasmin Beauty Salon at the phone
+                        number you provide. Message frequency varies. Standard message and data rates may apply.</p>
                 </div>
                 <p data-i18n="privacy.s04.limited">Our SMS messages are strictly limited to:</p>
                 <ul>
@@ -188,11 +204,9 @@
                 </ul>
                 <p data-i18n="privacy.s04.p1">We will never send promotional marketing texts without a separate,
                     explicit opt-in.</p>
-                <p data-i18n="privacy.s04.optout"><strong class="term" data-i18n="privacy.s04.to-opt-out">To opt
-                        out:</strong> Reply <strong>STOP</strong> to any text we send. You will receive one final
+                <p data-i18n="privacy.s04.optout"><strong class="term">To opt out:</strong> Reply <strong>STOP</strong> to any text we send. You will receive one final
                     confirmation and no further messages. You may also contact us directly (see Section 12).</p>
-                <p data-i18n="privacy.s04.help"><strong class="term" data-i18n="privacy.s04.to-get-help">To get
-                        help:</strong> Reply <strong>HELP</strong> to any of our texts, or email us at the address in
+                <p data-i18n="privacy.s04.help"><strong class="term">To get help:</strong> Reply <strong>HELP</strong> to any of our texts, or email us at the address in
                     Section 12.</p>
                 <p data-i18n="privacy.s04.p2">SMS consent is never required to book an appointment. Unchecking the SMS
                     box has no effect on your ability to schedule services.</p>
@@ -209,9 +223,9 @@
                 <p data-i18n="privacy.s05.intro">We do not sell, rent, or trade your personal information. We share data
                     only in these limited circumstances:</p>
                 <ul>
-                    <li data-i18n="privacy.s05.li1"><strong class="term">Service providers:</strong> Twilio (SMS), and
-                        Neon (database hosting) process data on our behalf under written agreements restricting their
-                        use of your information.</li>
+                    <li data-i18n="privacy.s05.li1"><strong class="term">Service providers:</strong> Twilio (SMS),
+                        Cloudinary (secure storage of hair photographs you upload), and Neon (database hosting) process
+                        data on our behalf under written agreements restricting their use of your information.</li>
                     <li data-i18n="privacy.s05.li2"><strong class="term">Legal compliance:</strong> We may disclose
                         information when required by law, court order, or to protect the rights, property, or safety of
                         our clients or others.</li>
@@ -226,14 +240,11 @@
                     <span class="section-num">06</span>
                     <span data-i18n="privacy.s06.title">Analytics &amp; Cookies</span>
                 </h3>
-                <p data-i18n="privacy.s06.p1">We use Google Analytics to understand how visitors interact with the Site.
-                    This data is aggregated and anonymized — we cannot use it to identify you personally.</p>
-                <p data-i18n="privacy.s06.p2">Google Analytics uses cookies (small text files stored in your browser).
-                    You can opt out by installing the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank"
-                        rel="noopener">Google Analytics Opt-out Browser Add-on</a>.</p>
+                <p data-i18n="privacy.s06.p1">We do not currently use analytics or advertising cookies on this Site. If
+                    we add analytics in the future, we will update this policy before doing so.</p>
                 <p data-i18n="privacy.s06.p3">We do not use advertising cookies, tracking pixels, or retargeting
-                    technology. The only cookies on this Site are those set by Google Analytics for session and behavior
-                    tracking.</p>
+                    technology. The Site stores your language preference in your browser's local storage, and — if you
+                    book — a code that lets you return to your appointment. Neither is used for tracking.</p>
             </section>
 
             <section class="policy-section" id="ccpa">
@@ -247,9 +258,10 @@
                     <li data-i18n="privacy.s07.li1"><strong class="term">Right to know:</strong> Request a list of
                         personal information we have collected, its sources, our business purpose, and any third parties
                         it was shared with.</li>
-                    <li data-i18n="privacy.s07.li2"><strong class="term" data-i18n="privacy.s07.right-to-delete">Right
-                            to delete:</strong> Request deletion of your personal information, subject to certain legal
+                    <li data-i18n="privacy.s07.li2"><strong class="term">Right to delete:</strong> Request deletion of your personal information, subject to certain legal
                         exceptions.</li>
+                    <li data-i18n="privacy.s07.li5"><strong class="term">Right to correct:</strong> Request that we
+                        correct inaccurate personal information we hold about you.</li>
                     <li data-i18n="privacy.s07.li3"><strong class="term">Right to opt out of sale:</strong> We do not
                         sell personal information. No opt-out action is required.</li>
                     <li data-i18n="privacy.s07.li4"><strong class="term">Right to non-discrimination:</strong> We will
@@ -285,11 +297,11 @@
                 <p data-i18n="privacy.s09.intro">We use reasonable technical and organizational measures to protect your
                     information, including:</p>
                 <ul>
-                    <li data-i18n="privacy.s09.li1">HTTPS encryption for all data transmitted between your browser and
-                        our servers</li>
+                    <li data-i18n="privacy.s09.li1">HTTPS encryption for the website you are reading now. We are in the
+                        process of extending HTTPS to our booking API; until that work completes, please use the phone
+                        number in Section 12 if you would prefer not to submit details through the website.</li>
                     <li data-i18n="privacy.s09.li2">Encrypted database connections (TLS) to our hosted PostgreSQL
                         instance</li>
-                    <li data-i18n="privacy.s09.li3">JWT-based authentication for all admin access</li>
                     <li data-i18n="privacy.s09.li4">Access controls limiting which personnel can view personal data</li>
                 </ul>
                 <p data-i18n="privacy.s09.p">No method of internet transmission is 100% secure. We cannot guarantee
@@ -348,7 +360,7 @@
         <div class="footer-inner">
             <div class="info-container">
                 <div class="company-info footer-col">
-                    <img src="images/logo-yasmin-vertical.svg" alt="Yasmin Beauty Salon" class="footer-logo" width="150">
+                    <img src="images/logo-yasmin-vertical.svg" alt="" class="footer-logo" width="150" height="150" loading="lazy">
                     <p class="company-p" data-i18n="footer.tagline">Unisex beauty and barber salon located in Boyle Heights.</p>
                     <span class="company-reminder">Se habla español</span>
                 </div>
@@ -401,9 +413,9 @@
                 <div class="legal-right">
                     <a href="privacy-policy.html" class="footer-policy-link" data-i18n="footer.privacy">Privacy Policy</a>
                     <div class="footer-lang">
-                        <span class="lang-opt active" data-lang="en">EN</span>
-                        <span class="lang-divider">|</span>
-                        <span class="lang-opt" data-lang="es">ES</span>
+                        <button type="button" class="lang-opt active" data-lang="en" aria-pressed="true">EN</button>
+                        <span class="lang-divider" aria-hidden="true">|</span>
+                        <button type="button" class="lang-opt" data-lang="es" aria-pressed="false">ES</button>
                     </div>
                 </div>
             </div>

@@ -1,14 +1,19 @@
-// The magic-link code from the SMS URL always refreshes the stored one;
-// otherwise fall back to the code saved when the appointment was booked.
-const urlViewCode = new URLSearchParams(window.location.search).get("c");
-if (urlViewCode) localStorage.setItem("appointmentViewCode", urlViewCode);
+// The magic-link code was captured and stripped from the URL by appointment-link.js,
+// which runs first on every page. Fall back to the code saved when the appointment
+// was booked.
+let storage = null;
+try { storage = window.localStorage; } catch { /* Safari private mode */ }
 
-let viewCode = urlViewCode || localStorage.getItem("appointmentViewCode");
+let viewCode = window.__viewCode || (() => {
+    try { return storage?.getItem("appointmentViewCode"); } catch { return null; }
+})();
 let appointment = null;
 
 const loadingEl = document.querySelector(".appointment-loading");
 const infoEl = document.querySelector(".appointment-info");
 const missingEl = document.querySelector(".appointment-missing");
+const missingMessageEl = missingEl.querySelector("p");
+const missingDefaultKey = missingMessageEl.dataset.i18n;
 
 const confirmBtn = document.getElementById("confirm-btn");
 const cancelBtn = document.getElementById("cancel-btn");
@@ -16,7 +21,50 @@ const rescheduleBtn = document.getElementById("reschedule-btn");
 const reschedulePanel = document.querySelector(".reschedule-panel");
 const rescheduleSubmit = document.getElementById("reschedule-submit");
 const timeSlotContainer = document.querySelector(".container-time-slot");
-const timeSlotEmptyStateHTML = timeSlotContainer.innerHTML;
+
+// Same contract as the booking page: { type: "<ExceptionClassName>", error: "<message>" }
+const ERROR_KEYS = {
+    SlotUnavailableException:          "form.error.slot-taken",
+    DataIntegrityViolationException:   "form.error.slot-taken",
+    SlotIsMondayException:             "form.error.monday",
+    PastDateException:                 "form.error.past-date",
+    OutsideServiceHoursException:      "form.error.hours",
+    EndsAfterClosingException:         "form.error.closing",
+    InvalidAppointmentStateException:  "form.error.state",
+    CancellationTooLateException:      "form.error.too-late",
+    AppointmentNotFoundException:      "form.error.not-found",
+    MethodArgumentNotValidException:   "form.error.invalid",
+};
+
+// Backend ServiceType -> the same translation keys the booking dropdown uses, so the
+// service name reads identically on both pages and in both languages.
+const SERVICE_KEYS = {
+    HAIRCUT: "form.services.haircut",
+    BABY_HIGHLIGHT: "form.services.baby-highlight",
+    DYES: "form.services.dyes",
+    KERATIN_TREATMENT: "form.services.keratin",
+    BLOW_DRYING: "form.services.blowdry",
+    WASHING: "form.services.washing",
+    TREATMENT_MOISTURIZING: "form.services.treatment",
+    HAIRCUT_BLOW_DRY: "form.services.haircut-blowdry",
+    COLOR_TOUCH_UP: "form.services.color-touchup",
+    PERM: "form.services.perm",
+    BEARD_TRIM: "form.services.beard-trim",
+    EYEBROW_SHAPING: "form.services.eyebrow-shaping",
+    HAIRCUT_BEARD_TRIM: "form.services.haircut-beard-trim",
+    HAIRCUT_BEARD_TRIM_EYEBROW_SHAPING: "form.services.haircut-beard-trim-eyebrow-shaping",
+};
+
+function tr(key) {
+    return (typeof window.t === "function") ? window.t(key) : key;
+}
+
+function messageForFailure(body, status) {
+    const key = ERROR_KEYS[body?.type];
+    if (key) return tr(key);
+    if (status >= 500) return tr("form.error.server");
+    return tr("form.error.invalid");
+}
 
 loadAppointment();
 
@@ -39,7 +87,9 @@ async function loadAppointment() {
         appointment = await res.json();
         renderAppointment();
     } catch (err) {
-        showMissing();
+        // A network failure is NOT a missing appointment. Telling a customer their
+        // booking doesn't exist makes them rebook, which double-books the salon.
+        showNetworkError();
     }
 }
 
@@ -47,10 +97,20 @@ function showMissing() {
     loadingEl.hidden = true;
     infoEl.hidden = true;
     missingEl.hidden = false;
+    missingMessageEl.dataset.i18n = missingDefaultKey;
+    missingMessageEl.textContent = tr(missingDefaultKey);
+}
+
+function showNetworkError() {
+    loadingEl.hidden = true;
+    infoEl.hidden = true;
+    missingEl.hidden = false;
+    missingMessageEl.dataset.i18n = "view.error.network";
+    missingMessageEl.textContent = tr("view.error.network");
 }
 
 function forgetViewCode() {
-    localStorage.removeItem("appointmentViewCode");
+    try { storage?.removeItem("appointmentViewCode"); } catch { /* ignore */ }
     document.querySelectorAll(".appointment-nav-item").forEach(li => { li.hidden = true; });
 }
 
@@ -60,7 +120,15 @@ function renderAppointment() {
     infoEl.hidden = false;
 
     document.querySelector(".appointment-name").textContent = appointment.name;
-    document.querySelector(".detail-service").textContent = serviceLabel(appointment.serviceType);
+
+    // Tag the service with its key as well as its text: if the appointment request wins
+    // the race against the locale fetch, this element still gets corrected by the
+    // refreshTranslations() pass below instead of being stuck showing a raw key.
+    const serviceEl = document.querySelector(".detail-service");
+    const serviceKey = SERVICE_KEYS[appointment.serviceType];
+    if (serviceKey) serviceEl.dataset.i18n = serviceKey;
+    serviceEl.textContent = serviceLabel(appointment.serviceType);
+
     document.querySelector(".detail-date").textContent = formatLongDate(appointment.date);
     document.querySelector(".detail-time").textContent =
         formatTime(appointment.startTime) + " – " + formatTime(appointment.endTime);
@@ -76,7 +144,7 @@ function updateStatus(status) {
     const statusKey = status.toLowerCase();
     badge.className = "status-badge status-" + statusKey;
     badge.dataset.i18n = "view.status." + statusKey;
-    badge.textContent = statusKey.replace(/_/g, " ").replace(/^./, c => c.toUpperCase());
+    badge.textContent = tr("view.status." + statusKey);
 
     // Only BOOKED can still be confirmed; anything past CONFIRMED is terminal
     confirmBtn.disabled = status !== "BOOKED";
@@ -110,7 +178,7 @@ async function sendCancelOrConfirm(action) {
 
         if (!res.ok) {
             const body = await res.json().catch(() => ({}));
-            showFailureModal(body.error);
+            showFailureModal(messageForFailure(body, res.status));
             return;
         }
 
@@ -121,20 +189,16 @@ async function sendCancelOrConfirm(action) {
             forgetViewCode(); // the code dies with the appointment
             showSuccessModal({
                 titleKey: "view.modal.canceled.heading",
-                titleText: "Appointment canceled",
-                messageKey: "view.modal.canceled.message",
-                messageText: "Your appointment has been canceled. We hope to see you again soon."
+                messageKey: "view.modal.canceled.message"
             });
         } else {
             showSuccessModal({
                 titleKey: "view.modal.confirmed.heading",
-                titleText: "Appointment confirmed!",
-                messageKey: "view.modal.confirmed.message",
-                messageText: "We look forward to seeing you. You'll receive a reminder the day before."
+                messageKey: "view.modal.confirmed.message"
             });
         }
     } catch (err) {
-        showFailureModal(err.message);
+        showFailureModal(tr("form.error.network"));
     } finally {
         setActionsBusy(false);
     }
@@ -148,14 +212,27 @@ rescheduleBtn.addEventListener("click", () => {
     if (!reschedulePanel.hidden && !reschedulePicker) initReschedulePicker();
 });
 
+const SALON_TZ = "America/Los_Angeles";
+
+function salonToday() {
+    return new Intl.DateTimeFormat("en-CA", { timeZone: SALON_TZ }).format(new Date());
+}
+
+function salonDatePlus(days) {
+    const [y, m, d] = salonToday().split("-").map(Number);
+    return new Date(Date.UTC(y, m - 1, d + days)).toISOString().slice(0, 10);
+}
+
 function initReschedulePicker() {
     reschedulePicker = flatpickr("#date-input", {
         inline: true,
-        minDate: "today",
-        maxDate: new Date().fp_incr(30),
+        minDate: salonToday(),
+        maxDate: salonDatePlus(30),
         allowInput: false,
         enableTime: false,
         dateFormat: "Y-m-d",
+        locale: (document.documentElement.lang === "es" && flatpickr.l10ns.es)
+            ? flatpickr.l10ns.es : flatpickr.l10ns.default,
         disable: [
             date => date.getDay() === 1 //disable Mondays
         ],
@@ -167,8 +244,19 @@ function initReschedulePicker() {
     });
 }
 
+document.addEventListener("languagechange", (e) => {
+    if (!reschedulePicker) return;
+    const l10n = e.detail.lang === "es" ? flatpickr.l10ns.es : flatpickr.l10ns.default;
+    if (l10n) reschedulePicker.set("locale", l10n);
+});
+
+function renderTimeSlotEmptyState() {
+    timeSlotContainer.innerHTML =
+        `<p class="time-panel-empty" data-i18n="form.time.empty">${tr("form.time.empty")}</p>`;
+}
+
 async function loadTimeSlots(dateStr) {
-    timeSlotContainer.innerHTML = "<p class='time-panel-empty'>Loading times...</p>";
+    timeSlotContainer.innerHTML = `<p class="time-panel-empty">${tr("form.time.loading")}</p>`;
 
     const params = new URLSearchParams({
         requestDate: dateStr,
@@ -182,13 +270,13 @@ async function loadTimeSlots(dateStr) {
         const slots = await res.json();
         renderTimeSlots(slots);
     } catch (err) {
-        timeSlotContainer.innerHTML = "<p class='time-panel-empty'>Couldn't load times. Please try again later.</p>";
+        timeSlotContainer.innerHTML = `<p class="time-panel-empty">${tr("form.time.error")}</p>`;
     }
 }
 
 function renderTimeSlots(slots) {
     if (slots.length === 0) {
-        timeSlotContainer.innerHTML = "<p class='time-panel-empty'>No times available this day.</p>";
+        timeSlotContainer.innerHTML = `<p class="time-panel-empty">${tr("form.time.none")}</p>`;
         return;
     }
 
@@ -219,7 +307,7 @@ rescheduleSubmit.addEventListener("click", () => {
     // validate the picked slot before the "are you sure?" dialog ever opens
     if (!dateVal || !timeVal) {
         bookingWrapper.classList.add("input-error");
-        bookingWrapper.scrollIntoView({ behavior: "smooth", block: "center" });
+        bookingWrapper.scrollIntoView({ behavior: scrollBehavior(), block: "center" });
         return;
     }
     bookingWrapper.classList.remove("input-error");
@@ -245,7 +333,7 @@ async function submitReschedule() {
 
         if (!res.ok) {
             const body = await res.json().catch(() => ({}));
-            showFailureModal(body.error);
+            showFailureModal(messageForFailure(body, res.status));
             return;
         }
 
@@ -254,7 +342,7 @@ async function submitReschedule() {
         // Rescheduling creates a fresh appointment with a fresh code — swap it in
         if (body.viewCode) {
             viewCode = body.viewCode;
-            localStorage.setItem("appointmentViewCode", viewCode);
+            try { storage?.setItem("appointmentViewCode", viewCode); } catch { /* ignore */ }
         }
 
         appointment.date = body.date;
@@ -266,16 +354,15 @@ async function submitReschedule() {
         reschedulePanel.hidden = true;
         reschedulePicker.clear(false);
         clearTimeSelection();
-        timeSlotContainer.innerHTML = timeSlotEmptyStateHTML;
+        renderTimeSlotEmptyState();
 
         showSuccessModal({
             titleKey: "view.modal.rescheduled.heading",
-            titleText: "Appointment rescheduled!",
             messageText: formatLongDate(body.date) + " · "
                 + formatTime(body.startTime) + " – " + formatTime(body.endTime)
         });
     } catch (err) {
-        showFailureModal(err.message);
+        showFailureModal(tr("form.error.network"));
     } finally {
         setActionsBusy(false);
     }
@@ -296,8 +383,12 @@ function showBookingSummary(timeSlot) {
     const summary = document.querySelector(".booking-summary");
     summary.textContent =
         reschedulePicker.formatDate(reschedulePicker.selectedDates[0], "l, F j")
-        + " at " + formatTime(timeSlot);
+        + " " + tr("form.summary.at") + " " + formatTime(timeSlot);
     summary.hidden = false;
+}
+
+function scrollBehavior() {
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
 }
 
 // CONFIRM DIALOG (native <dialog>) — one action table keyed by the action string holds
@@ -357,7 +448,7 @@ function openConfirmDialog(action) {
 // language.js) AND fill the text now in the active language via the global t() helper.
 function setDialogText(el, key) {
     el.dataset.i18n = key;
-    el.textContent = (typeof window.t === "function") ? window.t(key) : el.textContent;
+    el.textContent = tr(key);
 }
 
 // The form's buttons close the dialog natively and set returnValue; dispatch on close so
@@ -365,27 +456,27 @@ function setDialogText(el, key) {
 confirmDialog.addEventListener("close", () => {
     const action = pendingAction;
     pendingAction = null;
-    if (confirmDialog.returnValue === "confirm") CONFIRM_ACTIONS[action].run();
+    if (confirmDialog.returnValue === "confirm" && action) CONFIRM_ACTIONS[action].run();
 });
 
 // MODALS (same look as the booking page; text is set per action)
-function showSuccessModal({ titleKey, titleText, messageKey, messageText }) {
+function showSuccessModal({ titleKey, messageKey, messageText }) {
     const titleEl = document.getElementById("success-modal-title");
     const messageEl = document.getElementById("success-modal-message");
 
     titleEl.dataset.i18n = titleKey;
-    titleEl.textContent = titleText;
+    titleEl.textContent = tr(titleKey);
 
     if (messageKey) {
         messageEl.dataset.i18n = messageKey;
+        messageEl.textContent = tr(messageKey);
     } else {
         // dynamic text (e.g. the new date/time) must survive language switches
         delete messageEl.dataset.i18n;
+        messageEl.textContent = messageText;
     }
-    messageEl.textContent = messageText;
 
     document.getElementById("success-modal-overlay").classList.add("is-open");
-    refreshTranslations();
 }
 
 document.getElementById("modal-btn-close").addEventListener("click", () => {
@@ -412,9 +503,8 @@ failureOverlay.addEventListener("click", (e) => {
 
 // HELPERS
 function serviceLabel(serviceType) {
-    return serviceType.toLowerCase().split("_")
-        .map(w => w.charAt(0).toUpperCase() + w.slice(1))
-        .join(" ");
+    const key = SERVICE_KEYS[serviceType];
+    return key ? tr(key) : serviceType;
 }
 
 function formatLongDate(dateStr) {
@@ -426,12 +516,15 @@ function formatTime(timeStr) {
     const [h, m] = timeStr.split(":");
     const d = new Date();
     d.setHours(h, m);
-    return d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+    return d.toLocaleTimeString(document.documentElement.lang || "en",
+        { hour: "numeric", minute: "2-digit" });
 }
 
-// Re-apply translations to elements injected after page load
+// Re-apply translations to elements injected after page load. switchLanguage is now
+// exposed on window by language.js — previously this test always failed silently,
+// so nothing rendered after load was ever translated.
 function refreshTranslations() {
-    if (typeof switchLanguage === "function") {
-        switchLanguage(localStorage.getItem("ybs_lang") || document.documentElement.lang || "en");
+    if (typeof window.switchLanguage === "function") {
+        window.switchLanguage(document.documentElement.lang || "en");
     }
 }

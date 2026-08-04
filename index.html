@@ -4,8 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yasmin Beauty Salon | Home</title>
-    
+    <title data-i18n-title="title.home">Yasmin Beauty Salon | Hair &amp; Barber in Boyle Heights, LA</title>
+    <meta name="description" content="Unisex hair and barber salon in Boyle Heights, Los Angeles. Cuts, color, keratin, beard trims. Walk-ins welcome. Se habla espanol. Book online or call (323) 907-5658.">
+    <link rel="canonical" href="https://yasminbeauty.salon/">
+    <meta name="theme-color" content="#191310">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Yasmin Beauty Salon">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="es_US">
+    <meta property="og:url" content="https://yasminbeauty.salon/">
+    <meta property="og:title" content="Yasmin Beauty Salon | Boyle Heights Hair &amp; Barber">
+    <meta property="og:description" content="Cuts, color, keratin, beard trims. Walk-ins welcome. Se habla espanol. Book online or call (323) 907-5658.">
+    <meta property="og:image" content="https://res.cloudinary.com/yfmlabi1/image/upload/f_auto,q_auto,w_1200,h_630,c_fill,g_auto/v1783755063/highlights_q6b9jo.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Hair styling at Yasmin Beauty Salon">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Yasmin Beauty Salon | Boyle Heights Hair &amp; Barber">
+    <meta name="twitter:description" content="Cuts, color, keratin, beard trims. Walk-ins welcome. Se habla espanol.">
+    <meta name="twitter:image" content="https://res.cloudinary.com/yfmlabi1/image/upload/f_auto,q_auto,w_1200,h_630,c_fill,g_auto/v1783755063/highlights_q6b9jo.jpg">
+
     <link rel="icon" type="image/png" href="/favicon-96x96.png?v=20260803" sizes="96x96"/>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260803"/>
     <link rel="shortcut icon" href="/favicon.ico?v=20260803"/>
@@ -15,40 +34,48 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"rel="stylesheet">   
+    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="preload" as="image" fetchpriority="high"
+        href="https://res.cloudinary.com/yfmlabi1/image/upload/f_auto,q_auto,w_900/v1783755063/highlights_q6b9jo.jpg">
     <link rel="stylesheet" href="css/global-layout.css">
     <link rel="stylesheet" href="css/home.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
-    <script src="js/home.js" defer></script>
-    <script src="js/language.js" defer type="module"></script>
-    <script src="js/burger.js" defer></script>
+
+    <!-- appointment-link.js runs first: it strips the ?c= capability code from the URL
+         before analytics.js can record page_location. -->
     <script src="js/appointment-link.js" defer></script>
+    <script src="js/analytics.js" defer></script>
+    <script src="js/language.js" defer type="module"></script>
+    <script src="js/home.js" defer></script>
+    <script src="js/burger.js" defer></script>
 </head>
 
 <body>
+    <a class="skip-link" href="#main-content" data-i18n="a11y.skip">Skip to content</a>
     <header>
         <div class="brand">
             <a href="index.html" class="logo">
-                <img src="images/flower-and-text-hor-final-final.svg" alt="Yasmin Beauty Salon Logo">
+                <img src="images/flower-and-text-hor-final-final.svg" alt="Yasmin Beauty Salon — home"
+                    data-i18n-alt="a11y.logo" width="220" height="48">
             </a>
         </div>
 
         <div class="header-right">
             <div class="header-tools">
                 <div class="language-dropdown">
-                    <button class="language-btn" type="button">
+                    <button class="language-btn" type="button" aria-haspopup="listbox" aria-expanded="false"
+                        aria-label="Change language" data-i18n-aria-label="a11y.language">
                         <span class="fi fi-us"></span>
                         <span>English</span>
-                        <span class="language-arrow">▼</span>
+                        <span class="language-arrow" aria-hidden="true">▼</span>
                     </button>
 
-                    <ul class="list-reset language-menu">
-                        <li data-lang="en">
+                    <ul class="list-reset language-menu" role="listbox">
+                        <li data-lang="en" role="option" aria-selected="true" tabindex="0">
                             <span class="fi fi-us"></span>
                             English
                         </li>
-                        <li data-lang="es">
+                        <li data-lang="es" role="option" aria-selected="false" tabindex="0">
                             <span class="fi fi-sv"></span>
                             Español
                         </li>
@@ -56,7 +83,7 @@
                 </div>
             </div>
 
-            <nav class="top-nav" aria-label="Primary Navigation">
+            <nav class="top-nav" aria-label="Primary navigation" data-i18n-aria-label="a11y.nav">
                 <div class="nav-container">
                     <ul class="list-reset nav-list">
                         <li><a class="nav-btn btn-style" data-i18n="nav.services" href="#services">Services</a></li>
@@ -71,7 +98,8 @@
             </nav>
         </div>
 
-        <button class="burger-icon" id="burgerBtn" onclick="burgerBehaviour()" aria-label="Toggle menu">
+        <button class="burger-icon" id="burgerBtn" type="button" aria-label="Menu"
+            data-i18n-aria-label="a11y.menu" aria-expanded="false" aria-controls="mobileMenu">
             <span class="bar top"></span>
             <span class="bar middle"></span>
             <span class="bar bottom"></span>
@@ -79,7 +107,7 @@
 
         <div class="mobile-menu" id="mobileMenu">
             <div class="mobile-menu-inner">
-                <nav class="burger-nav" aria-label="Primary Navigation">
+                <nav class="burger-nav" aria-label="Primary navigation" data-i18n-aria-label="a11y.nav">
                     <ul class="list-reset nav-list-burger">
                         <li><a class="nav-btn-burger" data-i18n="nav.services" href="#services">Services</a></li>
                         <li><a class="nav-btn-burger" data-i18n="nav.gallery" href="#gallery">Gallery</a></li>
@@ -92,19 +120,19 @@
                 </nav>
 
                 <div class="mobile-lang-toggle">
-                    <span class="lang-opt active" data-lang="en">EN</span>
-                    <span class="lang-divider">|</span>
-                    <span class="lang-opt" data-lang="es">ES</span>
+                    <button type="button" class="lang-opt active" data-lang="en" aria-pressed="true">EN</button>
+                    <span class="lang-divider" aria-hidden="true">|</span>
+                    <button type="button" class="lang-opt" data-lang="es" aria-pressed="false">ES</button>
                 </div>
             </div>
         </div>
     </header>
 
-    <main>
+    <main id="main-content">
         <section class="hero">
             <div class="hero-inner">
                 <div class="hero-copy">
-                    <h2 class="hero-title" data-i18n="hero.heading">Look your best, <em>feel even better</em></h2>
+                    <h1 class="hero-title" data-i18n="hero.heading">Look your best, <em>feel even better</em></h1>
                     <p class="hero-sub" data-i18n="hero.message">Expert cuts, color, styling, and treatments for
                         everyone walk in as you are, leave feeling brand new.</p>
                     <div class="hero-actions">
@@ -123,13 +151,16 @@
                         <a href="tel:+13239075658" class="panel-phone">
                             <span>(323) 907-5658</span>
                         </a>
-                        <span>Walk-ins welcome</span>
+                        <span data-i18n="hero.walkins">Walk-ins welcome</span>
                         <span class="panel-lang">Se habla Español</span>
                     </div>
 
                 </div>
                 <div class="hero-media">
-                    <img src="https://res.cloudinary.com/yfmlabi1/image/upload/v1783755063/highlights_q6b9jo.jpg" alt="Hair styling at Yasmin Beauty Salon">
+                    <img src="https://res.cloudinary.com/yfmlabi1/image/upload/f_auto,q_auto,w_900/v1783755063/highlights_q6b9jo.jpg"
+                         alt="A stylist finishing balayage highlights at Yasmin Beauty Salon"
+                         data-i18n-alt="gallery.alt.hero"
+                         width="900" height="600" fetchpriority="high" decoding="async">
                 </div>
             </div>
         </section>
@@ -141,11 +172,13 @@
         <div class="service-toggle">
             <div class="slider"></div>
 
-            <button type="button" class="toggle-btn-beauty" data-target="services-beauty">
+            <button type="button" class="toggle-btn-beauty" data-target="services-beauty"
+                data-i18n="services.category.beauty" aria-pressed="true">
                 Beauty Salon
             </button>
 
-            <button type="button" class="toggle-btn-barber unfocus-color" data-target="services-barber">
+            <button type="button" class="toggle-btn-barber unfocus-color" data-target="services-barber"
+                data-i18n="services.category.barber" aria-pressed="false">
                 Barber Salon
             </button>
         </div>
@@ -159,12 +192,12 @@
                         <p class="card-desc" data-i18n="services.haircut.desc">Precision cut tailored to your face shape
                             and texture.</p>
                         <div class="card-meta">
-                            <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 45 min</span>
+                            <span class="pill pill-time"><svg class="pill-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg> 45 min</span>
                             <span class="pill pill-price" data-i18n="services.haircut.price">starting $25</span>
                         </div>
                     </div>
                     <button type="button" class="book-btn" data-service="HAIRCUT">
-                        <i class="fa-regular fa-calendar-plus"></i> <span data-i18n="services.book">Book this
+                        <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M8 3v4M16 3v4M3 11h18M12 15v4M10 17h4"></path></svg> <span data-i18n="services.book">Book this
                             service</span>
                     </button>
                 </article>
@@ -175,12 +208,12 @@
                         <p class="card-desc" data-i18n="services.blowdry.desc">Professional finish with volume,
                             smoothness, or curl.</p>
                         <div class="card-meta">
-                            <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 60 min</span>
+                            <span class="pill pill-time"><svg class="pill-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg> 60 min</span>
                             <span class="pill pill-price" data-i18n="services.blowdry.price">starting $35</span>
                         </div>
                     </div>
                     <button type="button" class="book-btn" data-service="BLOW_DRYING">
-                        <i class="fa-regular fa-calendar-plus"></i> <span data-i18n="services.book">Book this
+                        <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M8 3v4M16 3v4M3 11h18M12 15v4M10 17h4"></path></svg> <span data-i18n="services.book">Book this
                             service</span>
                     </button>
                 </article>
@@ -191,12 +224,12 @@
                         <p class="card-desc" data-i18n="services.haircut-blowdry.desc">Cut and styled finish in one
                             session the most popular combo.</p>
                         <div class="card-meta">
-                            <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 70 min</span>
+                            <span class="pill pill-time"><svg class="pill-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg> 70 min</span>
                             <span class="pill pill-price" data-i18n="services.haircut-blowdry.price">starting $35</span>
                         </div>
                     </div>
                     <button type="button" class="book-btn" data-service="HAIRCUT_BLOW_DRY">
-                        <i class="fa-regular fa-calendar-plus"></i> <span data-i18n="services.book">Book this
+                        <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M8 3v4M16 3v4M3 11h18M12 15v4M10 17h4"></path></svg> <span data-i18n="services.book">Book this
                             service</span>
                     </button>
                 </article>
@@ -207,12 +240,12 @@
                         <p class="card-desc" data-i18n="services.washing.desc">Scalp massage and deep cleanse with
                             salon-grade products.</p>
                         <div class="card-meta">
-                            <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 20 min</span>
+                            <span class="pill pill-time"><svg class="pill-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg> 20 min</span>
                             <span class="pill pill-price" data-i18n="services.washing.price">starting $8</span>
                         </div>
                     </div>
                     <button type="button" class="book-btn" data-service="WASHING">
-                        <i class="fa-regular fa-calendar-plus"></i> <span data-i18n="services.book">Book this
+                        <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M8 3v4M16 3v4M3 11h18M12 15v4M10 17h4"></path></svg> <span data-i18n="services.book">Book this
                             service</span>
                     </button>
                 </article>
@@ -226,28 +259,28 @@
                         <p class="card-desc" data-i18n="services.dyes.desc">Full color application root to tip. Includes
                             toner and conditioning rinse.</p>
                         <div class="card-meta">
-                            <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 90 - 150 min</span>
+                            <span class="pill pill-time"><svg class="pill-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg> 90 - 150 min</span>
                             <span class="pill pill-price" data-i18n="services.dyes.price">starting $80</span>
                         </div>
                     </div>
                     <button type="button" class="book-btn" data-service="DYES">
-                        <i class="fa-regular fa-calendar-plus"></i> <span data-i18n="services.book">Book this
+                        <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M8 3v4M16 3v4M3 11h18M12 15v4M10 17h4"></path></svg> <span data-i18n="services.book">Book this
                             service</span>
                     </button>
                 </article>
 
                 <article class="service-card" style="--accent: #b07db0">
                     <div class="card-main">
-                        <h3 class="card-title">Baby Highlight</h3>
+                        <h3 class="card-title" data-i18n="services.baby-highlight.title">Baby Highlight</h3>
                         <p class="card-desc" data-i18n="services.baby-highlight.desc">Subtle face-framing highlights for
                             a natural sun-kissed look.</p>
                         <div class="card-meta">
-                            <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 3 - 4 hrs</span>
+                            <span class="pill pill-time"><svg class="pill-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg> 3 - 4 hrs</span>
                             <span class="pill pill-price" data-i18n="services.baby-highlight.price">starting $180</span>
                         </div>
                     </div>
                     <button type="button" class="book-btn" data-service="BABY_HIGHLIGHT">
-                        <i class="fa-regular fa-calendar-plus"></i> <span data-i18n="services.book">Book this
+                        <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M8 3v4M16 3v4M3 11h18M12 15v4M10 17h4"></path></svg> <span data-i18n="services.book">Book this
                             service</span>
                     </button>
                 </article>
@@ -258,27 +291,27 @@
                         <p class="card-desc" data-i18n="services.color-touchup.desc">Root retouch to blend regrowth with
                             your existing color.</p>
                         <div class="card-meta">
-                            <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 90 min</span>
+                            <span class="pill pill-time"><svg class="pill-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg> 90 min</span>
                             <span class="pill pill-price" data-i18n="services.color-touchup.price">starting $50</span>
                         </div>
                     </div>
                     <button type="button" class="book-btn" data-service="COLOR_TOUCH_UP">
-                        <i class="fa-regular fa-calendar-plus"></i> <span data-i18n="services.book">Book this
+                        <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M8 3v4M16 3v4M3 11h18M12 15v4M10 17h4"></path></svg> <span data-i18n="services.book">Book this
                             service</span>
                     </button>
                 </article>
 
                 <article class="info-card">
-                    <img src="images/flower-only-final.svg" alt="Yasmin Beauty Salon Logo" class="info-logo">
+                    <img src="images/flower-only-final.svg" alt="" class="info-logo" width="64" height="64" loading="lazy">
                     <div class="service-info-container">
-                        <h3 class="info-title">Not sure the color will work?</h3>
-                        <p class="info-paragraph">Book your appointment and leave a note. We'll test a strand first, free, and let you know what's achievable with your hair.</p>
+                        <h3 class="info-title" data-i18n="services.info.title">Not sure the color will work?</h3>
+                        <p class="info-paragraph" data-i18n="services.info.body">Book your appointment and leave a note. We'll test a strand first, free, and let you know what's achievable with your hair.</p>
                         <a href="tel:+13239075658" class="info-phoneLink">
-                            <span>CALL US AND WE'LL TALK IT THROUGH</span>
+                            <span data-i18n="services.info.call">CALL US AND WE'LL TALK IT THROUGH</span>
                         </a>
                         <br>
                         <a href="book-appointment.html" class="info-notesLink">
-                            <span>or book online</span>
+                            <span data-i18n="services.info.book">or book online</span>
                         </a>
                     </div>
                 </article>
@@ -293,12 +326,12 @@
                         <p class="card-desc" data-i18n="services.treatment.desc">Deep repair mask for dry or damaged
                             hair. Leaves hair soft and resilient.</p>
                         <div class="card-meta">
-                            <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 90 min</span>
+                            <span class="pill pill-time"><svg class="pill-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg> 90 min</span>
                             <span class="pill pill-price" data-i18n="services.treatment.price">starting $50</span>
                         </div>
                     </div>
                     <button type="button" class="book-btn" data-service="TREATMENT_MOISTURIZING">
-                        <i class="fa-regular fa-calendar-plus"></i> <span data-i18n="services.book">Book this
+                        <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M8 3v4M16 3v4M3 11h18M12 15v4M10 17h4"></path></svg> <span data-i18n="services.book">Book this
                             service</span>
                     </button>
                 </article>
@@ -309,12 +342,12 @@
                         <p class="card-desc" data-i18n="services.keratin.desc">Keratin smoothing treatment for
                             long-lasting frizz-free results.</p>
                         <div class="card-meta">
-                            <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 90 min</span>
+                            <span class="pill pill-time"><svg class="pill-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg> 60 min</span>
                             <span class="pill pill-price" data-i18n="services.keratin.price">starting $50</span>
                         </div>
                     </div>
                     <button type="button" class="book-btn" data-service="KERATIN_TREATMENT">
-                        <i class="fa-regular fa-calendar-plus"></i> <span data-i18n="services.book">Book this
+                        <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M8 3v4M16 3v4M3 11h18M12 15v4M10 17h4"></path></svg> <span data-i18n="services.book">Book this
                             service</span>
                     </button>
                 </article>
@@ -331,12 +364,12 @@
                         <p class="card-desc" data-i18n="services.haircut-barber.desc">Classic haircut tailored to your
                             style and face shape.</p>
                         <div class="card-meta">
-                            <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 45 min</span>
-                            <span class="pill pill-price" data-i18n="services.haircut-barber.price">starting $25.00</span>
+                            <span class="pill pill-time"><svg class="pill-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg> 45 min</span>
+                            <span class="pill pill-price" data-i18n="services.haircut-barber.price">starting $25</span>
                         </div>
                     </div>
                     <button type="button" class="book-btn" data-service="HAIRCUT">
-                        <i class="fa-regular fa-calendar-plus"></i> <span data-i18n="services.book">Book this
+                        <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M8 3v4M16 3v4M3 11h18M12 15v4M10 17h4"></path></svg> <span data-i18n="services.book">Book this
                             service</span>
                     </button>
                 </article>
@@ -347,12 +380,12 @@
                         <p class="card-desc" data-i18n="services.perm.desc">Long-lasting texture and shape for a fuller
                             styled finish.</p>
                         <div class="card-meta">
-                            <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 120 min</span>
-                            <span class="pill pill-price" data-i18n="services.perm.price">starting $50.00</span>
+                            <span class="pill pill-time"><svg class="pill-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg> 120 min</span>
+                            <span class="pill pill-price" data-i18n="services.perm.price">starting $50</span>
                         </div>
                     </div>
                     <button type="button" class="book-btn" data-service="PERM">
-                        <i class="fa-regular fa-calendar-plus"></i><span data-i18n="services.book">Book this
+                        <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M8 3v4M16 3v4M3 11h18M12 15v4M10 17h4"></path></svg><span data-i18n="services.book">Book this
                             service</span>
                     </button>
                 </article>
@@ -367,12 +400,12 @@
                         <p class="card-desc" data-i18n="services.beard-trim.desc">Shape and clean up your beard for a
                             sharp, polished look.</p>
                         <div class="card-meta">
-                            <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 20 min</span>
-                            <span class="pill pill-price" data-i18n="services.beard-trim.price">starting $10.00</span>
+                            <span class="pill pill-time"><svg class="pill-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg> 20 min</span>
+                            <span class="pill pill-price" data-i18n="services.beard-trim.price">starting $10</span>
                         </div>
                     </div>
                     <button type="button" class="book-btn" data-service="BEARD_TRIM">
-                        <i class="fa-regular fa-calendar-plus"></i><span data-i18n="services.book">Book this
+                        <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M8 3v4M16 3v4M3 11h18M12 15v4M10 17h4"></path></svg><span data-i18n="services.book">Book this
                             service</span>
                     </button>
                 </article>
@@ -383,12 +416,12 @@
                         <p class="card-desc" data-i18n="services.eyebrow-shaping.desc">Clean, precise shaping for a
                             balanced and refined look.</p>
                         <div class="card-meta">
-                            <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 15 Min</span>
-                            <span class="pill pill-price" data-i18n="services.eyebrow-shaping.price">starting $10.00</span>
+                            <span class="pill pill-time"><svg class="pill-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg> 15 min</span>
+                            <span class="pill pill-price" data-i18n="services.eyebrow-shaping.price">starting $10</span>
                         </div>
                     </div>
                     <button type="button" class="book-btn" data-service="EYEBROW_SHAPING">
-                        <i class="fa-regular fa-calendar-plus"></i> <span data-i18n="services.book">Book this
+                        <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M8 3v4M16 3v4M3 11h18M12 15v4M10 17h4"></path></svg> <span data-i18n="services.book">Book this
                             service</span>
                     </button>
                 </article>
@@ -402,13 +435,12 @@
                         <p class="card-desc" data-i18n="services.haircut-beard-trim.desc">A full grooming session for a
                             clean haircut and beard refresh.</p>
                         <div class="card-meta">
-                            <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 60 min</span>
-                            <span class="pill pill-price" data-i18n="services.haircut-beard-trim.price">starting
-                                $30.00</span>
+                            <span class="pill pill-time"><svg class="pill-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg> 60 min</span>
+                            <span class="pill pill-price" data-i18n="services.haircut-beard-trim.price">starting $30</span>
                         </div>
                     </div>
                     <button type="button" class="book-btn" data-service="HAIRCUT_BEARD_TRIM">
-                        <i class="fa-regular fa-calendar-plus"></i><span data-i18n="services.book">Book this
+                        <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M8 3v4M16 3v4M3 11h18M12 15v4M10 17h4"></path></svg><span data-i18n="services.book">Book this
                             service</span>
                     </button>
                 </article>
@@ -420,13 +452,13 @@
                         <p class="card-desc" data-i18n="services.haircut-beard-trim-eyebrow-shaping.desc">Complete
                             grooming package with haircut, beard trim, and brow shaping.</p>
                         <div class="card-meta">
-                            <span class="pill pill-time"><i class="fa-regular fa-clock"></i> 80 min</span>
+                            <span class="pill pill-time"><svg class="pill-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg> 80 min</span>
                             <span class="pill pill-price"
-                                data-i18n="services.haircut-beard-trim-eyebrow-shaping.price">starting $45.00</span>
+                                data-i18n="services.haircut-beard-trim-eyebrow-shaping.price">starting $45</span>
                         </div>
                     </div>
                     <button type="button" class="book-btn" data-service="HAIRCUT_BEARD_TRIM_EYEBROW_SHAPING">
-                        <i class="fa-regular fa-calendar-plus"></i><span data-i18n="services.book">Book this
+                        <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M8 3v4M16 3v4M3 11h18M12 15v4M10 17h4"></path></svg><span data-i18n="services.book">Book this
                             service</span>
                     </button>
                 </article>
@@ -440,29 +472,44 @@
 
             <div class="gallery-grid">
                 <div class="gallery-item featured">
-                    <img src="https://res.cloudinary.com/yfmlabi1/image/upload/f_auto,q_auto/black-purple-color_f9g5lg" alt="Purple and black hair color"
-                        style="object-position: center right;">
+                    <img src="https://res.cloudinary.com/yfmlabi1/image/upload/f_auto,q_auto,w_800/black-purple-color_f9g5lg"
+                         alt="Long hair coloured in blended black and purple" data-i18n-alt="gallery.alt.black-purple"
+                         width="800" height="1000" loading="lazy" decoding="async"
+                         style="object-position: center right;">
                 </div>
                 <div class="gallery-item medium-hor">
-                    <img src="https://res.cloudinary.com/yfmlabi1/image/upload/v1783755049/blonde-curls_lmhute.jpg" alt="blonde curls" style="object-position: center 22%;">
+                    <img src="https://res.cloudinary.com/yfmlabi1/image/upload/f_auto,q_auto,w_600/v1783755049/blonde-curls_lmhute.jpg"
+                         alt="Loose blonde curls styled with volume" data-i18n-alt="gallery.alt.blonde-curls"
+                         width="600" height="450" loading="lazy" decoding="async"
+                         style="object-position: center 22%;">
                 </div>
                 <div class="gallery-item medium-hor">
-                    <img src="https://res.cloudinary.com/yfmlabi1/image/upload/v1783755063/blue-color_rlzshp.jpg" alt="blue hair color">
+                    <img src="https://res.cloudinary.com/yfmlabi1/image/upload/f_auto,q_auto,w_600/v1783755063/blue-color_rlzshp.jpg"
+                         alt="Vivid blue all-over hair colour" data-i18n-alt="gallery.alt.blue"
+                         width="600" height="450" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item medium-hor">
-                    <img src="https://res.cloudinary.com/yfmlabi1/image/upload/v1783755064/layers_iety4p.jpg" alt="Featured Style">
+                    <img src="https://res.cloudinary.com/yfmlabi1/image/upload/f_auto,q_auto,w_600/v1783755064/layers_iety4p.jpg"
+                         alt="Long layered cut with face-framing pieces" data-i18n-alt="gallery.alt.layers"
+                         width="600" height="450" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item featured">
-                    <img src="https://res.cloudinary.com/yfmlabi1/image/upload/v1783755066/straight_mqeuql.jpg" alt="Featured Style" style="object-position:  70% center;">
+                    <img src="https://res.cloudinary.com/yfmlabi1/image/upload/f_auto,q_auto,w_800/v1783755066/straight_mqeuql.jpg"
+                         alt="Sleek straight blowout finish" data-i18n-alt="gallery.alt.straight"
+                         width="800" height="1000" loading="lazy" decoding="async"
+                         style="object-position:  70% center;">
                 </div>
                 <div class="gallery-item medium-hor">
-                    <img src="https://res.cloudinary.com/yfmlabi1/image/upload/v1783755064/red-color_mql70p.jpg" alt="Featured Style" style="object-position: top center;">
+                    <img src="https://res.cloudinary.com/yfmlabi1/image/upload/f_auto,q_auto,w_600/v1783755064/red-color_mql70p.jpg"
+                         alt="Deep copper-red all-over colour" data-i18n-alt="gallery.alt.red"
+                         width="600" height="450" loading="lazy" decoding="async"
+                         style="object-position: top center;">
                 </div>
             </div>
         </section>
 
         <section id="cta-section">
-            <img src="images/flower-only-final.svg" alt="Yasmin Beauty Salon Logo" class="cta-logo">
+            <img src="images/flower-only-final.svg" alt="" class="cta-logo" width="80" height="80" loading="lazy">
             <h2 class="section-eyebrow" data-i18n="cta.heading">Ready to <em>Book?</em></h2>
             <p class="cta-message" data-i18n="cta.message">Schedule your appointment today.</p>
             <a href="book-appointment.html" class="btn-style cta-btn" data-i18n="common.btn.appointment">
@@ -478,7 +525,7 @@
         <div class="footer-inner">
             <div class="info-container">
                 <div class="company-info footer-col">
-                    <img src="images/logo-yasmin-vertical.svg" alt="Yasmin Beauty Salon" class="footer-logo" width="150">
+                    <img src="images/logo-yasmin-vertical.svg" alt="" class="footer-logo" width="150" height="150" loading="lazy">
                     <p class="company-p" data-i18n="footer.tagline">Unisex beauty and barber salon located in Boyle Heights.</p>
                     <span class="company-reminder">Se habla español</span>
                 </div>
@@ -531,9 +578,9 @@
                 <div class="legal-right">
                     <a href="privacy-policy.html" class="footer-policy-link" data-i18n="footer.privacy">Privacy Policy</a>
                     <div class="footer-lang">
-                        <span class="lang-opt active" data-lang="en">EN</span>
-                        <span class="lang-divider">|</span>
-                        <span class="lang-opt" data-lang="es">ES</span>
+                        <button type="button" class="lang-opt active" data-lang="en" aria-pressed="true">EN</button>
+                        <span class="lang-divider" aria-hidden="true">|</span>
+                        <button type="button" class="lang-opt" data-lang="es" aria-pressed="false">ES</button>
                     </div>
                 </div>
             </div>

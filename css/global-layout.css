@@ -3,7 +3,7 @@
   --color-form: #f1e9da;
   --color-dark: #2E2019;
   --color-dark-hover: #1a1310;
-  --color-primary: #B08A52;
+  --color-primary: #80643a;        /* was #B08A52 - 2.83:1 on cream, below AA */
   --color-panel: rgb(239, 232, 220);
   --colot-accent-panel: rgb(59, 42, 32);
 
@@ -19,8 +19,8 @@
   --color-logo-petal-dark: #a8883a;
   --color-logo-petal-text-light: #dcae3a;
 
-  --color-logo-buttefly-wings: #cc7288;
-  --color-logo-buttefly-wings-hover: #c4547a;
+  --color-logo-buttefly-wings: #a8455f;        /* was #cc7288 - 2.95:1 on cream, below AA */
+  --color-logo-buttefly-wings-hover: #8d3550;  /* was #c4547a */
   --color-logo-butterfly-body: #66c293;
 
   --color-logo-text-light: #f7f1e8;
@@ -210,6 +210,8 @@ header {
   /* BURGER ICON */
   .burger-icon {
     display: block;
+    min-width: 44px;
+    min-height: 44px;
     padding: 8px;
     border: none;
     background-color: transparent;
@@ -290,9 +292,16 @@ header {
   border-top: 1px solid rgba(255,255,255,0.06);
   }
   .lang-opt {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 10px 14px;
+    border: none;
+    background: transparent;
+    font: inherit;
     font-size: 16px;
     letter-spacing: 0.12em;
-    color: rgba(246,241,232,0.35);
+    /* was rgba(246,241,232,0.35) = 2.94:1 against the menu background */
+    color: rgba(246, 241, 232, 0.75);
     cursor: pointer;
     transition: color 0.2s ease;
   }
@@ -357,7 +366,6 @@ header {
   min-width: 125px;
   background: transparent;
   border: none;
-  outline: none;
   appearance: none;
   -webkit-appearance: none;
   transition: background 0.35s ease;
@@ -519,9 +527,16 @@ footer a:hover {
 }
 .footer-lang {
   display: flex;
-  gap: 0.4rem;
+  align-items: center;
+  gap: 0.75rem;
 }
 .lang-opt {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 10px 14px;
+  border: none;
+  background: transparent;
+  font: inherit;
   cursor: pointer;
 }
 .lang-opt.active {
@@ -546,4 +561,63 @@ footer a:hover {
     flex-direction: column;
     align-items: flex-start;
   }
+}
+
+/* Language-switcher flag chips. Inline data URIs replace the flag-icons CDN stylesheet,
+   which shipped a full sprite sheet to render these two flags. */
+.fi {
+  display: inline-block;
+  width: 1.33em;
+  height: 1em;
+  background-size: contain;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  vertical-align: middle;
+  border-radius: 2px;
+}
+.fi-us { background-image: url("data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7410 3900"><rect width="7410" height="3900" fill="#b22234"/><g fill="#fff"><rect y="300" width="7410" height="300"/><rect y="900" width="7410" height="300"/><rect y="1500" width="7410" height="300"/><rect y="2100" width="7410" height="300"/><rect y="2700" width="7410" height="300"/><rect y="3300" width="7410" height="300"/></g><rect width="2964" height="2100" fill="#3c3b6e"/></svg>"); }
+.fi-sv { background-image: url("data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 189 108"><rect width="189" height="108" fill="#0f47af"/><rect y="36" width="189" height="36" fill="#fff"/></svg>"); }
+
+/* Focus + motion + skip link */
+.language-btn:focus-visible,
+.lang-opt:focus-visible,
+.language-menu li:focus-visible,
+.burger-icon:focus-visible {
+  outline: 2px solid var(--color-logo-petal-text-light);
+  outline-offset: 2px;
+}
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: 12px 20px;
+  background: var(--color-dark);
+  color: var(--color-light);
+  text-decoration: none;
+}
+.skip-link:focus {
+  left: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* 404 page */
+.notfound-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1rem;
+  padding: 4rem 1.5rem;
+}
+.notfound-phone {
+  font-size: 1.2rem;
 }

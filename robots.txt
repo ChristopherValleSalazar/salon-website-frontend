@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Reached with a single-use capability code from an SMS. Never crawl it.
+Disallow: /view-appointment.html
+Disallow: /locales/
+
+Sitemap: https://yasminbeauty.salon/sitemap.xml

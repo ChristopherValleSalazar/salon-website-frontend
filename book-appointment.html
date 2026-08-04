@@ -4,48 +4,73 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yasmin Beauty Salon | Book an Appointment</title>
+  <title data-i18n-title="title.book">Yasmin Beauty Salon | Book an Appointment</title>
+  <meta name="description" content="Book your appointment at Yasmin Beauty Salon in Boyle Heights. Choose your service, date and time online. Se habla espanol.">
+  <link rel="canonical" href="https://yasminbeauty.salon/book-appointment.html">
+  <meta name="theme-color" content="#191310">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Yasmin Beauty Salon">
+  <meta property="og:url" content="https://yasminbeauty.salon/book-appointment.html">
+  <meta property="og:title" content="Book an Appointment | Yasmin Beauty Salon">
+  <meta property="og:description" content="Choose your service, date and time online. Walk-ins also welcome.">
+  <meta property="og:image" content="https://res.cloudinary.com/yfmlabi1/image/upload/f_auto,q_auto,w_1200,h_630,c_fill,g_auto/v1783755063/highlights_q6b9jo.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" type="image/png" href="/favicon-96x96.png?v=20260803" sizes="96x96"/>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260803"/>
+  <link rel="shortcut icon" href="/favicon.ico?v=20260803"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=20260803"/>
+  <link rel="manifest" href="/site.webmanifest?v=20260803"/>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
-    rel="stylesheet">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/global-layout.css">
   <link rel="stylesheet" href="css/book-appointment.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css" />
+
+  <!-- Flatpickr pinned: the unversioned jsDelivr path resolved to "latest", so an
+       upstream release could break the calendar with no deploy on our side. -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/themes/airbnb.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/l10n/es.js" defer></script>
+
+  <script src="js/appointment-link.js" defer></script>
+  <script src="js/analytics.js" defer></script>
   <script src="js/config.js" defer></script>
   <script src="js/language.js" defer type="module"></script>
   <script src="js/book-appointment.js" defer type="module"></script>
   <script src="js/burger.js" defer></script>
-  <script src="js/appointment-link.js" defer></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/airbnb.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
 </head>
 
 <body>
+    <a class="skip-link" href="#main-content" data-i18n="a11y.skip">Skip to content</a>
     <header>
         <div class="brand">
             <a href="index.html" class="logo">
-                <img src="images/flower-and-text-hor-final-final.svg" alt="Yasmin Beauty Salon Logo">
+                <img src="images/flower-and-text-hor-final-final.svg" alt="Yasmin Beauty Salon — home"
+                    data-i18n-alt="a11y.logo" width="220" height="48">
             </a>
         </div>
 
         <div class="header-right">
             <div class="header-tools">
                 <div class="language-dropdown">
-                    <button class="language-btn" type="button">
+                    <button class="language-btn" type="button" aria-haspopup="listbox" aria-expanded="false"
+                        aria-label="Change language" data-i18n-aria-label="a11y.language">
                         <span class="fi fi-us"></span>
                         <span>English</span>
-                        <span class="language-arrow">▼</span>
+                        <span class="language-arrow" aria-hidden="true">▼</span>
                     </button>
 
-                    <ul class="list-reset language-menu">
-                        <li data-lang="en">
+                    <ul class="list-reset language-menu" role="listbox">
+                        <li data-lang="en" role="option" aria-selected="true" tabindex="0">
                             <span class="fi fi-us"></span>
                             English
                         </li>
-                        <li data-lang="es">
+                        <li data-lang="es" role="option" aria-selected="false" tabindex="0">
                             <span class="fi fi-sv"></span>
                             Español
                         </li>
@@ -53,7 +78,7 @@
                 </div>
             </div>
 
-            <nav class="top-nav" aria-label="Primary Navigation">
+            <nav class="top-nav" aria-label="Primary navigation" data-i18n-aria-label="a11y.nav">
                 <div class="nav-container">
                     <ul class="list-reset nav-list">
                         <li><a class="nav-btn btn-style" data-i18n="nav.services" href="index.html#services">Services</a></li>
@@ -68,7 +93,8 @@
             </nav>
         </div>
 
-        <button class="burger-icon" id="burgerBtn" onclick="burgerBehaviour()" aria-label="Toggle menu">
+        <button class="burger-icon" id="burgerBtn" type="button" aria-label="Menu"
+            data-i18n-aria-label="a11y.menu" aria-expanded="false" aria-controls="mobileMenu">
             <span class="bar top"></span>
             <span class="bar middle"></span>
             <span class="bar bottom"></span>
@@ -76,7 +102,7 @@
 
         <div class="mobile-menu" id="mobileMenu">
             <div class="mobile-menu-inner">
-                <nav class="burger-nav" aria-label="Primary Navigation">
+                <nav class="burger-nav" aria-label="Primary navigation" data-i18n-aria-label="a11y.nav">
                     <ul class="list-reset nav-list-burger">
                         <li><a class="nav-btn-burger" data-i18n="nav.services" href="index.html#services">Services</a></li>
                         <li><a class="nav-btn-burger" data-i18n="nav.gallery" href="index.html#gallery">Gallery</a></li>
@@ -89,17 +115,17 @@
                 </nav>
 
                 <div class="mobile-lang-toggle">
-                    <span class="lang-opt active" data-lang="en">EN</span>
-                    <span class="lang-divider">|</span>
-                    <span class="lang-opt" data-lang="es">ES</span>
+                    <button type="button" class="lang-opt active" data-lang="en" aria-pressed="true">EN</button>
+                    <span class="lang-divider" aria-hidden="true">|</span>
+                    <button type="button" class="lang-opt" data-lang="es" aria-pressed="false">ES</button>
                 </div>
             </div>
         </div>
     </header>
 
-  <main>
+  <main id="main-content">
     <section id="appointment-form-container">
-      <h2 class="form-title" data-i18n="form.heading">Make an <em>Appointment</em></h2>
+      <h1 class="form-title" data-i18n="form.heading">Make an <em>Appointment</em></h1>
       <div class="app-form">
         <p class="form-description" data-i18n="form.description">Reserve your appointment below. Once submitted, our
           team will reach out to confirm your date and time — usually within a few hours.
@@ -107,12 +133,16 @@
 
         <form id="appointment-form" class="main-form">
           <label for="customer-name" data-i18n="form.name">Name<span class="required">*</span></label>
-          <input type="text" id="customer-name" required name="clientName" data-i18n="form.name.placeholder"
-            placeholder="Your name">
+          <input type="text" id="customer-name" required name="clientName" autocomplete="name"
+            data-i18n="form.name.placeholder" placeholder="Your name">
 
           <label for="client-phone" data-i18n="form.phone">Phone Number<span class="required">*</span></label>
-          <input type="tel" id="client-phone" required name="clientPhone" placeholder="123 456 7893"
-            pattern="[0-9]{3}[0-9]{3}[0-9]{4}">
+          <input type="tel" id="client-phone" required name="clientPhone"
+            inputmode="tel" autocomplete="tel"
+            pattern="[0-9+()\-.\s]{10,20}"
+            data-i18n="form.phone.placeholder" placeholder="(323) 907-5658">
+          <p class="field-error" id="client-phone-error" role="alert" hidden
+            data-i18n="form.phone.error">Enter a 10-digit phone number, for example (323) 907-5658.</p>
 
           <label for="service" data-i18n="form.services">Services<span class="required">*</span></label>
           <select id="service" name="service" required>
@@ -155,9 +185,10 @@
                 </span>
               </span>
               <span class="file-drop-selected">
-                <img class="file-drop-thumb" alt="Selected image preview">
+                <img class="file-drop-thumb" alt="Selected image preview" data-i18n-alt="a11y.image-preview">
                 <span class="file-drop-name"></span>
-                <button type="button" class="file-drop-clear" aria-label="Remove image">&times;</button>
+                <button type="button" class="file-drop-clear" aria-label="Remove image"
+                  data-i18n-aria-label="a11y.remove-image">&times;</button>
               </span>
             </label>
           </div>
@@ -181,8 +212,9 @@
 
           <div class="consent-wrapper">
             <input type="checkbox" id="consent-sms" name="consentSMS">
-            <label for="consent-sms" data-i18n="form.consentSMS">I agree to receive SMS appointment
-            confirmations, reminders, and scheduling updates from Yasmin Beauty Salon. Message frequency varies. Message &amp; data rates may apply. Reply STOP to opt out, HELP for help. Consent is
+            <label for="consent-sms" data-i18n="form.consentSMS">I agree to receive automated SMS appointment
+            confirmations, reminders, and scheduling updates from Yasmin Beauty Salon at the number I provided. Message
+            frequency varies. Message &amp; data rates may apply. Reply STOP to opt out, HELP for help. Consent is
             not required to book. See our <a href="privacy-policy.html">Privacy Policy</a>.</label>
           </div>
           <button id="book-app-btn" class="book-app-btn btn-style" type="submit" data-i18n="common.btn.appointment">Book
@@ -202,7 +234,7 @@
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d846343.3660965702!2d-118.20877800000001!3d34.043133!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c60701da1d91%3A0x9e292fb128fbf175!2sYasmin%20Beauty%20Salon%20Unisex!5e0!3m2!1sen!2sus!4v1781750795074!5m2!1sen!2sus"
             allowfullscreen loading="lazy"
-            title="Map to Yasmin Beauty Salon Unisex"
+            title="Map to Yasmin Beauty Salon" data-i18n-title="a11y.map"
             referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
 
@@ -261,7 +293,7 @@
         <div class="footer-inner">
             <div class="info-container">
                 <div class="company-info footer-col">
-                    <img src="images/logo-yasmin-vertical.svg" alt="Yasmin Beauty Salon" class="footer-logo" width="150">
+                    <img src="images/logo-yasmin-vertical.svg" alt="" class="footer-logo" width="150" height="150" loading="lazy">
                     <p class="company-p" data-i18n="footer.tagline">Unisex beauty and barber salon located in Boyle Heights.</p>
                     <span class="company-reminder">Se habla español</span>
                 </div>
@@ -314,9 +346,9 @@
                 <div class="legal-right">
                     <a href="privacy-policy.html" class="footer-policy-link" data-i18n="footer.privacy">Privacy Policy</a>
                     <div class="footer-lang">
-                        <span class="lang-opt active" data-lang="en">EN</span>
-                        <span class="lang-divider">|</span>
-                        <span class="lang-opt" data-lang="es">ES</span>
+                        <button type="button" class="lang-opt active" data-lang="en" aria-pressed="true">EN</button>
+                        <span class="lang-divider" aria-hidden="true">|</span>
+                        <button type="button" class="lang-opt" data-lang="es" aria-pressed="false">ES</button>
                     </div>
                 </div>
             </div>
@@ -334,8 +366,11 @@
         </span>
         <h2 class="modal-title" data-i18n="modal.heading">Thank you for booking an appointment <span
             class="customer-name"></span></h2>
-        <p class="modal-message" data-i18n="modal.message">To view, cancel, or reschedule please check the SMS/Email
-          with your appointment link</p>
+        <p class="modal-message modal-message-sms" data-i18n="modal.message">We'll text you a confirmation with a
+          link to view, reschedule or cancel this appointment. Please arrive five minutes early.</p>
+        <p class="modal-message modal-message-nosms" hidden data-i18n="modal.message.nosms">You chose not to receive
+          texts, so use the "My Appointment" link in the menu on this device to manage this booking — or call us at
+          (323) 907-5658.</p>
         <ul class="list-reset appointment-details">
           <li><span data-i18n="detail.service">Service</span><strong class="detail-service"></strong></li>
           <li><span data-i18n="detail.date">Date</span><strong class="detail-date"></strong></li>
@@ -343,10 +378,9 @@
         </ul>
       </div>
       <div class="actions">
-        <button id="modal-btn-view" onclick="window.location.href='view-appointment.html'" class="primary-btn"
-          data-i18n="modal.view">View Appointment</button>
-        <button id="modal-btn-home" onclick="window.location.href='index.html'" class="secondary-btn"
-          data-i18n="modal.home">Home</button>
+        <a id="modal-btn-view" href="view-appointment.html" class="primary-btn"
+          data-i18n="modal.view">View Appointment</a>
+        <a id="modal-btn-home" href="index.html" class="secondary-btn" data-i18n="modal.home">Home</a>
         <button id="modal-btn-close" class="secondary-btn" data-i18n="modal.close">Close</button>
       </div>
     </div>

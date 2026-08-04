@@ -4,48 +4,66 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yasmin Beauty Salon | Your Appointment</title>
+  <title data-i18n-title="title.view">Yasmin Beauty Salon | Your Appointment</title>
+
+  <!-- This page is reached with a single-use capability code. It must never be crawled,
+       and it must never leak the code through a referrer. -->
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="same-origin">
+  <meta name="theme-color" content="#191310">
+
+  <link rel="icon" type="image/png" href="/favicon-96x96.png?v=20260803" sizes="96x96"/>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260803"/>
+  <link rel="shortcut icon" href="/favicon.ico?v=20260803"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=20260803"/>
+  <link rel="manifest" href="/site.webmanifest?v=20260803"/>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
-    rel="stylesheet">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/global-layout.css">
   <link rel="stylesheet" href="css/book-appointment.css">
   <link rel="stylesheet" href="css/view-appointment.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/themes/airbnb.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/l10n/es.js" defer></script>
+
+  <!-- appointment-link.js must run before anything else: it strips ?c= from the URL. -->
+  <script src="js/appointment-link.js" defer></script>
+  <script src="js/analytics.js" defer></script>
   <script src="js/config.js" defer></script>
   <script src="js/language.js" defer type="module"></script>
   <script src="js/view-appointment.js" defer></script>
   <script src="js/burger.js" defer></script>
-  <script src="js/appointment-link.js" defer></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/airbnb.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
 </head>
 <body>
+    <a class="skip-link" href="#main-content" data-i18n="a11y.skip">Skip to content</a>
     <header>
         <div class="brand">
             <a href="index.html" class="logo">
-                <img src="images/flower-and-text-hor-final-final.svg" alt="Yasmin Beauty Salon Logo">
+                <img src="images/flower-and-text-hor-final-final.svg" alt="Yasmin Beauty Salon — home"
+                    data-i18n-alt="a11y.logo" width="220" height="48">
             </a>
         </div>
 
         <div class="header-right">
             <div class="header-tools">
                 <div class="language-dropdown">
-                    <button class="language-btn" type="button">
+                    <button class="language-btn" type="button" aria-haspopup="listbox" aria-expanded="false"
+                        aria-label="Change language" data-i18n-aria-label="a11y.language">
                         <span class="fi fi-us"></span>
                         <span>English</span>
-                        <span class="language-arrow">▼</span>
+                        <span class="language-arrow" aria-hidden="true">▼</span>
                     </button>
 
-                    <ul class="list-reset language-menu">
-                        <li data-lang="en">
+                    <ul class="list-reset language-menu" role="listbox">
+                        <li data-lang="en" role="option" aria-selected="true" tabindex="0">
                             <span class="fi fi-us"></span>
                             English
                         </li>
-                        <li data-lang="es">
+                        <li data-lang="es" role="option" aria-selected="false" tabindex="0">
                             <span class="fi fi-sv"></span>
                             Español
                         </li>
@@ -53,7 +71,7 @@
                 </div>
             </div>
 
-            <nav class="top-nav" aria-label="Primary Navigation">
+            <nav class="top-nav" aria-label="Primary navigation" data-i18n-aria-label="a11y.nav">
                 <div class="nav-container">
                     <ul class="list-reset nav-list">
                         <li><a class="nav-btn btn-style" data-i18n="nav.services" href="index.html#services">Services</a></li>
@@ -68,7 +86,8 @@
             </nav>
         </div>
 
-        <button class="burger-icon" id="burgerBtn" onclick="burgerBehaviour()" aria-label="Toggle menu">
+        <button class="burger-icon" id="burgerBtn" type="button" aria-label="Menu"
+            data-i18n-aria-label="a11y.menu" aria-expanded="false" aria-controls="mobileMenu">
             <span class="bar top"></span>
             <span class="bar middle"></span>
             <span class="bar bottom"></span>
@@ -76,7 +95,7 @@
 
         <div class="mobile-menu" id="mobileMenu">
             <div class="mobile-menu-inner">
-                <nav class="burger-nav" aria-label="Primary Navigation">
+                <nav class="burger-nav" aria-label="Primary navigation" data-i18n-aria-label="a11y.nav">
                     <ul class="list-reset nav-list-burger">
                         <li><a class="nav-btn-burger" data-i18n="nav.services" href="index.html#services">Services</a></li>
                         <li><a class="nav-btn-burger" data-i18n="nav.gallery" href="index.html#gallery">Gallery</a></li>
@@ -89,17 +108,17 @@
                 </nav>
 
                 <div class="mobile-lang-toggle">
-                    <span class="lang-opt active" data-lang="en">EN</span>
-                    <span class="lang-divider">|</span>
-                    <span class="lang-opt" data-lang="es">ES</span>
+                    <button type="button" class="lang-opt active" data-lang="en" aria-pressed="true">EN</button>
+                    <span class="lang-divider" aria-hidden="true">|</span>
+                    <button type="button" class="lang-opt" data-lang="es" aria-pressed="false">ES</button>
                 </div>
             </div>
         </div>
     </header>
 
-  <main>
+  <main id="main-content">
     <section id="view-appointment-container">
-      <h2 class="form-title" data-i18n="view.heading">Your Appointment</h2>
+      <h1 class="form-title" data-i18n="view.heading">Your Appointment</h1>
 
       <div class="appointment-card">
         <p class="appointment-loading" data-i18n="view.loading">Loading your appointment...</p>
@@ -107,7 +126,7 @@
         <div class="appointment-info" hidden>
           <div class="appointment-topline">
             <h3 class="appointment-name"></h3>
-            <span class="status-badge"></span>
+            <span class="status-badge" role="status" aria-live="polite"></span>
           </div>
 
           <ul class="list-reset appointment-details">
@@ -158,7 +177,7 @@
         <div class="footer-inner">
             <div class="info-container">
                 <div class="company-info footer-col">
-                    <img src="images/logo-yasmin-vertical.svg" alt="Yasmin Beauty Salon" class="footer-logo" width="150">
+                    <img src="images/logo-yasmin-vertical.svg" alt="" class="footer-logo" width="150" height="150" loading="lazy">
                     <p class="company-p" data-i18n="footer.tagline">Unisex beauty and barber salon located in Boyle Heights.</p>
                     <span class="company-reminder">Se habla español</span>
                 </div>
@@ -211,9 +230,9 @@
                 <div class="legal-right">
                     <a href="privacy-policy.html" class="footer-policy-link" data-i18n="footer.privacy">Privacy Policy</a>
                     <div class="footer-lang">
-                        <span class="lang-opt active" data-lang="en">EN</span>
-                        <span class="lang-divider">|</span>
-                        <span class="lang-opt" data-lang="es">ES</span>
+                        <button type="button" class="lang-opt active" data-lang="en" aria-pressed="true">EN</button>
+                        <span class="lang-divider" aria-hidden="true">|</span>
+                        <button type="button" class="lang-opt" data-lang="es" aria-pressed="false">ES</button>
                     </div>
                 </div>
             </div>
@@ -233,8 +252,7 @@
         <p class="modal-message" id="success-modal-message"></p>
       </div>
       <div class="actions">
-        <button id="modal-btn-home" onclick="window.location.href='index.html'" class="secondary-btn"
-          data-i18n="modal.home">Home</button>
+        <a id="modal-btn-home" href="index.html" class="secondary-btn" data-i18n="modal.home">Home</a>
         <button id="modal-btn-close" class="primary-btn" data-i18n="modal.close">Close</button>
       </div>
     </div>
