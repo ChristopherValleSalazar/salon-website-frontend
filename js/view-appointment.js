@@ -1,9 +1,9 @@
-// The magic-link code from the SMS URL always refreshes the stored one;
-// otherwise fall back to the code saved when the appointment was booked.
-const urlViewCode = new URLSearchParams(window.location.search).get("c");
-if (urlViewCode) localStorage.setItem("appointmentViewCode", urlViewCode);
+let storage = null;
+try { storage = window.localStorage; } catch { /* Safari private mode */ }
 
-let viewCode = urlViewCode || localStorage.getItem("appointmentViewCode");
+let viewCode = window.__viewCode || (() => {
+    try { return storage?.getItem("appointmentViewCode"); } catch { return null; }
+})();
 let appointment = null;
 
 const loadingEl = document.querySelector(".appointment-loading");
@@ -50,7 +50,7 @@ function showMissing() {
 }
 
 function forgetViewCode() {
-    localStorage.removeItem("appointmentViewCode");
+    try { storage?.removeItem("appointmentViewCode"); } catch { /* ignore */ }
     document.querySelectorAll(".appointment-nav-item").forEach(li => { li.hidden = true; });
 }
 
@@ -254,7 +254,7 @@ async function submitReschedule() {
         // Rescheduling creates a fresh appointment with a fresh code — swap it in
         if (body.viewCode) {
             viewCode = body.viewCode;
-            localStorage.setItem("appointmentViewCode", viewCode);
+            try { storage?.setItem("appointmentViewCode", viewCode); } catch { /* ignore */ }
         }
 
         appointment.date = body.date;
@@ -353,8 +353,7 @@ function openConfirmDialog(action) {
     confirmDialog.showModal();   // native modal: backdrop, focus-trap, ESC-to-close
 }
 
-// Keep data-i18n (so a later language toggle re-translates the open dialog via
-// language.js) AND fill the text now in the active language via the global t() helper.
+// Keep data-i18n AND fill the text now in the active language via the global t() helper.
 function setDialogText(el, key) {
     el.dataset.i18n = key;
     el.textContent = (typeof window.t === "function") ? window.t(key) : el.textContent;

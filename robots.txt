@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /view-appointment.html
+Disallow: /locales/
+Disallow: /README.md
+Disallow: /.vscode/
+
+Sitemap: https://yasminbeauty.salon/sitemap.xml
