@@ -30,7 +30,7 @@ textarea {
   font-size: var(--font-size-label);
 }
 .main-form .required {
-  color: red;
+  color: #a3282f;
   font-size: 1.2rem;
   margin-left: 4px;
 }
@@ -40,7 +40,12 @@ textarea {
 .hair-image-label.is-required .required {
   display: inline;
 }
-
+.field-error {
+  margin: 2px 0 8px;
+  color: #a3282f;
+  font-family: "Inter", sans-serif;
+  font-size: 0.875rem;
+}
 .main-form input,
 .main-form select {
   width: 100%;

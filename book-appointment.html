@@ -107,12 +107,17 @@
 
         <form id="appointment-form" class="main-form">
           <label for="customer-name" data-i18n="form.name">Name<span class="required">*</span></label>
-          <input type="text" id="customer-name" required name="clientName" data-i18n="form.name.placeholder"
+          <input type="text" id="customer-name" required name="clientName" autocomplete="name" data-i18n="form.name.placeholder"
             placeholder="Your name">
 
           <label for="client-phone" data-i18n="form.phone">Phone Number<span class="required">*</span></label>
-          <input type="tel" id="client-phone" required name="clientPhone" placeholder="123 456 7893"
-            pattern="[0-9]{3}[0-9]{3}[0-9]{4}">
+          <input type="tel" id="client-phone" required name="clientPhone"
+            inputmode="tel" autocomplete="tel"
+            placeholder="(323) 907-5658"
+            pattern="[0-9+()\-.\s]{10,20}"
+            data-i18n="form.phone.placeholder">
+            <p class="field-error" id="client-phone-error" role="alert" hidden
+            data-i18n="form.phone.error">Enter a 10-digit phone number, for example (323) 907-5658.</p>
 
           <label for="service" data-i18n="form.services">Services<span class="required">*</span></label>
           <select id="service" name="service" required>
