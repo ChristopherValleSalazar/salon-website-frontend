@@ -253,5 +253,14 @@
     "view.modal.canceled.message": "Tu cita ha sido cancelada. Esperamos verte de nuevo pronto.",
     "view.modal.rescheduled.heading": "¡Cita reprogramada!",
     "view.modal.fail.heading": "Algo salió mal",
-    "view.modal.fail.message": "No pudimos completar tu solicitud. Por favor, inténtalo de nuevo."
+    "view.modal.fail.message": "No pudimos completar tu solicitud. Por favor, inténtalo de nuevo.",
+    "view.confirm.dialog.dismiss": "No, volver",
+    "view.confirm.dialog.confirm.heading": "¿Confirmar esta cita?",
+    "view.confirm.dialog.confirm.message": "Avisaremos al salón que asistirás.",
+    "view.confirm.dialog.confirm.proceed": "Sí, confirmar",
+    "view.confirm.dialog.cancel.heading": "¿Cancelar esta cita?",
+    "view.confirm.dialog.cancel.message": "Esto no se puede deshacer. Tendrías que reservar de nuevo.",
+    "view.confirm.dialog.cancel.proceed": "Sí, cancelar",
+    "view.confirm.dialog.reschedule.heading": "¿Reprogramar tu cita?",
+    "view.confirm.dialog.reschedule.proceed": "Sí, reprogramar"
 }

@@ -10,6 +10,9 @@ export function t(key) {
     return translations[key] ?? key;
 }
 
+// Expose the lookup to classic (non-module) scripts so they can translate
+window.t = t;
+
 export async function switchLanguage(lang) {
     if (!SUPPORTED.includes(lang)) lang = 'en';
 
@@ -47,8 +50,9 @@ export async function switchLanguage(lang) {
         `;
     }
 
-    document.querySelectorAll('.lang-opt').forEach(el => {
-        el.classList.toggle('active', el.dataset.lang === lang);
+    document.querySelectorAll('.lang-opt').forEach(opt => {
+        opt.addEventListener('click', () => switchLanguage(opt.dataset.lang));
+        opt.classList.toggle('active', opt.dataset.lang === lang);
     });
 
     document.dispatchEvent(new CustomEvent('languagechange', { detail: { lang } }));
