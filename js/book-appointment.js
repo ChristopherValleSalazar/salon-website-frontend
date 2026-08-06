@@ -98,26 +98,18 @@ function updateHairImageRequirement() {
 
 serviceSelector.addEventListener("change", updateHairImageRequirement);
 
-document.getElementById("appointment-form").addEventListener("submit", async (e) => {
-    e.preventDefault(); //preventing empty form from submitting
+// One in-flight submission at a time. The flag guards against repeated Enter presses,
+// which fire before the button's disabled state is painted.
+let submitting = false;
 
-    const dateInput = document.getElementById("date-input");
-    const timeInput = document.getElementById("time-input");
-    const bookingWrapper = document.getElementById("booking-wrapper");
-
-    if (!dateInput.value || !timeInput.value) {
-        bookingWrapper.classList.add("input-error");
-        bookingWrapper.scrollIntoView({ behavior: "smooth", block: "center" });
-        return;
-    }
-    bookingWrapper.classList.remove("input-error");
-
-async function imageUploader() {
-    if(hairImageInput.files.length === 0) {
-        return {imageUrl: null, imagePublicId: null};
+async function uploadHairImage() {
+    if (hairImageInput.files.length === 0) {
+        return { imageUrl: null, imagePublicId: null };
     }
 
-    const sig = await fetch(`${API_BASE_URL}/api/v1/uploads/signature`).then(r => r.json());
+    const sigRes = await fetch(`${API_BASE_URL}/api/v1/uploads/signature`);
+    if (!sigRes.ok) throw new ApiError("form.error.upload");
+    const sig = await sigRes.json();
 
     const fd = new FormData();
     fd.append('file', hairImageInput.files[0]);
@@ -126,68 +118,111 @@ async function imageUploader() {
     fd.append('signature', sig.signature);
     fd.append('folder', sig.folder);
 
-    console.log(JSON.stringify(sig, null, 2));
-    console.log('sig len:', sig.signature?.length, 'key len:', sig.apiKey?.length);
-
     const res = await fetch(
         `https://api.cloudinary.com/v1_1/yfmlabi1/image/upload`,
         { method: 'POST', body: fd }
     );
-    if(!res.ok) throw new Error('image upload failed');
+    if (!res.ok) throw new ApiError("form.error.upload");
+
     const data = await res.json();
-
-    console.log("Image upload result:", data);
-
-    const imageUrl = data.secure_url;
-    const imagePublicId = data.public_id;
-
-    return {imageUrl, imagePublicId};
+    return { imageUrl: data.secure_url, imagePublicId: data.public_id };
 }
 
+// Carries a translation key rather than a technical string, so the customer never
+// sees "Failed to fetch".
+class ApiError extends Error {
+    constructor(key) { super(key); this.key = key; }
+}
+
+document.getElementById("appointment-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (submitting) return;
+
+    const phoneInput = document.getElementById("client-phone");
+    const phoneError = document.getElementById("client-phone-error");
+    const dateInput = document.getElementById("date-input");
+    const timeInput = document.getElementById("time-input");
+    const bookingWrapper = document.getElementById("booking-wrapper");
+
+    // Accept any human phone format, then reduce to the 10 digits the API expects.
+    const phoneDigits = phoneInput.value.replace(/\D/g, "").replace(/^1(?=\d{10}$)/, "");
+    if (phoneDigits.length !== 10) {
+        phoneError.hidden = false;
+        phoneInput.setAttribute("aria-invalid", "true");
+        phoneInput.setAttribute("aria-describedby", "client-phone-error");
+        phoneInput.focus();
+        return;
+    }
+    phoneError.hidden = true;
+    phoneInput.removeAttribute("aria-invalid");
+
+    if (!dateInput.value || !timeInput.value) {
+        bookingWrapper.classList.add("input-error");
+        bookingWrapper.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth", block: "center" });
+        return;
+    }
+    bookingWrapper.classList.remove("input-error");
+
+    // Lock the button synchronously, before any await — this is the whole point.
+    submitting = true;
+    setSubmitting(true);
+
     try {
-        let imageUrl = null;
-        let imagePublicId = null;
-
-        const result = await imageUploader();
-        imageUrl = result?.imageUrl || null;
-        imagePublicId = result?.imagePublicId || null;
-
+        const { imageUrl, imagePublicId } = await uploadHairImage();
 
         const payload = {
             name: document.getElementById("customer-name").value,
-            phoneNumber: document.getElementById("client-phone").value,
+            phoneNumber: phoneDigits,
             serviceType: document.getElementById("service").value,
-            date: document.getElementById("date-input").value,
-            startTime: document.getElementById("time-input").value,
+            date: dateInput.value,
+            startTime: timeInput.value,
             smsConsent: document.getElementById("consent-sms").checked,
             additionalNotes: document.getElementById("notes").value.trim() || null,
             hairImageUrl: imageUrl,
             hairImagePublicId: imagePublicId
         };
 
-        submitBtn.disabled = true;
-
-        console.log("Submitting appointment:", payload);
-
-        const resPost = await fetch((`${API_BASE_URL}/api/v1/appointments`), {
+        const resPost = await fetch(`${API_BASE_URL}/api/v1/appointments`, {
             method: "POST",
-            headers: { "content-type": "application/json"},
+            headers: { "content-type": "application/json" },
             body: JSON.stringify(payload)
         });
 
-        if(resPost.ok) {
-            const body = await resPost.json();
-            modalBehaviour(body); // implement body in modalBehaviour to show the success message
+        if (resPost.ok) {
+            modalBehaviour(await resPost.json());
+        } else if (resPost.status === 409) {
+            failureModalBehaviour(t("form.error.slot-taken"));
+        } else if (resPost.status >= 500) {
+            failureModalBehaviour(t("form.error.server"));
         } else {
-            const body = await resPost.json().catch(() => ({}));
-            failureModalBehaviour(body.error || "An error occurred while submitting the appointment."); // message from the response body
+            failureModalBehaviour(t("form.error.invalid"));
         }
     } catch (err) {
-        failureModalBehaviour(err.message);
+        // ApiError carries a key; anything else is a network/parse failure.
+        failureModalBehaviour(t(err instanceof ApiError ? err.key : "form.error.network"));
     } finally {
-        submitBtn.disabled = false;
+        submitting = false;
+        setSubmitting(false);
     }
 });
+
+function setSubmitting(busy) {
+    submitBtn.disabled = busy;
+    submitBtn.setAttribute("aria-busy", String(busy));
+    // Drop data-i18n while busy so a language switch mid-request can't overwrite the
+    // pending label; restore it afterwards.
+    if (busy) {
+        delete submitBtn.dataset.i18n;
+        submitBtn.textContent = t("form.submitting");
+    } else {
+        submitBtn.dataset.i18n = "common.btn.appointment";
+        submitBtn.textContent = t("common.btn.appointment");
+    }
+}
+
+function prefersReducedMotion() {
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
 
 const modalOverlay = document.querySelector(".modal-overlay");
 
