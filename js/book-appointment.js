@@ -134,6 +134,16 @@ class ApiError extends Error {
     constructor(key) { super(key); this.key = key; }
 }
 
+// Read lazily, at submit time — language.js writes ybs_lang from an async IIFE, and the
+// customer may switch language after the page loads. Safari private mode throws on access.
+function readLang() {
+    try {
+        return localStorage.getItem("ybs_lang") || "en";
+    } catch {
+        return "en";
+    }
+}
+
 document.getElementById("appointment-form").addEventListener("submit", async (e) => {
     e.preventDefault();
     if (submitting) return;
@@ -179,7 +189,8 @@ document.getElementById("appointment-form").addEventListener("submit", async (e)
             smsConsent: document.getElementById("consent-sms").checked,
             additionalNotes: document.getElementById("notes").value.trim() || null,
             hairImageUrl: imageUrl,
-            hairImagePublicId: imagePublicId
+            hairImagePublicId: imagePublicId,
+            language: readLang()
         };
 
         const resPost = await fetch(`${API_BASE_URL}/api/v1/appointments`, {
