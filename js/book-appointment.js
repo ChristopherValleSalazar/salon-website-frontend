@@ -134,8 +134,6 @@ class ApiError extends Error {
     constructor(key) { super(key); this.key = key; }
 }
 
-// Read lazily, at submit time — language.js writes ybs_lang from an async IIFE, and the
-// customer may switch language after the page loads. Safari private mode throws on access.
 function readLang() {
     try {
         return localStorage.getItem("ybs_lang") || "en";
