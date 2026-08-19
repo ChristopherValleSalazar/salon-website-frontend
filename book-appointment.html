@@ -141,12 +141,18 @@
               data-i18n="form.services.haircut-beard-trim-eyebrow-shaping">Haircut Beard Trim Eyebrow Shaping</option>
           </select>
 
-          <label class="hair-image-label" for="hair-image"><span data-i18n="form.hair-img">Hair Image</span><span class="required">*</span></label>
-          <div class="img-container">
-            <input type="file" id="hair-image" accept=".png,.jpg,.jpeg,.webp" name="hairPic">
+          <label class="hair-image-label" for="hair-image">
+            <span data-i18n="form.hair-img">Hair Image</span><span class="required">*</span>
+          </label>
+          <p class="hair-image-help" data-i18n="form.hair-img.help">
+            One photo required — add up to 2 more if it helps your stylist.
+          </p>
 
-            <label for="hair-image" class="file-drop" id="file-drop">
-              <span class="file-drop-empty">
+          <div class="img-container">
+            <input type="file" id="hair-image" accept="image/jpeg,image/png,image/webp" multiple>
+
+            <div class="file-drop" id="file-drop">
+              <label for="hair-image" class="file-drop-empty">
                 <svg class="file-drop-icon" viewBox="0 0 24 24" width="26" height="26" fill="none"
                   stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"
                   aria-hidden="true">
@@ -155,16 +161,14 @@
                   <path d="M21 15l-5-5L5 21"></path>
                 </svg>
                 <span class="file-drop-copy">
-                  <span class="file-drop-title" data-i18n="form.hair-img.prompt">Click or drag a photo here</span>
-                  <span class="file-drop-hint" data-i18n="form.hair-img.hint">PNG, JPG or WEBP</span>
+                  <span class="file-drop-title" data-i18n="form.hair-img.prompt">Click or drag photos here</span>
+                  <span class="file-drop-hint" data-i18n="form.hair-img.hint">PNG, JPG or WEBP · up to 3 · 5 MB each</span>
                 </span>
-              </span>
-              <span class="file-drop-selected">
-                <img class="file-drop-thumb" alt="Selected image preview">
-                <span class="file-drop-name"></span>
-                <button type="button" class="file-drop-clear" aria-label="Remove image">&times;</button>
-              </span>
-            </label>
+              </label>
+
+              <div class="file-drop-thumbs"></div>
+              <p class="file-drop-note" role="alert" hidden></p>
+            </div>
           </div>
 
           <label for="date-input" data-i18n="form.date">Date &amp; Time<span class="required">*</span></label>

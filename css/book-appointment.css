@@ -125,8 +125,133 @@ textarea {
   display: none;
 }
 
+/* Thumbnails and errors render on both mobile and desktop */
+.hair-image-help {
+  margin: 0 0 6px 8px;
+  font-family: "Inter", sans-serif;
+  font-size: 0.8rem;
+  color: #8a7f72;
+}
+.file-drop-thumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+.file-drop-thumbs:empty {
+  display: none;
+}
+.file-drop-item {
+  position: relative;
+  width: 84px;
+  height: 84px;
+}
+.file-drop-thumb {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  background: #e7decb;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+.file-drop-clear {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  font-size: 1.05rem;
+  line-height: 1;
+  color: var(--color-light);
+  background: var(--color-dark);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.file-drop-clear:hover {
+  background: var(--color-submit-btn);
+  transform: scale(1.08);
+}
+.file-drop-note {
+  margin: 8px 0 0 8px;
+  font-family: "Inter", sans-serif;
+  font-size: 0.875rem;
+  color: #a3282f;
+}
+
+/* Custom drop zone hidden by default; shown on desktop only */
+.file-drop {
+  display: none;
+}
+
+/* Thumbnails and errors render on both mobile and desktop */
+.hair-image-help {
+  margin: 0 0 6px 8px;
+  font-family: "Inter", sans-serif;
+  font-size: 0.8rem;
+  color: #8a7f72;
+}
+.file-drop-thumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+.file-drop-thumbs:empty {
+  display: none;
+}
+.file-drop-item {
+  position: relative;
+  width: 84px;
+  height: 84px;
+}
+.file-drop-thumb {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  background: #e7decb;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+.file-drop-clear {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  font-size: 1.05rem;
+  line-height: 1;
+  color: var(--color-light);
+  background: var(--color-dark);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.file-drop-clear:hover {
+  background: var(--color-submit-btn);
+  transform: scale(1.08);
+}
+.file-drop-note {
+  margin: 8px 0 0 8px;
+  font-family: "Inter", sans-serif;
+  font-size: 0.875rem;
+  color: #a3282f;
+}
+
 @media (min-width: 601px) {
-  /* Visually hide the native input but keep it in the DOM so it still carries the file */
+  /* Visually hide the native input but keep it in the DOM so it still carries the files */
   .img-container input[type="file"] {
     position: absolute;
     width: 1px;
@@ -140,18 +265,14 @@ textarea {
   }
 
   .file-drop {
-    display: flex;
-    align-items: center;
-    gap: 16px;
+    display: block;
     width: 99%;
     max-width: 980px;
-    min-height: 20px;
     padding: 14px 18px;
     border: 1.5px dashed #c9bda8;
     border-radius: 14px;
     background: #f8f4ed;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    cursor: pointer;
     transition: border-color 0.2s ease, background 0.2s ease;
   }
   .file-drop:hover,
@@ -159,8 +280,9 @@ textarea {
     border-color: var(--color-primary);
     background: #f3ecdf;
   }
-  .file-drop.has-file {
-    border-style: solid;
+  /* Three picked: nothing more can be added, so drop the prompt entirely */
+  .file-drop.is-full {
+    display: none;
   }
   .img-container input[type="file"]:focus-visible + .file-drop {
     border-color: var(--color-primary);
@@ -172,6 +294,8 @@ textarea {
     align-items: center;
     gap: 16px;
     width: 100%;
+    margin: 0;
+    cursor: pointer;
   }
   .file-drop-icon {
     flex-shrink: 0;
@@ -193,59 +317,8 @@ textarea {
     font-size: 0.78rem;
     color: #8a7f72;
   }
-
-  .file-drop-selected {
-    display: none;
-    align-items: center;
-    gap: 14px;
-    width: 100%;
-  }
-  .file-drop.has-file .file-drop-empty {
-    display: none;
-  }
-  .file-drop.has-file .file-drop-selected {
-    display: flex;
-  }
-  .file-drop-thumb {
-    flex-shrink: 0;
-    width: 44px;
-    height: 44px;
-    object-fit: cover;
-    border-radius: 8px;
-    background: #e7decb;
-  }
-  .file-drop-name {
-    flex: 1;
-    min-width: 0;
-    font-family: "Inter", sans-serif;
-    font-size: 0.9rem;
-    color: var(--color-dark);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .file-drop-clear {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 28px;
-    height: 28px;
-    padding: 0;
-    font-size: 1.2rem;
-    line-height: 1;
-    color: var(--color-dark);
-    background: rgba(0, 0, 0, 0.06);
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: background 0.2s ease, color 0.2s ease;
-  }
-  .file-drop-clear:hover {
-    background: var(--color-submit-btn);
-    color: var(--color-light);
-  }
 }
+
 .book-app-btn{
   display: block;
   width: 50%;

@@ -23,37 +23,79 @@ const fileInput = document.getElementById("hair-image");
 const fileDrop = document.getElementById("file-drop");
 
 if (fileInput && fileDrop) {
-    const thumb = fileDrop.querySelector(".file-drop-thumb");
-    const nameEl = fileDrop.querySelector(".file-drop-name");
-    const clearBtn = fileDrop.querySelector(".file-drop-clear");
+    const thumbs = fileDrop.querySelector(".file-drop-thumbs");
+    const note = fileDrop.querySelector(".file-drop-note");
 
-    function showFile(file) {
-        if (!file) {
-            fileDrop.classList.remove("has-file");
-            thumb.removeAttribute("src");
-            nameEl.textContent = "";
-            return;
-        }
+    // Source of truth. The input's own FileList is derived from this.
+    let selectedFiles = [];
 
-        nameEl.textContent = file.name;
-        fileDrop.classList.add("has-file");
-
-        if (file.type.startsWith("image/")) {
-            const reader = new FileReader();
-            reader.onload = (e) => { thumb.src = e.target.result; };
-            reader.readAsDataURL(file);
-        } else {
-            thumb.removeAttribute("src");
-        }
+    function syncInput() {
+        const dt = new DataTransfer();
+        selectedFiles.forEach(f => dt.items.add(f));
+        fileInput.files = dt.files;
+        fileDrop.classList.toggle("has-file", selectedFiles.length > 0);
+        renderThumbs();
     }
 
-    fileInput.addEventListener("change", () => showFile(fileInput.files[0]));
+    function renderThumbs() {
+        thumbs.innerHTML = "";
+        selectedFiles.forEach((file, index) => {
+            const item = document.createElement("div");
+            item.className = "file-drop-item";
 
-    clearBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        fileInput.value = "";
-        showFile(null);
+            const img = document.createElement("img");
+            img.className = "file-drop-thumb";
+            img.alt = file.name;
+            const reader = new FileReader();
+            reader.onload = (e) => { img.src = e.target.result; };
+            reader.readAsDataURL(file);
+
+            const remove = document.createElement("button");
+            remove.type = "button";
+            remove.className = "file-drop-clear";
+            remove.textContent = "×";
+            remove.addEventListener("click", (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                selectedFiles.splice(index, 1);
+                showNote("");
+                syncInput();
+            });
+
+            item.append(img, remove);
+            thumbs.appendChild(item);
+        });
+    }
+
+    function showNote(key) {
+        if (!key) {
+            note.hidden = true;
+            note.textContent = "";
+            return;
+        }
+        note.textContent = t(key);
+        note.hidden = false;
+    }
+
+    // Merges rather than replaces, so a second pick adds to the first.
+    function addFiles(incoming) {
+        let rejected = null;
+
+        for (const file of incoming) {
+            if (selectedFiles.length >= MAX_IMAGES) { rejected = "form.error.tooManyImages"; break; }
+            if (!ALLOWED_TYPES.includes(file.type)) { rejected = "form.error.imageType"; continue; }
+            if (file.size > MAX_FILE_BYTES) { rejected = "form.error.imageTooLarge"; continue; }
+            if (selectedFiles.some(f => f.name === file.name && f.size === file.size)) continue;
+            selectedFiles.push(file);
+        }
+
+        showNote(rejected);
+        syncInput();
+    }
+
+    fileInput.addEventListener("change", () => {
+        // Snapshot before syncInput reassigns fileInput.files
+        addFiles(Array.from(fileInput.files));
     });
 
     ["dragenter", "dragover"].forEach((ev) =>
@@ -68,16 +110,14 @@ if (fileInput && fileDrop) {
     fileDrop.addEventListener("drop", (e) => {
         e.preventDefault();
         fileDrop.classList.remove("is-dragover");
-
-        const dropped = e.dataTransfer.files;
-        if (dropped && dropped.length) {
-            fileInput.files = dropped;
-            showFile(fileInput.files[0]);
-        }
+        if (e.dataTransfer.files?.length) addFiles(Array.from(e.dataTransfer.files));
     });
 
-    // Keep the custom UI in sync when the form is reset after a successful booking
-    document.getElementById("appointment-form").addEventListener("reset", () => showFile(null));
+    document.getElementById("appointment-form").addEventListener("reset", () => {
+        selectedFiles = [];
+        showNote("");
+        syncInput();
+    });
 }
 
 const serviceSelector = document.getElementById("service");
@@ -102,34 +142,53 @@ serviceSelector.addEventListener("change", updateHairImageRequirement);
 // which fire before the button's disabled state is painted.
 let submitting = false;
 
-async function uploadHairImage() {
-    if (hairImageInput.files.length === 0) {
-        return { imageUrl: null, imagePublicId: null };
+const MAX_IMAGES = 3;
+const MAX_FILE_BYTES = 5 * 1024 * 1024;
+const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp"];
+
+async function uploadHairImages() {
+    const files = Array.from(hairImageInput.files);
+
+    if (files.length === 0) {
+        return { imageUrls: [], imagePublicIds: [] };
     }
 
-    const sigRes = await fetch(`${API_BASE_URL}/api/v1/uploads/signature`);
-    if (!sigRes.ok) throw new ApiError("form.error.upload");
-    const sig = await sigRes.json();
+    if (files.length > MAX_IMAGES) {
+        throw new ApiError("form.error.tooManyImages");
+    }
+
+    for (const file of files) {
+        if (!ALLOWED_TYPES.includes(file.type)) {
+            throw new ApiError("form.error.imageType");
+        }
+        if (file.size > MAX_FILE_BYTES) {
+            throw new ApiError("form.error.imageTooLarge");
+        }
+    }
 
     const fd = new FormData();
-    fd.append('file', hairImageInput.files[0]);
-    fd.append('api_key', sig.apiKey);
-    fd.append('timestamp', sig.timestamp);
-    fd.append('signature', sig.signature);
-    fd.append('folder', sig.folder);
+    for (const file of files) {
+        fd.append("files", file);
+    }
 
-    const res = await fetch(
-        `https://api.cloudinary.com/v1_1/yfmlabi1/image/upload`,
-        { method: 'POST', body: fd }
-    );
+    const res = await fetch(`${API_BASE_URL}/api/v1/uploads`, {
+        method: "POST",
+        body: fd
+    });
+
     if (!res.ok) throw new ApiError("form.error.upload");
 
-    const data = await res.json();
-    return { imageUrl: data.secure_url, imagePublicId: data.public_id };
+    const uploaded = await res.json();
+
+    console.log("Uploaded images:", uploaded);
+
+    return {
+        imageUrls: uploaded.map(img => img.url),
+        imagePublicIds: uploaded.map(img => img.publicId)
+    };
 }
 
-// Carries a translation key rather than a technical string, so the customer never
-// sees "Failed to fetch".
+// Carries a translation key rather than a technical string
 class ApiError extends Error {
     constructor(key) { super(key); this.key = key; }
 }
@@ -176,7 +235,7 @@ document.getElementById("appointment-form").addEventListener("submit", async (e)
     setSubmitting(true);
 
     try {
-        const { imageUrl, imagePublicId } = await uploadHairImage();
+        const {imageUrls, imagePublicIds} = await uploadHairImages();
 
         const payload = {
             name: document.getElementById("customer-name").value,
@@ -186,8 +245,10 @@ document.getElementById("appointment-form").addEventListener("submit", async (e)
             startTime: timeInput.value,
             smsConsent: document.getElementById("consent-sms").checked,
             additionalNotes: document.getElementById("notes").value.trim() || null,
-            hairImageUrl: imageUrl,
-            hairImagePublicId: imagePublicId,
+            // hairImageUrls: imageUrls,
+            hairImageUrl: imageUrls[0] ?? null,
+            // hairImagePublicIds: imagePublicIds,
+            hairImagePublicId: imagePublicIds[0] ?? null,
             language: readLang()
         };
 
