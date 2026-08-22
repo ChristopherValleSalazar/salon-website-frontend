@@ -613,7 +613,7 @@ async function loadTimeSlots(dateStr) {
         requestDate: dateStr,
         // The slots endpoint accepts a single ServiceType, so the first choice
         // drives the duration. Two-service bookings need a backend change.
-        requestService: selectedServices()[0]
+        requestServices: selectedServices()
     });
 
     try {

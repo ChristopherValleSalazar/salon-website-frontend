@@ -129,7 +129,7 @@ textarea {
   top: 100%;
   left: 0;
   right: 0;
-  z-index: 2;
+  z-index: 4; /* Set at 4 to hide arrows from calendar overlapping with the selection panel*/
   margin: 0.35rem 0 0;
   padding: 6px;
   max-height: 320px;

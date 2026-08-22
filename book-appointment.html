@@ -118,8 +118,6 @@
             <p class="field-error" id="client-phone-error" role="alert" hidden
             data-i18n="form.phone.error">Enter a 10-digit phone number, for example (323) 907-5658.</p>
 
-          <!-- `for` is dropped because <button> is not a labelable element; the
-               trigger points back at this label with aria-labelledby instead. -->
           <label id="service-label" data-i18n="form.services">Services<span class="required">*</span></label>
 
           <div class="service-select" id="service-select">
@@ -127,10 +125,6 @@
               aria-haspopup="listbox" aria-expanded="false" aria-controls="service-panel"
               aria-labelledby="service-label service-trigger"
               data-i18n="form.services.placeholder">Select up to 2 services</button>
-
-            <!-- role="group", not role="listbox": a listbox's children must be
-                 options, and wrapping real checkboxes in one stops screen readers
-                 announcing checked state. The trigger keeps aria-haspopup. -->
             <div class="service-panel" id="service-panel" role="group" aria-labelledby="service-label">
               <p class="service-panel-hint" data-i18n="form.services.max-hint">Choose up to 2 services</p>
 
