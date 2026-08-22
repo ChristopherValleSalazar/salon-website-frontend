@@ -114,7 +114,6 @@
           <input type="tel" id="client-phone" required name="clientPhone"
             inputmode="tel" autocomplete="tel"
             placeholder="(323) 907-5658"
-            pattern="[0-9+()\-.\s]{10,20}"
             data-i18n="form.phone.placeholder">
             <p class="field-error" id="client-phone-error" role="alert" hidden
             data-i18n="form.phone.error">Enter a 10-digit phone number, for example (323) 907-5658.</p>
@@ -141,33 +140,43 @@
               data-i18n="form.services.haircut-beard-trim-eyebrow-shaping">Haircut Beard Trim Eyebrow Shaping</option>
           </select>
 
-          <label class="hair-image-label" for="hair-image">
-            <span data-i18n="form.hair-img">Hair Image</span><span class="required">*</span>
-          </label>
-          <p class="hair-image-help" data-i18n="form.hair-img.help">
-            One photo required — add up to 2 more if it helps your stylist.
-          </p>
+            <label class="hair-image-label" for="hair-image">
+              <span data-i18n="form.hair-img">Hair Image</span><span class="required">*</span>
+            </label>
 
-          <div class="img-container">
-            <input type="file" id="hair-image" accept="image/jpeg,image/png,image/webp" multiple>
+            <!-- Appears only when the chosen service needs a photo, in step with the asterisk. -->
+            <p class="hair-image-help" id="hair-image-help" data-i18n="form.hair-img.help" hidden>
+              One photo required. Add up to 2 more if it helps your stylist.
+            </p>
 
-            <div class="file-drop" id="file-drop">
-              <label for="hair-image" class="file-drop-empty">
-                <svg class="file-drop-icon" viewBox="0 0 24 24" width="26" height="26" fill="none"
-                  stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"
-                  aria-hidden="true">
-                  <rect x="3" y="3" width="18" height="18" rx="3"></rect>
-                  <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                  <path d="M21 15l-5-5L5 21"></path>
-                </svg>
-                <span class="file-drop-copy">
-                  <span class="file-drop-title" data-i18n="form.hair-img.prompt">Click or drag photos here</span>
-                  <span class="file-drop-hint" data-i18n="form.hair-img.hint">PNG, JPG or WEBP · up to 3 · 5 MB each</span>
-                </span>
-              </label>
+            <div class="img-container">
+              <!-- No `required` here on purpose: constraint validation runs before the
+                  submit event, so a native block would stop the submit handler from
+                  running at all and surface the message in a bubble pinned to this
+                  visually-hidden input. The check lives in JS instead. -->
+              <input type="file" id="hair-image" accept="image/jpeg,image/png,image/webp" multiple>
 
-              <div class="file-drop-thumbs"></div>
-              <p class="file-drop-note" role="alert" hidden></p>
+              <div class="file-drop" id="file-drop">
+                <label for="hair-image" class="file-drop-empty">
+                  <svg class="file-drop-icon" viewBox="0 0 24 24" width="26" height="26" fill="none"
+                    stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"
+                    aria-hidden="true">
+                    <rect x="3" y="3" width="18" height="18" rx="3"></rect>
+                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                    <path d="M21 15l-5-5L5 21"></path>
+                  </svg>
+                  <span class="file-drop-copy">
+                    <span class="file-drop-title" data-i18n="form.hair-img.prompt">Click or drag photos here</span>
+                    <span class="file-drop-hint" data-i18n="form.hair-img.hint">PNG, JPG or WEBP · up to 3 · 5 MB each</span>
+                  </span>
+                </label>
+              </div>
+
+              <!-- Thumbnails and the error line sit OUTSIDE #file-drop. That element is
+                  display:none below 601px and again at three files via .is-full, which
+                  was hiding both the previews and every validation message. -->
+              <div class="file-drop-thumbs" id="hair-image-thumbs"></div>
+              <p class="file-drop-note" id="hair-image-note" role="alert" aria-live="polite" hidden></p>
             </div>
           </div>
 
