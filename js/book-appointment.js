@@ -18,159 +18,231 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// Custom hair-image drop zone (desktop). Mobile keeps the native OS picker untouched.
-const fileInput = document.getElementById("hair-image");
-const fileDrop = document.getElementById("file-drop");
+// ---------------------------------------------------------------------------
+// Hair reference photos
+// Desktop (>=601px) uses the custom drag-and-drop zone, mobile (<=600px) the
+// native OS picker. Both funnel into the same selectedFiles array.
+// ---------------------------------------------------------------------------
 
-if (fileInput && fileDrop) {
-    const thumbs = fileDrop.querySelector(".file-drop-thumbs");
-    const note = fileDrop.querySelector(".file-drop-note");
+const MAX_IMAGES = 3;
+const MAX_FILE_BYTES = 5 * 1024 * 1024;
+const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp"];
+// Fallback for pickers that hand over a file with an empty `type`.
+const ALLOWED_EXTENSIONS = [".jpg", ".jpeg", ".png", ".webp"];
 
-    // Source of truth. The input's own FileList is derived from this.
-    let selectedFiles = [];
-
-    function syncInput() {
-        const dt = new DataTransfer();
-        selectedFiles.forEach(f => dt.items.add(f));
-        fileInput.files = dt.files;
-        fileDrop.classList.toggle("has-file", selectedFiles.length > 0);
-        renderThumbs();
-    }
-
-    function renderThumbs() {
-        thumbs.innerHTML = "";
-        selectedFiles.forEach((file, index) => {
-            const item = document.createElement("div");
-            item.className = "file-drop-item";
-
-            const img = document.createElement("img");
-            img.className = "file-drop-thumb";
-            img.alt = file.name;
-            const reader = new FileReader();
-            reader.onload = (e) => { img.src = e.target.result; };
-            reader.readAsDataURL(file);
-
-            const remove = document.createElement("button");
-            remove.type = "button";
-            remove.className = "file-drop-clear";
-            remove.textContent = "×";
-            remove.addEventListener("click", (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                selectedFiles.splice(index, 1);
-                showNote("");
-                syncInput();
-            });
-
-            item.append(img, remove);
-            thumbs.appendChild(item);
-        });
-    }
-
-    function showNote(key) {
-        if (!key) {
-            note.hidden = true;
-            note.textContent = "";
-            return;
-        }
-        note.textContent = t(key);
-        note.hidden = false;
-    }
-
-    // Merges rather than replaces, so a second pick adds to the first.
-    function addFiles(incoming) {
-        let rejected = null;
-
-        for (const file of incoming) {
-            if (selectedFiles.length >= MAX_IMAGES) { rejected = "form.error.tooManyImages"; break; }
-            if (!ALLOWED_TYPES.includes(file.type)) { rejected = "form.error.imageType"; continue; }
-            if (file.size > MAX_FILE_BYTES) { rejected = "form.error.imageTooLarge"; continue; }
-            if (selectedFiles.some(f => f.name === file.name && f.size === file.size)) continue;
-            selectedFiles.push(file);
-        }
-
-        showNote(rejected);
-        syncInput();
-    }
-
-    fileInput.addEventListener("change", () => {
-        // Snapshot before syncInput reassigns fileInput.files
-        addFiles(Array.from(fileInput.files));
-    });
-
-    ["dragenter", "dragover"].forEach((ev) =>
-        fileDrop.addEventListener(ev, (e) => {
-            e.preventDefault();
-            fileDrop.classList.add("is-dragover");
-        })
-    );
-    ["dragleave", "dragend"].forEach((ev) =>
-        fileDrop.addEventListener(ev, () => fileDrop.classList.remove("is-dragover"))
-    );
-    fileDrop.addEventListener("drop", (e) => {
-        e.preventDefault();
-        fileDrop.classList.remove("is-dragover");
-        if (e.dataTransfer.files?.length) addFiles(Array.from(e.dataTransfer.files));
-    });
-
-    document.getElementById("appointment-form").addEventListener("reset", () => {
-        selectedFiles = [];
-        showNote("");
-        syncInput();
-    });
-}
-
-const serviceSelector = document.getElementById("service");
-const hairImageInput = document.getElementById("hair-image");
-const hairImageLabel = document.querySelector(".hair-image-label");
-const submitBtn = document.getElementById("book-app-btn");
+// Services that cannot be booked without at least one reference photo.
 const IMAGE_REQUIRED_SERVICES = new Set([
     "DYES", "BABY_HIGHLIGHT", "COLOR_TOUCH_UP", "TREATMENT_MOISTURIZING",
     "KERATIN_TREATMENT", "PERM"
-])
+]);
 
-function updateHairImageRequirement() {
-    const needsImage = IMAGE_REQUIRED_SERVICES.has(serviceSelector.value);
+const serviceSelector = document.getElementById("service");
+const submitBtn = document.getElementById("book-app-btn");
 
-    hairImageInput.required = needsImage;
-    hairImageLabel.classList.toggle("is-required", needsImage);
+const fileInput = document.getElementById("hair-image");
+const fileDrop = document.getElementById("file-drop");
+const hairImageLabel = document.querySelector(".hair-image-label");
+const hairImageHelp = document.getElementById("hair-image-help");
+const thumbs = document.getElementById("hair-image-thumbs");
+const note = document.getElementById("hair-image-note");
+
+// Source of truth. The input's own FileList is rebuilt from this.
+let selectedFiles = [];
+
+// Object URLs currently handed to <img> elements, revoked on every re-render so
+// large phone photos don't accumulate in memory.
+let thumbUrls = [];
+
+// Remembered so the message can be re-rendered when the language changes.
+let noteKey = "";
+
+function imageIsRequired() {
+    return IMAGE_REQUIRED_SERVICES.has(serviceSelector.value);
 }
 
-serviceSelector.addEventListener("change", updateHairImageRequirement);
+// Trust the MIME type when the picker provides one, otherwise fall back to the
+// extension — some Android and iOS pickers send an empty type for valid photos.
+function isAllowedType(file) {
+    if (file.type) return ALLOWED_TYPES.includes(file.type);
+    return ALLOWED_EXTENSIONS.some(ext => file.name.toLowerCase().endsWith(ext));
+}
+
+function showNote(key) {
+    noteKey = key || "";
+    if (!noteKey) {
+        note.hidden = true;
+        note.textContent = "";
+        return;
+    }
+    note.textContent = t(noteKey);
+    note.hidden = false;
+}
+
+function renderThumbs() {
+    // Detach the old nodes BEFORE revoking their URLs: revoking a URL that a
+    // still-attached <img> is mid-decode on would fire a spurious error event.
+    thumbs.innerHTML = "";
+    thumbUrls.forEach(URL.revokeObjectURL);
+    thumbUrls = [];
+
+    selectedFiles.forEach((file) => {
+        const item = document.createElement("div");
+        item.className = "file-drop-item";
+
+        const img = document.createElement("img");
+        img.className = "file-drop-thumb";
+        img.alt = file.name;
+
+        // Object URLs stream from disk instead of loading the whole photo into a
+        // base64 string the way FileReader does — much lighter for phone photos.
+        const url = URL.createObjectURL(file);
+        thumbUrls.push(url);
+        img.src = url;
+
+        // A file can pass the type check and still be undecodable — an iPhone HEIC
+        // arriving through the Files app is the usual case. The only reliable test
+        // is asking the browser to render it, so a decode failure drops the file.
+        img.addEventListener("error", () => {
+            if (!img.isConnected) return;   // stale node from an earlier render
+            rejectUndecodable(file);
+        });
+
+        const remove = document.createElement("button");
+        remove.type = "button";
+        remove.className = "file-drop-clear";
+        remove.textContent = "×";
+        // The multiplication sign alone is not an accessible name.
+        remove.setAttribute("aria-label", `${t("form.hair-img.remove")}: ${file.name}`);
+        remove.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            removeFile(file);
+        });
+
+        item.append(img, remove);
+        thumbs.appendChild(item);
+    });
+}
+
+// Removal is by identity, not index: an index captured at render time goes stale
+// as soon as an earlier item is removed.
+function removeFile(file) {
+    selectedFiles = selectedFiles.filter(f => f !== file);
+    showNote("");
+    syncInput();
+}
+
+function rejectUndecodable(file) {
+    if (!selectedFiles.includes(file)) return;   // already removed
+    selectedFiles = selectedFiles.filter(f => f !== file);
+    showNote("form.error.imageUnreadable");
+    syncInput();
+}
+
+function syncInput() {
+    // Rebuild the input's FileList from our array so the two never disagree.
+    const dt = new DataTransfer();
+    selectedFiles.forEach(f => dt.items.add(f));
+    fileInput.files = dt.files;
+
+    // The stylesheet hides the prompt at three files via .is-full. The old code
+    // set .has-file, which no CSS rule reads.
+    fileDrop.classList.toggle("is-full", selectedFiles.length >= MAX_IMAGES);
+
+    renderThumbs();
+}
+
+// Merges rather than replaces, so a second pick adds to the first.
+function addFiles(incoming) {
+    let message = null;
+    let droppedForLimit = false;
+
+    for (const file of incoming) {
+        if (selectedFiles.length >= MAX_IMAGES) { droppedForLimit = true; continue; }
+        if (!isAllowedType(file)) { message = "form.error.imageType"; continue; }
+        if (file.size > MAX_FILE_BYTES) { message = "form.error.imageTooLarge"; continue; }
+        // Same photo picked twice across two visits to the picker.
+        if (selectedFiles.some(f => f.name === file.name && f.size === file.size)) continue;
+        selectedFiles.push(file);
+    }
+
+    // HTML has no "maximum number of files" attribute, so the OS picker hands over
+    // as many as the user taps. Extras are dropped here — and said out loud,
+    // because silently discarding their photos is the confusing part.
+    if (droppedForLimit) message = "form.hair-img.limit";
+
+    showNote(message);
+    syncInput();
+}
+
+function updateHairImageRequirement() {
+    const needsImage = imageIsRequired();
+    // Asterisk and help line appear together, only once a service that needs a
+    // photo is chosen.
+    hairImageLabel.classList.toggle("is-required", needsImage);
+    hairImageHelp.hidden = !needsImage;
+}
+
+fileInput.addEventListener("change", () => {
+    // Snapshot before syncInput reassigns fileInput.files
+    addFiles(Array.from(fileInput.files));
+});
+
+["dragenter", "dragover"].forEach((ev) =>
+    fileDrop.addEventListener(ev, (e) => {
+        e.preventDefault();
+        fileDrop.classList.add("is-dragover");
+    })
+);
+["dragleave", "dragend"].forEach((ev) =>
+    fileDrop.addEventListener(ev, () => fileDrop.classList.remove("is-dragover"))
+);
+fileDrop.addEventListener("drop", (e) => {
+    e.preventDefault();
+    fileDrop.classList.remove("is-dragover");
+    if (e.dataTransfer.files?.length) addFiles(Array.from(e.dataTransfer.files));
+});
+
+document.getElementById("appointment-form").addEventListener("reset", () => {
+    selectedFiles = [];
+    showNote("");
+    syncInput();
+    updateHairImageRequirement();
+});
+
+serviceSelector.addEventListener("change", () => {
+    updateHairImageRequirement();
+    // A "photo required" warning is stale once the service changes.
+    if (noteKey === "form.error.imageRequired") showNote("");
+});
+
+// language.js fires this after swapping the active bundle. Text this file creates
+// isn't covered by its [data-i18n] sweep, so it is refreshed here.
+document.addEventListener("languagechange", () => {
+    if (noteKey) note.textContent = t(noteKey);
+    thumbs.querySelectorAll(".file-drop-clear").forEach((btn, i) => {
+        const file = selectedFiles[i];
+        if (file) btn.setAttribute("aria-label", `${t("form.hair-img.remove")}: ${file.name}`);
+    });
+});
 
 // One in-flight submission at a time. The flag guards against repeated Enter presses,
 // which fire before the button's disabled state is painted.
 let submitting = false;
 
-const MAX_IMAGES = 3;
-const MAX_FILE_BYTES = 5 * 1024 * 1024;
-const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp"];
-
 async function uploadHairImages() {
-    const files = Array.from(hairImageInput.files);
-
-    if (files.length === 0) {
+    // selectedFiles is the source of truth; the input's FileList mirrors it.
+    if (selectedFiles.length === 0) {
         return { imageUrls: [], imagePublicIds: [] };
     }
 
-    if (files.length > MAX_IMAGES) {
-        throw new ApiError("form.error.tooManyImages");
-    }
-
-    for (const file of files) {
-        if (!ALLOWED_TYPES.includes(file.type)) {
-            throw new ApiError("form.error.imageType");
-        }
-        if (file.size > MAX_FILE_BYTES) {
-            throw new ApiError("form.error.imageTooLarge");
-        }
-    }
-
+    // Count, type and size are already enforced in addFiles(), which is the only
+    // way a file can reach selectedFiles — so there is one place to change a rule.
     const fd = new FormData();
-    for (const file of files) {
-        fd.append("files", file);
-    }
+    selectedFiles.forEach(file => fd.append("files", file));
 
+    // No Content-Type header: the browser must set it so the multipart boundary
+    // is generated. Setting it by hand is what breaks multipart uploads.
     const res = await fetch(`${API_BASE_URL}/api/v1/uploads`, {
         method: "POST",
         body: fd
@@ -179,8 +251,6 @@ async function uploadHairImages() {
     if (!res.ok) throw new ApiError("form.error.upload");
 
     const uploaded = await res.json();
-
-    console.log("Uploaded images:", uploaded);
 
     return {
         imageUrls: uploaded.map(img => img.url),
@@ -229,6 +299,18 @@ document.getElementById("appointment-form").addEventListener("submit", async (e)
         return;
     }
     bookingWrapper.classList.remove("input-error");
+
+    // Replaces the `required` attribute that used to sit on the file input.
+    // Native validation runs before this handler, so a native block would prevent
+    // this code from ever executing — and would point its bubble at an element
+    // that is 1px wide on desktop. Here the message lands in the visible line.
+    if (imageIsRequired() && selectedFiles.length === 0) {
+        showNote("form.error.imageRequired");
+        document.querySelector(".img-container").scrollIntoView({
+            behavior: prefersReducedMotion() ? "auto" : "smooth", block: "center"
+        });
+        return;
+    }
 
     // Lock the button synchronously, before any await — this is the whole point.
     submitting = true;

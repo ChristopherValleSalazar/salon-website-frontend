@@ -132,70 +132,10 @@ textarea {
   font-size: 0.8rem;
   color: #8a7f72;
 }
-.file-drop-thumbs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 10px;
-}
-.file-drop-thumbs:empty {
-  display: none;
-}
-.file-drop-item {
-  position: relative;
-  width: 84px;
-  height: 84px;
-}
-.file-drop-thumb {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 10px;
-  background: #e7decb;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-}
-.file-drop-clear {
-  position: absolute;
-  top: -7px;
-  right: -7px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  padding: 0;
-  font-size: 1.05rem;
-  line-height: 1;
-  color: var(--color-light);
-  background: var(--color-dark);
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease;
-}
-.file-drop-clear:hover {
-  background: var(--color-submit-btn);
-  transform: scale(1.08);
-}
-.file-drop-note {
-  margin: 8px 0 0 8px;
-  font-family: "Inter", sans-serif;
-  font-size: 0.875rem;
-  color: #a3282f;
-}
 
-/* Custom drop zone hidden by default; shown on desktop only */
-.file-drop {
+/* The help line is toggled by the `hidden` attribute from JS. */
+.hair-image-help[hidden] {
   display: none;
-}
-
-/* Thumbnails and errors render on both mobile and desktop */
-.hair-image-help {
-  margin: 0 0 6px 8px;
-  font-family: "Inter", sans-serif;
-  font-size: 0.8rem;
-  color: #8a7f72;
 }
 .file-drop-thumbs {
   display: flex;
