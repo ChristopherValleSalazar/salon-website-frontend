@@ -91,6 +91,125 @@ textarea {
   color: var(--color-dark);
 }
 
+/* SERVICE MULTI-SELECT
+   Positioning follows the language menu: relatively positioned wrapper with an
+   absolutely positioned panel toggled by .show. The trigger reproduces the old
+   <select> styling so the field looks unchanged. */
+.service-select {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin: 2px 0;
+}
+.service-trigger {
+  width: 100%;
+  min-height: 50px;
+  padding: 12px;
+  font: inherit;
+  font-size: 1rem;
+  text-align: left;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  box-sizing: border-box;
+  background-color: #f8f4ed;
+  color: var(--color-logo-inner-circle);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+/* Mirrors the old select:has(option[value=""]:checked) placeholder treatment */
+.service-trigger.is-placeholder {
+  color: rgba(22, 15, 10, 0.55);
+  font-size: 1.3rem;
+}
+.service-panel {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  margin: 0.35rem 0 0;
+  padding: 6px;
+  max-height: 320px;
+  overflow-y: auto;
+  background-color: #f8f4ed;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+}
+.service-panel.show {
+  display: block;
+}
+.service-panel-hint {
+  margin: 4px 8px 8px;
+  font-family: "Inter", sans-serif;
+  font-size: 0.78rem;
+  color: #8a7f72;
+}
+.service-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.service-option:hover {
+  background: rgba(184, 138, 68, 0.12);
+}
+/* Visually hidden but still focusable, so keyboard and screen readers work.
+   Needs three classes to outweigh `.main-form input[type="checkbox"]`, which
+   sizes the SMS consent box. */
+.main-form .service-panel .service-checkbox {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+}
+.service-option-box {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid #c9bda8;
+  border-radius: 5px;
+  background: #fff;
+}
+.service-option-box::after {
+  content: "";
+  width: 11px;
+  height: 11px;
+  transform: scale(0);
+  transition: transform 0.12s ease;
+  background: var(--color-submit-btn);
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+.main-form .service-panel .service-checkbox:checked + .service-option-box::after {
+  transform: scale(1);
+}
+.main-form .service-panel .service-checkbox:focus-visible + .service-option-box {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+/* At the cap of 2 the remaining rows are disabled rather than error-checked */
+.service-option.is-disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.service-option.is-disabled:hover {
+  background: none;
+}
+
 /* FILE INPUT */
 .img-container {
   position: relative;

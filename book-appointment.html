@@ -118,27 +118,95 @@
             <p class="field-error" id="client-phone-error" role="alert" hidden
             data-i18n="form.phone.error">Enter a 10-digit phone number, for example (323) 907-5658.</p>
 
-          <label for="service" data-i18n="form.services">Services<span class="required">*</span></label>
-          <select id="service" name="service" required>
-            <option class="service-placeholder" value="" selected disabled data-i18n="form.services.placeholder">
-              Select a service
-            </option>
-            <option value="HAIRCUT" data-i18n="form.services.haircut">Haircut</option>
-            <option value="BABY_HIGHLIGHT" data-i18n="form.services.baby-highlight">Baby Highlight</option>
-            <option value="DYES" data-i18n="form.services.dyes">Dyes</option>
-            <option value="KERATIN_TREATMENT" data-i18n="form.services.keratin">Keratin Treatment</option>
-            <option value="BLOW_DRYING" data-i18n="form.services.blowdry">Blow Drying</option>
-            <option value="WASHING" data-i18n="form.services.washing">Washing</option>
-            <option value="TREATMENT_MOISTURIZING" data-i18n="form.services.treatment">Treatment Moisturizing</option>
-            <option value="HAIRCUT_BLOW_DRY" data-i18n="form.services.haircut-blowdry">Haircut Blow Dry</option>
-            <option value="COLOR_TOUCH_UP" data-i18n="form.services.color-touchup">Color Touch Up</option>
-            <option value="PERM" data-i18n="form.services.perm">Perm</option>
-            <option value="BEARD_TRIM" data-i18n="form.services.beard-trim">Beard Trim</option>
-            <option value="EYEBROW_SHAPING" data-i18n="form.services.eyebrow-shaping">Eyebrow Shaping</option>
-            <option value="HAIRCUT_BEARD_TRIM" data-i18n="form.services.haircut-beard-trim">Haircut Beard Trim</option>
-            <option value="HAIRCUT_BEARD_TRIM_EYEBROW_SHAPING"
-              data-i18n="form.services.haircut-beard-trim-eyebrow-shaping">Haircut Beard Trim Eyebrow Shaping</option>
-          </select>
+          <!-- `for` is dropped because <button> is not a labelable element; the
+               trigger points back at this label with aria-labelledby instead. -->
+          <label id="service-label" data-i18n="form.services">Services<span class="required">*</span></label>
+
+          <div class="service-select" id="service-select">
+            <button type="button" class="service-trigger is-placeholder" id="service-trigger"
+              aria-haspopup="listbox" aria-expanded="false" aria-controls="service-panel"
+              aria-labelledby="service-label service-trigger"
+              data-i18n="form.services.placeholder">Select up to 2 services</button>
+
+            <!-- role="group", not role="listbox": a listbox's children must be
+                 options, and wrapping real checkboxes in one stops screen readers
+                 announcing checked state. The trigger keeps aria-haspopup. -->
+            <div class="service-panel" id="service-panel" role="group" aria-labelledby="service-label">
+              <p class="service-panel-hint" data-i18n="form.services.max-hint">Choose up to 2 services</p>
+
+              <label class="service-option">
+                <input type="checkbox" class="service-checkbox" value="HAIRCUT">
+                <span class="service-option-box" aria-hidden="true"></span>
+                <span class="service-option-label" data-i18n="form.services.haircut">Haircut</span>
+              </label>
+              <label class="service-option">
+                <input type="checkbox" class="service-checkbox" value="BABY_HIGHLIGHT">
+                <span class="service-option-box" aria-hidden="true"></span>
+                <span class="service-option-label" data-i18n="form.services.baby-highlight">Baby Highlight</span>
+              </label>
+              <label class="service-option">
+                <input type="checkbox" class="service-checkbox" value="DYES">
+                <span class="service-option-box" aria-hidden="true"></span>
+                <span class="service-option-label" data-i18n="form.services.dyes">Dyes</span>
+              </label>
+              <label class="service-option">
+                <input type="checkbox" class="service-checkbox" value="KERATIN_TREATMENT">
+                <span class="service-option-box" aria-hidden="true"></span>
+                <span class="service-option-label" data-i18n="form.services.keratin">Keratin Treatment</span>
+              </label>
+              <label class="service-option">
+                <input type="checkbox" class="service-checkbox" value="BLOW_DRYING">
+                <span class="service-option-box" aria-hidden="true"></span>
+                <span class="service-option-label" data-i18n="form.services.blowdry">Blow Drying</span>
+              </label>
+              <label class="service-option">
+                <input type="checkbox" class="service-checkbox" value="WASHING">
+                <span class="service-option-box" aria-hidden="true"></span>
+                <span class="service-option-label" data-i18n="form.services.washing">Washing</span>
+              </label>
+              <label class="service-option">
+                <input type="checkbox" class="service-checkbox" value="TREATMENT_MOISTURIZING">
+                <span class="service-option-box" aria-hidden="true"></span>
+                <span class="service-option-label" data-i18n="form.services.treatment">Treatment Moisturizing</span>
+              </label>
+              <label class="service-option">
+                <input type="checkbox" class="service-checkbox" value="HAIRCUT_BLOW_DRY">
+                <span class="service-option-box" aria-hidden="true"></span>
+                <span class="service-option-label" data-i18n="form.services.haircut-blowdry">Haircut Blow Dry</span>
+              </label>
+              <label class="service-option">
+                <input type="checkbox" class="service-checkbox" value="COLOR_TOUCH_UP">
+                <span class="service-option-box" aria-hidden="true"></span>
+                <span class="service-option-label" data-i18n="form.services.color-touchup">Color Touch Up</span>
+              </label>
+              <label class="service-option">
+                <input type="checkbox" class="service-checkbox" value="PERM">
+                <span class="service-option-box" aria-hidden="true"></span>
+                <span class="service-option-label" data-i18n="form.services.perm">Perm</span>
+              </label>
+              <label class="service-option">
+                <input type="checkbox" class="service-checkbox" value="BEARD_TRIM">
+                <span class="service-option-box" aria-hidden="true"></span>
+                <span class="service-option-label" data-i18n="form.services.beard-trim">Beard Trim</span>
+              </label>
+              <label class="service-option">
+                <input type="checkbox" class="service-checkbox" value="EYEBROW_SHAPING">
+                <span class="service-option-box" aria-hidden="true"></span>
+                <span class="service-option-label" data-i18n="form.services.eyebrow-shaping">Eyebrow Shaping</span>
+              </label>
+              <label class="service-option">
+                <input type="checkbox" class="service-checkbox" value="HAIRCUT_BEARD_TRIM">
+                <span class="service-option-box" aria-hidden="true"></span>
+                <span class="service-option-label" data-i18n="form.services.haircut-beard-trim">Haircut Beard Trim</span>
+              </label>
+              <label class="service-option">
+                <input type="checkbox" class="service-checkbox" value="HAIRCUT_BEARD_TRIM_EYEBROW_SHAPING">
+                <span class="service-option-box" aria-hidden="true"></span>
+                <span class="service-option-label"
+                  data-i18n="form.services.haircut-beard-trim-eyebrow-shaping">Haircut Beard Trim Eyebrow Shaping</span>
+              </label>
+            </div>
+          </div>
 
           <label class="hair-image-label" for="hair-image">
             <span data-i18n="form.hair-img">Hair Image</span><span class="required">*</span>

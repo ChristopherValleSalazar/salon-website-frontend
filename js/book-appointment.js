@@ -9,11 +9,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const service = params.get("service");
 
     if (service) {
-        const select = document.getElementById("service");
+        // Compared rather than used in a selector so a crafted ?service= value
+        // cannot break out into the query.
+        const box = serviceBoxes.find(b => b.value === service);
 
-        if (select) {
-            select.value = service;
-            select.dispatchEvent(new Event("change"));
+        if (box) {
+            box.checked = true;
+            // Must bubble: the panel listeners are bound on the panel, not the box.
+            box.dispatchEvent(new Event("change", { bubbles: true }));
         }
     }
 });
@@ -36,7 +39,106 @@ const IMAGE_REQUIRED_SERVICES = new Set([
     "KERATIN_TREATMENT", "PERM"
 ]);
 
-const serviceSelector = document.getElementById("service");
+// ---------------------------------------------------------------------------
+// Service multi-select (1 or 2)
+// A button plus a checkbox panel rather than <select multiple>, which cannot be
+// styled and behaves poorly on mobile. Positioning follows the language menu:
+// a relatively positioned wrapper with an absolutely positioned panel toggled
+// by a .show class.
+// ---------------------------------------------------------------------------
+
+const MAX_SERVICES = 2;
+
+const serviceTrigger = document.getElementById("service-trigger");
+const servicePanel = document.getElementById("service-panel");
+const serviceBoxes = Array.from(servicePanel.querySelectorAll(".service-checkbox"));
+
+function selectedServices() {
+    return serviceBoxes.filter(b => b.checked).map(b => b.value);
+}
+
+// The row label carries the data-i18n, so reading it back always yields the
+// active language without this file keeping its own copy of the names.
+function serviceLabelFor(box) {
+    return box.parentElement.querySelector(".service-option-label").textContent.trim();
+}
+
+function renderServiceTrigger() {
+    const chosen = serviceBoxes.filter(b => b.checked);
+
+    if (chosen.length === 0) {
+        // Restoring data-i18n hands the placeholder back to the translation sweep.
+        serviceTrigger.dataset.i18n = "form.services.placeholder";
+        serviceTrigger.textContent = t("form.services.placeholder");
+        serviceTrigger.classList.add("is-placeholder");
+        return;
+    }
+
+    // Dropping data-i18n stops the sweep overwriting the joined labels; they are
+    // rebuilt on languagechange below instead.
+    delete serviceTrigger.dataset.i18n;
+    serviceTrigger.textContent = chosen.map(serviceLabelFor).join(t("form.services.separator"));
+    serviceTrigger.classList.remove("is-placeholder");
+}
+
+// Prevent the third selection rather than validating it after the fact.
+function applyServiceCap() {
+    const atCap = selectedServices().length >= MAX_SERVICES;
+    serviceBoxes.forEach(box => {
+        const off = atCap && !box.checked;
+        box.disabled = off;
+        box.parentElement.classList.toggle("is-disabled", off);
+    });
+}
+
+function openServicePanel() {
+    servicePanel.classList.add("show");
+    serviceTrigger.setAttribute("aria-expanded", "true");
+}
+
+function closeServicePanel({ focusTrigger = false } = {}) {
+    servicePanel.classList.remove("show");
+    serviceTrigger.setAttribute("aria-expanded", "false");
+    if (focusTrigger) serviceTrigger.focus();
+}
+
+serviceTrigger.addEventListener("click", () => {
+    if (servicePanel.classList.contains("show")) closeServicePanel();
+    else openServicePanel();
+});
+
+// Only clicks landing outside the whole control close the panel, so ticking a
+// checkbox leaves it open.
+document.addEventListener("click", (e) => {
+    if (!e.target.closest("#service-select")) closeServicePanel();
+});
+
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && servicePanel.classList.contains("show")) {
+        closeServicePanel({ focusTrigger: true });
+    }
+});
+
+servicePanel.addEventListener("change", () => {
+    applyServiceCap();
+    renderServiceTrigger();
+});
+
+// The joined label is built here, so the [data-i18n] sweep does not cover it.
+// language.js dispatches this after refreshing the row labels, so re-reading
+// them now picks up the new language. Checked state is untouched by the sweep.
+document.addEventListener("languagechange", renderServiceTrigger);
+
+document.getElementById("appointment-form").addEventListener("reset", () => {
+    // The reset event fires before the browser clears the inputs, so the cap and
+    // the trigger label have to be recomputed on the next tick.
+    setTimeout(() => {
+        applyServiceCap();
+        renderServiceTrigger();
+        closeServicePanel();
+    });
+});
+
 const submitBtn = document.getElementById("book-app-btn");
 
 const fileInput = document.getElementById("hair-image");
@@ -57,7 +159,7 @@ let thumbUrls = [];
 let noteKey = "";
 
 function imageIsRequired() {
-    return IMAGE_REQUIRED_SERVICES.has(serviceSelector.value);
+    return selectedServices().some(s => IMAGE_REQUIRED_SERVICES.has(s));
 }
 
 // Trust the MIME type when the picker provides one, otherwise fall back to the
@@ -210,9 +312,9 @@ document.getElementById("appointment-form").addEventListener("reset", () => {
     updateHairImageRequirement();
 });
 
-serviceSelector.addEventListener("change", () => {
+servicePanel.addEventListener("change", () => {
     updateHairImageRequirement();
-    // A "photo required" warning is stale once the service changes.
+    // A "photo required" warning is stale once the service set changes.
     if (noteKey === "form.error.imageRequired") showNote("");
 });
 
@@ -293,6 +395,13 @@ document.getElementById("appointment-form").addEventListener("submit", async (e)
     phoneError.hidden = true;
     phoneInput.removeAttribute("aria-invalid");
 
+    // The <select> carried `required`; the button that replaced it cannot, so the
+    // empty case is checked here and reuses the existing service error treatment.
+    if (selectedServices().length === 0) {
+        showServiceRequiredError();
+        return;
+    }
+
     if (!dateInput.value || !timeInput.value) {
         bookingWrapper.classList.add("input-error");
         bookingWrapper.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth", block: "center" });
@@ -324,7 +433,7 @@ document.getElementById("appointment-form").addEventListener("submit", async (e)
         const payload = {
             name: document.getElementById("customer-name").value,
             phoneNumber: phoneDigits,
-            serviceType: document.getElementById("service").value,
+            services: selectedServices(),
             date: dateInput.value,
             startTime: timeInput.value,
             smsConsent: document.getElementById("consent-sms").checked,
@@ -453,8 +562,8 @@ const datePIcker = flatpickr("#date-input", {
         // a new date invalidates any previously selected time
         clearTimeSelection();
 
-        // slots depend on the service, so it has to be chosen first
-        if (!serviceSelector.value) {
+        // slots depend on the service, so at least one has to be chosen first
+        if (selectedServices().length === 0) {
             showServiceRequiredError();
             return;
         }
@@ -474,8 +583,8 @@ document.getElementById("appointment-form").addEventListener("reset", () => {
 });
 
 // A different service means different slot spacing: drop the chosen time and refetch
-serviceSelector.addEventListener("change", () => {
-    serviceSelector.classList.remove("input-error");
+servicePanel.addEventListener("change", () => {
+    serviceTrigger.classList.remove("input-error");
     clearTimeSelection();
 
     if (datePIcker.selectedDates.length) {
@@ -493,8 +602,8 @@ function clearTimeSelection() {
 function showServiceRequiredError() {
     timeSlotContainer.innerHTML =
         `<p class="time-panel-empty time-panel-error">${t("form.time.need-service")}</p>`;
-    serviceSelector.classList.add("input-error");
-    serviceSelector.scrollIntoView({ behavior: "smooth", block: "center" });
+    serviceTrigger.classList.add("input-error");
+    serviceTrigger.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
 async function loadTimeSlots(dateStr) {
@@ -502,7 +611,9 @@ async function loadTimeSlots(dateStr) {
 
     const params = new URLSearchParams({
         requestDate: dateStr,
-        requestService: serviceSelector.value
+        // The slots endpoint accepts a single ServiceType, so the first choice
+        // drives the duration. Two-service bookings need a backend change.
+        requestService: selectedServices()[0]
     });
 
     try {
@@ -557,10 +668,10 @@ function renderTimeSlots(container, slots) {
     });
 }
 
-// The option label doubles as the display name (and is already translated)
+// The row label doubles as the display name (and is already translated)
 function serviceLabel(serviceType) {
-    const option = serviceSelector.querySelector(`option[value="${serviceType}"]`);
-    return option ? option.textContent.trim() : serviceType;
+    const box = serviceBoxes.find(b => b.value === serviceType);
+    return box ? serviceLabelFor(box) : serviceType;
 }
 
 function formatLongDate(dateStr) {
