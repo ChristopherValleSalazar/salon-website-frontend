@@ -61,7 +61,7 @@ function imageIsRequired() {
 }
 
 // Trust the MIME type when the picker provides one, otherwise fall back to the
-// extension — some Android and iOS pickers send an empty type for valid photos.
+// extension. The extension check is case-insensitive because some pickers (notably iOS) hand over uppercase.
 function isAllowedType(file) {
     if (file.type) return ALLOWED_TYPES.includes(file.type);
     return ALLOWED_EXTENSIONS.some(ext => file.name.toLowerCase().endsWith(ext));
@@ -94,12 +94,12 @@ function renderThumbs() {
         img.alt = file.name;
 
         // Object URLs stream from disk instead of loading the whole photo into a
-        // base64 string the way FileReader does — much lighter for phone photos.
+        // base64 string the way FileReader does; much lighter for phone photos.
         const url = URL.createObjectURL(file);
         thumbUrls.push(url);
         img.src = url;
 
-        // A file can pass the type check and still be undecodable — an iPhone HEIC
+        // A file can pass the type check and still be undecodable; an iPhone HEIC
         // arriving through the Files app is the usual case. The only reliable test
         // is asking the browser to render it, so a decode failure drops the file.
         img.addEventListener("error", () => {
@@ -318,6 +318,8 @@ document.getElementById("appointment-form").addEventListener("submit", async (e)
 
     try {
         const {imageUrls, imagePublicIds} = await uploadHairImages();
+        console.log("imageUrls", imageUrls);
+        console.log("imagePublicIds", imagePublicIds);
 
         const payload = {
             name: document.getElementById("customer-name").value,
@@ -327,12 +329,11 @@ document.getElementById("appointment-form").addEventListener("submit", async (e)
             startTime: timeInput.value,
             smsConsent: document.getElementById("consent-sms").checked,
             additionalNotes: document.getElementById("notes").value.trim() || null,
-            // hairImageUrls: imageUrls,
-            hairImageUrl: imageUrls[0] ?? null,
-            // hairImagePublicIds: imagePublicIds,
-            hairImagePublicId: imagePublicIds[0] ?? null,
+            hairImageUrls: imageUrls,
+            hairImagePublicIds: imagePublicIds,
             language: readLang()
         };
+        
 
         const resPost = await fetch(`${API_BASE_URL}/api/v1/appointments`, {
             method: "POST",
