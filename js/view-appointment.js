@@ -60,7 +60,7 @@ function renderAppointment() {
     infoEl.hidden = false;
 
     document.querySelector(".appointment-name").textContent = appointment.name;
-    document.querySelector(".detail-service").textContent = serviceLabel(appointment.serviceType);
+    document.querySelector(".detail-service").textContent = serviceLabel(appointment.services.join(", and "));
     document.querySelector(".detail-date").textContent = formatLongDate(appointment.date);
     document.querySelector(".detail-time").textContent =
         formatTime(appointment.startTime) + " – " + formatTime(appointment.endTime);
@@ -172,7 +172,7 @@ async function loadTimeSlots(dateStr) {
 
     const params = new URLSearchParams({
         requestDate: dateStr,
-        requestService: appointment.serviceType
+        requestServices: appointment.services
     });
 
     try {
