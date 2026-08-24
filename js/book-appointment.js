@@ -500,7 +500,7 @@ function modalBehaviour(appointment) {
     }
 
     modalOverlay.querySelector(".customer-name").textContent = appointment.name;
-    modalOverlay.querySelector(".detail-service").textContent = serviceLabel(appointment.serviceType);
+    modalOverlay.querySelector(".detail-service").textContent = serviceLabel(appointment.services);
     modalOverlay.querySelector(".detail-date").textContent = formatLongDate(appointment.date);
     modalOverlay.querySelector(".detail-time").textContent =
         formatTime(appointment.startTime) + " – " + formatTime(appointment.endTime);
@@ -669,9 +669,13 @@ function renderTimeSlots(container, slots) {
 }
 
 // The row label doubles as the display name (and is already translated)
-function serviceLabel(serviceType) {
-    const box = serviceBoxes.find(b => b.value === serviceType);
-    return box ? serviceLabelFor(box) : serviceType;
+function serviceLabel(services) {
+    console.log(t("form.services.separator")); // ensure the translation is loaded
+
+
+
+    const box = serviceBoxes.find(b => b.value === services.join(", and "));
+    return box ? serviceLabelFor(box) : services.join(", and ");
 }
 
 function formatLongDate(dateStr) {
