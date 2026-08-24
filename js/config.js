@@ -1,3 +1,3 @@
-const API_BASE_URL = 'http://chris-fedora:8080';
+// const API_BASE_URL = 'http://chris-fedora:8080';
 // const API_BASE_URL = 'https://z5jngjgg-8080.usw3.devtunnels.ms';
-// const API_BASE_URL = 'https://salon-website-backend-z0m2.onrender.com/';
+const API_BASE_URL = 'https://api.yasminbeauty.salon';
