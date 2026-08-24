@@ -1,4 +1,7 @@
 let translations = {};
+// English is the reference bundle. A key the active locale is missing falls back
+// to it, rather than leaving whatever the previous language happened to render.
+let fallbacks = {};
 let currentLang = 'en';
 const SUPPORTED = ['en', 'es'];
 const cache = {};
@@ -7,25 +10,31 @@ const languageBtn = document.querySelector(".language-btn");
 const languageMenu = document.querySelector(".language-menu");
 
 export function t(key) {
-    return translations[key] ?? key;
+    return translations[key] ?? fallbacks[key] ?? key;
 }
 
 // Expose the lookup to classic (non-module) scripts so they can translate
 window.t = t;
+window.switchLanguage = switchLanguage;
 
-export async function switchLanguage(lang) {
-    if (!SUPPORTED.includes(lang)) lang = 'en';
-
+async function loadBundle(lang) {
     if (!cache[lang]) {
         const res = await fetch(`/locales/${lang}.json`);
         cache[lang] = await res.json();
     }
-    translations = cache[lang];
+    return cache[lang];
+}
+
+export async function switchLanguage(lang) {
+    if (!SUPPORTED.includes(lang)) lang = 'en';
+
+    translations = await loadBundle(lang);
+    fallbacks = lang === 'en' ? translations : await loadBundle('en');
     currentLang = lang;
 
     document.querySelectorAll('[data-i18n]').forEach(el => {
-        const val = translations[el.dataset.i18n];
-        if (!val) return;
+        const val = translations[el.dataset.i18n] ?? fallbacks[el.dataset.i18n];
+        if (val === undefined) return;
 
         if (el.hasAttribute('placeholder')) {
             el.placeholder = val;
@@ -51,12 +60,18 @@ export async function switchLanguage(lang) {
     }
 
     document.querySelectorAll('.lang-opt').forEach(opt => {
-        opt.addEventListener('click', () => switchLanguage(opt.dataset.lang));
         opt.classList.toggle('active', opt.dataset.lang === lang);
     });
 
     document.dispatchEvent(new CustomEvent('languagechange', { detail: { lang } }));
 }
+
+// Bound once, not per switch — switchLanguage runs on every render now that
+// refreshTranslations() actually works, and re-binding there stacked a fresh
+// handler on every call.
+document.querySelectorAll('.lang-opt').forEach(opt => {
+    opt.addEventListener('click', () => switchLanguage(opt.dataset.lang));
+});
 
 languageBtn.addEventListener("click", () => {
     languageMenu.classList.toggle("show");

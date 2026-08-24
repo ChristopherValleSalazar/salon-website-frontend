@@ -7,6 +7,7 @@ textarea {
   border-radius: 8px;
   background-color: #f8f4ed;
 }
+
 .form-description {
   font-size: 0.9rem;
   text-align: center;
@@ -91,6 +92,125 @@ textarea {
   color: var(--color-dark);
 }
 
+/* SERVICE MULTI-SELECT
+   Positioning follows the language menu: relatively positioned wrapper with an
+   absolutely positioned panel toggled by .show. The trigger reproduces the old
+   <select> styling so the field looks unchanged. */
+.service-select {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin: 2px 0;
+}
+.service-trigger {
+  width: 100%;
+  min-height: 50px;
+  padding: 12px;
+  font: inherit;
+  font-size: 1rem;
+  text-align: left;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  box-sizing: border-box;
+  background-color: #f8f4ed;
+  color: var(--color-logo-inner-circle);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+/* Mirrors the old select:has(option[value=""]:checked) placeholder treatment */
+.service-trigger.is-placeholder {
+  color: rgba(22, 15, 10, 0.55);
+  font-size: 1.3rem;
+}
+.service-panel {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 4; /* Set at 4 to hide arrows from calendar overlapping with the selection panel*/
+  margin: 0.35rem 0 0;
+  padding: 6px;
+  max-height: 320px;
+  overflow-y: auto;
+  background-color: #f8f4ed;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+}
+.service-panel.show {
+  display: block;
+}
+.service-panel-hint {
+  margin: 4px 8px 8px;
+  font-family: "Inter", sans-serif;
+  font-size: 0.78rem;
+  color: #8a7f72;
+}
+.service-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.service-option:hover {
+  background: rgba(184, 138, 68, 0.12);
+}
+/* Visually hidden but still focusable, so keyboard and screen readers work.
+   Needs three classes to outweigh `.main-form input[type="checkbox"]`, which
+   sizes the SMS consent box. */
+.main-form .service-panel .service-checkbox {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+}
+.service-option-box {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid #c9bda8;
+  border-radius: 5px;
+  background: #fff;
+}
+.service-option-box::after {
+  content: "";
+  width: 11px;
+  height: 11px;
+  transform: scale(0);
+  transition: transform 0.12s ease;
+  background: var(--color-submit-btn);
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+.main-form .service-panel .service-checkbox:checked + .service-option-box::after {
+  transform: scale(1);
+}
+.main-form .service-panel .service-checkbox:focus-visible + .service-option-box {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+/* At the cap of 2 the remaining rows are disabled rather than error-checked */
+.service-option.is-disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.service-option.is-disabled:hover {
+  background: none;
+}
+
 /* FILE INPUT */
 .img-container {
   position: relative;
@@ -125,8 +245,73 @@ textarea {
   display: none;
 }
 
+/* Thumbnails and errors render on both mobile and desktop */
+.hair-image-help {
+  margin: 0 0 6px 8px;
+  font-family: "Inter", sans-serif;
+  font-size: 0.8rem;
+  color: #8a7f72;
+}
+
+/* The help line is toggled by the `hidden` attribute from JS. */
+.hair-image-help[hidden] {
+  display: none;
+}
+.file-drop-thumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+.file-drop-thumbs:empty {
+  display: none;
+}
+.file-drop-item {
+  position: relative;
+  width: 84px;
+  height: 84px;
+}
+.file-drop-thumb {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  background: #e7decb;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+.file-drop-clear {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  font-size: 1.05rem;
+  line-height: 1;
+  color: var(--color-light);
+  background: var(--color-dark);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.file-drop-clear:hover {
+  background: var(--color-submit-btn);
+  transform: scale(1.08);
+}
+.file-drop-note {
+  margin: 8px 0 0 8px;
+  font-family: "Inter", sans-serif;
+  font-size: 0.875rem;
+  color: #a3282f;
+}
+
 @media (min-width: 601px) {
-  /* Visually hide the native input but keep it in the DOM so it still carries the file */
+  /* Visually hide the native input but keep it in the DOM so it still carries the files */
   .img-container input[type="file"] {
     position: absolute;
     width: 1px;
@@ -140,18 +325,14 @@ textarea {
   }
 
   .file-drop {
-    display: flex;
-    align-items: center;
-    gap: 16px;
+    display: block;
     width: 99%;
     max-width: 980px;
-    min-height: 20px;
     padding: 14px 18px;
     border: 1.5px dashed #c9bda8;
     border-radius: 14px;
     background: #f8f4ed;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    cursor: pointer;
     transition: border-color 0.2s ease, background 0.2s ease;
   }
   .file-drop:hover,
@@ -159,8 +340,9 @@ textarea {
     border-color: var(--color-primary);
     background: #f3ecdf;
   }
-  .file-drop.has-file {
-    border-style: solid;
+  /* Three picked: nothing more can be added, so drop the prompt entirely */
+  .file-drop.is-full {
+    display: none;
   }
   .img-container input[type="file"]:focus-visible + .file-drop {
     border-color: var(--color-primary);
@@ -172,6 +354,8 @@ textarea {
     align-items: center;
     gap: 16px;
     width: 100%;
+    margin: 0;
+    cursor: pointer;
   }
   .file-drop-icon {
     flex-shrink: 0;
@@ -193,59 +377,8 @@ textarea {
     font-size: 0.78rem;
     color: #8a7f72;
   }
-
-  .file-drop-selected {
-    display: none;
-    align-items: center;
-    gap: 14px;
-    width: 100%;
-  }
-  .file-drop.has-file .file-drop-empty {
-    display: none;
-  }
-  .file-drop.has-file .file-drop-selected {
-    display: flex;
-  }
-  .file-drop-thumb {
-    flex-shrink: 0;
-    width: 44px;
-    height: 44px;
-    object-fit: cover;
-    border-radius: 8px;
-    background: #e7decb;
-  }
-  .file-drop-name {
-    flex: 1;
-    min-width: 0;
-    font-family: "Inter", sans-serif;
-    font-size: 0.9rem;
-    color: var(--color-dark);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .file-drop-clear {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 28px;
-    height: 28px;
-    padding: 0;
-    font-size: 1.2rem;
-    line-height: 1;
-    color: var(--color-dark);
-    background: rgba(0, 0, 0, 0.06);
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: background 0.2s ease, color 0.2s ease;
-  }
-  .file-drop-clear:hover {
-    background: var(--color-submit-btn);
-    color: var(--color-light);
-  }
 }
+
 .book-app-btn{
   display: block;
   width: 50%;

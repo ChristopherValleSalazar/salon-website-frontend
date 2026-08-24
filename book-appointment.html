@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css" />
   <script src="js/appointment-link.js" defer></script>
   <script src="js/config.js" defer></script>
+  <script src="js/services.js" defer></script>
   <script src="js/language.js" defer type="module"></script>
   <script src="js/book-appointment.js" defer type="module"></script>
   <script src="js/burger.js" defer></script>
@@ -114,39 +115,112 @@
           <input type="tel" id="client-phone" required name="clientPhone"
             inputmode="tel" autocomplete="tel"
             placeholder="(323) 907-5658"
-            pattern="[0-9+()\-.\s]{10,20}"
             data-i18n="form.phone.placeholder">
             <p class="field-error" id="client-phone-error" role="alert" hidden
             data-i18n="form.phone.error">Enter a 10-digit phone number, for example (323) 907-5658.</p>
 
-          <label for="service" data-i18n="form.services">Services<span class="required">*</span></label>
-          <select id="service" name="service" required>
-            <option class="service-placeholder" value="" selected disabled data-i18n="form.services.placeholder">
-              Select a service
-            </option>
-            <option value="HAIRCUT" data-i18n="form.services.haircut">Haircut</option>
-            <option value="BABY_HIGHLIGHT" data-i18n="form.services.baby-highlight">Baby Highlight</option>
-            <option value="DYES" data-i18n="form.services.dyes">Dyes</option>
-            <option value="KERATIN_TREATMENT" data-i18n="form.services.keratin">Keratin Treatment</option>
-            <option value="BLOW_DRYING" data-i18n="form.services.blowdry">Blow Drying</option>
-            <option value="WASHING" data-i18n="form.services.washing">Washing</option>
-            <option value="TREATMENT_MOISTURIZING" data-i18n="form.services.treatment">Treatment Moisturizing</option>
-            <option value="HAIRCUT_BLOW_DRY" data-i18n="form.services.haircut-blowdry">Haircut Blow Dry</option>
-            <option value="COLOR_TOUCH_UP" data-i18n="form.services.color-touchup">Color Touch Up</option>
-            <option value="PERM" data-i18n="form.services.perm">Perm</option>
-            <option value="BEARD_TRIM" data-i18n="form.services.beard-trim">Beard Trim</option>
-            <option value="EYEBROW_SHAPING" data-i18n="form.services.eyebrow-shaping">Eyebrow Shaping</option>
-            <option value="HAIRCUT_BEARD_TRIM" data-i18n="form.services.haircut-beard-trim">Haircut Beard Trim</option>
-            <option value="HAIRCUT_BEARD_TRIM_EYEBROW_SHAPING"
-              data-i18n="form.services.haircut-beard-trim-eyebrow-shaping">Haircut Beard Trim Eyebrow Shaping</option>
-          </select>
+          <label id="service-label" data-i18n="form.services">Services<span class="required">*</span></label>
 
-          <label class="hair-image-label" for="hair-image"><span data-i18n="form.hair-img">Hair Image</span><span class="required">*</span></label>
+          <div class="service-select" id="service-select">
+            <button type="button" class="service-trigger is-placeholder" id="service-trigger"
+              aria-haspopup="listbox" aria-expanded="false" aria-controls="service-panel"
+              aria-labelledby="service-label service-trigger"
+              data-i18n="form.services.placeholder">Select up to 2 services</button>
+            <div class="service-panel" id="service-panel" role="group" aria-labelledby="service-label">
+              <p class="service-panel-hint" data-i18n="form.services.max-hint">Choose up to 2 services</p>
+
+              <label class="service-option">
+                <input type="checkbox" class="service-checkbox" value="HAIRCUT">
+                <span class="service-option-box" aria-hidden="true"></span>
+                <span class="service-option-label" data-i18n="form.services.haircut">Haircut</span>
+              </label>
+              <label class="service-option">
+                <input type="checkbox" class="service-checkbox" value="BABY_HIGHLIGHT">
+                <span class="service-option-box" aria-hidden="true"></span>
+                <span class="service-option-label" data-i18n="form.services.baby-highlight">Baby Highlight</span>
+              </label>
+              <label class="service-option">
+                <input type="checkbox" class="service-checkbox" value="DYES">
+                <span class="service-option-box" aria-hidden="true"></span>
+                <span class="service-option-label" data-i18n="form.services.dyes">Dyes</span>
+              </label>
+              <label class="service-option">
+                <input type="checkbox" class="service-checkbox" value="KERATIN_TREATMENT">
+                <span class="service-option-box" aria-hidden="true"></span>
+                <span class="service-option-label" data-i18n="form.services.keratin">Keratin Treatment</span>
+              </label>
+              <label class="service-option">
+                <input type="checkbox" class="service-checkbox" value="BLOW_DRYING">
+                <span class="service-option-box" aria-hidden="true"></span>
+                <span class="service-option-label" data-i18n="form.services.blowdry">Blow Drying</span>
+              </label>
+              <label class="service-option">
+                <input type="checkbox" class="service-checkbox" value="WASHING">
+                <span class="service-option-box" aria-hidden="true"></span>
+                <span class="service-option-label" data-i18n="form.services.washing">Washing</span>
+              </label>
+              <label class="service-option">
+                <input type="checkbox" class="service-checkbox" value="TREATMENT_MOISTURIZING">
+                <span class="service-option-box" aria-hidden="true"></span>
+                <span class="service-option-label" data-i18n="form.services.treatment">Treatment Moisturizing</span>
+              </label>
+              <label class="service-option">
+                <input type="checkbox" class="service-checkbox" value="HAIRCUT_BLOW_DRY">
+                <span class="service-option-box" aria-hidden="true"></span>
+                <span class="service-option-label" data-i18n="form.services.haircut-blowdry">Haircut Blow Dry</span>
+              </label>
+              <label class="service-option">
+                <input type="checkbox" class="service-checkbox" value="COLOR_TOUCH_UP">
+                <span class="service-option-box" aria-hidden="true"></span>
+                <span class="service-option-label" data-i18n="form.services.color-touchup">Color Touch Up</span>
+              </label>
+              <label class="service-option">
+                <input type="checkbox" class="service-checkbox" value="PERM">
+                <span class="service-option-box" aria-hidden="true"></span>
+                <span class="service-option-label" data-i18n="form.services.perm">Perm</span>
+              </label>
+              <label class="service-option">
+                <input type="checkbox" class="service-checkbox" value="BEARD_TRIM">
+                <span class="service-option-box" aria-hidden="true"></span>
+                <span class="service-option-label" data-i18n="form.services.beard-trim">Beard Trim</span>
+              </label>
+              <label class="service-option">
+                <input type="checkbox" class="service-checkbox" value="EYEBROW_SHAPING">
+                <span class="service-option-box" aria-hidden="true"></span>
+                <span class="service-option-label" data-i18n="form.services.eyebrow-shaping">Eyebrow Shaping</span>
+              </label>
+              <label class="service-option">
+                <input type="checkbox" class="service-checkbox" value="HAIRCUT_BEARD_TRIM">
+                <span class="service-option-box" aria-hidden="true"></span>
+                <span class="service-option-label" data-i18n="form.services.haircut-beard-trim">Haircut Beard Trim</span>
+              </label>
+              <label class="service-option">
+                <input type="checkbox" class="service-checkbox" value="HAIRCUT_BEARD_TRIM_EYEBROW_SHAPING">
+                <span class="service-option-box" aria-hidden="true"></span>
+                <span class="service-option-label"
+                  data-i18n="form.services.haircut-beard-trim-eyebrow-shaping">Haircut Beard Trim Eyebrow Shaping</span>
+              </label>
+            </div>
+          </div>
+
+          <label class="hair-image-label" for="hair-image">
+            <span data-i18n="form.hair-img">Hair Image</span><span class="required">*</span>
+          </label>
+
+          <!-- Appears only when the chosen service needs a photo, in step with the asterisk. -->
+          <p class="hair-image-help" id="hair-image-help" data-i18n="form.hair-img.help" hidden>
+            One photo required. Add up to 2 more if it helps your stylist.
+          </p>
+
           <div class="img-container">
-            <input type="file" id="hair-image" accept=".png,.jpg,.jpeg,.webp" name="hairPic">
+            <!-- No `required` here on purpose: constraint validation runs before the
+                submit event, so a native block would stop the submit handler from
+                running at all and surface the message in a bubble pinned to this
+                visually-hidden input. The check lives in JS instead. -->
+            <input type="file" id="hair-image" accept="image/jpeg,image/png,image/webp" multiple>
 
-            <label for="hair-image" class="file-drop" id="file-drop">
-              <span class="file-drop-empty">
+            <div class="file-drop" id="file-drop">
+              <label for="hair-image" class="file-drop-empty">
                 <svg class="file-drop-icon" viewBox="0 0 24 24" width="26" height="26" fill="none"
                   stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"
                   aria-hidden="true">
@@ -155,16 +229,17 @@
                   <path d="M21 15l-5-5L5 21"></path>
                 </svg>
                 <span class="file-drop-copy">
-                  <span class="file-drop-title" data-i18n="form.hair-img.prompt">Click or drag a photo here</span>
-                  <span class="file-drop-hint" data-i18n="form.hair-img.hint">PNG, JPG or WEBP</span>
+                  <span class="file-drop-title" data-i18n="form.hair-img.prompt">Click or drag photos here</span>
+                  <span class="file-drop-hint" data-i18n="form.hair-img.hint">PNG, JPG or WEBP · up to 3 · 5 MB each</span>
                 </span>
-              </span>
-              <span class="file-drop-selected">
-                <img class="file-drop-thumb" alt="Selected image preview">
-                <span class="file-drop-name"></span>
-                <button type="button" class="file-drop-clear" aria-label="Remove image">&times;</button>
-              </span>
-            </label>
+              </label>
+            </div>
+
+            <!-- Thumbnails and the error line sit OUTSIDE #file-drop. That element is
+                display:none below 601px and again at three files via .is-full, which
+                was hiding both the previews and every validation message. -->
+            <div class="file-drop-thumbs" id="hair-image-thumbs"></div>
+            <p class="file-drop-note" id="hair-image-note" role="alert" aria-live="polite" hidden></p>
           </div>
 
           <label for="date-input" data-i18n="form.date">Date &amp; Time<span class="required">*</span></label>
@@ -181,8 +256,8 @@
           <input id="time-input" name="time" type="hidden" required>
 
           <label for="notes" data-i18n="form.additional-notes">Additional Notes</label>
-          <textarea name="notes" id="notes" rows="5" data-i18n="form.additional-notes.placeholder"
-            placeholder="Tell us about your hair goals, preferred stylist, allergies, etc."></textarea>
+          <textarea name="notes" id="notes" rows="5" maxlength="1000" data-i18n="form.additional-notes.placeholder"
+            placeholder="Things you can mention: hair strand test, hair goals, allergies, etc."></textarea>
 
           <div class="consent-wrapper">
             <input type="checkbox" id="consent-sms" name="consentSMS">

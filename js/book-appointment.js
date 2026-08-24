@@ -9,129 +9,369 @@ document.addEventListener("DOMContentLoaded", () => {
     const service = params.get("service");
 
     if (service) {
-        const select = document.getElementById("service");
+        // Compared rather than used in a selector so a crafted ?service= value
+        // cannot break out into the query.
+        const box = serviceBoxes.find(b => b.value === service);
 
-        if (select) {
-            select.value = service;
-            select.dispatchEvent(new Event("change"));
+        if (box) {
+            box.checked = true;
+            // Must bubble: the panel listeners are bound on the panel, not the box.
+            box.dispatchEvent(new Event("change", { bubbles: true }));
         }
     }
 });
 
-// Custom hair-image drop zone (desktop). Mobile keeps the native OS picker untouched.
-const fileInput = document.getElementById("hair-image");
-const fileDrop = document.getElementById("file-drop");
+// ---------------------------------------------------------------------------
+// Hair reference photos
+// Desktop (>=601px) uses the custom drag-and-drop zone, mobile (<=600px) the
+// native OS picker. Both funnel into the same selectedFiles array.
+// ---------------------------------------------------------------------------
 
-if (fileInput && fileDrop) {
-    const thumb = fileDrop.querySelector(".file-drop-thumb");
-    const nameEl = fileDrop.querySelector(".file-drop-name");
-    const clearBtn = fileDrop.querySelector(".file-drop-clear");
+const MAX_IMAGES = 3;
+const MAX_FILE_BYTES = 5 * 1024 * 1024;
+const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp"];
+// Fallback for pickers that hand over a file with an empty `type`.
+const ALLOWED_EXTENSIONS = [".jpg", ".jpeg", ".png", ".webp"];
 
-    function showFile(file) {
-        if (!file) {
-            fileDrop.classList.remove("has-file");
-            thumb.removeAttribute("src");
-            nameEl.textContent = "";
-            return;
-        }
-
-        nameEl.textContent = file.name;
-        fileDrop.classList.add("has-file");
-
-        if (file.type.startsWith("image/")) {
-            const reader = new FileReader();
-            reader.onload = (e) => { thumb.src = e.target.result; };
-            reader.readAsDataURL(file);
-        } else {
-            thumb.removeAttribute("src");
-        }
-    }
-
-    fileInput.addEventListener("change", () => showFile(fileInput.files[0]));
-
-    clearBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        fileInput.value = "";
-        showFile(null);
-    });
-
-    ["dragenter", "dragover"].forEach((ev) =>
-        fileDrop.addEventListener(ev, (e) => {
-            e.preventDefault();
-            fileDrop.classList.add("is-dragover");
-        })
-    );
-    ["dragleave", "dragend"].forEach((ev) =>
-        fileDrop.addEventListener(ev, () => fileDrop.classList.remove("is-dragover"))
-    );
-    fileDrop.addEventListener("drop", (e) => {
-        e.preventDefault();
-        fileDrop.classList.remove("is-dragover");
-
-        const dropped = e.dataTransfer.files;
-        if (dropped && dropped.length) {
-            fileInput.files = dropped;
-            showFile(fileInput.files[0]);
-        }
-    });
-
-    // Keep the custom UI in sync when the form is reset after a successful booking
-    document.getElementById("appointment-form").addEventListener("reset", () => showFile(null));
-}
-
-const serviceSelector = document.getElementById("service");
-const hairImageInput = document.getElementById("hair-image");
-const hairImageLabel = document.querySelector(".hair-image-label");
-const submitBtn = document.getElementById("book-app-btn");
+// Services that cannot be booked without at least one reference photo.
 const IMAGE_REQUIRED_SERVICES = new Set([
     "DYES", "BABY_HIGHLIGHT", "COLOR_TOUCH_UP", "TREATMENT_MOISTURIZING",
     "KERATIN_TREATMENT", "PERM"
-])
+]);
 
-function updateHairImageRequirement() {
-    const needsImage = IMAGE_REQUIRED_SERVICES.has(serviceSelector.value);
+// ---------------------------------------------------------------------------
+// Service multi-select (1 or 2)
+// A button plus a checkbox panel rather than <select multiple>, which cannot be
+// styled and behaves poorly on mobile. Positioning follows the language menu:
+// a relatively positioned wrapper with an absolutely positioned panel toggled
+// by a .show class.
+// ---------------------------------------------------------------------------
 
-    hairImageInput.required = needsImage;
-    hairImageLabel.classList.toggle("is-required", needsImage);
+const MAX_SERVICES = 2;
+
+const serviceTrigger = document.getElementById("service-trigger");
+const servicePanel = document.getElementById("service-panel");
+const serviceBoxes = Array.from(servicePanel.querySelectorAll(".service-checkbox"));
+
+function selectedServices() {
+    return serviceBoxes.filter(b => b.checked).map(b => b.value);
 }
 
-serviceSelector.addEventListener("change", updateHairImageRequirement);
+// The row label carries the data-i18n, so reading it back always yields the
+// active language. Used for the checkbox rows' own accessible names; the
+// customer-facing service text goes through formatServices() in services.js.
+function serviceLabelFor(box) {
+    return box.parentElement.querySelector(".service-option-label").textContent.trim();
+}
+
+function renderServiceTrigger() {
+    const chosen = serviceBoxes.filter(b => b.checked);
+
+    if (chosen.length === 0) {
+        // Restoring data-i18n hands the placeholder back to the translation sweep.
+        serviceTrigger.dataset.i18n = "form.services.placeholder";
+        serviceTrigger.textContent = t("form.services.placeholder");
+        serviceTrigger.classList.add("is-placeholder");
+        return;
+    }
+
+    // Dropping data-i18n stops the sweep overwriting the joined labels; they are
+    // rebuilt on languagechange below instead.
+    delete serviceTrigger.dataset.i18n;
+    serviceTrigger.textContent = formatServices(chosen.map(b => b.value));
+    serviceTrigger.classList.remove("is-placeholder");
+}
+
+// Prevent the third selection rather than validating it after the fact.
+function applyServiceCap() {
+    const atCap = selectedServices().length >= MAX_SERVICES;
+    serviceBoxes.forEach(box => {
+        const off = atCap && !box.checked;
+        box.disabled = off;
+        box.parentElement.classList.toggle("is-disabled", off);
+    });
+}
+
+function openServicePanel() {
+    servicePanel.classList.add("show");
+    serviceTrigger.setAttribute("aria-expanded", "true");
+}
+
+function closeServicePanel({ focusTrigger = false } = {}) {
+    servicePanel.classList.remove("show");
+    serviceTrigger.setAttribute("aria-expanded", "false");
+    if (focusTrigger) serviceTrigger.focus();
+}
+
+serviceTrigger.addEventListener("click", () => {
+    if (servicePanel.classList.contains("show")) closeServicePanel();
+    else openServicePanel();
+});
+
+// Only clicks landing outside the whole control close the panel, so ticking a
+// checkbox leaves it open.
+document.addEventListener("click", (e) => {
+    if (!e.target.closest("#service-select")) closeServicePanel();
+});
+
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && servicePanel.classList.contains("show")) {
+        closeServicePanel({ focusTrigger: true });
+    }
+});
+
+servicePanel.addEventListener("change", () => {
+    applyServiceCap();
+    renderServiceTrigger();
+});
+
+// The joined label is built here, so the [data-i18n] sweep does not cover it.
+// language.js dispatches this after refreshing the row labels, so re-reading
+// them now picks up the new language. Checked state is untouched by the sweep.
+document.addEventListener("languagechange", renderServiceTrigger);
+
+document.getElementById("appointment-form").addEventListener("reset", () => {
+    // The reset event fires before the browser clears the inputs, so the cap and
+    // the trigger label have to be recomputed on the next tick.
+    setTimeout(() => {
+        applyServiceCap();
+        renderServiceTrigger();
+        closeServicePanel();
+    });
+});
+
+const submitBtn = document.getElementById("book-app-btn");
+
+const fileInput = document.getElementById("hair-image");
+const fileDrop = document.getElementById("file-drop");
+const hairImageLabel = document.querySelector(".hair-image-label");
+const hairImageHelp = document.getElementById("hair-image-help");
+const thumbs = document.getElementById("hair-image-thumbs");
+const note = document.getElementById("hair-image-note");
+
+// Source of truth. The input's own FileList is rebuilt from this.
+let selectedFiles = [];
+
+// Object URLs currently handed to <img> elements, revoked on every re-render so
+// large phone photos don't accumulate in memory.
+let thumbUrls = [];
+
+// Remembered so the message can be re-rendered when the language changes.
+let noteKey = "";
+
+function imageIsRequired() {
+    return selectedServices().some(s => IMAGE_REQUIRED_SERVICES.has(s));
+}
+
+// Trust the MIME type when the picker provides one, otherwise fall back to the
+// extension. The extension check is case-insensitive because some pickers (notably iOS) hand over uppercase.
+function isAllowedType(file) {
+    if (file.type) return ALLOWED_TYPES.includes(file.type);
+    return ALLOWED_EXTENSIONS.some(ext => file.name.toLowerCase().endsWith(ext));
+}
+
+function showNote(key) {
+    noteKey = key || "";
+    if (!noteKey) {
+        note.hidden = true;
+        note.textContent = "";
+        return;
+    }
+    note.textContent = t(noteKey);
+    note.hidden = false;
+}
+
+function renderThumbs() {
+    // Detach the old nodes BEFORE revoking their URLs: revoking a URL that a
+    // still-attached <img> is mid-decode on would fire a spurious error event.
+    thumbs.innerHTML = "";
+    thumbUrls.forEach(URL.revokeObjectURL);
+    thumbUrls = [];
+
+    selectedFiles.forEach((file) => {
+        const item = document.createElement("div");
+        item.className = "file-drop-item";
+
+        const img = document.createElement("img");
+        img.className = "file-drop-thumb";
+        img.alt = file.name;
+
+        // Object URLs stream from disk instead of loading the whole photo into a
+        // base64 string the way FileReader does; much lighter for phone photos.
+        const url = URL.createObjectURL(file);
+        thumbUrls.push(url);
+        img.src = url;
+
+        // A file can pass the type check and still be undecodable; an iPhone HEIC
+        // arriving through the Files app is the usual case. The only reliable test
+        // is asking the browser to render it, so a decode failure drops the file.
+        img.addEventListener("error", () => {
+            if (!img.isConnected) return;   // stale node from an earlier render
+            rejectUndecodable(file);
+        });
+
+        const remove = document.createElement("button");
+        remove.type = "button";
+        remove.className = "file-drop-clear";
+        remove.textContent = "×";
+        // The multiplication sign alone is not an accessible name.
+        remove.setAttribute("aria-label", `${t("form.hair-img.remove")}: ${file.name}`);
+        remove.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            removeFile(file);
+        });
+
+        item.append(img, remove);
+        thumbs.appendChild(item);
+    });
+}
+
+// Removal is by identity, not index: an index captured at render time goes stale
+// as soon as an earlier item is removed.
+function removeFile(file) {
+    selectedFiles = selectedFiles.filter(f => f !== file);
+    showNote("");
+    syncInput();
+}
+
+function rejectUndecodable(file) {
+    if (!selectedFiles.includes(file)) return;   // already removed
+    selectedFiles = selectedFiles.filter(f => f !== file);
+    showNote("form.error.imageUnreadable");
+    syncInput();
+}
+
+function syncInput() {
+    // Rebuild the input's FileList from our array so the two never disagree.
+    const dt = new DataTransfer();
+    selectedFiles.forEach(f => dt.items.add(f));
+    fileInput.files = dt.files;
+
+    // The stylesheet hides the prompt at three files via .is-full. The old code
+    // set .has-file, which no CSS rule reads.
+    fileDrop.classList.toggle("is-full", selectedFiles.length >= MAX_IMAGES);
+
+    renderThumbs();
+}
+
+// Merges rather than replaces, so a second pick adds to the first.
+function addFiles(incoming) {
+    let message = null;
+    let droppedForLimit = false;
+
+    for (const file of incoming) {
+        if (selectedFiles.length >= MAX_IMAGES) { droppedForLimit = true; continue; }
+        if (!isAllowedType(file)) { message = "form.error.imageType"; continue; }
+        if (file.size > MAX_FILE_BYTES) { message = "form.error.imageTooLarge"; continue; }
+        // Same photo picked twice across two visits to the picker.
+        if (selectedFiles.some(f => f.name === file.name && f.size === file.size)) continue;
+        selectedFiles.push(file);
+    }
+
+    // HTML has no "maximum number of files" attribute, so the OS picker hands over
+    // as many as the user taps. Extras are dropped here — and said out loud,
+    // because silently discarding their photos is the confusing part.
+    if (droppedForLimit) message = "form.hair-img.limit";
+
+    showNote(message);
+    syncInput();
+}
+
+function updateHairImageRequirement() {
+    const needsImage = imageIsRequired();
+    // Asterisk and help line appear together, only once a service that needs a
+    // photo is chosen.
+    hairImageLabel.classList.toggle("is-required", needsImage);
+    hairImageHelp.hidden = !needsImage;
+}
+
+fileInput.addEventListener("change", () => {
+    // Snapshot before syncInput reassigns fileInput.files
+    addFiles(Array.from(fileInput.files));
+});
+
+["dragenter", "dragover"].forEach((ev) =>
+    fileDrop.addEventListener(ev, (e) => {
+        e.preventDefault();
+        fileDrop.classList.add("is-dragover");
+    })
+);
+["dragleave", "dragend"].forEach((ev) =>
+    fileDrop.addEventListener(ev, () => fileDrop.classList.remove("is-dragover"))
+);
+fileDrop.addEventListener("drop", (e) => {
+    e.preventDefault();
+    fileDrop.classList.remove("is-dragover");
+    if (e.dataTransfer.files?.length) addFiles(Array.from(e.dataTransfer.files));
+});
+
+document.getElementById("appointment-form").addEventListener("reset", () => {
+    selectedFiles = [];
+    showNote("");
+    syncInput();
+    updateHairImageRequirement();
+});
+
+servicePanel.addEventListener("change", () => {
+    updateHairImageRequirement();
+    // A "photo required" warning is stale once the service set changes.
+    if (noteKey === "form.error.imageRequired") showNote("");
+});
+
+// language.js fires this after swapping the active bundle. Text this file creates
+// isn't covered by its [data-i18n] sweep, so it is refreshed here.
+document.addEventListener("languagechange", () => {
+    if (noteKey) note.textContent = t(noteKey);
+    thumbs.querySelectorAll(".file-drop-clear").forEach((btn, i) => {
+        const file = selectedFiles[i];
+        if (file) btn.setAttribute("aria-label", `${t("form.hair-img.remove")}: ${file.name}`);
+    });
+});
 
 // One in-flight submission at a time. The flag guards against repeated Enter presses,
 // which fire before the button's disabled state is painted.
 let submitting = false;
 
-async function uploadHairImage() {
-    if (hairImageInput.files.length === 0) {
-        return { imageUrl: null, imagePublicId: null };
+async function uploadHairImages() {
+    // selectedFiles is the source of truth; the input's FileList mirrors it.
+    if (selectedFiles.length === 0) {
+        return { imageUrls: [], imagePublicIds: [] };
     }
 
-    const sigRes = await fetch(`${API_BASE_URL}/api/v1/uploads/signature`);
-    if (!sigRes.ok) throw new ApiError("form.error.upload");
-    const sig = await sigRes.json();
-
+    // Count, type and size are already enforced in addFiles(), which is the only
+    // way a file can reach selectedFiles — so there is one place to change a rule.
     const fd = new FormData();
-    fd.append('file', hairImageInput.files[0]);
-    fd.append('api_key', sig.apiKey);
-    fd.append('timestamp', sig.timestamp);
-    fd.append('signature', sig.signature);
-    fd.append('folder', sig.folder);
+    selectedFiles.forEach(file => fd.append("files", file));
 
-    const res = await fetch(
-        `https://api.cloudinary.com/v1_1/yfmlabi1/image/upload`,
-        { method: 'POST', body: fd }
-    );
+    // No Content-Type header: the browser must set it so the multipart boundary
+    // is generated. Setting it by hand is what breaks multipart uploads.
+    const res = await fetch(`${API_BASE_URL}/api/v1/uploads`, {
+        method: "POST",
+        body: fd
+    });
+
     if (!res.ok) throw new ApiError("form.error.upload");
 
-    const data = await res.json();
-    return { imageUrl: data.secure_url, imagePublicId: data.public_id };
+    const uploaded = await res.json();
+
+    return {
+        imageUrls: uploaded.map(img => img.url),
+        imagePublicIds: uploaded.map(img => img.publicId)
+    };
 }
 
-// Carries a translation key rather than a technical string, so the customer never
-// sees "Failed to fetch".
+// Carries a translation key rather than a technical string
 class ApiError extends Error {
     constructor(key) { super(key); this.key = key; }
+}
+
+function readLang() {
+    try {
+        return localStorage.getItem("ybs_lang") || "en";
+    } catch {
+        return "en";
+    }
 }
 
 document.getElementById("appointment-form").addEventListener("submit", async (e) => {
@@ -156,6 +396,13 @@ document.getElementById("appointment-form").addEventListener("submit", async (e)
     phoneError.hidden = true;
     phoneInput.removeAttribute("aria-invalid");
 
+    // The <select> carried `required`; the button that replaced it cannot, so the
+    // empty case is checked here and reuses the existing service error treatment.
+    if (selectedServices().length === 0) {
+        showServiceRequiredError();
+        return;
+    }
+
     if (!dateInput.value || !timeInput.value) {
         bookingWrapper.classList.add("input-error");
         bookingWrapper.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth", block: "center" });
@@ -163,24 +410,38 @@ document.getElementById("appointment-form").addEventListener("submit", async (e)
     }
     bookingWrapper.classList.remove("input-error");
 
+    // Replaces the `required` attribute that used to sit on the file input.
+    // Native validation runs before this handler, so a native block would prevent
+    // this code from ever executing — and would point its bubble at an element
+    // that is 1px wide on desktop. Here the message lands in the visible line.
+    if (imageIsRequired() && selectedFiles.length === 0) {
+        showNote("form.error.imageRequired");
+        document.querySelector(".img-container").scrollIntoView({
+            behavior: prefersReducedMotion() ? "auto" : "smooth", block: "center"
+        });
+        return;
+    }
+
     // Lock the button synchronously, before any await — this is the whole point.
     submitting = true;
     setSubmitting(true);
 
     try {
-        const { imageUrl, imagePublicId } = await uploadHairImage();
+        const {imageUrls, imagePublicIds} = await uploadHairImages();
 
         const payload = {
             name: document.getElementById("customer-name").value,
             phoneNumber: phoneDigits,
-            serviceType: document.getElementById("service").value,
+            services: selectedServices(),
             date: dateInput.value,
             startTime: timeInput.value,
             smsConsent: document.getElementById("consent-sms").checked,
             additionalNotes: document.getElementById("notes").value.trim() || null,
-            hairImageUrl: imageUrl,
-            hairImagePublicId: imagePublicId
+            hairImageUrls: imageUrls,
+            hairImagePublicIds: imagePublicIds,
+            language: readLang()
         };
+        
 
         const resPost = await fetch(`${API_BASE_URL}/api/v1/appointments`, {
             method: "POST",
@@ -238,7 +499,7 @@ function modalBehaviour(appointment) {
     }
 
     modalOverlay.querySelector(".customer-name").textContent = appointment.name;
-    modalOverlay.querySelector(".detail-service").textContent = serviceLabel(appointment.serviceType);
+    modalOverlay.querySelector(".detail-service").textContent = formatServices(appointment.services);
     modalOverlay.querySelector(".detail-date").textContent = formatLongDate(appointment.date);
     modalOverlay.querySelector(".detail-time").textContent =
         formatTime(appointment.startTime) + " – " + formatTime(appointment.endTime);
@@ -300,8 +561,8 @@ const datePIcker = flatpickr("#date-input", {
         // a new date invalidates any previously selected time
         clearTimeSelection();
 
-        // slots depend on the service, so it has to be chosen first
-        if (!serviceSelector.value) {
+        // slots depend on the service, so at least one has to be chosen first
+        if (selectedServices().length === 0) {
             showServiceRequiredError();
             return;
         }
@@ -321,8 +582,8 @@ document.getElementById("appointment-form").addEventListener("reset", () => {
 });
 
 // A different service means different slot spacing: drop the chosen time and refetch
-serviceSelector.addEventListener("change", () => {
-    serviceSelector.classList.remove("input-error");
+servicePanel.addEventListener("change", () => {
+    serviceTrigger.classList.remove("input-error");
     clearTimeSelection();
 
     if (datePIcker.selectedDates.length) {
@@ -340,8 +601,8 @@ function clearTimeSelection() {
 function showServiceRequiredError() {
     timeSlotContainer.innerHTML =
         `<p class="time-panel-empty time-panel-error">${t("form.time.need-service")}</p>`;
-    serviceSelector.classList.add("input-error");
-    serviceSelector.scrollIntoView({ behavior: "smooth", block: "center" });
+    serviceTrigger.classList.add("input-error");
+    serviceTrigger.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
 async function loadTimeSlots(dateStr) {
@@ -349,7 +610,9 @@ async function loadTimeSlots(dateStr) {
 
     const params = new URLSearchParams({
         requestDate: dateStr,
-        requestService: serviceSelector.value
+        // The slots endpoint accepts a single ServiceType, so the first choice
+        // drives the duration. Two-service bookings need a backend change.
+        requestServices: selectedServices()
     });
 
     try {
@@ -373,7 +636,7 @@ function showBookingSummary(timeSlot) {
     const summary = document.querySelector(".booking-summary");
     summary.textContent =
         datePIcker.formatDate(datePIcker.selectedDates[0], "l, F j")
-        + " at " + formatTime(timeSlot);
+        + " " + t("common.at") + " " + formatTime(timeSlot);
     summary.hidden = false;
 }
 
@@ -404,11 +667,8 @@ function renderTimeSlots(container, slots) {
     });
 }
 
-// The option label doubles as the display name (and is already translated)
-function serviceLabel(serviceType) {
-    const option = serviceSelector.querySelector(`option[value="${serviceType}"]`);
-    return option ? option.textContent.trim() : serviceType;
-}
+// Service names come from formatServices() in services.js so the booking page,
+// the view page and the trigger all render them the same way.
 
 function formatLongDate(dateStr) {
     const [y, m, d] = dateStr.split("-").map(Number);
