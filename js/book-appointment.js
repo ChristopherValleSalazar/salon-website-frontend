@@ -636,7 +636,7 @@ function showBookingSummary(timeSlot) {
     const summary = document.querySelector(".booking-summary");
     summary.textContent =
         datePIcker.formatDate(datePIcker.selectedDates[0], "l, F j")
-        + " at " + formatTime(timeSlot);
+        + " " + t("common.at") + " " + formatTime(timeSlot);
     summary.hidden = false;
 }
 

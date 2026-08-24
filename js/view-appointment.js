@@ -1,3 +1,28 @@
+// language.js exposes t() on window; this page is a classic script, not a module.
+function tr(key) {
+    return (typeof window.t === "function") ? window.t(key) : key;
+}
+
+// The API answers failures with { type, error }. `type` is the exception's simple
+// name — stable and safe to switch on — while `error` is hardcoded English written
+// for developers. Map the type to a key so the customer sees their own language.
+const API_ERROR_KEYS = {
+    SlotUnavailableException:         "form.error.slot-taken",
+    SlotIsMondayException:            "view.error.monday",
+    PastDateException:                "view.error.past-date",
+    OutsideServiceHoursException:     "view.error.outside-hours",
+    EndsAfterClosingException:        "view.error.after-closing",
+    InvalidAppointmentStateException: "view.error.already-in-state",
+    CancellationTooLateException:     "view.error.too-late",
+    AppointmentNotFoundException:     "view.error.not-found"
+};
+
+// Anything unmapped still gets a translated message rather than a backend string.
+function showApiFailure(body, status) {
+    showFailureModal(API_ERROR_KEYS[body && body.type]
+        || (status >= 500 ? "form.error.server" : "form.error.invalid"));
+}
+
 let storage = null;
 try { storage = window.localStorage; } catch { /* Safari private mode */ }
 
@@ -75,8 +100,15 @@ function updateStatus(status) {
     const badge = document.querySelector(".status-badge");
     const statusKey = status.toLowerCase();
     badge.className = "status-badge status-" + statusKey;
-    badge.dataset.i18n = "view.status." + statusKey;
-    badge.textContent = statusKey.replace(/_/g, " ").replace(/^./, c => c.toUpperCase());
+    const labelKey = "view.status." + statusKey;
+    badge.dataset.i18n = labelKey;
+    // Translated on every call, so setActionsBusy() re-running this after an action
+    // no longer drops the badge back to English. tr() returns the key when nothing
+    // matches, in which case the enum is prettified instead.
+    const label = tr(labelKey);
+    badge.textContent = label === labelKey
+        ? statusKey.replace(/_/g, " ").replace(/^./, c => c.toUpperCase())
+        : label;
 
     // Only BOOKED can still be confirmed; anything past CONFIRMED is terminal
     confirmBtn.disabled = status !== "BOOKED";
@@ -110,7 +142,7 @@ async function sendCancelOrConfirm(action) {
 
         if (!res.ok) {
             const body = await res.json().catch(() => ({}));
-            showFailureModal(body.error);
+            showApiFailure(body, res.status);
             return;
         }
 
@@ -134,7 +166,8 @@ async function sendCancelOrConfirm(action) {
             });
         }
     } catch (err) {
-        showFailureModal(err.message);
+        // err.message here is the browser's own "Failed to fetch", not customer copy.
+        showFailureModal("form.error.network");
     } finally {
         setActionsBusy(false);
     }
@@ -168,7 +201,7 @@ function initReschedulePicker() {
 }
 
 async function loadTimeSlots(dateStr) {
-    timeSlotContainer.innerHTML = "<p class='time-panel-empty'>Loading times...</p>";
+    timeSlotContainer.innerHTML = `<p class="time-panel-empty">${tr("form.time.loading")}</p>`;
 
     const params = new URLSearchParams({
         requestDate: dateStr,
@@ -182,13 +215,17 @@ async function loadTimeSlots(dateStr) {
         const slots = await res.json();
         renderTimeSlots(slots);
     } catch (err) {
-        timeSlotContainer.innerHTML = "<p class='time-panel-empty'>Couldn't load times. Please try again later.</p>";
+        timeSlotContainer.innerHTML = `<p class="time-panel-empty">${tr("form.time.error")}</p>`;
     }
 }
 
 function renderTimeSlots(slots) {
     if (slots.length === 0) {
-        timeSlotContainer.innerHTML = "<p class='time-panel-empty'>No times available this day.</p>";
+        // Same treatment as the booking page: the copy ends mid-sentence and the
+        // phone number is appended as a link.
+        timeSlotContainer.innerHTML = `<p class="time-panel-empty">${tr("form.time.none")}
+                <a class="time-panel-phone" href="tel:+13239075658">(323) 907-5658</a>
+            </p>`;
         return;
     }
 
@@ -245,7 +282,7 @@ async function submitReschedule() {
 
         if (!res.ok) {
             const body = await res.json().catch(() => ({}));
-            showFailureModal(body.error);
+            showApiFailure(body, res.status);
             return;
         }
 
@@ -275,7 +312,8 @@ async function submitReschedule() {
                 + formatTime(body.startTime) + " – " + formatTime(body.endTime)
         });
     } catch (err) {
-        showFailureModal(err.message);
+        // err.message here is the browser's own "Failed to fetch", not customer copy.
+        showFailureModal("form.error.network");
     } finally {
         setActionsBusy(false);
     }
@@ -296,7 +334,7 @@ function showBookingSummary(timeSlot) {
     const summary = document.querySelector(".booking-summary");
     summary.textContent =
         reschedulePicker.formatDate(reschedulePicker.selectedDates[0], "l, F j")
-        + " at " + formatTime(timeSlot);
+        + " " + tr("common.at") + " " + formatTime(timeSlot);
     summary.hidden = false;
 }
 
@@ -394,11 +432,13 @@ document.getElementById("modal-btn-close").addEventListener("click", () => {
 const failureOverlay = document.getElementById("failure-modal-overlay");
 const failureMessageEl = document.getElementById("failure-modal-message");
 
-function showFailureModal(message) {
-    if (message && message.trim()) {
-        delete failureMessageEl.dataset.i18n;
-        failureMessageEl.textContent = message;
-    }
+// Takes a translation key, not a message: keeping data-i18n on the element means
+// the [data-i18n] sweep retranslates it on a language switch, and a later failure
+// can never inherit the previous one's text.
+function showFailureModal(key) {
+    const messageKey = key || "modal.fail.message";
+    failureMessageEl.dataset.i18n = messageKey;
+    failureMessageEl.textContent = tr(messageKey);
     failureOverlay.classList.add("is-open");
 }
 
