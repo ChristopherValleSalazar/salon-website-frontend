@@ -22,7 +22,6 @@ barberBtn.addEventListener("click", () => selectCategory("barber"));
 document.querySelectorAll(".book-btn").forEach(btn => {
     btn.addEventListener("click", () => {
         const service = btn.dataset.service;
-        console.log(service);
         window.location.href = `book-appointment.html?service=${service}`;
     });
 });

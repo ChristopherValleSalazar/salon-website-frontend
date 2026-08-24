@@ -427,8 +427,6 @@ document.getElementById("appointment-form").addEventListener("submit", async (e)
 
     try {
         const {imageUrls, imagePublicIds} = await uploadHairImages();
-        console.log("imageUrls", imageUrls);
-        console.log("imagePublicIds", imagePublicIds);
 
         const payload = {
             name: document.getElementById("customer-name").value,
@@ -670,10 +668,6 @@ function renderTimeSlots(container, slots) {
 
 // The row label doubles as the display name (and is already translated)
 function serviceLabel(services) {
-    console.log(t("form.services.separator")); // ensure the translation is loaded
-
-
-
     const box = serviceBoxes.find(b => b.value === services.join(", and "));
     return box ? serviceLabelFor(box) : services.join(", and ");
 }
