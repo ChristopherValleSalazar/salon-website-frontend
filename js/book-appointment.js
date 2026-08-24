@@ -58,7 +58,8 @@ function selectedServices() {
 }
 
 // The row label carries the data-i18n, so reading it back always yields the
-// active language without this file keeping its own copy of the names.
+// active language. Used for the checkbox rows' own accessible names; the
+// customer-facing service text goes through formatServices() in services.js.
 function serviceLabelFor(box) {
     return box.parentElement.querySelector(".service-option-label").textContent.trim();
 }
@@ -77,7 +78,7 @@ function renderServiceTrigger() {
     // Dropping data-i18n stops the sweep overwriting the joined labels; they are
     // rebuilt on languagechange below instead.
     delete serviceTrigger.dataset.i18n;
-    serviceTrigger.textContent = chosen.map(serviceLabelFor).join(t("form.services.separator"));
+    serviceTrigger.textContent = formatServices(chosen.map(b => b.value));
     serviceTrigger.classList.remove("is-placeholder");
 }
 
@@ -498,7 +499,7 @@ function modalBehaviour(appointment) {
     }
 
     modalOverlay.querySelector(".customer-name").textContent = appointment.name;
-    modalOverlay.querySelector(".detail-service").textContent = serviceLabel(appointment.services);
+    modalOverlay.querySelector(".detail-service").textContent = formatServices(appointment.services);
     modalOverlay.querySelector(".detail-date").textContent = formatLongDate(appointment.date);
     modalOverlay.querySelector(".detail-time").textContent =
         formatTime(appointment.startTime) + " – " + formatTime(appointment.endTime);
@@ -666,11 +667,8 @@ function renderTimeSlots(container, slots) {
     });
 }
 
-// The row label doubles as the display name (and is already translated)
-function serviceLabel(services) {
-    const box = serviceBoxes.find(b => b.value === services.join(", and "));
-    return box ? serviceLabelFor(box) : services.join(", and ");
-}
+// Service names come from formatServices() in services.js so the booking page,
+// the view page and the trigger all render them the same way.
 
 function formatLongDate(dateStr) {
     const [y, m, d] = dateStr.split("-").map(Number);

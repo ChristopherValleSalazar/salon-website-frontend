@@ -60,7 +60,7 @@ function renderAppointment() {
     infoEl.hidden = false;
 
     document.querySelector(".appointment-name").textContent = appointment.name;
-    document.querySelector(".detail-service").textContent = serviceLabel(appointment.services.join(", and "));
+    document.querySelector(".detail-service").textContent = formatServices(appointment.services);
     document.querySelector(".detail-date").textContent = formatLongDate(appointment.date);
     document.querySelector(".detail-time").textContent =
         formatTime(appointment.startTime) + " – " + formatTime(appointment.endTime);
@@ -410,11 +410,15 @@ failureOverlay.addEventListener("click", (e) => {
 });
 
 // HELPERS
-function serviceLabel(serviceType) {
-    return serviceType.toLowerCase().split("_")
-        .map(w => w.charAt(0).toUpperCase() + w.slice(1))
-        .join(" ");
-}
+// Service names come from formatServices() in services.js. This line is written
+// by JS, so the [data-i18n] sweep never touches it — it is re-rendered here on a
+// language switch instead. Only the text is rewritten: calling back into
+// refreshTranslations() would re-dispatch languagechange and loop.
+document.addEventListener("languagechange", () => {
+    if (appointment) {
+        document.querySelector(".detail-service").textContent = formatServices(appointment.services);
+    }
+});
 
 function formatLongDate(dateStr) {
     const [y, m, d] = dateStr.split("-").map(Number);
