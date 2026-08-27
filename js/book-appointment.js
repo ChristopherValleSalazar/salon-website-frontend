@@ -554,7 +554,8 @@ const datePIcker = flatpickr("#date-input", {
     enableTime: false,
     dateFormat: "Y-m-d",
     disable: [
-        date => date.getDay() === 1 //disable Mondays
+        date => date.getDay() === 1,//disable Mondays
+        date => isPastClosingTime(date)
     ],
 
     onChange(selectedDates, dateStr, instance) {
@@ -570,6 +571,34 @@ const datePIcker = flatpickr("#date-input", {
         loadTimeSlots(dateStr);
     }
 });
+
+//function to disable current time if past the closing time of the salon
+function  isPastClosingTime(date) {
+    // Apply the cutoff using Los Angeles local time. Monday remains
+            // controlled by the rule above.
+            const laParts = new Intl.DateTimeFormat("en-US", {
+                timeZone: "America/Los_Angeles",
+                year: "numeric",
+                month: "numeric",
+                day: "numeric",
+                hour: "numeric",
+                hour12: false
+            }).formatToParts(new Date());
+            const la = Object.fromEntries(
+                laParts
+                    .filter(part => part.type !== "literal")
+                    .map(part => [part.type, Number(part.value)])
+            );
+            const isToday = date.getFullYear() === la.year
+                && date.getMonth() + 1 === la.month
+                && date.getDate() === la.day;
+            const weekday = date.getDay();
+            const cutoffHour = weekday === 0 ? 15 : 19;
+
+            return isToday
+                && ((weekday >= 2 && weekday <= 6) || weekday === 0)
+                && la.hour >= cutoffHour;
+}
 
 // Clear the booking card along with the rest of the form after a successful booking
 const timeSlotContainer = document.querySelector(".container-time-slot");

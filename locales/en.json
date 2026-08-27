@@ -71,7 +71,7 @@
     "footer.contact": "Get in touch",
     "footer.privacy": "Privacy Policy",
     "form.heading": "Make an <em>Appointment</em>",
-    "form.description": "Reserve your appointment below. Once submitted, our team will reach out to confirm your date and time. Usually within a few hours.",
+    "form.description": "Reserve your appointment below. Once submitted, you will receive an SMS with your confirmation and appointment link. If you did not opt-in for SMS confirmation you can always navigate your menu and click on \"View Appointment\".",
     "form.name": "Name<span class=\"required\">*</span>",
     "form.name.placeholder": "Your name",
     "form.phone.placeholder": "(323) 907-5658",
