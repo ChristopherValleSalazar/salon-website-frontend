@@ -500,11 +500,14 @@ function modalBehaviour(appointment) {
 
     modalOverlay.querySelector(".customer-name").textContent = appointment.name;
     modalOverlay.querySelector(".detail-service").textContent = formatServices(appointment.services);
-    modalOverlay.querySelector(".detail-date").textContent = formatLongDate(appointment.date);
+    modalOverlay.querySelector(".detail-date").textContent = appointment.formattedDate;
     modalOverlay.querySelector(".detail-time").textContent =
-        formatTime(appointment.startTime) + " – " + formatTime(appointment.endTime);
+        appointment.formattedStartTime + " – " + appointment.formattedEndTime;
 
     modalOverlay.classList.add("is-open");
+
+
+    console.log("Appointment booked:", appointment);
 
     closeBtn.addEventListener("click", () => {
         document.getElementById("appointment-form").reset();
