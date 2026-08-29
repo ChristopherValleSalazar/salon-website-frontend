@@ -346,19 +346,27 @@ async function uploadHairImages() {
 
     // No Content-Type header: the browser must set it so the multipart boundary
     // is generated. Setting it by hand is what breaks multipart uploads.
-    const res = await fetch(`${API_BASE_URL}/api/v1/uploads`, {
+    try {
+        const res = await fetch(`${API_BASE_URL}/api/v1/uploads`, {
         method: "POST",
+        signal: AbortSignal.timeout(10_000), //10s timeout
         body: fd
-    });
+        });
 
-    if (!res.ok) throw new ApiError("form.error.upload");
+        if (!res.ok) throw new ApiError("form.error.upload");
+        const uploaded = await res.json();
 
-    const uploaded = await res.json();
+        return {
+            imageUrls: uploaded.map(img => img.url),
+            imagePublicIds: uploaded.map(img => img.publicId)
+        };
+    }
+    catch (error) {
+        if(error.name === 'TimeoutError') {
+            throw new ApiError("timeout.error");
+        }
+    }
 
-    return {
-        imageUrls: uploaded.map(img => img.url),
-        imagePublicIds: uploaded.map(img => img.publicId)
-    };
 }
 
 // Carries a translation key rather than a technical string
@@ -446,19 +454,31 @@ document.getElementById("appointment-form").addEventListener("submit", async (e)
         const resPost = await fetch(`${API_BASE_URL}/api/v1/appointments`, {
             method: "POST",
             headers: { "content-type": "application/json" },
+            signal: AbortSignal.timeout(10_000), //30s timeout
             body: JSON.stringify(payload)
         });
 
-        if (resPost.ok) {
-            modalBehaviour(await resPost.json());
-        } else if (resPost.status === 409) {
-            failureModalBehaviour(t("form.error.slot-taken"));
-        } else if (resPost.status >= 500) {
-            failureModalBehaviour(t("form.error.server"));
-        } else {
-            failureModalBehaviour(t("form.error.invalid"));
+        switch (resPost.status) {
+            case 200:
+                modalBehaviour(await resPost.json());
+                break;
+            case 409:
+                failureModalBehaviour(t("form.error.slot-taken"));
+                break;
+            case 500:
+            case 502:
+            case 503:
+            case 504:
+                failureModalBehaviour(t("form.error.server"));
+                break;
+            default:
+                failureModalBehaviour(t("form.error.invalid"));
         }
     } catch (err) {
+        if(err.name === 'TimeoutError') {
+            failureModalBehaviour(t("timeout.error"));
+        }
+
         // ApiError carries a key; anything else is a network/parse failure.
         failureModalBehaviour(t(err instanceof ApiError ? err.key : "form.error.network"));
     } finally {
@@ -648,13 +668,19 @@ async function loadTimeSlots(dateStr) {
     });
 
     try {
-        const res = await fetch(`${API_BASE_URL}/api/v1/appointments/timeSlots?${params}`);
-        if (!res.ok) throw new Error("Failed to load slots");
+        const res = await fetch(`${API_BASE_URL}/api/v1/appointments/timeSlots?${params}`, {
+            signal: AbortSignal.timeout(10_000)
+        });
+        if (!res.ok) throw new Error("Failed to load slots"); 
 
         const slots = await res.json();
         renderTimeSlots(timeSlotContainer, slots);
     } catch (err) {
-        timeSlotContainer.innerHTML = `<p class="time-panel-empty">${t("form.time.error")}</p>`;
+        if(err.name === 'TimeoutError') {
+            timeSlotContainer.innerHTML = `<p class="time-panel-empty">${t("timeout.error")}</p>`;
+        } else {
+            timeSlotContainer.innerHTML = `<p class="time-panel-empty">${t("form.time.error")}</p>`;
+        }
     }
 }
 

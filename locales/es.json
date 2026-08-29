@@ -295,5 +295,9 @@
     "view.confirm.dialog.cancel.message": "Esto no se puede deshacer. Tendrías que reservar de nuevo.",
     "view.confirm.dialog.cancel.proceed": "Sí, cancelar",
     "view.confirm.dialog.reschedule.heading": "¿Reprogramar tu cita?",
-    "view.confirm.dialog.reschedule.proceed": "Sí, reprogramar"
+    "view.confirm.dialog.reschedule.proceed": "Sí, reprogramar",
+
+    "timeout.error": "Oh no, tu solicitud se agotó. Por favor, inténtalo de nuevo en unos segundos."
+
+
 }

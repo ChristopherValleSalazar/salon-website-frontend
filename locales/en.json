@@ -295,5 +295,9 @@
     "view.confirm.dialog.cancel.message": "This can't be undone. You'd need to book again.",
     "view.confirm.dialog.cancel.proceed": "Yes, cancel",
     "view.confirm.dialog.reschedule.heading": "Reschedule your appointment?",
-    "view.confirm.dialog.reschedule.proceed": "Yes, reschedule"
+    "view.confirm.dialog.reschedule.proceed": "Yes, reschedule",
+
+    "timeout.error": "Oh no your request timed out. Please try again, in a few seconds."
+
+
 }

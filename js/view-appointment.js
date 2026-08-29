@@ -52,7 +52,11 @@ async function loadAppointment() {
     }
 
     try {
-        const res = await fetch(`${API_BASE_URL}/api/v1/appointments/view?code=${encodeURIComponent(viewCode)}`);
+        const res = await fetch(`${API_BASE_URL}/api/v1/appointments/view?code=${encodeURIComponent(viewCode)}`,
+            {
+                signal: AbortSignal.timeout(10_000)
+            }
+        );
 
         if (!res.ok) {
             // The code is dead (past date, canceled, or rescheduled) — stop offering it
@@ -137,7 +141,9 @@ async function sendCancelOrConfirm(action) {
     try {
         const res = await fetch(
             `${API_BASE_URL}/api/v1/appointments/cancelOrConfirm?action=${action}&code=${encodeURIComponent(viewCode)}`,
-            { method: "POST" }
+            { method: "POST",
+                signal: AbortSignal.timeout(10_000)
+             }
         );
 
         if (!res.ok) {
@@ -238,7 +244,9 @@ async function loadTimeSlots(dateStr) {
     });
 
     try {
-        const res = await fetch(`${API_BASE_URL}/api/v1/appointments/timeSlots?${params}`);
+        const res = await fetch(`${API_BASE_URL}/api/v1/appointments/timeSlots?${params}`
+            , { signal: AbortSignal.timeout(10_000) }
+        );
         if (!res.ok) throw new Error("Failed to load slots");
 
         const slots = await res.json();
@@ -305,6 +313,7 @@ async function submitReschedule() {
             {
                 method: "POST",
                 headers: { "content-type": "application/json" },
+                signal: AbortSignal.timeout(10_000),
                 body: JSON.stringify({ date: dateVal, startTime: timeVal })
             }
         );
