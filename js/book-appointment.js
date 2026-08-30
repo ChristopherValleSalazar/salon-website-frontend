@@ -657,6 +657,9 @@ function showServiceRequiredError() {
     serviceTrigger.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
+
+let loadingSlots = false; // Flag to prevent fetching multiple times before first request is completed
+
 async function loadTimeSlots(dateStr) {
     timeSlotContainer.innerHTML = `<p class="time-panel-empty">${t("form.time.loading")}</p>`;;
 
@@ -666,6 +669,11 @@ async function loadTimeSlots(dateStr) {
         // drives the duration. Two-service bookings need a backend change.
         requestServices: selectedServices()
     });
+
+    if(loadingSlots) {
+        return; // if slots are loading, exit to prevent multiple fetches
+    }
+    loadingSlots = true;
 
     try {
         const res = await fetch(`${API_BASE_URL}/api/v1/appointments/timeSlots?${params}`, {
@@ -681,6 +689,8 @@ async function loadTimeSlots(dateStr) {
         } else {
             timeSlotContainer.innerHTML = `<p class="time-panel-empty">${t("form.time.error")}</p>`;
         }
+    } finally {
+        loadingSlots = false; // Reset the flag after the request is completed
     }
 }
 

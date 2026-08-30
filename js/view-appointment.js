@@ -92,7 +92,7 @@ function renderAppointment() {
     document.querySelector(".detail-service").textContent = formatServices(appointment.services);
     document.querySelector(".detail-date").textContent = appointment.formattedDate;
     document.querySelector(".detail-time").textContent =
-        appointment.formattedStartTime + " – " + appointment.formattedEndTime;
+        formatTime(appointment.formattedStartTime) + " - " + formatTime(appointment.formattedEndTime);
 
     updateStatus(appointment.status);
     refreshTranslations();
@@ -235,6 +235,8 @@ function  isPastClosingTime(date) {
                 && la.hour >= cutoffHour;
 }
 
+let loadingSlots = false; // Flag to prevent fetching multiple times before first request is completed
+
 async function loadTimeSlots(dateStr) {
     timeSlotContainer.innerHTML = `<p class="time-panel-empty">${tr("form.time.loading")}</p>`;
 
@@ -242,6 +244,11 @@ async function loadTimeSlots(dateStr) {
         requestDate: dateStr,
         requestServices: appointment.services
     });
+
+    if(loadingSlots) {
+        return; // if slots are loading, exit to prevent multiple fetches
+    }
+    loadingSlots = true;
 
     try {
         const res = await fetch(`${API_BASE_URL}/api/v1/appointments/timeSlots?${params}`
@@ -253,6 +260,8 @@ async function loadTimeSlots(dateStr) {
         renderTimeSlots(slots);
     } catch (err) {
         timeSlotContainer.innerHTML = `<p class="time-panel-empty">${tr("form.time.error")}</p>`;
+    } finally {
+        loadingSlots = false; // Reset the flag after the request is completed
     }
 }
 
@@ -332,9 +341,9 @@ async function submitReschedule() {
             try { storage?.setItem("appointmentViewCode", viewCode); } catch { /* ignore */ }
         }
 
-        appointment.date = body.date;
-        appointment.startTime = body.startTime;
-        appointment.endTime = body.endTime;
+        appointment.date = body.formattedDate;
+        appointment.startTime = body.formattedStartTime;
+        appointment.endTime = body.formattedEndTime;
         appointment.status = "BOOKED";
         renderAppointment();
 
@@ -346,11 +355,13 @@ async function submitReschedule() {
         showSuccessModal({
             titleKey: "view.modal.rescheduled.heading",
             titleText: "Appointment rescheduled!",
-            messageText: formatLongDate(body.date) + " · "
-                + formatTime(body.startTime) + " – " + formatTime(body.endTime)
+            messageText: body.formattedDate + " · "
+                + (body.formattedStartTime) + " - " + (body.formattedEndTime)
         });
+        console.log("Rescheduled to " + body.formattedDate + " " + body.formattedStartTime + " - " + body.formattedEndTime);
     } catch (err) {
         // err.message here is the browser's own "Failed to fetch", not customer copy.
+        console.log(err + " " + err.stack);
         showFailureModal("form.error.network");
     } finally {
         setActionsBusy(false);

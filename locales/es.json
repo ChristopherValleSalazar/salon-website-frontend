@@ -71,7 +71,7 @@
     "footer.contact": "Contáctanos",
     "footer.privacy": "Política de Privacidad",
     "form.heading": "Haz una <em>Cita</em>",
-    "form.description": "Reserva tu cita con la forma abajo. Cuando envies tu solicitud de cita, te contactaremos for SMS con tu confirmation and link de tu cita. Si no optaste for recivir SMS de confirmacion siempre puedes navegar el menu arriva derecha on presiona en \"Mi Cita\" ",
+    "form.description": "Reserva tu cita con la forma abajo. Cuando envies tu solicitud de cita, te contactaremos for SMS con tu confirmation and link de tu cita. <br> Si no optaste for recivir SMS de confirmacion siempre puedes navegar el menu arriva derecha on presiona en \"Mi Cita\" ",
     "form.name": "Nombre<span class=\"required\">*</span>",
     "form.name.placeholder": "Tu nombre",
     "form.phone": "Número de Teléfono<span class=\"required\">*</span>",

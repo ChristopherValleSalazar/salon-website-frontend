@@ -9,7 +9,7 @@ textarea {
 }
 
 .form-description {
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   text-align: center;
   color: var(--color-muted, #8a7f72); 
   margin-bottom: 32px;
