@@ -68,14 +68,19 @@ async function loadAppointment() {
         appointment = await res.json();
         renderAppointment();
     } catch (err) {
-        showMissing();
+        showMissing(err.name === "TimeoutError" ? "timeout.error" : null);
     }
 }
 
-function showMissing() {
+function showMissing(messageKey) {
     loadingEl.hidden = true;
     infoEl.hidden = true;
     missingEl.hidden = false;
+
+    const msgEl = missingEl.querySelector(".appointment-missing-message");
+    const key = messageKey || "view.missing.message";
+    msgEl.dataset.i18n = key;
+    msgEl.textContent = tr(key);
 }
 
 function forgetViewCode() {
@@ -92,7 +97,7 @@ function renderAppointment() {
     document.querySelector(".detail-service").textContent = formatServices(appointment.services);
     document.querySelector(".detail-date").textContent = appointment.formattedDate;
     document.querySelector(".detail-time").textContent =
-        formatTime(appointment.formattedStartTime) + " - " + formatTime(appointment.formattedEndTime);
+        appointment.formattedStartTime + " - " + appointment.formattedEndTime;
 
     updateStatus(appointment.status);
     refreshTranslations();
@@ -341,9 +346,9 @@ async function submitReschedule() {
             try { storage?.setItem("appointmentViewCode", viewCode); } catch { /* ignore */ }
         }
 
-        appointment.date = body.formattedDate;
-        appointment.startTime = body.formattedStartTime;
-        appointment.endTime = body.formattedEndTime;
+        appointment.date = body.date;
+        appointment.startTime = body.startTime;
+        appointment.endTime = body.endTime;
         appointment.status = "BOOKED";
         renderAppointment();
 
@@ -355,13 +360,11 @@ async function submitReschedule() {
         showSuccessModal({
             titleKey: "view.modal.rescheduled.heading",
             titleText: "Appointment rescheduled!",
-            messageText: body.formattedDate + " · "
-                + (body.formattedStartTime) + " - " + (body.formattedEndTime)
+            messageText: body.date + " · "
+                + (body.startTime) + " - " + (body.endTime)
         });
-        console.log("Rescheduled to " + body.formattedDate + " " + body.formattedStartTime + " - " + body.formattedEndTime);
     } catch (err) {
         // err.message here is the browser's own "Failed to fetch", not customer copy.
-        console.log(err + " " + err.stack);
         showFailureModal("form.error.network");
     } finally {
         setActionsBusy(false);

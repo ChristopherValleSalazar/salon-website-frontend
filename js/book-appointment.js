@@ -526,9 +526,6 @@ function modalBehaviour(appointment) {
 
     modalOverlay.classList.add("is-open");
 
-
-    console.log("Appointment booked:", appointment);
-
     closeBtn.addEventListener("click", () => {
         document.getElementById("appointment-form").reset();
         modalOverlay.classList.remove("is-open");

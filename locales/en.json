@@ -127,6 +127,7 @@
     "view.error.already-in-state": "This appointment is already in that state, so nothing was changed.",
     "view.error.too-late": "Changes have to be made at least 2 hours before your appointment.",
     "view.error.not-found": "We couldn't find this appointment. The link may have expired or the appointment may already be cancelled.",
+    "view.missing.message": "We couldn't find this appointment. The link may have expired or the appointment may already be cancelled.",
     "form.phone": "Phone Number<span class=\"required\">*</span>",
     "common.btn.book": "Book this service",
     "privacy.eyebrow": "Legal",
