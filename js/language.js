@@ -100,8 +100,8 @@ document.addEventListener("click", (event) => {
     const lang = SUPPORTED.includes(saved)
         ? saved
         : SUPPORTED.includes(browser)
-        ? browser
-        : 'en';
+            ? browser
+            : 'en';
 
     await switchLanguage(lang);
 })();

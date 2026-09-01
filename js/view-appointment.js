@@ -7,14 +7,14 @@ function tr(key) {
 // name — stable and safe to switch on — while `error` is hardcoded English written
 // for developers. Map the type to a key so the customer sees their own language.
 const API_ERROR_KEYS = {
-    SlotUnavailableException:         "form.error.slot-taken",
-    SlotIsMondayException:            "view.error.monday",
-    PastDateException:                "view.error.past-date",
-    OutsideServiceHoursException:     "view.error.outside-hours",
-    EndsAfterClosingException:        "view.error.after-closing",
+    SlotUnavailableException: "form.error.slot-taken",
+    SlotIsMondayException: "view.error.monday",
+    PastDateException: "view.error.past-date",
+    OutsideServiceHoursException: "view.error.outside-hours",
+    EndsAfterClosingException: "view.error.after-closing",
     InvalidAppointmentStateException: "view.error.already-in-state",
-    CancellationTooLateException:     "view.error.too-late",
-    AppointmentNotFoundException:     "view.error.not-found"
+    CancellationTooLateException: "view.error.too-late",
+    AppointmentNotFoundException: "view.error.not-found"
 };
 
 // Anything unmapped still gets a translated message rather than a backend string.
@@ -146,9 +146,10 @@ async function sendCancelOrConfirm(action) {
     try {
         const res = await fetch(
             `${API_BASE_URL}/api/v1/appointments/cancelOrConfirm?action=${action}&code=${encodeURIComponent(viewCode)}`,
-            { method: "POST",
+            {
+                method: "POST",
                 signal: AbortSignal.timeout(10_000)
-             }
+            }
         );
 
         if (!res.ok) {
@@ -213,31 +214,31 @@ function initReschedulePicker() {
 }
 
 //function to disable current time if past the closing time of the salon
-function  isPastClosingTime(date) {
+function isPastClosingTime(date) {
     // Apply the cutoff using Los Angeles local time. Monday remains
-            // controlled by the rule above.
-            const laParts = new Intl.DateTimeFormat("en-US", {
-                timeZone: "America/Los_Angeles",
-                year: "numeric",
-                month: "numeric",
-                day: "numeric",
-                hour: "numeric",
-                hour12: false
-            }).formatToParts(new Date());
-            const la = Object.fromEntries(
-                laParts
-                    .filter(part => part.type !== "literal")
-                    .map(part => [part.type, Number(part.value)])
-            );
-            const isToday = date.getFullYear() === la.year
-                && date.getMonth() + 1 === la.month
-                && date.getDate() === la.day;
-            const weekday = date.getDay();
-            const cutoffHour = weekday === 0 ? 15 : 19;
+    // controlled by the rule above.
+    const laParts = new Intl.DateTimeFormat("en-US", {
+        timeZone: "America/Los_Angeles",
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+        hour: "numeric",
+        hour12: false
+    }).formatToParts(new Date());
+    const la = Object.fromEntries(
+        laParts
+            .filter(part => part.type !== "literal")
+            .map(part => [part.type, Number(part.value)])
+    );
+    const isToday = date.getFullYear() === la.year
+        && date.getMonth() + 1 === la.month
+        && date.getDate() === la.day;
+    const weekday = date.getDay();
+    const cutoffHour = weekday === 0 ? 15 : 19;
 
-            return isToday
-                && ((weekday >= 2 && weekday <= 6) || weekday === 0)
-                && la.hour >= cutoffHour;
+    return isToday
+        && ((weekday >= 2 && weekday <= 6) || weekday === 0)
+        && la.hour >= cutoffHour;
 }
 
 let loadingSlots = false; // Flag to prevent fetching multiple times before first request is completed
@@ -250,7 +251,7 @@ async function loadTimeSlots(dateStr) {
         requestServices: appointment.services
     });
 
-    if(loadingSlots) {
+    if (loadingSlots) {
         return; // if slots are loading, exit to prevent multiple fetches
     }
     loadingSlots = true;

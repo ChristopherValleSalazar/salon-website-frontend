@@ -11,9 +11,10 @@ textarea {
 .form-description {
   font-size: 1.1rem;
   text-align: center;
-  color: var(--color-muted, #8a7f72); 
+  color: var(--color-muted, #8a7f72);
   margin-bottom: 32px;
 }
+
 .main-form {
   border-radius: 40px;
   display: flex;
@@ -25,28 +26,34 @@ textarea {
   height: auto;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
+
 .main-form label {
   margin: 12px 0 8px 8px;
   color: var(--color-dark);
   font-size: var(--font-size-label);
 }
+
 .main-form .required {
   color: #a3282f;
   font-size: 1.2rem;
   margin-left: 4px;
 }
+
 .hair-image-label .required {
   display: none;
 }
+
 .hair-image-label.is-required .required {
   display: inline;
 }
+
 .field-error {
   margin: 2px 0 8px;
   color: #a3282f;
   font-family: "Inter", sans-serif;
   font-size: 0.875rem;
 }
+
 .main-form input,
 .main-form select {
   width: 100%;
@@ -60,18 +67,22 @@ textarea {
   box-sizing: border-box;
   background-color: #f8f4ed;
 }
+
 .main-form input,
 .main-form select,
 .main-form textarea {
   max-width: 1000px;
 }
+
 .main-form textarea {
   font-size: 1rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
+
 .main-form input {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
+
 .main-form select {
   appearance: none;
   -webkit-appearance: none;
@@ -82,10 +93,12 @@ textarea {
   font: inherit;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
+
 .main-form select:has(option[value=""]:checked) {
   color: rgba(22, 15, 10, 0.55);
   font-size: 1.3rem;
 }
+
 .main-form select option {
   background-color: #f8f4ed;
   font-size: 1.2rem;
@@ -102,6 +115,7 @@ textarea {
   max-width: 1000px;
   margin: 2px 0;
 }
+
 .service-trigger {
   width: 100%;
   min-height: 50px;
@@ -119,18 +133,21 @@ textarea {
   -webkit-appearance: none;
   cursor: pointer;
 }
+
 /* Mirrors the old select:has(option[value=""]:checked) placeholder treatment */
 .service-trigger.is-placeholder {
   color: rgba(22, 15, 10, 0.55);
   font-size: 1.3rem;
 }
+
 .service-panel {
   display: none;
   position: absolute;
   top: 100%;
   left: 0;
   right: 0;
-  z-index: 4; /* Set at 4 to hide arrows from calendar overlapping with the selection panel*/
+  z-index: 4;
+  /* Set at 4 to hide arrows from calendar overlapping with the selection panel*/
   margin: 0.35rem 0 0;
   padding: 6px;
   max-height: 320px;
@@ -140,15 +157,18 @@ textarea {
   border-radius: 14px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
 }
+
 .service-panel.show {
   display: block;
 }
+
 .service-panel-hint {
   margin: 4px 8px 8px;
   font-family: "Inter", sans-serif;
   font-size: 0.78rem;
   color: #8a7f72;
 }
+
 .service-option {
   display: flex;
   align-items: center;
@@ -158,9 +178,11 @@ textarea {
   cursor: pointer;
   transition: background 0.15s ease;
 }
+
 .service-option:hover {
   background: rgba(184, 138, 68, 0.12);
 }
+
 /* Visually hidden but still focusable, so keyboard and screen readers work.
    Needs three classes to outweigh `.main-form input[type="checkbox"]`, which
    sizes the SMS consent box. */
@@ -175,6 +197,7 @@ textarea {
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
 }
+
 .service-option-box {
   flex-shrink: 0;
   display: flex;
@@ -186,6 +209,7 @@ textarea {
   border-radius: 5px;
   background: #fff;
 }
+
 .service-option-box::after {
   content: "";
   width: 11px;
@@ -195,18 +219,22 @@ textarea {
   background: var(--color-submit-btn);
   clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
 }
-.main-form .service-panel .service-checkbox:checked + .service-option-box::after {
+
+.main-form .service-panel .service-checkbox:checked+.service-option-box::after {
   transform: scale(1);
 }
-.main-form .service-panel .service-checkbox:focus-visible + .service-option-box {
+
+.main-form .service-panel .service-checkbox:focus-visible+.service-option-box {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
+
 /* At the cap of 2 the remaining rows are disabled rather than error-checked */
 .service-option.is-disabled {
   opacity: 0.45;
   cursor: not-allowed;
 }
+
 .service-option.is-disabled:hover {
   background: none;
 }
@@ -216,6 +244,7 @@ textarea {
   position: relative;
   width: 100%;
 }
+
 .main-form input[type="file"] {
   display: block;
   margin: 0;
@@ -223,6 +252,7 @@ textarea {
   color: #6b5c4e;
   cursor: pointer;
 }
+
 .main-form input[type="file"]::-webkit-file-upload-button,
 .main-form input[type="file"]::file-selector-button {
   margin-right: 12px;
@@ -235,6 +265,7 @@ textarea {
   cursor: pointer;
   transition: background 0.2s ease;
 }
+
 .main-form input[type="file"]::-webkit-file-upload-button:hover,
 .main-form input[type="file"]::file-selector-button:hover {
   background: var(--color-submit-btn-hover);
@@ -257,20 +288,24 @@ textarea {
 .hair-image-help[hidden] {
   display: none;
 }
+
 .file-drop-thumbs {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 10px;
 }
+
 .file-drop-thumbs:empty {
   display: none;
 }
+
 .file-drop-item {
   position: relative;
   width: 84px;
   height: 84px;
 }
+
 .file-drop-thumb {
   display: block;
   width: 100%;
@@ -280,6 +315,7 @@ textarea {
   background: #e7decb;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
+
 .file-drop-clear {
   position: absolute;
   top: -7px;
@@ -299,10 +335,12 @@ textarea {
   cursor: pointer;
   transition: background 0.2s ease, transform 0.2s ease;
 }
+
 .file-drop-clear:hover {
   background: var(--color-submit-btn);
   transform: scale(1.08);
 }
+
 .file-drop-note {
   margin: 8px 0 0 8px;
   font-family: "Inter", sans-serif;
@@ -311,6 +349,7 @@ textarea {
 }
 
 @media (min-width: 601px) {
+
   /* Visually hide the native input but keep it in the DOM so it still carries the files */
   .img-container input[type="file"] {
     position: absolute;
@@ -335,16 +374,19 @@ textarea {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     transition: border-color 0.2s ease, background 0.2s ease;
   }
+
   .file-drop:hover,
   .file-drop.is-dragover {
     border-color: var(--color-primary);
     background: #f3ecdf;
   }
+
   /* Three picked: nothing more can be added, so drop the prompt entirely */
   .file-drop.is-full {
     display: none;
   }
-  .img-container input[type="file"]:focus-visible + .file-drop {
+
+  .img-container input[type="file"]:focus-visible+.file-drop {
     border-color: var(--color-primary);
     box-shadow: 0 4px 12px rgba(184, 138, 68, 0.25);
   }
@@ -357,21 +399,25 @@ textarea {
     margin: 0;
     cursor: pointer;
   }
+
   .file-drop-icon {
     flex-shrink: 0;
     color: var(--color-logo-butterfly-body);
   }
+
   .file-drop-copy {
     display: flex;
     flex-direction: column;
     gap: 2px;
   }
+
   .file-drop-title {
     font-family: "Inter", sans-serif;
     font-size: 0.95rem;
     font-weight: 500;
     color: rgba(22, 15, 10, 0.65);
   }
+
   .file-drop-hint {
     font-family: "Inter", sans-serif;
     font-size: 0.78rem;
@@ -379,7 +425,7 @@ textarea {
   }
 }
 
-.book-app-btn{
+.book-app-btn {
   display: block;
   width: 50%;
   text-align: center;
@@ -394,33 +440,40 @@ textarea {
   cursor: pointer;
   transition: color 0.25s ease, background 0.25s ease, transform 0.2s ease, border-color 0.25s ease;
 }
+
 .book-app-btn:hover {
   background: var(--color-logo-buttefly-wings-hover);
   color: var(--color-logo-text-light);
   transform: translateY(-2px);
 }
-.app-form{
+
+.app-form {
   max-width: 90%;
   height: auto;
   margin: 0 auto;
   margin-bottom: 40px;
 }
+
 .form-title {
-    font-size: clamp(2.2rem, 3.6vw, 2.5rem);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.7rem;
-    margin: 24px 0 12px 0;
+  font-size: clamp(2.2rem, 3.6vw, 2.5rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  margin: 24px 0 12px 0;
 }
+
 .form-title em {
   font-style: italic;
   color: var(--color-logo-buttefly-wings);
 }
-.main-form input:focus, .main-form select:focus, .main-form textarea:focus {
+
+.main-form input:focus,
+.main-form select:focus,
+.main-form textarea:focus {
   outline: none;
   border-color: var(--color-logo-petal-text-light);
-  box-shadow: 0 4px 12px rgba(184,138,68,0.25);
+  box-shadow: 0 4px 12px rgba(184, 138, 68, 0.25);
 }
 
 /* Sms Consent */
@@ -432,6 +485,7 @@ textarea {
   border-radius: 4px;
   margin: 0;
 }
+
 .consent-wrapper {
   display: flex;
   align-items: flex-start;
@@ -440,6 +494,7 @@ textarea {
   margin: 8px auto;
   align-items: center;
 }
+
 .consent-wrapper label {
   font-size: 1.2rem;
   color: var(--color-text);
@@ -463,9 +518,11 @@ textarea {
   .book-app-btn {
     width: 80%;
   }
+
   .booking-wrapper {
     width: 100%;
   }
+
   .main-form select {
     width: 100%;
   }
@@ -485,6 +542,7 @@ textarea {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   box-sizing: border-box;
 }
+
 .booking-wrapper.input-error {
   border-color: red;
   box-shadow: 0 0 2px rgba(255, 0, 0, 0.15);
@@ -493,23 +551,31 @@ textarea {
 .booking-wrapper .flatpickr-input {
   display: none;
 }
+
 .flatpickr-calendar.inline {
   box-shadow: none;
   background: transparent;
 }
+
 .flatpickr-months {
   background: transparent;
 }
+
 .flatpickr-month {
   min-height: 48px;
 }
-.flatpickr-months .flatpickr-next-month, .flatpickr-months .flatpickr-prev-month {
+
+.flatpickr-months .flatpickr-next-month,
+.flatpickr-months .flatpickr-prev-month {
   margin-top: 6px;
 }
+
 .form-control {
   cursor: pointer;
 }
-.flatpickr-weekdays, .flatpickr-days {
+
+.flatpickr-weekdays,
+.flatpickr-days {
   font-size: 18px;
 }
 
@@ -520,6 +586,7 @@ textarea {
   border-color: var(--color-logo-buttefly-wings);
   color: var(--color-light);
 }
+
 .booking-wrapper .flatpickr-day.today:not(.selected) {
   border-color: var(--color-logo-butterfly-body);
 }
@@ -545,6 +612,7 @@ textarea {
 .booking-wrapper .numInputWrapper:hover {
   background: transparent;
 }
+
 .booking-wrapper .numInputWrapper span {
   display: none;
 }
@@ -557,6 +625,7 @@ textarea {
   display: flex;
   flex-direction: column;
 }
+
 .time-panel-title {
   margin: 4px 0 12px;
   font-family: "Cormorant Garamond", serif;
@@ -564,6 +633,7 @@ textarea {
   font-weight: 600;
   color: var(--color-dark);
 }
+
 .container-time-slot {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
@@ -573,34 +643,38 @@ textarea {
   overflow-y: auto;
   padding-right: 4px;
 }
+
 .time-panel-empty {
   grid-column: 1 / -1;
   margin: 0;
   font-size: 1.2rem;
   color: #8a7f72;
 }
+
 .time-panel-phone {
-    display: inline-block;
-    margin-top: 10px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-align: left;
-    cursor: pointer;
-    background: transparent;
-    color: var(--color-logo-buttefly-wings);             
-    text-decoration: none;
-    transition: transform 0.2s ease;
-    font-family: 'Inter', sans-serif;
-    font-variant-numeric: lining-nums tabular-nums;
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-align: left;
+  cursor: pointer;
+  background: transparent;
+  color: var(--color-logo-buttefly-wings);
+  text-decoration: none;
+  transition: transform 0.2s ease;
+  font-family: 'Inter', sans-serif;
+  font-variant-numeric: lining-nums tabular-nums;
 }
-.time-panel-phone:hover {            
-    transform: translateY(-2px);
+
+.time-panel-phone:hover {
+  transform: translateY(-2px);
 }
 
 .time-panel-error {
   color: #b3402e;
 }
+
 .slot-button {
   padding: 10px 6px;
   font-size: 1rem;
@@ -611,9 +685,11 @@ textarea {
   cursor: pointer;
   transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
 }
+
 .slot-button:hover {
   border-color: var(--color-logo-butterfly-body);
 }
+
 .slot-button.selected {
   background: var(--color-logo-buttefly-wings);
   border-color: var(--color-logo-buttefly-wings);
@@ -640,6 +716,7 @@ textarea {
   .booking-wrapper {
     flex-direction: column;
   }
+
   .booking-wrapper .flatpickr-calendar,
   .booking-wrapper .flatpickr-rContainer,
   .booking-wrapper .flatpickr-days,
@@ -648,6 +725,7 @@ textarea {
     max-width: 100%;
     min-width: 0;
   }
+
   .container-time-slot {
     max-height: 220px;
   }
@@ -699,9 +777,11 @@ textarea {
   border-radius: 10px;
   background: var(--color-dark);
 }
+
 .address-card .card-eyebrow {
   color: var(--color-logo-petal-text-light);
 }
+
 .address-link {
   display: flex;
   flex-direction: column;
@@ -710,18 +790,22 @@ textarea {
   color: var(--color-light);
   transition: transform 0.2s ease;
 }
+
 .address-link:hover {
   transform: translateY(-2px);
 }
+
 .address-name {
   font-size: 1.75rem;
   line-height: 1.2;
 }
+
 .address-street {
   font-size: 0.95rem;
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.75);
 }
+
 .address-cta {
   font-family: "Inter", sans-serif;
   font-size: 0.75rem;
@@ -730,6 +814,7 @@ textarea {
   text-transform: uppercase;
   color: var(--color-logo-butterfly-body);
 }
+
 .address-desc {
   margin: 1rem 0 0;
   font-size: 0.75rem;
@@ -743,10 +828,12 @@ textarea {
   background: #faf6ef;
   border: 1px solid rgba(22, 15, 10, 0.1);
 }
+
 .hours-list {
   display: flex;
   flex-direction: column;
 }
+
 .day-container {
   display: flex;
   justify-content: space-between;
@@ -757,26 +844,33 @@ textarea {
   border-radius: 4px;
   font-size: 0.9rem;
 }
+
 .day-container:last-child {
   border-bottom: none;
 }
+
 .day-name {
   color: var(--color-dark);
 }
+
 .day-time {
   color: rgba(22, 15, 10, 0.7);
   white-space: nowrap;
 }
+
 .day-container.is-closed .day-name,
 .day-container.is-closed .day-time {
   color: rgba(22, 15, 10, 0.35);
 }
+
 .day-container.is-today {
   background: rgba(216, 138, 165, 0.1);
 }
+
 .day-container.is-today .day-name {
   font-weight: 600;
 }
+
 .day-container.is-today .day-name::after {
   content: " · TODAY";
   font-family: "Inter", sans-serif;
@@ -785,6 +879,7 @@ textarea {
   letter-spacing: 0.12em;
   color: var(--color-logo-buttefly-wings);
 }
+
 .hours-note {
   display: block;
   margin-top: 1.2rem;
@@ -801,6 +896,7 @@ textarea {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
+
   .map-container iframe {
     min-height: 320px;
   }
@@ -823,14 +919,16 @@ textarea {
   opacity: 0;
   visibility: hidden;
 }
+
 .modal-overlay.is-open {
   opacity: 1;
   visibility: visible;
 }
+
 .modal-container {
   background: #f1e9da;
   color: #3B2A1E;
-  padding: 32px 36px; 
+  padding: 32px 36px;
   border-radius: 24px;
   width: 90%;
   max-width: 550px;
@@ -843,12 +941,14 @@ textarea {
   line-height: 1.3;
   margin: 0 0 12px 0;
 }
+
 .modal-message {
   font-size: 0.95rem;
   line-height: 1.6;
   color: #6b5c4e;
   margin: 0 0 28px 0;
 }
+
 .appointment-details {
   display: flex;
   flex-direction: column;
@@ -857,6 +957,7 @@ textarea {
   max-width: 340px;
   text-align: left;
 }
+
 .appointment-details li {
   display: flex;
   justify-content: space-between;
@@ -866,13 +967,15 @@ textarea {
   color: #6b5c4e;
   border-bottom: 1px dashed rgba(107, 92, 78, 0.25);
 }
+
 .appointment-details strong {
   color: var(--color-dark);
   text-align: right;
 }
 
 /* MODAL BUTTONS */
-.primary-btn, .secondary-btn{
+.primary-btn,
+.secondary-btn {
   cursor: pointer;
   padding: 10px 24px;
   border-radius: 40px;
@@ -880,42 +983,52 @@ textarea {
   font-weight: 600;
   border: none;
 }
+
 .actions {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
 }
+
 .primary-btn {
   background: var(--color-submit-btn);
   color: var(--color-light);
   transition: background 0.2s ease, transform 0.2s ease;
 }
+
 .primary-btn:hover {
   background: var(--color-submit-btn-hover);
   transform: scale(1.03);
 }
+
 .secondary-btn {
   background: transparent;
   color: var(--color-dark);
   border: 1px solid var(--color-dark);
   transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
+
 .secondary-btn:hover {
   background: var(--color-dark);
   color: var(--color-light);
   transform: scale(1.03);
 }
+
 @media (max-width: 480px) {
   .modal-container {
     padding: 24px 20px;
   }
+
   .modal-title {
     font-size: 1.3rem;
   }
+
   .actions {
     flex-direction: column-reverse;
   }
-  .primary-btn, .secondary-btn {
+
+  .primary-btn,
+  .secondary-btn {
     width: 100%;
     text-align: center;
   }
@@ -925,6 +1038,7 @@ textarea {
 .modal-success {
   text-align: center;
 }
+
 .modal-success .modal-icon {
   display: inline-flex;
   align-items: center;
@@ -936,12 +1050,15 @@ textarea {
   background: rgba(47, 133, 90, 0.12);
   border-radius: 50%;
 }
+
 .modal-success .modal-title {
   color: #2f855a;
 }
+
 .modal-success .modal-message {
   margin-bottom: 24px;
 }
+
 .modal-success .actions {
   justify-content: center;
 }
@@ -950,6 +1067,7 @@ textarea {
 .modal-fail {
   text-align: center;
 }
+
 .modal-fail .modal-icon {
   display: inline-flex;
   align-items: center;
@@ -961,12 +1079,15 @@ textarea {
   background: rgba(179, 64, 46, 0.12);
   border-radius: 50%;
 }
+
 .modal-fail .modal-title {
   color: #b3402e;
 }
+
 .modal-fail .modal-message {
   margin-bottom: 24px;
 }
+
 .modal-fail .actions {
   justify-content: center;
 }

@@ -348,9 +348,9 @@ async function uploadHairImages() {
     // is generated. Setting it by hand is what breaks multipart uploads.
     try {
         const res = await fetch(`${API_BASE_URL}/api/v1/uploads`, {
-        method: "POST",
-        signal: AbortSignal.timeout(10_000), //10s timeout
-        body: fd
+            method: "POST",
+            signal: AbortSignal.timeout(10_000), //10s timeout
+            body: fd
         });
 
         if (!res.ok) throw new ApiError("form.error.upload");
@@ -362,7 +362,7 @@ async function uploadHairImages() {
         };
     }
     catch (error) {
-        if(error.name === 'TimeoutError') {
+        if (error.name === 'TimeoutError') {
             throw new ApiError("timeout.error");
         }
     }
@@ -435,7 +435,7 @@ document.getElementById("appointment-form").addEventListener("submit", async (e)
     setSubmitting(true);
 
     try {
-        const {imageUrls, imagePublicIds} = await uploadHairImages();
+        const { imageUrls, imagePublicIds } = await uploadHairImages();
 
         const payload = {
             name: document.getElementById("customer-name").value,
@@ -449,7 +449,7 @@ document.getElementById("appointment-form").addEventListener("submit", async (e)
             hairImagePublicIds: imagePublicIds,
             language: readLang()
         };
-        
+
 
         const resPost = await fetch(`${API_BASE_URL}/api/v1/appointments`, {
             method: "POST",
@@ -475,7 +475,7 @@ document.getElementById("appointment-form").addEventListener("submit", async (e)
                 failureModalBehaviour(t("form.error.invalid"));
         }
     } catch (err) {
-        if(err.name === 'TimeoutError') {
+        if (err.name === 'TimeoutError') {
             failureModalBehaviour(t("timeout.error"));
         }
 
@@ -574,7 +574,7 @@ const datePIcker = flatpickr("#date-input", {
     enableTime: false,
     dateFormat: "Y-m-d",
     disable: [
-        date => date.getDay() === 1,//disable Mondays
+        date => date.getDay() === 1, //disable Mondays
         date => isPastClosingTime(date)
     ],
 
@@ -593,31 +593,31 @@ const datePIcker = flatpickr("#date-input", {
 });
 
 //function to disable current time if past the closing time of the salon
-function  isPastClosingTime(date) {
+function isPastClosingTime(date) {
     // Apply the cutoff using Los Angeles local time. Monday remains
-            // controlled by the rule above.
-            const laParts = new Intl.DateTimeFormat("en-US", {
-                timeZone: "America/Los_Angeles",
-                year: "numeric",
-                month: "numeric",
-                day: "numeric",
-                hour: "numeric",
-                hour12: false
-            }).formatToParts(new Date());
-            const la = Object.fromEntries(
-                laParts
-                    .filter(part => part.type !== "literal")
-                    .map(part => [part.type, Number(part.value)])
-            );
-            const isToday = date.getFullYear() === la.year
-                && date.getMonth() + 1 === la.month
-                && date.getDate() === la.day;
-            const weekday = date.getDay();
-            const cutoffHour = weekday === 0 ? 15 : 19;
+    // controlled by the rule above.
+    const laParts = new Intl.DateTimeFormat("en-US", {
+        timeZone: "America/Los_Angeles",
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+        hour: "numeric",
+        hour12: false
+    }).formatToParts(new Date());
+    const la = Object.fromEntries(
+        laParts
+            .filter(part => part.type !== "literal")
+            .map(part => [part.type, Number(part.value)])
+    );
+    const isToday = date.getFullYear() === la.year
+        && date.getMonth() + 1 === la.month
+        && date.getDate() === la.day;
+    const weekday = date.getDay();
+    const cutoffHour = weekday === 0 ? 15 : 19;
 
-            return isToday
-                && ((weekday >= 2 && weekday <= 6) || weekday === 0)
-                && la.hour >= cutoffHour;
+    return isToday
+        && ((weekday >= 2 && weekday <= 6) || weekday === 0)
+        && la.hour >= cutoffHour;
 }
 
 // Clear the booking card along with the rest of the form after a successful booking
@@ -667,7 +667,7 @@ async function loadTimeSlots(dateStr) {
         requestServices: selectedServices()
     });
 
-    if(loadingSlots) {
+    if (loadingSlots) {
         return; // if slots are loading, exit to prevent multiple fetches
     }
     loadingSlots = true;
@@ -676,12 +676,12 @@ async function loadTimeSlots(dateStr) {
         const res = await fetch(`${API_BASE_URL}/api/v1/appointments/timeSlots?${params}`, {
             signal: AbortSignal.timeout(10_000)
         });
-        if (!res.ok) throw new Error("Failed to load slots"); 
+        if (!res.ok) throw new Error("Failed to load slots");
 
         const slots = await res.json();
         renderTimeSlots(timeSlotContainer, slots);
     } catch (err) {
-        if(err.name === 'TimeoutError') {
+        if (err.name === 'TimeoutError') {
             timeSlotContainer.innerHTML = `<p class="time-panel-empty">${t("timeout.error")}</p>`;
         } else {
             timeSlotContainer.innerHTML = `<p class="time-panel-empty">${t("form.time.error")}</p>`;
