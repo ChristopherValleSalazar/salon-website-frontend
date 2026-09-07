@@ -563,12 +563,28 @@ textarea {
    hiding it left the calendar unreachable without a mouse. It sits on its own row
    above the calendar; flatpickr keeps it readonly, so it reads as a value display
    that happens to be the keyboard entry point. */
+/* Box styling repeated here rather than left to `.main-form input`, because
+   view-appointment.html has no .main-form and the field rendered unstyled there. */
 .booking-wrapper .flatpickr-input {
   flex: 1 0 100%;
+  width: 100%;
+  min-height: 50px;
   margin: 0;
-  cursor: pointer;
-  background: #fff;
+  padding: 12px;
+  font-size: 1rem;
   color: var(--color-dark);
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 14px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+}
+
+.booking-wrapper .flatpickr-input:focus {
+  outline: none;
+  border-color: var(--color-logo-petal-text-light);
+  box-shadow: 0 4px 12px rgba(184, 138, 68, 0.25);
 }
 
 .date-input-hint {
