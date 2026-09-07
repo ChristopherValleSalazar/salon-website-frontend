@@ -7,14 +7,14 @@ function tr(key) {
 // name — stable and safe to switch on — while `error` is hardcoded English written
 // for developers. Map the type to a key so the customer sees their own language.
 const API_ERROR_KEYS = {
-    SlotUnavailableException:         "form.error.slot-taken",
-    SlotIsMondayException:            "view.error.monday",
-    PastDateException:                "view.error.past-date",
-    OutsideServiceHoursException:     "view.error.outside-hours",
-    EndsAfterClosingException:        "view.error.after-closing",
+    SlotUnavailableException: "form.error.slot-taken",
+    SlotIsMondayException: "view.error.monday",
+    PastDateException: "view.error.past-date",
+    OutsideServiceHoursException: "view.error.outside-hours",
+    EndsAfterClosingException: "view.error.after-closing",
     InvalidAppointmentStateException: "view.error.already-in-state",
-    CancellationTooLateException:     "view.error.too-late",
-    AppointmentNotFoundException:     "view.error.not-found"
+    CancellationTooLateException: "view.error.too-late",
+    AppointmentNotFoundException: "view.error.not-found"
 };
 
 // Anything unmapped still gets a translated message rather than a backend string.
@@ -52,7 +52,11 @@ async function loadAppointment() {
     }
 
     try {
-        const res = await fetch(`${API_BASE_URL}/api/v1/appointments/view?code=${encodeURIComponent(viewCode)}`);
+        const res = await fetch(`${API_BASE_URL}/api/v1/appointments/view?code=${encodeURIComponent(viewCode)}`,
+            {
+                signal: AbortSignal.timeout(10_000)
+            }
+        );
 
         if (!res.ok) {
             // The code is dead (past date, canceled, or rescheduled) — stop offering it
@@ -62,16 +66,24 @@ async function loadAppointment() {
         }
 
         appointment = await res.json();
+
+        console.log(appointment)
+
         renderAppointment();
     } catch (err) {
-        showMissing();
+        showMissing(err.name === "TimeoutError" ? "timeout.error" : null);
     }
 }
 
-function showMissing() {
+function showMissing(messageKey) {
     loadingEl.hidden = true;
     infoEl.hidden = true;
     missingEl.hidden = false;
+
+    const msgEl = missingEl.querySelector(".appointment-missing-message");
+    const key = messageKey || "view.missing.message";
+    msgEl.dataset.i18n = key;
+    msgEl.textContent = tr(key);
 }
 
 function forgetViewCode() {
@@ -86,9 +98,9 @@ function renderAppointment() {
 
     document.querySelector(".appointment-name").textContent = appointment.name;
     document.querySelector(".detail-service").textContent = formatServices(appointment.services);
-    document.querySelector(".detail-date").textContent = formatLongDate(appointment.date);
+    document.querySelector(".detail-date").textContent = appointment.formattedDate;
     document.querySelector(".detail-time").textContent =
-        formatTime(appointment.startTime) + " – " + formatTime(appointment.endTime);
+        appointment.formattedStartTime + " - " + appointment.formattedEndTime;
 
     updateStatus(appointment.status);
     refreshTranslations();
@@ -137,7 +149,10 @@ async function sendCancelOrConfirm(action) {
     try {
         const res = await fetch(
             `${API_BASE_URL}/api/v1/appointments/cancelOrConfirm?action=${action}&code=${encodeURIComponent(viewCode)}`,
-            { method: "POST" }
+            {
+                method: "POST",
+                signal: AbortSignal.timeout(10_000)
+            }
         );
 
         if (!res.ok) {
@@ -184,13 +199,14 @@ rescheduleBtn.addEventListener("click", () => {
 function initReschedulePicker() {
     reschedulePicker = flatpickr("#date-input", {
         inline: true,
-        minDate: "today",
-        maxDate: new Date().fp_incr(30),
+        minDate: salonToday,
+        maxDate: salonMaxDate,
         allowInput: false,
         enableTime: false,
         dateFormat: "Y-m-d",
         disable: [
-            date => date.getDay() === 1 //disable Mondays
+            date => date.getDay() === 1, //disable Mondays
+            date => isPastClosingTime(date)
         ],
 
         onChange(selectedDates, dateStr) {
@@ -200,8 +216,71 @@ function initReschedulePicker() {
     });
 }
 
-async function loadTimeSlots(dateStr) {
+// ---------------------------------------------------------------------------
+// Salon time
+// Same reasoning as the booking page: the backend validates against
+// America/Los_Angeles, so "today" and the 30-day window have to be the salon's,
+// not the visitor's device clock. Intl gives the salon's civil date and hour as
+// numbers, which we rebuild as browser-local Dates because that is the frame
+// flatpickr compares in.
+// ---------------------------------------------------------------------------
+const SALON_TZ = "America/Los_Angeles";
+
+function salonNow() {
+    const parts = new Intl.DateTimeFormat("en-US", {
+        timeZone: SALON_TZ,
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+        hour: "numeric",
+        // Explicit rather than `hour12: false`, which some engines answer with 24
+        // for midnight — that would disable today between 00:00 and 01:00.
+        hourCycle: "h23"
+    }).formatToParts(new Date());
+
+    return Object.fromEntries(
+        parts.filter(part => part.type !== "literal")
+            .map(part => [part.type, Number(part.value)])
+    );
+}
+
+const salonAtLoad = salonNow();
+const salonToday = new Date(salonAtLoad.year, salonAtLoad.month - 1, salonAtLoad.day);
+// Date rolls the month over on its own, so no month-end special case.
+const salonMaxDate = new Date(salonAtLoad.year, salonAtLoad.month - 1, salonAtLoad.day + 30);
+
+//function to disable current time if past the closing time of the salon
+function isPastClosingTime(date) {
+    // Re-read rather than reuse salonAtLoad: a page left open across closing time
+    // should stop offering today on flatpickr's next redraw.
+    const now = salonNow();
+
+    const isToday = date.getFullYear() === now.year
+        && date.getMonth() + 1 === now.month
+        && date.getDate() === now.day;
+    if (!isToday) return false;
+
+    // Monday is already disabled by the rule above, so it needs no cutoff here.
+    const cutoffHour = date.getDay() === 0 ? 15 : 19;
+    return now.hour >= cutoffHour;
+}
+
+let slotsTimer;      // debounce timer
+let slotsController; // controller for the in-flight request
+
+// Same shape as the booking page. A plain "is one already loading?" flag dropped
+// the newer request and let the older one render, so the panel could show slots
+// for a date the customer had already moved off — the failure this guards against.
+function loadTimeSlots(dateStr) {
     timeSlotContainer.innerHTML = `<p class="time-panel-empty">${tr("form.time.loading")}</p>`;
+
+    clearTimeout(slotsTimer);
+    slotsTimer = setTimeout(() => fetchTimeSlots(dateStr), 250);
+}
+
+async function fetchTimeSlots(dateStr) {
+    slotsController?.abort();
+    slotsController = new AbortController();
 
     const params = new URLSearchParams({
         requestDate: dateStr,
@@ -209,14 +288,35 @@ async function loadTimeSlots(dateStr) {
     });
 
     try {
-        const res = await fetch(`${API_BASE_URL}/api/v1/appointments/timeSlots?${params}`);
+        const res = await fetch(`${API_BASE_URL}/api/v1/appointments/timeSlots?${params}`,
+            { signal: AbortSignal.any([slotsController.signal, AbortSignal.timeout(10_000)]) }
+        );
         if (!res.ok) throw new Error("Failed to load slots");
 
         const slots = await res.json();
         renderTimeSlots(slots);
     } catch (err) {
-        timeSlotContainer.innerHTML = `<p class="time-panel-empty">${tr("form.time.error")}</p>`;
+        if (err.name === "AbortError") return; // superseded by a newer pick
+        if (err.name === "TimeoutError") {
+            timeSlotContainer.innerHTML = `<p class="time-panel-empty">${tr("timeout.error")}</p>`;
+        } else {
+            timeSlotContainer.innerHTML = `<p class="time-panel-empty">${tr("form.time.error")}</p>`;
+        }
     }
+}
+
+// Same live-region announcement as the booking page: the slot buttons otherwise
+// appear with no signal a screen reader user can perceive.
+const slotStatus = document.getElementById("slot-status");
+const SALON_PHONE = "(323) 907-5658";
+
+function announceSlots(count) {
+    if (!slotStatus) return;
+    // form.time.none ends with "call us at: " — the number lives in a separate
+    // link, so it has to be appended here or the announcement trails off.
+    slotStatus.textContent = count === 0
+        ? tr("form.time.none") + SALON_PHONE
+        : `${tr("form.time.heading")}: ${count}`;
 }
 
 function renderTimeSlots(slots) {
@@ -224,11 +324,13 @@ function renderTimeSlots(slots) {
         // Same treatment as the booking page: the copy ends mid-sentence and the
         // phone number is appended as a link.
         timeSlotContainer.innerHTML = `<p class="time-panel-empty">${tr("form.time.none")}
-                <a class="time-panel-phone" href="tel:+13239075658">(323) 907-5658</a>
+                <a class="time-panel-phone" href="tel:+13239075658">${SALON_PHONE}</a>
             </p>`;
+        announceSlots(0);
         return;
     }
 
+    announceSlots(slots.length);
     timeSlotContainer.innerHTML = "";
     slots.forEach(slot => {
         const btn = document.createElement("button");
@@ -276,6 +378,7 @@ async function submitReschedule() {
             {
                 method: "POST",
                 headers: { "content-type": "application/json" },
+                signal: AbortSignal.timeout(10_000),
                 body: JSON.stringify({ date: dateVal, startTime: timeVal })
             }
         );
@@ -294,9 +397,9 @@ async function submitReschedule() {
             try { storage?.setItem("appointmentViewCode", viewCode); } catch { /* ignore */ }
         }
 
-        appointment.date = body.date;
-        appointment.startTime = body.startTime;
-        appointment.endTime = body.endTime;
+        appointment.formattedDate = body.date;
+        appointment.formattedStartTime = body.startTime;
+        appointment.formattedEndTime = body.endTime;
         appointment.status = "BOOKED";
         renderAppointment();
 
@@ -308,8 +411,8 @@ async function submitReschedule() {
         showSuccessModal({
             titleKey: "view.modal.rescheduled.heading",
             titleText: "Appointment rescheduled!",
-            messageText: formatLongDate(body.date) + " · "
-                + formatTime(body.startTime) + " – " + formatTime(body.endTime)
+            messageText: body.date + " · "
+                + (body.startTime) + " - " + (body.endTime)
         });
     } catch (err) {
         // err.message here is the browser's own "Failed to fetch", not customer copy.

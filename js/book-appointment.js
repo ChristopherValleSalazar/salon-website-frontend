@@ -1,7 +1,29 @@
 import { t } from './language.js';
+const SALON_TZ = "America/Los_Angeles";
 
-const today = new Date().getDay();
-document.querySelector(`.day-container[data-day="${today}"]`)?.classList.add("is-today");
+function salonNow() {
+    const parts = new Intl.DateTimeFormat("en-US", {
+        timeZone: SALON_TZ,
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+        hour: "numeric",
+        hourCycle: "h23"
+    }).formatToParts(new Date());
+
+    return Object.fromEntries(
+        parts.filter(part => part.type !== "literal")
+            .map(part => [part.type, Number(part.value)])
+    );
+}
+
+// Captured once: the picker's bounds are read at init, not per redraw.
+const salonAtLoad = salonNow();
+const salonToday = new Date(salonAtLoad.year, salonAtLoad.month - 1, salonAtLoad.day);
+// Date rolls the month over on its own, so no month-end special case.
+const salonMaxDate = new Date(salonAtLoad.year, salonAtLoad.month - 1, salonAtLoad.day + 30);
+
+document.querySelector(`.day-container[data-day="${salonToday.getDay()}"]`)?.classList.add("is-today");
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -92,9 +114,17 @@ function applyServiceCap() {
     });
 }
 
-function openServicePanel() {
+// Focus moves into the panel on open. Without it the panel is announced as
+// expanded while the caret stays on the trigger, so it reads as broken — and
+// Tab then walks the fourteen checkboxes blind.
+function firstEnabledBox() {
+    return serviceBoxes.find(b => !b.disabled) ?? serviceBoxes[0];
+}
+
+function openServicePanel({ focusFirst = false } = {}) {
     servicePanel.classList.add("show");
     serviceTrigger.setAttribute("aria-expanded", "true");
+    if (focusFirst) firstEnabledBox()?.focus();
 }
 
 function closeServicePanel({ focusTrigger = false } = {}) {
@@ -103,9 +133,34 @@ function closeServicePanel({ focusTrigger = false } = {}) {
     if (focusTrigger) serviceTrigger.focus();
 }
 
-serviceTrigger.addEventListener("click", () => {
-    if (servicePanel.classList.contains("show")) closeServicePanel();
-    else openServicePanel();
+serviceTrigger.addEventListener("click", (e) => {
+    if (servicePanel.classList.contains("show")) {
+        closeServicePanel();
+        return;
+    }
+    // detail === 0 means the click came from Enter or Space rather than a pointer.
+    // Mouse users keep their caret where it was; keyboard users land on an option.
+    openServicePanel({ focusFirst: e.detail === 0 });
+});
+
+// ArrowDown on the trigger opens and steps in, which is what the disclosure
+// pattern leads a keyboard user to expect.
+serviceTrigger.addEventListener("keydown", (e) => {
+    if (e.key !== "ArrowDown") return;
+    e.preventDefault();
+    if (!servicePanel.classList.contains("show")) openServicePanel({ focusFirst: true });
+    else firstEnabledBox()?.focus();
+});
+
+// Roving arrows inside the panel, skipping rows disabled by the two-service cap.
+servicePanel.addEventListener("keydown", (e) => {
+    if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
+    const open = serviceBoxes.filter(b => !b.disabled);
+    const i = open.indexOf(e.target);
+    if (i === -1) return;
+    e.preventDefault();
+    const next = e.key === "ArrowDown" ? i + 1 : i - 1;
+    open[(next + open.length) % open.length].focus();
 });
 
 // Only clicks landing outside the whole control close the panel, so ticking a
@@ -346,19 +401,27 @@ async function uploadHairImages() {
 
     // No Content-Type header: the browser must set it so the multipart boundary
     // is generated. Setting it by hand is what breaks multipart uploads.
-    const res = await fetch(`${API_BASE_URL}/api/v1/uploads`, {
-        method: "POST",
-        body: fd
-    });
+    try {
+        const res = await fetch(`${API_BASE_URL}/api/v1/uploads`, {
+            method: "POST",
+            signal: AbortSignal.timeout(10_000), //10s timeout
+            body: fd
+        });
 
-    if (!res.ok) throw new ApiError("form.error.upload");
+        if (!res.ok) throw new ApiError("form.error.upload");
+        const uploaded = await res.json();
 
-    const uploaded = await res.json();
+        return {
+            imageUrls: uploaded.map(img => img.url),
+            imagePublicIds: uploaded.map(img => img.publicId)
+        };
+    }
+    catch (error) {
+        if (error.name === 'TimeoutError') {
+            throw new ApiError("timeout.error");
+        }
+    }
 
-    return {
-        imageUrls: uploaded.map(img => img.url),
-        imagePublicIds: uploaded.map(img => img.publicId)
-    };
 }
 
 // Carries a translation key rather than a technical string
@@ -427,7 +490,7 @@ document.getElementById("appointment-form").addEventListener("submit", async (e)
     setSubmitting(true);
 
     try {
-        const {imageUrls, imagePublicIds} = await uploadHairImages();
+        const { imageUrls, imagePublicIds } = await uploadHairImages();
 
         const payload = {
             name: document.getElementById("customer-name").value,
@@ -441,24 +504,36 @@ document.getElementById("appointment-form").addEventListener("submit", async (e)
             hairImagePublicIds: imagePublicIds,
             language: readLang()
         };
-        
+
 
         const resPost = await fetch(`${API_BASE_URL}/api/v1/appointments`, {
             method: "POST",
             headers: { "content-type": "application/json" },
+            signal: AbortSignal.timeout(10_000), //30s timeout
             body: JSON.stringify(payload)
         });
 
-        if (resPost.ok) {
-            modalBehaviour(await resPost.json());
-        } else if (resPost.status === 409) {
-            failureModalBehaviour(t("form.error.slot-taken"));
-        } else if (resPost.status >= 500) {
-            failureModalBehaviour(t("form.error.server"));
-        } else {
-            failureModalBehaviour(t("form.error.invalid"));
+        switch (resPost.status) {
+            case 200:
+                modalBehaviour(await resPost.json());
+                break;
+            case 409:
+                failureModalBehaviour(t("form.error.slot-taken"));
+                break;
+            case 500:
+            case 502:
+            case 503:
+            case 504:
+                failureModalBehaviour(t("form.error.server"));
+                break;
+            default:
+                failureModalBehaviour(t("form.error.invalid"));
         }
     } catch (err) {
+        if (err.name === 'TimeoutError') {
+            failureModalBehaviour(t("timeout.error"));
+        }
+
         // ApiError carries a key; anything else is a network/parse failure.
         failureModalBehaviour(t(err instanceof ApiError ? err.key : "form.error.network"));
     } finally {
@@ -492,17 +567,21 @@ function modalBehaviour(appointment) {
     const modalOverlay = document.getElementById("success-modal-overlay");
     const closeBtn = document.getElementById("modal-btn-close");
 
-    // The view code is the customer's key to see/cancel/reschedule this booking
+    // The view code is the customer's key to see/cancel/reschedule this booking.
+    // setItem throws in Safari private mode and when the quota is full; the booking
+    // itself already succeeded, so that must not stop the modal from opening.
     if (appointment.viewCode) {
-        localStorage.setItem("appointmentViewCode", appointment.viewCode);
+        try {
+            localStorage.setItem("appointmentViewCode", appointment.viewCode);
+        } catch { /* private mode / quota — the nav link is the only thing lost */ }
         document.querySelectorAll(".appointment-nav-item").forEach(li => { li.hidden = false; });
     }
 
     modalOverlay.querySelector(".customer-name").textContent = appointment.name;
     modalOverlay.querySelector(".detail-service").textContent = formatServices(appointment.services);
-    modalOverlay.querySelector(".detail-date").textContent = formatLongDate(appointment.date);
+    modalOverlay.querySelector(".detail-date").textContent = appointment.formattedDate;
     modalOverlay.querySelector(".detail-time").textContent =
-        formatTime(appointment.startTime) + " – " + formatTime(appointment.endTime);
+        appointment.formattedStartTime + " – " + appointment.formattedEndTime;
 
     modalOverlay.classList.add("is-open");
 
@@ -548,13 +627,14 @@ if (failureOverlay) {
 
 const datePIcker = flatpickr("#date-input", {
     inline: true,
-    minDate: "today",
-    maxDate: new Date().fp_incr(30), // 30 days from now
+    minDate: salonToday,
+    maxDate: salonMaxDate, // 30 days from the salon's today
     allowInput: false,
     enableTime: false,
     dateFormat: "Y-m-d",
     disable: [
-        date => date.getDay() === 1 //disable Mondays
+        date => date.getDay() === 1, //disable Mondays
+        date => isPastClosingTime(date)
     ],
 
     onChange(selectedDates, dateStr, instance) {
@@ -570,6 +650,22 @@ const datePIcker = flatpickr("#date-input", {
         loadTimeSlots(dateStr);
     }
 });
+
+//function to disable current time if past the closing time of the salon
+function isPastClosingTime(date) {
+    // Re-read rather than reuse salonAtLoad: a page left open across closing time
+    // should stop offering today on flatpickr's next redraw.
+    const now = salonNow();
+
+    const isToday = date.getFullYear() === now.year
+        && date.getMonth() + 1 === now.month
+        && date.getDate() === now.day;
+    if (!isToday) return false;
+
+    // Monday is already disabled by the rule above, so it needs no cutoff here.
+    const cutoffHour = date.getDay() === 0 ? 15 : 19;
+    return now.hour >= cutoffHour;
+}
 
 // Clear the booking card along with the rest of the form after a successful booking
 const timeSlotContainer = document.querySelector(".container-time-slot");
@@ -605,25 +701,41 @@ function showServiceRequiredError() {
     serviceTrigger.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
-async function loadTimeSlots(dateStr) {
-    timeSlotContainer.innerHTML = `<p class="time-panel-empty">${t("form.time.loading")}</p>`;;
+let slotsTimer; //debounce timer   
+let slotsController; //controller for in flight request
+
+function loadTimeSlots(dateStr) {
+    timeSlotContainer.innerHTML = `<p class="time-panel-empty">${t("form.time.loading")}</p>`;
+
+    clearTimeout(slotsTimer);
+    slotsTimer = setTimeout(() => fetchTimeSlots(dateStr), 250);
+}
+
+async function fetchTimeSlots(dateStr) {
+    slotsController?.abort();
+    slotsController = new AbortController();
 
     const params = new URLSearchParams({
         requestDate: dateStr,
-        // The slots endpoint accepts a single ServiceType, so the first choice
-        // drives the duration. Two-service bookings need a backend change.
         requestServices: selectedServices()
     });
 
     try {
-        const res = await fetch(`${API_BASE_URL}/api/v1/appointments/timeSlots?${params}`);
+        const res = await fetch(`${API_BASE_URL}/api/v1/appointments/timeSlots?${params}`, {
+            signal: AbortSignal.any([slotsController.signal, AbortSignal.timeout(10_000)])
+        });
         if (!res.ok) throw new Error("Failed to load slots");
 
         const slots = await res.json();
         renderTimeSlots(timeSlotContainer, slots);
     } catch (err) {
-        timeSlotContainer.innerHTML = `<p class="time-panel-empty">${t("form.time.error")}</p>`;
-    }
+        if (err.name === 'AbortError') return; //self cause error no need to handle
+        if (err.name === 'TimeoutError') {
+            timeSlotContainer.innerHTML = `<p class="time-panel-empty">${t("timeout.error")}</p>`;
+        } else {
+            timeSlotContainer.innerHTML = `<p class="time-panel-empty">${t("form.time.error")}</p>`;
+        }
+    } 
 }
 
 function hideBookingSummary() {
@@ -640,14 +752,31 @@ function showBookingSummary(timeSlot) {
     summary.hidden = false;
 }
 
+// The slot buttons appear without any visible change of context, so a screen
+// reader user gets no signal that picking a date produced anything. This is the
+// same live-region pattern #hair-image-note already uses for the photo field.
+const slotStatus = document.getElementById("slot-status");
+const SALON_PHONE = "(323) 907-5658";
+
+function announceSlots(count) {
+    if (!slotStatus) return;
+    // form.time.none ends with "call us at: " — the number lives in a separate
+    // link, so it has to be appended here or the announcement trails off.
+    slotStatus.textContent = count === 0
+        ? t("form.time.none") + SALON_PHONE
+        : `${t("form.time.heading")}: ${count}`;
+}
+
 function renderTimeSlots(container, slots) {
     if (slots.length === 0) {
         container.innerHTML = `<p class="time-panel-empty">${t("form.time.none")}
-                <a class="time-panel-phone" href="tel:+13239075658">(323) 907-5658</a>
+                <a class="time-panel-phone" href="tel:+13239075658">${SALON_PHONE}</a>
             </p>`;
+        announceSlots(0);
         return;
     }
 
+    announceSlots(slots.length);
     container.innerHTML = "";
     slots.forEach(slot => {
         const btn = document.createElement("button");

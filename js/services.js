@@ -6,19 +6,19 @@
 // view-appointment.js is not a module.
 
 const SERVICE_LABEL_KEYS = {
-    HAIRCUT:                            "form.services.haircut",
-    BABY_HIGHLIGHT:                     "form.services.baby-highlight",
-    DYES:                               "form.services.dyes",
-    KERATIN_TREATMENT:                  "form.services.keratin",
-    BLOW_DRYING:                        "form.services.blowdry",
-    WASHING:                            "form.services.washing",
-    TREATMENT_MOISTURIZING:             "form.services.treatment",
-    HAIRCUT_BLOW_DRY:                   "form.services.haircut-blowdry",
-    COLOR_TOUCH_UP:                     "form.services.color-touchup",
-    PERM:                               "form.services.perm",
-    BEARD_TRIM:                         "form.services.beard-trim",
-    EYEBROW_SHAPING:                    "form.services.eyebrow-shaping",
-    HAIRCUT_BEARD_TRIM:                 "form.services.haircut-beard-trim",
+    HAIRCUT: "form.services.haircut",
+    BABY_HIGHLIGHT: "form.services.baby-highlight",
+    DYES: "form.services.dyes",
+    KERATIN_TREATMENT: "form.services.keratin",
+    BLOW_DRYING: "form.services.blowdry",
+    WASHING: "form.services.washing",
+    TREATMENT_MOISTURIZING: "form.services.treatment",
+    HAIRCUT_BLOW_DRY: "form.services.haircut-blowdry",
+    COLOR_TOUCH_UP: "form.services.color-touchup",
+    PERM: "form.services.perm",
+    BEARD_TRIM: "form.services.beard-trim",
+    EYEBROW_SHAPING: "form.services.eyebrow-shaping",
+    HAIRCUT_BEARD_TRIM: "form.services.haircut-beard-trim",
     HAIRCUT_BEARD_TRIM_EYEBROW_SHAPING: "form.services.haircut-beard-trim-eyebrow-shaping",
 };
 
