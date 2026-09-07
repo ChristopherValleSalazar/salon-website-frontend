@@ -558,8 +558,39 @@ textarea {
   box-shadow: 0 0 2px rgba(255, 0, 0, 0.15);
 }
 
+/* A1: this input used to be `display: none`. It has to be visible and focusable —
+   flatpickr drives its own arrow-key navigation from the input holding focus, so
+   hiding it left the calendar unreachable without a mouse. It sits on its own row
+   above the calendar; flatpickr keeps it readonly, so it reads as a value display
+   that happens to be the keyboard entry point. */
 .booking-wrapper .flatpickr-input {
-  display: none;
+  flex: 1 0 100%;
+  margin: 0;
+  cursor: pointer;
+  background: #fff;
+  color: var(--color-dark);
+}
+
+.date-input-hint {
+  flex: 1 0 100%;
+  margin: 6px 0 0 6px;
+  font-family: "Inter", sans-serif;
+  font-size: 0.8125rem;
+  color: var(--color-logo-inner-circle);
+  opacity: 0.7;
+}
+
+/* Announced, not shown — the buttons beside it are already the visible answer. */
+.slot-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
 }
 
 .flatpickr-calendar.inline {

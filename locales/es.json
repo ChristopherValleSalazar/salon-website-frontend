@@ -98,6 +98,7 @@
     "form.hair-img.prompt": "Haz clic o arrastra una foto aquí",
     "form.hair-img.hint": "PNG, JPG o WEBP",
     "form.date": "Fecha y Hora<span class=\"required\">*</span>",
+    "form.date.hint": "Presiona la flecha hacia abajo para llegar al calendario, luego usa las flechas y Enter para elegir una fecha.",
     "form.date.placeholder": "Selecciona una fecha",
     "form.time.heading": "Horarios disponibles",
     "form.time.empty": "Elige una fecha para ver los horarios",

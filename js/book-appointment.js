@@ -130,9 +130,17 @@ function applyServiceCap() {
     });
 }
 
-function openServicePanel() {
+// Focus moves into the panel on open. Without it the panel is announced as
+// expanded while the caret stays on the trigger, so it reads as broken — and
+// Tab then walks the fourteen checkboxes blind.
+function firstEnabledBox() {
+    return serviceBoxes.find(b => !b.disabled) ?? serviceBoxes[0];
+}
+
+function openServicePanel({ focusFirst = false } = {}) {
     servicePanel.classList.add("show");
     serviceTrigger.setAttribute("aria-expanded", "true");
+    if (focusFirst) firstEnabledBox()?.focus();
 }
 
 function closeServicePanel({ focusTrigger = false } = {}) {
@@ -141,9 +149,34 @@ function closeServicePanel({ focusTrigger = false } = {}) {
     if (focusTrigger) serviceTrigger.focus();
 }
 
-serviceTrigger.addEventListener("click", () => {
-    if (servicePanel.classList.contains("show")) closeServicePanel();
-    else openServicePanel();
+serviceTrigger.addEventListener("click", (e) => {
+    if (servicePanel.classList.contains("show")) {
+        closeServicePanel();
+        return;
+    }
+    // detail === 0 means the click came from Enter or Space rather than a pointer.
+    // Mouse users keep their caret where it was; keyboard users land on an option.
+    openServicePanel({ focusFirst: e.detail === 0 });
+});
+
+// ArrowDown on the trigger opens and steps in, which is what the disclosure
+// pattern leads a keyboard user to expect.
+serviceTrigger.addEventListener("keydown", (e) => {
+    if (e.key !== "ArrowDown") return;
+    e.preventDefault();
+    if (!servicePanel.classList.contains("show")) openServicePanel({ focusFirst: true });
+    else firstEnabledBox()?.focus();
+});
+
+// Roving arrows inside the panel, skipping rows disabled by the two-service cap.
+servicePanel.addEventListener("keydown", (e) => {
+    if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
+    const open = serviceBoxes.filter(b => !b.disabled);
+    const i = open.indexOf(e.target);
+    if (i === -1) return;
+    e.preventDefault();
+    const next = e.key === "ArrowDown" ? i + 1 : i - 1;
+    open[(next + open.length) % open.length].focus();
 });
 
 // Only clicks landing outside the whole control close the panel, so ticking a
@@ -735,14 +768,31 @@ function showBookingSummary(timeSlot) {
     summary.hidden = false;
 }
 
+// The slot buttons appear without any visible change of context, so a screen
+// reader user gets no signal that picking a date produced anything. This is the
+// same live-region pattern #hair-image-note already uses for the photo field.
+const slotStatus = document.getElementById("slot-status");
+const SALON_PHONE = "(323) 907-5658";
+
+function announceSlots(count) {
+    if (!slotStatus) return;
+    // form.time.none ends with "call us at: " — the number lives in a separate
+    // link, so it has to be appended here or the announcement trails off.
+    slotStatus.textContent = count === 0
+        ? t("form.time.none") + SALON_PHONE
+        : `${t("form.time.heading")}: ${count}`;
+}
+
 function renderTimeSlots(container, slots) {
     if (slots.length === 0) {
         container.innerHTML = `<p class="time-panel-empty">${t("form.time.none")}
-                <a class="time-panel-phone" href="tel:+13239075658">(323) 907-5658</a>
+                <a class="time-panel-phone" href="tel:+13239075658">${SALON_PHONE}</a>
             </p>`;
+        announceSlots(0);
         return;
     }
 
+    announceSlots(slots.length);
     container.innerHTML = "";
     slots.forEach(slot => {
         const btn = document.createElement("button");

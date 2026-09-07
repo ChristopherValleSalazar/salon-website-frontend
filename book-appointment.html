@@ -123,7 +123,10 @@
           <label id="service-label" data-i18n="form.services">Services<span class="required">*</span></label>
 
           <div class="service-select" id="service-select">
-            <button type="button" class="service-trigger is-placeholder" id="service-trigger" aria-haspopup="listbox"
+            <!-- aria-haspopup is "true", not "listbox": a listbox promises role="option"
+                 children and single selection, but this panel is a role="group" of
+                 checkboxes capped at two. -->
+            <button type="button" class="service-trigger is-placeholder" id="service-trigger" aria-haspopup="true"
               aria-expanded="false" aria-controls="service-panel" aria-labelledby="service-label service-trigger"
               data-i18n="form.services.placeholder">Select up to 2 services</button>
             <div class="service-panel" id="service-panel" role="group" aria-labelledby="service-label">
@@ -242,12 +245,22 @@
 
           <label for="date-input" data-i18n="form.date">Date &amp; Time<span class="required">*</span></label>
           <div class="booking-wrapper" id="booking-wrapper">
-            <input type="hidden" id="date-input" required autocomplete="off" />
+            <p class="date-input-hint" id="date-input-hint" data-i18n="form.date.hint">Press the down arrow to reach
+              the calendar, then use the arrow keys and Enter to choose a date.</p>
+            <!-- A real, focusable input rather than type="hidden": flatpickr's own
+                 arrow-key navigation only engages while its input holds focus, so a
+                 hidden one leaves the calendar unreachable without a mouse. It stays
+                 readonly (allowInput: false), so it can be focused but not typed into.
+                 The hint sits above it because flatpickr inserts the inline calendar as
+                 this input's next sibling. -->
+            <input type="text" id="date-input" required autocomplete="off" aria-describedby="date-input-hint"
+              data-i18n="form.date.placeholder" placeholder="Select a date" />
             <div class="time-panel">
-              <h3 class="time-panel-title" data-i18n="form.time.heading">Available times</h3>
-              <div class="container-time-slot">
+              <h3 class="time-panel-title" id="time-panel-title" data-i18n="form.time.heading">Available times</h3>
+              <div class="container-time-slot" role="group" aria-labelledby="time-panel-title">
                 <p class="time-panel-empty" data-i18n="form.time.empty">Pick a date to see available times</p>
               </div>
+              <p class="slot-status" id="slot-status" role="status"></p>
             </div>
             <div class="booking-summary" hidden></div>
           </div>

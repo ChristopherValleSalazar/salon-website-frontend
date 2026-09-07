@@ -132,13 +132,20 @@
           <div class="reschedule-panel" hidden>
             <p class="reschedule-hint" data-i18n="view.reschedule.hint">Pick a new date and time for your
               appointment</p>
+            <label for="date-input" data-i18n="form.date">Date &amp; Time<span class="required">*</span></label>
             <div class="booking-wrapper" id="booking-wrapper">
-              <input type="hidden" id="date-input" autocomplete="off" />
+              <p class="date-input-hint" id="date-input-hint" data-i18n="form.date.hint">Press the down arrow to reach
+                the calendar, then use the arrow keys and Enter to choose a date.</p>
+              <!-- Same as the booking page: a focusable input is what makes flatpickr's
+                   arrow-key navigation work at all. -->
+              <input type="text" id="date-input" autocomplete="off" aria-describedby="date-input-hint"
+                data-i18n="form.date.placeholder" placeholder="Select a date" />
               <div class="time-panel">
-                <h3 class="time-panel-title" data-i18n="form.time.heading">Available times</h3>
-                <div class="container-time-slot">
+                <h3 class="time-panel-title" id="time-panel-title" data-i18n="form.time.heading">Available times</h3>
+                <div class="container-time-slot" role="group" aria-labelledby="time-panel-title">
                   <p class="time-panel-empty" data-i18n="form.time.empty">Pick a date to see available times</p>
                 </div>
+                <p class="slot-status" id="slot-status" role="status"></p>
               </div>
               <div class="booking-summary" hidden></div>
             </div>

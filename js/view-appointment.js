@@ -305,16 +305,32 @@ async function fetchTimeSlots(dateStr) {
     }
 }
 
+// Same live-region announcement as the booking page: the slot buttons otherwise
+// appear with no signal a screen reader user can perceive.
+const slotStatus = document.getElementById("slot-status");
+const SALON_PHONE = "(323) 907-5658";
+
+function announceSlots(count) {
+    if (!slotStatus) return;
+    // form.time.none ends with "call us at: " — the number lives in a separate
+    // link, so it has to be appended here or the announcement trails off.
+    slotStatus.textContent = count === 0
+        ? tr("form.time.none") + SALON_PHONE
+        : `${tr("form.time.heading")}: ${count}`;
+}
+
 function renderTimeSlots(slots) {
     if (slots.length === 0) {
         // Same treatment as the booking page: the copy ends mid-sentence and the
         // phone number is appended as a link.
         timeSlotContainer.innerHTML = `<p class="time-panel-empty">${tr("form.time.none")}
-                <a class="time-panel-phone" href="tel:+13239075658">(323) 907-5658</a>
+                <a class="time-panel-phone" href="tel:+13239075658">${SALON_PHONE}</a>
             </p>`;
+        announceSlots(0);
         return;
     }
 
+    announceSlots(slots.length);
     timeSlotContainer.innerHTML = "";
     slots.forEach(slot => {
         const btn = document.createElement("button");
