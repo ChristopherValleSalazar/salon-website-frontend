@@ -1,18 +1,4 @@
 import { t } from './language.js';
-
-// ---------------------------------------------------------------------------
-// Salon time
-// The backend validates every date against America/Los_Angeles (TimeConfig), so
-// everything the customer is shown has to be computed in that zone too. Reading
-// the device clock instead puts a visitor in New York at 00:30 a full day ahead
-// of the salon: the picker offers a date the server then rejects as past, which
-// surfaces as a generic error for a rule the customer was never shown.
-//
-// Intl gives us the salon's civil date and hour as plain numbers, and we rebuild
-// those numbers as browser-local Dates. flatpickr compares Date objects in local
-// terms, so local-midnight-of-the-salon-date is what makes its grid agree with
-// the server's calendar whatever zone the visitor is in.
-// ---------------------------------------------------------------------------
 const SALON_TZ = "America/Los_Angeles";
 
 function salonNow() {
@@ -22,8 +8,6 @@ function salonNow() {
         month: "numeric",
         day: "numeric",
         hour: "numeric",
-        // Explicit rather than `hour12: false`, which some engines answer with 24
-        // for midnight — that would disable today between 00:00 and 01:00.
         hourCycle: "h23"
     }).formatToParts(new Date());
 
