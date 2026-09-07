@@ -566,9 +566,13 @@ if (failureOverlay) {
     });
 }
 
+const formattedDate = Intl.DateTimeFormat("en-US", {
+    timeZone: "America/Los_Angeles"
+}).format(new Date());
+
 const datePIcker = flatpickr("#date-input", {
     inline: true,
-    minDate: "today",
+    minDate: new Date(),
     maxDate: new Date().fp_incr(30), // 30 days from now
     allowInput: false,
     enableTime: false,
@@ -654,23 +658,24 @@ function showServiceRequiredError() {
     serviceTrigger.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
+let slotsTimer; //debounce timer   
+let slotsController; //controller for in flight request
 
-let loadingSlots = false; // Flag to prevent fetching multiple times before first request is completed
+function loadTimeSlots(dateStr) {
+    timeSlotContainer.innerHTML = `<p class="time-panel-empty">${t("form.time.loading")}</p>`;
 
-async function loadTimeSlots(dateStr) {
-    timeSlotContainer.innerHTML = `<p class="time-panel-empty">${t("form.time.loading")}</p>`;;
+    clearTimeout(slotsTimer);
+    slotsTimer = setTimeout(() => fetchTimeSlots(dateStr), 250);
+}
+
+async function fetchTimeSlots(dateStr) {
+    slotsController?.abort();
+    slotsController = new AbortController();
 
     const params = new URLSearchParams({
         requestDate: dateStr,
-        // The slots endpoint accepts a single ServiceType, so the first choice
-        // drives the duration. Two-service bookings need a backend change.
         requestServices: selectedServices()
     });
-
-    if (loadingSlots) {
-        return; // if slots are loading, exit to prevent multiple fetches
-    }
-    loadingSlots = true;
 
     try {
         const res = await fetch(`${API_BASE_URL}/api/v1/appointments/timeSlots?${params}`, {
@@ -681,14 +686,13 @@ async function loadTimeSlots(dateStr) {
         const slots = await res.json();
         renderTimeSlots(timeSlotContainer, slots);
     } catch (err) {
+        if (err.name === 'AbortError') return; //self cause error no need to handle
         if (err.name === 'TimeoutError') {
             timeSlotContainer.innerHTML = `<p class="time-panel-empty">${t("timeout.error")}</p>`;
         } else {
             timeSlotContainer.innerHTML = `<p class="time-panel-empty">${t("form.time.error")}</p>`;
         }
-    } finally {
-        loadingSlots = false; // Reset the flag after the request is completed
-    }
+    } 
 }
 
 function hideBookingSummary() {

@@ -66,6 +66,9 @@ async function loadAppointment() {
         }
 
         appointment = await res.json();
+
+        console.log(appointment)
+
         renderAppointment();
     } catch (err) {
         showMissing(err.name === "TimeoutError" ? "timeout.error" : null);
@@ -347,9 +350,9 @@ async function submitReschedule() {
             try { storage?.setItem("appointmentViewCode", viewCode); } catch { /* ignore */ }
         }
 
-        appointment.date = body.date;
-        appointment.startTime = body.startTime;
-        appointment.endTime = body.endTime;
+        appointment.formattedDate = body.date;
+        appointment.formattedStartTime = body.startTime;
+        appointment.formattedEndTime = body.endTime;
         appointment.status = "BOOKED";
         renderAppointment();
 

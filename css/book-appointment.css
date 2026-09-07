@@ -468,6 +468,16 @@ textarea {
   color: var(--color-logo-buttefly-wings);
 }
 
+#description-cta {
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--color-logo-buttefly-wings);
+}
+
+
+
+
 .main-form input:focus,
 .main-form select:focus,
 .main-form textarea:focus {
