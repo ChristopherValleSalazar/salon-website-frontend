@@ -679,7 +679,7 @@ async function fetchTimeSlots(dateStr) {
 
     try {
         const res = await fetch(`${API_BASE_URL}/api/v1/appointments/timeSlots?${params}`, {
-            signal: AbortSignal.timeout(10_000)
+            signal: AbortSignal.any([slotsController.signal, AbortSignal.timeout(10_000)])
         });
         if (!res.ok) throw new Error("Failed to load slots");
 
