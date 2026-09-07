@@ -199,8 +199,8 @@ rescheduleBtn.addEventListener("click", () => {
 function initReschedulePicker() {
     reschedulePicker = flatpickr("#date-input", {
         inline: true,
-        minDate: "today",
-        maxDate: new Date().fp_incr(30),
+        minDate: salonToday,
+        maxDate: salonMaxDate,
         allowInput: false,
         enableTime: false,
         dateFormat: "Y-m-d",
@@ -216,61 +216,92 @@ function initReschedulePicker() {
     });
 }
 
-//function to disable current time if past the closing time of the salon
-function isPastClosingTime(date) {
-    // Apply the cutoff using Los Angeles local time. Monday remains
-    // controlled by the rule above.
-    const laParts = new Intl.DateTimeFormat("en-US", {
-        timeZone: "America/Los_Angeles",
+// ---------------------------------------------------------------------------
+// Salon time
+// Same reasoning as the booking page: the backend validates against
+// America/Los_Angeles, so "today" and the 30-day window have to be the salon's,
+// not the visitor's device clock. Intl gives the salon's civil date and hour as
+// numbers, which we rebuild as browser-local Dates because that is the frame
+// flatpickr compares in.
+// ---------------------------------------------------------------------------
+const SALON_TZ = "America/Los_Angeles";
+
+function salonNow() {
+    const parts = new Intl.DateTimeFormat("en-US", {
+        timeZone: SALON_TZ,
         year: "numeric",
         month: "numeric",
         day: "numeric",
         hour: "numeric",
-        hour12: false
+        // Explicit rather than `hour12: false`, which some engines answer with 24
+        // for midnight — that would disable today between 00:00 and 01:00.
+        hourCycle: "h23"
     }).formatToParts(new Date());
-    const la = Object.fromEntries(
-        laParts
-            .filter(part => part.type !== "literal")
+
+    return Object.fromEntries(
+        parts.filter(part => part.type !== "literal")
             .map(part => [part.type, Number(part.value)])
     );
-    const isToday = date.getFullYear() === la.year
-        && date.getMonth() + 1 === la.month
-        && date.getDate() === la.day;
-    const weekday = date.getDay();
-    const cutoffHour = weekday === 0 ? 15 : 19;
-
-    return isToday
-        && ((weekday >= 2 && weekday <= 6) || weekday === 0)
-        && la.hour >= cutoffHour;
 }
 
-let loadingSlots = false; // Flag to prevent fetching multiple times before first request is completed
+const salonAtLoad = salonNow();
+const salonToday = new Date(salonAtLoad.year, salonAtLoad.month - 1, salonAtLoad.day);
+// Date rolls the month over on its own, so no month-end special case.
+const salonMaxDate = new Date(salonAtLoad.year, salonAtLoad.month - 1, salonAtLoad.day + 30);
 
-async function loadTimeSlots(dateStr) {
+//function to disable current time if past the closing time of the salon
+function isPastClosingTime(date) {
+    // Re-read rather than reuse salonAtLoad: a page left open across closing time
+    // should stop offering today on flatpickr's next redraw.
+    const now = salonNow();
+
+    const isToday = date.getFullYear() === now.year
+        && date.getMonth() + 1 === now.month
+        && date.getDate() === now.day;
+    if (!isToday) return false;
+
+    // Monday is already disabled by the rule above, so it needs no cutoff here.
+    const cutoffHour = date.getDay() === 0 ? 15 : 19;
+    return now.hour >= cutoffHour;
+}
+
+let slotsTimer;      // debounce timer
+let slotsController; // controller for the in-flight request
+
+// Same shape as the booking page. A plain "is one already loading?" flag dropped
+// the newer request and let the older one render, so the panel could show slots
+// for a date the customer had already moved off — the failure this guards against.
+function loadTimeSlots(dateStr) {
     timeSlotContainer.innerHTML = `<p class="time-panel-empty">${tr("form.time.loading")}</p>`;
+
+    clearTimeout(slotsTimer);
+    slotsTimer = setTimeout(() => fetchTimeSlots(dateStr), 250);
+}
+
+async function fetchTimeSlots(dateStr) {
+    slotsController?.abort();
+    slotsController = new AbortController();
 
     const params = new URLSearchParams({
         requestDate: dateStr,
         requestServices: appointment.services
     });
 
-    if (loadingSlots) {
-        return; // if slots are loading, exit to prevent multiple fetches
-    }
-    loadingSlots = true;
-
     try {
-        const res = await fetch(`${API_BASE_URL}/api/v1/appointments/timeSlots?${params}`
-            , { signal: AbortSignal.timeout(10_000) }
+        const res = await fetch(`${API_BASE_URL}/api/v1/appointments/timeSlots?${params}`,
+            { signal: AbortSignal.any([slotsController.signal, AbortSignal.timeout(10_000)]) }
         );
         if (!res.ok) throw new Error("Failed to load slots");
 
         const slots = await res.json();
         renderTimeSlots(slots);
     } catch (err) {
-        timeSlotContainer.innerHTML = `<p class="time-panel-empty">${tr("form.time.error")}</p>`;
-    } finally {
-        loadingSlots = false; // Reset the flag after the request is completed
+        if (err.name === "AbortError") return; // superseded by a newer pick
+        if (err.name === "TimeoutError") {
+            timeSlotContainer.innerHTML = `<p class="time-panel-empty">${tr("timeout.error")}</p>`;
+        } else {
+            timeSlotContainer.innerHTML = `<p class="time-panel-empty">${tr("form.time.error")}</p>`;
+        }
     }
 }
 

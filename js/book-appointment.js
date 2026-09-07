@@ -1,7 +1,45 @@
 import { t } from './language.js';
 
-const today = new Date().getDay();
-document.querySelector(`.day-container[data-day="${today}"]`)?.classList.add("is-today");
+// ---------------------------------------------------------------------------
+// Salon time
+// The backend validates every date against America/Los_Angeles (TimeConfig), so
+// everything the customer is shown has to be computed in that zone too. Reading
+// the device clock instead puts a visitor in New York at 00:30 a full day ahead
+// of the salon: the picker offers a date the server then rejects as past, which
+// surfaces as a generic error for a rule the customer was never shown.
+//
+// Intl gives us the salon's civil date and hour as plain numbers, and we rebuild
+// those numbers as browser-local Dates. flatpickr compares Date objects in local
+// terms, so local-midnight-of-the-salon-date is what makes its grid agree with
+// the server's calendar whatever zone the visitor is in.
+// ---------------------------------------------------------------------------
+const SALON_TZ = "America/Los_Angeles";
+
+function salonNow() {
+    const parts = new Intl.DateTimeFormat("en-US", {
+        timeZone: SALON_TZ,
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+        hour: "numeric",
+        // Explicit rather than `hour12: false`, which some engines answer with 24
+        // for midnight — that would disable today between 00:00 and 01:00.
+        hourCycle: "h23"
+    }).formatToParts(new Date());
+
+    return Object.fromEntries(
+        parts.filter(part => part.type !== "literal")
+            .map(part => [part.type, Number(part.value)])
+    );
+}
+
+// Captured once: the picker's bounds are read at init, not per redraw.
+const salonAtLoad = salonNow();
+const salonToday = new Date(salonAtLoad.year, salonAtLoad.month - 1, salonAtLoad.day);
+// Date rolls the month over on its own, so no month-end special case.
+const salonMaxDate = new Date(salonAtLoad.year, salonAtLoad.month - 1, salonAtLoad.day + 30);
+
+document.querySelector(`.day-container[data-day="${salonToday.getDay()}"]`)?.classList.add("is-today");
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -512,9 +550,13 @@ function modalBehaviour(appointment) {
     const modalOverlay = document.getElementById("success-modal-overlay");
     const closeBtn = document.getElementById("modal-btn-close");
 
-    // The view code is the customer's key to see/cancel/reschedule this booking
+    // The view code is the customer's key to see/cancel/reschedule this booking.
+    // setItem throws in Safari private mode and when the quota is full; the booking
+    // itself already succeeded, so that must not stop the modal from opening.
     if (appointment.viewCode) {
-        localStorage.setItem("appointmentViewCode", appointment.viewCode);
+        try {
+            localStorage.setItem("appointmentViewCode", appointment.viewCode);
+        } catch { /* private mode / quota — the nav link is the only thing lost */ }
         document.querySelectorAll(".appointment-nav-item").forEach(li => { li.hidden = false; });
     }
 
@@ -566,14 +608,10 @@ if (failureOverlay) {
     });
 }
 
-const formattedDate = Intl.DateTimeFormat("en-US", {
-    timeZone: "America/Los_Angeles"
-}).format(new Date());
-
 const datePIcker = flatpickr("#date-input", {
     inline: true,
-    minDate: new Date(),
-    maxDate: new Date().fp_incr(30), // 30 days from now
+    minDate: salonToday,
+    maxDate: salonMaxDate, // 30 days from the salon's today
     allowInput: false,
     enableTime: false,
     dateFormat: "Y-m-d",
@@ -598,30 +636,18 @@ const datePIcker = flatpickr("#date-input", {
 
 //function to disable current time if past the closing time of the salon
 function isPastClosingTime(date) {
-    // Apply the cutoff using Los Angeles local time. Monday remains
-    // controlled by the rule above.
-    const laParts = new Intl.DateTimeFormat("en-US", {
-        timeZone: "America/Los_Angeles",
-        year: "numeric",
-        month: "numeric",
-        day: "numeric",
-        hour: "numeric",
-        hour12: false
-    }).formatToParts(new Date());
-    const la = Object.fromEntries(
-        laParts
-            .filter(part => part.type !== "literal")
-            .map(part => [part.type, Number(part.value)])
-    );
-    const isToday = date.getFullYear() === la.year
-        && date.getMonth() + 1 === la.month
-        && date.getDate() === la.day;
-    const weekday = date.getDay();
-    const cutoffHour = weekday === 0 ? 15 : 19;
+    // Re-read rather than reuse salonAtLoad: a page left open across closing time
+    // should stop offering today on flatpickr's next redraw.
+    const now = salonNow();
 
-    return isToday
-        && ((weekday >= 2 && weekday <= 6) || weekday === 0)
-        && la.hour >= cutoffHour;
+    const isToday = date.getFullYear() === now.year
+        && date.getMonth() + 1 === now.month
+        && date.getDate() === now.day;
+    if (!isToday) return false;
+
+    // Monday is already disabled by the rule above, so it needs no cutoff here.
+    const cutoffHour = date.getDay() === 0 ? 15 : 19;
+    return now.hour >= cutoffHour;
 }
 
 // Clear the booking card along with the rest of the form after a successful booking
